@@ -15,9 +15,9 @@ export default function UserInfo() {
         )}
       </div>
       {/* //TODO sort out avatar stuff */}
-      {userInfo.avatarUrl && (
+      {/* {userInfo.avatarUrl && (
         <img alt="user avatar" src="" />
-      )}
+      )} */}
     </div>
   );
 }

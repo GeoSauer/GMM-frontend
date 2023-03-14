@@ -7,7 +7,6 @@ import './ProfileForm.css';
 
 export default function ProfileForm() {
   const navigate = useNavigate();
-  // const [charClass, setCharClass] = useState('');
   const { userInfo, fetchUserInfo } = useUserInfo();
   const [updatedInfo, handleChange] = useForm({
     // const [updatedInfo] = useForm({
@@ -25,10 +24,6 @@ export default function ProfileForm() {
     await fetchUserInfo();
     navigate('/spell-compendium');
   };
-
-  // const handleClassChange = async (e) => {
-  //   setCharClass(e.target.value);
-  // };
 
   return (
     <>
@@ -71,13 +66,11 @@ export default function ProfileForm() {
           value={updatedInfo.charClass}
           onChange={handleChange}
         >
-          console.log(charClass)
           <option value="">
             {!userInfo.charClass
               ? 'Character Class'
               : userInfo.charClass}
           </option>
-          {/* //TODO decide if I should hardcode or map these bois */}
           <option value="Bard">Bard</option>
           <option value="Cleric">Cleric</option>
           <option value="Druid">Druid</option>

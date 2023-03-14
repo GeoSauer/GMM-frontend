@@ -93,8 +93,8 @@ export function useAuth() {
     }
   };
 
-  const signUp = async (credentials) => {
-    const response = await signUpUser(credentials);
+  const signUp = async (info) => {
+    const response = await signUpUser(info);
     handleResponse(response);
   };
   const signIn = async (credentials) => {
