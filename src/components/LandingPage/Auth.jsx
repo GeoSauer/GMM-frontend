@@ -1,35 +1,4 @@
 import { Outlet, useNavigate } from 'react-router-dom';
-
-// import './Auth.css';
-
-// export default function Auth() {
-
-//   return (
-//     <main className="auth">
-//       <button
-//         className="signUpButton"
-//         alt="create new account"
-//         title="Create New Account"
-//         onClick={() => {
-//           navigate('sign-up');
-//         }}
-//       >
-//         get started
-//       </button>
-//       <button
-//         className="signInButton"
-//         alt="sign in"
-//         title="Sign In"
-// onClick={() => {
-//   navigate('sign-in');
-// }}
-//       >
-//         I already have an account
-//       </button>
-//       <Outlet />
-//     </main>
-//   );
-// }
 import {
   Button,
   Flex,
@@ -52,6 +21,13 @@ export default function Auth() {
         flex={1}
         align={'center'}
         justify={'center'}
+        w={'full'}
+        h={'100vh'}
+        // backgroundImage={
+        //   'url(https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg)'
+        // }
+        backgroundSize={'cover'}
+        backgroundPosition={'center center'}
       >
         <Stack spacing={6} w={'full'} maxW={'lg'}>
           <Heading
@@ -61,7 +37,7 @@ export default function Auth() {
               as={'span'}
               position={'relative'}
               _after={{
-                content: "''",
+                content: `''`,
                 width: 'full',
                 height: useBreakpointValue({
                   base: '20%',
@@ -74,20 +50,32 @@ export default function Auth() {
                 zIndex: -1,
               }}
             >
-              Freelance
+              Spellcasting
             </Text>
             <br />{' '}
             <Text color={'blue.400'} as={'span'}>
-              Design Projects
+              Simplified
             </Text>{' '}
           </Heading>
           <Text
+            p={2}
             fontSize={{ base: 'md', lg: 'lg' }}
             color={'gray.500'}
+            bg={'gray.50'}
+            rounded={'lg'}
           >
-            The project board is an exclusive resource for
-            contract work. Its perfect for freelancers,
-            agencies, and moonlighters.
+            <strong>
+              The Grimoire for the Modern Mage
+            </strong>{' '}
+            is specifically for those exhausted by constant
+            erasing and re-writing, dealing with illegible
+            shorthand, and sifting through spells irrelevant
+            to their character. Adding just a few pieces of
+            information to your profile will leave you with
+            a personalized list of available spells to
+            learn, prepare, and cast, no matter of where you
+            are in your adventure. So, what are you waiting
+            for?
           </Text>
           <Stack
             direction={{ base: 'column', md: 'row' }}
@@ -95,10 +83,10 @@ export default function Auth() {
           >
             <Button
               rounded={'full'}
-              bg={'green.400'}
+              bg={'cyan.800'}
               color={'white'}
               _hover={{
-                bg: 'blue.500',
+                bg: 'teal.500',
               }}
               onClick={() => {
                 navigate('sign-up');
@@ -122,7 +110,7 @@ export default function Auth() {
           alt={'Login Image'}
           objectFit={'cover'}
           src={
-            'https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+            'https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg'
           }
         />
       </Flex>

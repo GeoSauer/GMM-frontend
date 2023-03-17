@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
-import './Header.css';
 import UserInfo from './UserInfo';
 
 export default function Header() {

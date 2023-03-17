@@ -1,3 +1,4 @@
+import { Heading, Stack } from '@chakra-ui/react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import './LandingPage.css';
@@ -7,9 +8,19 @@ export default function LandingPage() {
   if (user) return <Navigate to="/spell-list" />;
 
   return (
-    <main className="landingPage">
-      <h1>Grimoire for the Modern Mage</h1>
+    <Stack align={'center'} justify={'center'}>
+      <Heading
+        fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+        position={'fixed'}
+        top={0}
+        backdropFilter="blur(5px)"
+        width={'full'}
+        zIndex={100}
+        align={'center'}
+      >
+        Grimoire for the Modern Mage
+      </Heading>
       <Outlet />
-    </main>
+    </Stack>
   );
 }
