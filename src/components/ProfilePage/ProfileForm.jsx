@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { useUserInfo } from '../../context/UserContext';
 import { updateUserInfo } from '../../services/users';
 import { useForm } from '../Forms/useForm';
-import './ProfileForm.css';
 
 export default function ProfileForm() {
   const navigate = useNavigate();

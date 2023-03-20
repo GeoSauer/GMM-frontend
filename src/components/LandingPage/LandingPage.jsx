@@ -1,7 +1,6 @@
 import { Heading, Stack } from '@chakra-ui/react';
 import { Navigate, Outlet } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
-import './LandingPage.css';
 
 export default function LandingPage() {
   const user = useUser();

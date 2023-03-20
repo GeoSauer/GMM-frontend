@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import styles from './FormControls.module.css';
 
 export default function FormControls({
   label,

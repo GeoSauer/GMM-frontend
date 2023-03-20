@@ -1,5 +1,4 @@
 import { useUserInfo } from '../../context/UserContext';
-import './UserInfo.css';
 
 export default function UserInfo() {
   const { userInfo } = useUserInfo();

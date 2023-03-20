@@ -1,6 +1,5 @@
 import { useUserInfo } from '../../context/UserContext';
 import { SiDungeonsanddragons } from 'react-icons/si';
-import './ProfilePage.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 export default function ProfilePage() {
