@@ -1,38 +1,93 @@
 import { useUserInfo } from '../../context/UserContext';
-import { SiDungeonsanddragons } from 'react-icons/si';
 import { Outlet, useNavigate } from 'react-router-dom';
+import {
+  Heading,
+  Avatar,
+  Box,
+  Center,
+  Image,
+  Flex,
+  Text,
+  Stack,
+  Button,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
 export default function ProfilePage() {
   const { userInfo } = useUserInfo();
   const navigate = useNavigate();
 
   return (
-    <>
-      <div className="userInfo">
-        <p>{userInfo.username}</p>
-        <p>{userInfo.charName}</p>
-        <p>{userInfo.charClass}</p>
-        <p>Caster Level: {userInfo.charLvl}</p>
-        {userInfo.avatarUrl ? (
-          <img
-            alt="user avatar"
-            href={userInfo.avatarUrl}
-          />
-        ) : (
-          <SiDungeonsanddragons />
-        )}
-      </div>
-      <button
-        className="editButton"
-        alt="edit profile"
-        title="Edit Profile"
-        onClick={() => {
-          navigate('edit');
-        }}
+    <Center py={6}>
+      <Box
+        maxW={'270px'}
+        w={'full'}
+        bg={useColorModeValue('white', 'gray.800')}
+        boxShadow={'2xl'}
+        rounded={'md'}
+        overflow={'hidden'}
       >
-        Edit
-      </button>
-      <Outlet />
-    </>
+        <Image
+          h={'120px'}
+          w={'full'}
+          //TODO make this image dynamic, based on charClass
+          src={
+            'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+          }
+          objectFit={'cover'}
+        />
+        <Flex justify={'center'} mt={-12}>
+          <Avatar
+            size={'xl'}
+            src={
+              userInfo.avatarUrl ? userInfo.avatarUrl : null
+            }
+            alt={'Avatar'}
+            css={{
+              border: '2px solid white',
+            }}
+          />
+        </Flex>
+
+        <Box p={6}>
+          <Stack spacing={0} align={'center'} mb={5}>
+            <Heading
+              fontSize={'2xl'}
+              fontWeight={500}
+              fontFamily={'body'}
+            >
+              {userInfo.username}
+            </Heading>
+            <Heading
+              fontSize={'xl'}
+              fontWeight={500}
+              fontFamily={'body'}
+            >
+              {userInfo.charName}
+            </Heading>
+            <Text color={'gray.500'}>
+              Level: {userInfo.charLvl} {userInfo.charClass}
+            </Text>
+          </Stack>
+          <Button
+            w={'full'}
+            mt={8}
+            bg={useColorModeValue('#151f21', 'gray.900')}
+            color={'white'}
+            rounded={'md'}
+            _hover={{
+              transform: 'translateY(-2px)',
+              boxShadow: 'lg',
+            }}
+            onClick={() => {
+              navigate('edit');
+            }}
+          >
+            Edit
+          </Button>
+          <Outlet />
+        </Box>
+      </Box>
+    </Center>
   );
 }

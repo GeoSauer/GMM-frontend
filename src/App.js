@@ -1,7 +1,5 @@
 // import { Navigate, Route, Routes } from 'react-router-dom';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
-
 import AboutPage from './components/AboutPage/AboutPage';
 import LandingPage from './components/LandingPage/LandingPage';
 import Layout from './components/PageLayout/Layout';
@@ -13,6 +11,7 @@ import SpellList from './components/SpellListPage/SpellList';
 import Auth from './components/LandingPage/Auth';
 import SpellCompendium from './components/SpellCompendiumPage/SpellCompendium';
 import ProfileForm from './components/ProfilePage/ProfileForm';
+import SettingsPage from './components/SettingsPage/SettingsPage';
 
 function App() {
   return (
@@ -37,6 +36,10 @@ function App() {
             <Route path="edit" element={<ProfileForm />} />
           </Route>
 
+          <Route
+            path="settings"
+            element={<SettingsPage />}
+          />
           <Route path="about" element={<AboutPage />} />
         </Route>
       </Route>

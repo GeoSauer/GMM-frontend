@@ -92,8 +92,9 @@ export default function Header() {
                 }
               />
             </MenuButton>
-            <MenuList>
+            <MenuList alignContent={'center'}>
               <UserInfo />
+              <MenuDivider />
               <MenuItem>
                 <NavLink
                   to="profile"
@@ -103,7 +104,15 @@ export default function Header() {
                   Profile
                 </NavLink>
               </MenuItem>
-              <MenuItem>Settings</MenuItem>
+              <MenuItem>
+                <NavLink
+                  to="settings"
+                  alt="settings"
+                  title="settings"
+                >
+                  Settings
+                </NavLink>
+              </MenuItem>
               <MenuDivider />
               <MenuItem onClick={handleSignOut}>
                 Sign Out
