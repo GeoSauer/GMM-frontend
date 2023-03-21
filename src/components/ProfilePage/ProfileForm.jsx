@@ -45,7 +45,7 @@ export default function ProfileForm() {
     setUserInfo((prevState) => {
       return { ...prevState, ...updatedInfo };
     });
-    navigate('/all-spells');
+    navigate('/prepared-spells');
   };
   //TODO still getting the controlled to uncontrolled error
   return (

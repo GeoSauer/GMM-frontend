@@ -1,3 +1,5 @@
+import SpellSlots from './SpellSlots';
+
 export default function PreparedSpells() {
-  return <div>PreparedSpells</div>;
+  return <SpellSlots />;
 }
