@@ -4,7 +4,7 @@ import { useUser } from '../../context/UserContext';
 
 export default function LandingPage() {
   const user = useUser();
-  if (user) return <Navigate to="/spell-list" />;
+  if (user) return <Navigate to="/prepared-spells" />;
 
   return (
     <Stack align={'center'} justify={'center'}>

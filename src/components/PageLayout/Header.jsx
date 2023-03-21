@@ -51,7 +51,11 @@ export default function Header() {
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
-        <HStack spacing={8} alignItems={'center'}>
+        <HStack
+          spacing={8}
+          alignItems={'center'}
+          justifyContent={'center'}
+        >
           <Box>Grimoire for the Modern Mage</Box>
           <HStack
             as={'nav'}
@@ -59,18 +63,25 @@ export default function Header() {
             display={{ base: 'none', md: 'flex' }}
           >
             <NavLink
-              to="spell-list"
-              alt="home"
-              title="Spell List"
+              to="prepared-spells"
+              alt="prepared"
+              title="Prepared Spells"
             >
-              Spell List
+              Prepared Spells
             </NavLink>
             <NavLink
-              to="spell-compendium"
-              alt="compendium"
-              title="Spell Compendium"
+              to="known-spells"
+              alt="known"
+              title="Known Spells"
             >
-              Spell Compendium
+              Known Spells
+            </NavLink>
+            <NavLink
+              to="all-spells"
+              alt="all"
+              title="All Spells"
+            >
+              All Spells
             </NavLink>
           </HStack>
         </HStack>
@@ -126,18 +137,25 @@ export default function Header() {
         <Box pb={4} display={{ md: 'none' }}>
           <Stack as={'nav'} spacing={4}>
             <NavLink
-              to="spell-list"
-              alt="home"
-              title="Spell List"
+              to="prepared-spells"
+              alt="prepared"
+              title="Prepared Spells"
             >
-              Spell List
+              Prepared Spells
             </NavLink>
             <NavLink
-              to="spell-compendium"
-              alt="compendium"
-              title="Spell Compendium"
+              to="known-spells"
+              alt="known"
+              title="Known Spells"
             >
-              Spell Compendium
+              Known Spells
+            </NavLink>
+            <NavLink
+              to="all-spells"
+              alt="all"
+              title="All Spells"
+            >
+              All Spells
             </NavLink>
           </Stack>
         </Box>

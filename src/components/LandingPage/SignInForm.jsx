@@ -71,7 +71,7 @@ export default function SignInForm() {
           p={8}
         >
           <Stack spacing={4}>
-            <FormControl marginTop={'2%'}>
+            <FormControl>
               <FormLabel
                 htmlFor="email"
                 fontWeight={'normal'}
@@ -87,7 +87,7 @@ export default function SignInForm() {
                 onChange={handleChange}
               />
             </FormControl>{' '}
-            <FormControl marginTop={'2%'}>
+            <FormControl>
               <FormLabel
                 htmlFor="username"
                 fontWeight={'normal'}

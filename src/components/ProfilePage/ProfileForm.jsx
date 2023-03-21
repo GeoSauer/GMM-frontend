@@ -1,153 +1,214 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserInfo } from '../../context/UserContext';
 import { updateUserInfo } from '../../services/users';
-import { useForm } from '../Forms/useForm';
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Button,
+  useColorModeValue,
+  Select,
+} from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 export default function ProfileForm() {
   const navigate = useNavigate();
-  const { userInfo, fetchUserInfo } = useUserInfo();
-  const [updatedInfo, handleChange] = useForm({
-    // const [updatedInfo] = useForm({
+  const { userInfo, setUserInfo } = useUserInfo();
+  const [updatedInfo, setUpdatedInfo] = useState({
     // adding a defined value to initial undefined state to avoid "uncontrolled to controlled input error"
-    username: userInfo.username || '',
-    charName: userInfo.charName || '',
-    charClass: userInfo.charClass || '',
-    charLvl: userInfo.charLvl || '',
-    charMod: userInfo.charMod || '',
+    username: '',
+    charName: '',
+    charClass: '',
+    charLvl: '',
+    charMod: '',
     // avatarUrl: '',
   });
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    await updateUserInfo(userInfo.id, { updatedInfo });
-    await fetchUserInfo();
-    navigate('/spell-compendium');
+
+  useEffect(() => {
+    setUpdatedInfo(userInfo);
+  }, [userInfo]);
+
+  const handleChange = ({ target }) => {
+    setUpdatedInfo((data) => ({
+      ...data,
+      [target.name]: target.value,
+    }));
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await updateUserInfo(updatedInfo);
+    setUserInfo((prevState) => {
+      return { ...prevState, ...updatedInfo };
+    });
+    navigate('/all-spells');
+  };
+  //TODO still getting the controlled to uncontrolled error
   return (
-    <>
-      <form
-        className="editProfileForm"
-        onSubmit={handleSubmit}
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}
+    >
+      <Stack
+        spacing={8}
+        mx={'auto'}
+        maxWidth={'lg'}
+        py={12}
+        px={6}
       >
-        <span>Username</span>
-        <input
-          placeholder={
-            !userInfo.username
-              ? 'Username'
-              : userInfo.username
-          }
-          name="username"
-          type="text"
-          required={!userInfo.username ? true : false}
-          value={updatedInfo.username}
-          onChange={handleChange}
-        />
-
-        <span>Character Name</span>
-        <input
-          placeholder={
-            !userInfo.charName
-              ? 'Character name'
-              : userInfo.charName
-          }
-          name="charName"
-          type="text"
-          required={!userInfo.charName ? true : false}
-          value={updatedInfo.charName}
-          onChange={handleChange}
-        />
-
-        <span>Character Class</span>
-        <select
-          name="charClass"
-          required={!userInfo.charClass ? true : false}
-          value={updatedInfo.charClass}
-          onChange={handleChange}
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}
         >
-          <option value="">
-            {!userInfo.charClass
-              ? 'Character Class'
-              : userInfo.charClass}
-          </option>
-          <option value="Bard">Bard</option>
-          <option value="Cleric">Cleric</option>
-          <option value="Druid">Druid</option>
-          <option value="Paladin">Paladin</option>
-          <option value="Ranger">Ranger</option>
-          <option value="Sorcerer">Sorcerer</option>
-          <option value="Warlock">Warlock</option>
-          <option value="Wizard">Wizard</option>
-        </select>
+          <Stack spacing={4}>
+            <FormControl>
+              <FormLabel
+                htmlFor="username"
+                fontWeight={'normal'}
+              >
+                Username
+              </FormLabel>
+              <Input
+                id="username"
+                type="text"
+                name="username"
+                placeholder={updatedInfo.username}
+                value={updatedInfo.username}
+                onChange={handleChange}
+              />
+            </FormControl>
 
-        <span>Character Level</span>
-        <select
-          name="charLvl"
-          required={!userInfo.charLvl ? true : false}
-          value={updatedInfo.charLvl}
-          onChange={handleChange}
-        >
-          <option value="">
-            {!userInfo.charLvl
-              ? 'Character Level'
-              : userInfo.charLvl}
-          </option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
-          <option value="16">16</option>
-          <option value="17">17</option>
-          <option value="18">18</option>
-          <option value="19">19</option>
-          <option value="20">20</option>
-        </select>
+            <FormControl>
+              <FormLabel
+                htmlFor="charName"
+                fontWeight={'normal'}
+              >
+                Character Name
+              </FormLabel>
+              <Input
+                id="charName"
+                type="text"
+                name="charName"
+                placeholder={updatedInfo.charName}
+                value={updatedInfo.charName}
+                onChange={handleChange}
+              />
+            </FormControl>
 
-        <span>Spellcasting Ability Modifier</span>
-        <select
-          name="charMod"
-          required={!userInfo.charMod ? true : false}
-          value={updatedInfo.charMod}
-          onChange={handleChange}
-        >
-          <option value="">
-            {!userInfo.charMod
-              ? 'Modifier'
-              : userInfo.charMod}
-          </option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-        </select>
+            <FormControl>
+              <FormLabel
+                htmlFor="charClass"
+                fontWeight={'normal'}
+              >
+                Character Class
+              </FormLabel>
+              <Select
+                id="charClass"
+                name="charClass"
+                value={updatedInfo.charClass}
+                onChange={handleChange}
+              >
+                <option value={updatedInfo.charClass}>
+                  {/* <option value=""> */}
+                  {updatedInfo.charClass}
+                </option>
+                <option value="Bard">Bard</option>
+                <option value="Cleric">Cleric</option>
+                <option value="Druid">Druid</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Ranger">Ranger</option>
+                <option value="Sorcerer">Sorcerer</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Wizard">Wizard</option>
+              </Select>
+            </FormControl>
 
-        <button>Submit</button>
-      </form>
-      {userInfo.username && (
-        <button
-          onClick={() => {
-            navigate('/profile');
-          }}
-        >
-          Back
-        </button>
-      )}
-    </>
+            <FormControl>
+              <FormLabel
+                htmlFor="charLvl"
+                fontWeight={'normal'}
+              >
+                Character Level
+              </FormLabel>
+              <Select
+                id="charLvl"
+                name="charLvl"
+                value={updatedInfo.charLvl}
+                onChange={handleChange}
+              >
+                <option value={updatedInfo.charLvl}>
+                  {/* <option value=""> */}
+                  {updatedInfo.charLvl}
+                </option>
+                {[...Array(20)].map((_, i) => {
+                  return (
+                    <option key={`key-${i}`} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  );
+                })}
+              </Select>
+            </FormControl>
+
+            <FormControl>
+              <FormLabel
+                htmlFor="charMod"
+                fontWeight={'normal'}
+              >
+                Spellcasting Ability Modifier
+              </FormLabel>
+              <Select
+                id="charMod"
+                name="charMod"
+                value={updatedInfo.charMod}
+                onChange={handleChange}
+              >
+                <option value={updatedInfo.charMod}>
+                  {/* <option value=""> */}
+                  {updatedInfo.charMod}
+                </option>
+                {[...Array(10)].map((_, i) => {
+                  return (
+                    <option key={`key-${i}`} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            <Button
+              bg={'blue.400'}
+              color={'white'}
+              _hover={{
+                bg: 'blue.500',
+              }}
+              onClick={handleSubmit}
+            >
+              Submit
+            </Button>
+            <Button
+              bg={'blue.400'}
+              color={'white'}
+              _hover={{
+                bg: 'blue.500',
+              }}
+              onClick={() => {
+                navigate('/profile');
+              }}
+            >
+              Back
+            </Button>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
 }

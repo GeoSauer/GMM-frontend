@@ -36,18 +36,32 @@ export default function SignInForm() {
     charLvl: '',
     charMod: '',
   });
+
   const handleChange = ({ target }) => {
     setUserInfo((data) => ({
       ...data,
       [target.name]: target.value,
     }));
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signUp(userInfo);
-    navigate('/spell-compendium');
+    navigate('/all-spells');
   };
 
+  const isError =
+    userInfo ===
+    {
+      email: '',
+      password: '',
+      username: '',
+      charName: '',
+      charClass: '',
+      charLvl: '',
+      charMod: '',
+    };
+  //TODO still need to fix required not working
   return (
     <Flex
       minH={'100vh'}
@@ -77,7 +91,7 @@ export default function SignInForm() {
           p={8}
         >
           <Stack spacing={4}>
-            <FormControl marginTop={'2%'}>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="email"
                 fontWeight={'normal'}
@@ -85,17 +99,18 @@ export default function SignInForm() {
                 Email
               </FormLabel>
               <Input
-                //TODO required isn't working on any of these inputs :(
                 id="email"
                 type="email"
                 name="email"
                 placeholder="Email"
-                required
                 value={userInfo.email}
                 onChange={handleChange}
               />
-            </FormControl>{' '}
-            <FormControl>
+              {isError && (
+                <FormHelperText>{error}</FormHelperText>
+              )}
+            </FormControl>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="password"
                 fontWeight={'normal'}
@@ -110,7 +125,6 @@ export default function SignInForm() {
                   pr="4.5rem"
                   type={show ? 'text' : 'password'}
                   placeholder="Password"
-                  required
                   value={userInfo.password}
                   onChange={handleChange}
                 />
@@ -125,8 +139,8 @@ export default function SignInForm() {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-            </FormControl>{' '}
-            <FormControl marginTop={'2%'}>
+            </FormControl>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="username"
                 fontWeight={'normal'}
@@ -138,12 +152,11 @@ export default function SignInForm() {
                 type="text"
                 name="username"
                 placeholder="Username"
-                required
                 value={userInfo.username}
                 onChange={handleChange}
               />
             </FormControl>{' '}
-            <FormControl marginTop={'2%'}>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="charName"
                 fontWeight={'normal'}
@@ -155,12 +168,11 @@ export default function SignInForm() {
                 type="text"
                 name="charName"
                 placeholder="Character Name"
-                required
                 value={userInfo.charName}
                 onChange={handleChange}
               />
-            </FormControl>{' '}
-            <FormControl marginTop={'2%'}>
+            </FormControl>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="charClass"
                 fontWeight={'normal'}
@@ -171,7 +183,6 @@ export default function SignInForm() {
                 id="charClass"
                 name="charClass"
                 placeholder="Choose One"
-                required
                 value={userInfo.charClass}
                 onChange={handleChange}
               >
@@ -185,7 +196,7 @@ export default function SignInForm() {
                 <option value="Wizard">Wizard</option>
               </Select>
             </FormControl>{' '}
-            <FormControl marginTop={'2%'}>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="charLvl"
                 fontWeight={'normal'}
@@ -196,33 +207,19 @@ export default function SignInForm() {
                 id="charLvl"
                 name="charLvl"
                 placeholder="Choose One"
-                required
                 value={userInfo.charLvl}
                 onChange={handleChange}
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
-                <option value="16">16</option>
-                <option value="17">17</option>
-                <option value="18">18</option>
-                <option value="19">19</option>
-                <option value="20">20</option>
+                {[...Array(20)].map((_, i) => {
+                  return (
+                    <option key={`key-${i}`} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  );
+                })}
               </Select>
-            </FormControl>{' '}
-            <FormControl marginTop={'2%'}>
+            </FormControl>
+            <FormControl isRequired isInvalid={isError}>
               <FormLabel
                 htmlFor="charMod"
                 fontWeight={'normal'}
@@ -233,25 +230,21 @@ export default function SignInForm() {
                 id="charMod"
                 name="charMod"
                 placeholder="Choose One"
-                required
                 value={userInfo.charMod}
                 onChange={handleChange}
               >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
+                {[...Array(10)].map((_, i) => {
+                  return (
+                    <option key={`key-${i}`} value={i + 1}>
+                      {i + 1}
+                    </option>
+                  );
+                })}
               </Select>
               <FormHelperText color={'red.500'}>
                 {error}
               </FormHelperText>
-            </FormControl>{' '}
+            </FormControl>
             <Stack spacing={5}>
               <Button
                 bg={'blue.400'}

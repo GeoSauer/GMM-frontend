@@ -73,9 +73,9 @@ export default function Auth() {
             to their character. Adding just a few pieces of
             information to your profile will leave you with
             a personalized list of available spells to
-            learn, prepare, and cast, no matter of where you
-            are in your adventure. So, what are you waiting
-            for?
+            learn, prepare, and cast, regardless of where
+            you are in your adventure. So, what are you
+            waiting for?
           </Text>
           <Stack
             direction={{ base: 'column', md: 'row' }}

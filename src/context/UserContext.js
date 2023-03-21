@@ -66,16 +66,14 @@ export function useUser() {
 export function useUserInfo() {
   const { userInfo, setUserInfo } = useContext(UserContext);
 
-  const fetchUserInfo = async () => {
-    const results = await getUserById();
-    setUserInfo(results.data);
-  };
-
   useEffect(() => {
+    const fetchUserInfo = async () => {
+      const results = await getUserById();
+      setUserInfo(results.data);
+    };
     fetchUserInfo();
-  }, []);
-
-  return { userInfo, fetchUserInfo };
+  }, [setUserInfo]);
+  return { userInfo, setUserInfo };
 }
 
 export function useAuth() {
