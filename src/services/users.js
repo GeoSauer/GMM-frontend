@@ -6,8 +6,7 @@ const URL = 'http://localhost:7890/api/v1/users';
 
 export async function getUserById() {
   const response = await get(`${URL}/`);
-  response.user = response.data;
-  return response;
+  return response.data;
 }
 
 export async function updateUserInfo(updatedInfo) {

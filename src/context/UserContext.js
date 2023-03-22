@@ -69,7 +69,7 @@ export function useUserInfo() {
   useEffect(() => {
     const fetchUserInfo = async () => {
       const results = await getUserById();
-      setUserInfo(results.data);
+      setUserInfo(results);
     };
     fetchUserInfo();
   }, [setUserInfo]);

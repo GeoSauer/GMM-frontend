@@ -2,50 +2,45 @@ import { get, patch, post, del } from './requests';
 
 //TODO switch this over after deploy
 // const SPELLS = 'https://gmm.herokuapp.com/api/v1/spells';
-// const SPELLBOOK = 'https://gmm.herokuapp.com/api/v1/spellbook';
+// const KNOWN_SPELLS = 'https://gmm.herokuapp.com/api/v1/known-spells';
 const SPELLS = 'http://localhost:7890/api/v1/spells';
-const SPELLBOOK = 'http://localhost:7890/api/v1/spellbook';
+const KNOWN_SPELLS =
+  'http://localhost:7890/api/v1/known-spells';
 
 export async function getAvailableSpells() {
-  const response = await get(`${SPELLS}/`);
-  return response;
+  const { body } = await get(`${SPELLS}/`);
+  return body;
 }
 
 export async function getSpellDetail(id) {
-  const response = await get(`${SPELLS}/${id}/details`);
-  return response;
+  const { body } = await get(`${SPELLS}/${id}/details`);
+  return body;
 }
 
-export async function learnSpell(id, spell) {
-  const response = await post(
-    `${SPELLS}/${id}/learn`,
-    spell
-  );
-  return response;
+export async function learnSpell(spell) {
+  const { body } = await post(`${SPELLS}/learn`, spell);
+  return body;
 }
 
 export async function getKnownSpells() {
-  const response = await get(`${SPELLBOOK}/`);
-  return response;
+  const { body } = await get(`${KNOWN_SPELLS}/`);
+  return body;
 }
 
 export async function getPreparedSpells() {
-  const response = await get(`${SPELLBOOK}/prepared`);
-  return response;
+  const { body } = await get(`${KNOWN_SPELLS}/prepared`);
+  return body;
 }
 
-export async function updateSpellPreparation(
-  id,
-  updatedInfo
-) {
-  const response = await patch(
-    `${SPELLBOOK}/${id}/prepare`,
+export async function updateSpellPreparation(updatedInfo) {
+  const { body } = await patch(
+    `${KNOWN_SPELLS}/prepare`,
     updatedInfo
   );
-  return response;
+  return body;
 }
 
 export async function forgetSpell(id) {
-  const response = await del(`${SPELLBOOK}/${id}`);
-  return response;
+  const { body } = await del(`${KNOWN_SPELLS}/${id}`);
+  return body;
 }

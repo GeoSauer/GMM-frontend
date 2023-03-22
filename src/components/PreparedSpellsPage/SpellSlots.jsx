@@ -1,7 +1,37 @@
-import { Flex, Text, Box } from '@chakra-ui/react';
+import {
+  Flex,
+  Text,
+  Box,
+  useDisclosure,
+  Button,
+  Collapse,
+} from '@chakra-ui/react';
 import { useUserInfo } from '../../context/UserContext';
 
 export default function SpellSlots() {
+  const { isOpen, onToggle } = useDisclosure();
+  return (
+    <>
+      <Button w={'full'} onClick={onToggle}>
+        Spell Slots
+      </Button>
+      <Collapse in={isOpen} animateOpacity>
+        <Box
+          p="40px"
+          color="white"
+          mt="4"
+          bg="teal.500"
+          rounded="md"
+          shadow="md"
+        >
+          <SpellSlotsDisplay />
+        </Box>
+      </Collapse>
+    </>
+  );
+}
+
+const SpellSlotsDisplay = () => {
   const { userInfo } = useUserInfo();
   return (
     <Flex
@@ -31,4 +61,4 @@ export default function SpellSlots() {
       })}
     </Flex>
   );
-}
+};

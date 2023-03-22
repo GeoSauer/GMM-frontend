@@ -1,3 +1,5 @@
+import SpellSlots from '../PreparedSpellsPage/SpellSlots';
+
 export default function KnownSpellsPage() {
-  return <div>KnownSpellsPage</div>;
+  return <SpellSlots />;
 }
