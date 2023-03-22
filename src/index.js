@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import SpellProvider from './context/SpellContext';
 import UserProvider from './context/UserContext';
 
 const root = ReactDOM.createRoot(
@@ -13,7 +14,9 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <UserProvider>
-          <App />
+          <SpellProvider>
+            <App />
+          </SpellProvider>
         </UserProvider>
       </BrowserRouter>
     </ChakraProvider>
