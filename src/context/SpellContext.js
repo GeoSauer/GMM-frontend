@@ -47,9 +47,12 @@ export function useAllSpells() {
     setAllSpells,
     allSpellDetails,
     setAllSpellDetails,
+    loading,
+    setLoading,
   } = useContext(SpellContext);
 
   useEffect(() => {
+    setLoading(true);
     const fetchAllSpells = async () => {
       const response = await getAvailableSpells();
       setAllSpells(response);
@@ -60,11 +63,11 @@ export function useAllSpells() {
         })
       );
       setAllSpellDetails(details);
-      console.log(details, 'CONTEXT');
+      setLoading(false);
     };
     fetchAllSpells();
-  }, [setAllSpells, setAllSpellDetails]);
-  return { allSpells, allSpellDetails };
+  }, [setAllSpells, setAllSpellDetails, setLoading]);
+  return { allSpells, allSpellDetails, loading };
 }
 
 export function useKnownSpells() {

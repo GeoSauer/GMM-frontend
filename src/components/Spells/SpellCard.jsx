@@ -14,7 +14,6 @@ export default function SpellCard({
   school,
   spellDetails,
 }) {
-  console.log(spellDetails, 'SPELLCARD');
   const { isOpen, onToggle } = useDisclosure();
   const getSuffix = (num) => {
     let suffix;
@@ -55,7 +54,7 @@ export default function SpellCard({
           rounded="md"
           shadow="md"
         >
-          {/* <SpellDetail spellDetails={spellDetails} /> */}
+          <SpellDetail spellDetails={spellDetails} />
         </Box>
       </Collapse>
     </>

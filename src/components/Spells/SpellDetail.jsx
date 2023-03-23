@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react';
 
 export default function SpellDetail({ spellDetails }) {
-  console.log(spellDetails, 'spell details');
   return (
     <Card>
       <CardBody>
