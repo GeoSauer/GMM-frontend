@@ -5,8 +5,8 @@ import { get, patch } from './requests';
 const URL = 'http://localhost:7890/api/v1/users';
 
 export async function getUserById() {
-  const response = await get(`${URL}/`);
-  return response.data;
+  const { data } = await get(`${URL}/`);
+  return data;
 }
 
 export async function updateUserInfo(updatedInfo) {

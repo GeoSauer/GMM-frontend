@@ -12,16 +12,18 @@ export default function SpellSlots() {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-      <Button w={'full'} onClick={onToggle}>
+      <Button
+        w={'full'}
+        rounded={'none'}
+        onClick={onToggle}
+      >
         Spell Slots
       </Button>
       <Collapse in={isOpen} animateOpacity>
         <Box
           p="40px"
           color="white"
-          mt="4"
           bg="teal.500"
-          rounded="md"
           shadow="md"
         >
           <SpellSlotsDisplay />

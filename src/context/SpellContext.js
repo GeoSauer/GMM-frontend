@@ -8,15 +8,18 @@ import {
   getAvailableSpells,
   getKnownSpells,
   getPreparedSpells,
+  getSpellDetails,
 } from '../services/spells';
 
 const SpellContext = createContext();
 
 export default function SpellProvider({ children }) {
-  const [allSpells, setAllSpells] = useState();
-  const [knownSpells, setKnownSpells] = useState();
-  const [preparedSpells, setPreparedSpells] = useState();
-  const [spellDetail, setSpellDetail] = useState();
+  const [allSpells, setAllSpells] = useState([]);
+  const [knownSpells, setKnownSpells] = useState([]);
+  const [preparedSpells, setPreparedSpells] = useState([]);
+  const [allSpellDetails, setAllSpellDetails] = useState(
+    []
+  );
   const [loading, setLoading] = useState(true);
 
   const value = {
@@ -26,8 +29,8 @@ export default function SpellProvider({ children }) {
     setKnownSpells,
     preparedSpells,
     setPreparedSpells,
-    spellDetail,
-    setSpellDetail,
+    allSpellDetails,
+    setAllSpellDetails,
     loading,
     setLoading,
   };
@@ -39,17 +42,29 @@ export default function SpellProvider({ children }) {
 }
 
 export function useAllSpells() {
-  const { allSpells, setAllSpells } =
-    useContext(SpellContext);
+  const {
+    allSpells,
+    setAllSpells,
+    allSpellDetails,
+    setAllSpellDetails,
+  } = useContext(SpellContext);
 
   useEffect(() => {
     const fetchAllSpells = async () => {
-      const results = await getAvailableSpells();
-      setAllSpells(results);
+      const response = await getAvailableSpells();
+      setAllSpells(response);
+      const details = await Promise.all(
+        response.map(async (spell) => {
+          const results = await getSpellDetails(spell.id);
+          return results;
+        })
+      );
+      setAllSpellDetails(details);
+      console.log(details, 'CONTEXT');
     };
     fetchAllSpells();
-  }, [setAllSpells]);
-  return { allSpells, setAllSpells };
+  }, [setAllSpells, setAllSpellDetails]);
+  return { allSpells, allSpellDetails };
 }
 
 export function useKnownSpells() {
@@ -71,11 +86,11 @@ export function usePreparedSpells() {
     useContext(SpellContext);
 
   useEffect(() => {
-    const fetchAllSpells = async () => {
+    const fetchPreparedSpells = async () => {
       const results = await getPreparedSpells();
       setPreparedSpells(results);
     };
-    fetchAllSpells();
+    fetchPreparedSpells();
   }, [setPreparedSpells]);
   return { preparedSpells, setPreparedSpells };
 }

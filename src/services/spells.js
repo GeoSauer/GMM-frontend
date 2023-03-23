@@ -8,28 +8,28 @@ const KNOWN_SPELLS =
   'http://localhost:7890/api/v1/known-spells';
 
 export async function getAvailableSpells() {
-  const { body } = await get(`${SPELLS}/`);
-  return body;
+  const { data } = await get(`${SPELLS}/`);
+  return data;
 }
 
-export async function getSpellDetail(id) {
-  const { body } = await get(`${SPELLS}/${id}/details`);
-  return body;
+export async function getSpellDetails(id) {
+  const { data } = await get(`${SPELLS}/${id}/details`);
+  return data;
 }
 
 export async function learnSpell(spell) {
-  const { body } = await post(`${SPELLS}/learn`, spell);
-  return body;
+  const { data } = await post(`${SPELLS}/learn`, spell);
+  return data;
 }
 
 export async function getKnownSpells() {
-  const { body } = await get(`${KNOWN_SPELLS}/`);
-  return body;
+  const { data } = await get(`${KNOWN_SPELLS}/`);
+  return data;
 }
 
 export async function getPreparedSpells() {
-  const { body } = await get(`${KNOWN_SPELLS}/prepared`);
-  return body;
+  const { data } = await get(`${KNOWN_SPELLS}/prepared`);
+  return data;
 }
 
 export async function updateSpellPreparation(updatedInfo) {
