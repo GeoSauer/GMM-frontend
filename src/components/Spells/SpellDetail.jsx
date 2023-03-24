@@ -7,6 +7,7 @@ import {
   StackDivider,
   Text,
 } from '@chakra-ui/react';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 
 export default function SpellDetail({ spellDetails }) {
   return (
@@ -20,6 +21,8 @@ export default function SpellDetail({ spellDetails }) {
               </Heading>
               <Text pt="2" fontSize="sm">
                 {spellDetails.castingTime}
+                {spellDetails.ritual &&
+                  ', or ritual (+10 minutes)'}
               </Text>
             </Box>
           )}
@@ -84,14 +87,6 @@ export default function SpellDetail({ spellDetails }) {
               </Text>
             </Box>
           )}
-          <Box>
-            <Heading size="xs" textTransform="uppercase">
-              Ritual
-            </Heading>
-            <Text pt="2" fontSize="sm">
-              {spellDetails.ritual === true ? '✅' : '❌'}
-            </Text>
-          </Box>
           {spellDetails.attackType && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
@@ -110,15 +105,78 @@ export default function SpellDetail({ spellDetails }) {
               <Text pt="2" fontSize="sm">
                 {spellDetails.damage.damageType.name}
               </Text>
+
+              {spellDetails.damage.damageAtCharacterLevel &&
+                Object.keys(
+                  spellDetails.damage.damageAtCharacterLevel
+                ).map((key) => {
+                  console.log(spellDetails.name);
+                  const value =
+                    spellDetails.damage
+                      .damageAtCharacterLevel[key];
+                  return (
+                    <Text
+                      key={`Key-${key}`}
+                      pt="2"
+                      fontSize="sm"
+                    >
+                      Character Level: {key} Damage: {value}
+                    </Text>
+                  );
+                })}
+              {spellDetails.damage.damageAtSlotLevel &&
+                Object.keys(
+                  spellDetails.damage.damageAtSlotLevel
+                ).map((key) => {
+                  const value =
+                    spellDetails.damage.damageAtSlotLevel[
+                      key
+                    ];
+                  return (
+                    <Text
+                      key={`Key-${key}`}
+                      pt="2"
+                      fontSize="sm"
+                    >
+                      Spell SLot Level: {key} Damage:{' '}
+                      {value}
+                    </Text>
+                  );
+                })}
+            </Box>
+          )}
+          {spellDetails.saveDc.type && (
+            <Box>
+              <Heading size="xs" textTransform="uppercase">
+                Save DC
+              </Heading>
+              <Text pt="2" fontSize="sm">
+                {spellDetails.saveDc.type.name}
+              </Text>
+              {spellDetails.saveDc.success !== 'none' && (
+                <Text pt="2" fontSize="sm">
+                  {spellDetails.saveDc.success}
+                </Text>
+              )}
             </Box>
           )}
           <Box>
             <Heading size="xs" textTransform="uppercase">
               Description
             </Heading>
-            <Text pt="2" fontSize="sm">
-              {spellDetails.desc}
-            </Text>
+            <Box>
+              <ReactMarkdown>
+                {spellDetails.desc.reduce((acc, p) => {
+                  if (
+                    p.startsWith('*') ||
+                    p.startsWith('#') ||
+                    p.startsWith('|')
+                  )
+                    return `${acc}\n ${p}`;
+                  return acc;
+                }, '')}
+              </ReactMarkdown>
+            </Box>
           </Box>
           {spellDetails.higherLevel[0] && (
             <Box>

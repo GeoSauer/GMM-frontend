@@ -30,8 +30,10 @@ export default function SpellCard({
       >
         <Heading size="md">{name}</Heading>
         <Text>
-          {level}
-          {suffix}-Level {school}
+          {level > 0
+            ? `${level}
+            ${suffix}-Level ${school}`
+            : `${school} Cantrip`}
         </Text>
       </Button>
       <Collapse in={isOpen} animateOpacity>
@@ -41,7 +43,7 @@ export default function SpellCard({
           bg="teal.500"
           rounded="md"
           shadow="md"
-          onClick={onToggle}
+          // onClick={onToggle}
         >
           <SpellDetail spellDetails={spellDetails} />
         </Box>

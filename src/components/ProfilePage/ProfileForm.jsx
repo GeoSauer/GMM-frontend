@@ -47,7 +47,7 @@ export default function ProfileForm() {
     setUserInfo((prevState) => {
       return { ...prevState, ...updatedInfo };
     });
-    navigate('/prepared-spells');
+    navigate('/all-spells');
   };
   return (
     <Flex
@@ -118,7 +118,6 @@ export default function ProfileForm() {
                 onChange={handleChange}
               >
                 <option value={updatedInfo.charClass}>
-                  {/* <option value=""> */}
                   {updatedInfo.charClass}
                 </option>
                 <option value="Bard">Bard</option>
