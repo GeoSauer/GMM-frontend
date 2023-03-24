@@ -6,6 +6,7 @@ import {
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
+import { getSuffix } from '../../utils/utils';
 import SpellDetail from './SpellDetail';
 
 export default function SpellCard({
@@ -15,20 +16,6 @@ export default function SpellCard({
   spellDetails,
 }) {
   const { isOpen, onToggle } = useDisclosure();
-  //TODO find a forever home for this lonesome pup
-  const getSuffix = (num) => {
-    let suffix;
-    if (num === 1) {
-      suffix = 'st';
-    } else if (num === 2) {
-      suffix = 'nd';
-    } else if (num === 3) {
-      suffix = 'rd';
-    } else {
-      suffix = 'th';
-    }
-    return suffix;
-  };
   const suffix = getSuffix(level);
 
   return (
