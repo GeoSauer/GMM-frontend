@@ -15,6 +15,7 @@ export default function SpellCard({
   spellDetails,
 }) {
   const { isOpen, onToggle } = useDisclosure();
+  //TODO find a forever home for this lonesome pup
   const getSuffix = (num) => {
     let suffix;
     if (num === 1) {
@@ -53,6 +54,7 @@ export default function SpellCard({
           bg="teal.500"
           rounded="md"
           shadow="md"
+          onClick={onToggle}
         >
           <SpellDetail spellDetails={spellDetails} />
         </Box>

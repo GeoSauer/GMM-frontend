@@ -29,7 +29,9 @@ export default function ProfileForm() {
   });
 
   useEffect(() => {
-    setUpdatedInfo(userInfo);
+    if (userInfo.username) {
+      setUpdatedInfo(userInfo);
+    }
   }, [userInfo]);
 
   const handleChange = ({ target }) => {
@@ -47,7 +49,6 @@ export default function ProfileForm() {
     });
     navigate('/prepared-spells');
   };
-  //TODO still getting the controlled to uncontrolled error
   return (
     <Flex
       minH={'100vh'}

@@ -13,13 +13,13 @@ export default function SpellDetail({ spellDetails }) {
     <Card>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">
-          {spellDetails.casting_time && (
+          {spellDetails.castingTime && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Casting Time
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.casting_time}
+                {spellDetails.castingTime}
               </Text>
             </Box>
           )}
@@ -33,14 +33,14 @@ export default function SpellDetail({ spellDetails }) {
               </Text>
             </Box>
           )}
-          {spellDetails.area_of_effect && (
+          {spellDetails.areaOfEffect && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Area of Effect
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.area_of_effect.size} foot{' '}
-                {spellDetails.area_of_effect.type}
+                {spellDetails.areaOfEffect.size} foot{' '}
+                {spellDetails.areaOfEffect.type}
               </Text>
             </Box>
           )}
@@ -50,13 +50,15 @@ export default function SpellDetail({ spellDetails }) {
                 Components
               </Heading>
               {spellDetails.components.map((component) => {
-                <Text
-                  key={`key-${component}`}
-                  pt="2"
-                  fontSize="sm"
-                >
-                  {component}
-                </Text>;
+                return (
+                  <Text
+                    key={`key-${component}`}
+                    pt="2"
+                    fontSize="sm"
+                  >
+                    {component}
+                  </Text>
+                );
               })}
             </Box>
           )}
@@ -90,23 +92,23 @@ export default function SpellDetail({ spellDetails }) {
               {spellDetails.ritual === true ? '✅' : '❌'}
             </Text>
           </Box>
-          {spellDetails.attack_type && (
+          {spellDetails.attackType && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Attack Type
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.attack_type}
+                {spellDetails.attackType}
               </Text>
             </Box>
           )}
-          {spellDetails.damage && (
+          {spellDetails.damage.damageType && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Damage Type
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.damage.damage_type.name}
+                {spellDetails.damage.damageType.name}
               </Text>
             </Box>
           )}
@@ -118,13 +120,13 @@ export default function SpellDetail({ spellDetails }) {
               {spellDetails.desc}
             </Text>
           </Box>
-          {spellDetails.higher_level[0] && (
+          {spellDetails.higherLevel[0] && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Higher Level
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.higher_level}
+                {spellDetails.higherLevel}
               </Text>
             </Box>
           )}
