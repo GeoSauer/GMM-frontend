@@ -1,3 +1,5 @@
+##### Animated Object Statistics
+
 | Size   | HP  | AC  | Attack                     | Str | Dex |
 | ------ | --- | --- | -------------------------- | --- | --- |
 | Tiny   | 20  | 18  | +8 to hit, 1d4 + 4 damage  | 4   | 18  |
