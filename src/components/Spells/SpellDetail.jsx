@@ -19,27 +19,6 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import gfm from 'remark-gfm';
 
 export default function SpellDetail({ spellDetails }) {
-  // const markdown = `
-  // ##### Animated Object Statistics
-
-  // | Size   | HP  | AC  | Attack                     | Str | Dex |
-  // | ------ | --- | --- | -------------------------- | --- | --- |
-  // | Tiny   | 20  | 18  | +8 to hit, 1d4 + 4 damage  | 4   | 18  |
-  // | Small  | 25  | 16  | +6 to hit, 1d8 + 2 damage  | 6   | 14  |
-  // | Medium | 40  | 13  | +5 to hit, 2d6 + 1 damage  | 10  | 12  |
-  // | Large  | 50  | 10  | +6 to hit, 2d10 + 2 damage | 14  | 10  |
-  // | Huge   | 80  | 10  | +8 to hit, 2d12 + 4 damage | 18  | 6   |
-  //   `;
-  // const markdown = spellDetails.desc.reduce((acc, p) => {
-  //   if (
-  //     p.startsWith('*') ||
-  //     p.startsWith('#') ||
-  //     p.startsWith('|')
-  //   )
-  //     return `${acc}\n${p}`;
-  //   return acc;
-  // }, '');
-
   return (
     <Card>
       <CardBody>
@@ -51,8 +30,7 @@ export default function SpellDetail({ spellDetails }) {
               </Heading>
               <Text pt="2" fontSize="sm">
                 {spellDetails.castingTime}
-                {spellDetails.ritual &&
-                  ', or ritual (+10 minutes)'}
+                {spellDetails.ritual && ', or ritual (+10 minutes)'}
               </Text>
             </Box>
           )}
@@ -72,8 +50,7 @@ export default function SpellDetail({ spellDetails }) {
                 Area of Effect
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.areaOfEffect.size} foot{' '}
-                {spellDetails.areaOfEffect.type}
+                {spellDetails.areaOfEffect.size} foot {spellDetails.areaOfEffect.type}
               </Text>
             </Box>
           )}
@@ -85,31 +62,19 @@ export default function SpellDetail({ spellDetails }) {
               {spellDetails.components.map((component) => {
                 if (component === 'V') {
                   return (
-                    <Text
-                      key={`key-${component}`}
-                      pt="2"
-                      fontSize="sm"
-                    >
+                    <Text key={`key-${component}`} pt="2" fontSize="sm">
                       Verbal
                     </Text>
                   );
                 } else if (component === 'S') {
                   return (
-                    <Text
-                      key={`key-${component}`}
-                      pt="2"
-                      fontSize="sm"
-                    >
+                    <Text key={`key-${component}`} pt="2" fontSize="sm">
                       Somatic
                     </Text>
                   );
                 } else if (component === 'M') {
                   return (
-                    <Text
-                      key={`key-${component}`}
-                      pt="2"
-                      fontSize="sm"
-                    >
+                    <Text key={`key-${component}`} pt="2" fontSize="sm">
                       Material
                     </Text>
                   );
@@ -134,8 +99,7 @@ export default function SpellDetail({ spellDetails }) {
               </Heading>
               <Text pt="2" fontSize="sm">
                 {spellDetails.duration}
-                {spellDetails.concentration &&
-                  ', concentration'}
+                {spellDetails.concentration && ', concentration'}
               </Text>
             </Box>
           )}
@@ -152,12 +116,12 @@ export default function SpellDetail({ spellDetails }) {
           {spellDetails.damage.damageType && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
-                {spellDetails.damage.damageAtCharacterLevel
+                {spellDetails.damage.damageAtCharacterLevel || spellDetails.damage.damageAtSlotLevel
                   ? 'Damage'
                   : 'Damage Type'}
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.damage.damageAtCharacterLevel
+                {spellDetails.damage.damageAtCharacterLevel || spellDetails.damage.damageAtSlotLevel
                   ? `Type: ${spellDetails.damage.damageType.name}`
                   : spellDetails.damage.damageType.name}
               </Text>
@@ -167,9 +131,7 @@ export default function SpellDetail({ spellDetails }) {
             <Box>
               <TableContainer>
                 <Table>
-                  <TableCaption placement="top">
-                    Damage At Character Level
-                  </TableCaption>
+                  <TableCaption placement="top">Damage At Character Level</TableCaption>
                   <Thead>
                     <Tr>
                       <Th>Level</Th>
@@ -177,13 +139,8 @@ export default function SpellDetail({ spellDetails }) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(
-                      spellDetails.damage
-                        .damageAtCharacterLevel
-                    ).map((key) => {
-                      const value =
-                        spellDetails.damage
-                          .damageAtCharacterLevel[key];
+                    {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key) => {
+                      const value = spellDetails.damage.damageAtCharacterLevel[key];
                       return (
                         <Tr key={`Key-${key}`}>
                           <Td>{key}</Td>
@@ -200,9 +157,7 @@ export default function SpellDetail({ spellDetails }) {
             <Box>
               <TableContainer>
                 <Table>
-                  <TableCaption placement="top">
-                    Damage At Spell Slot Level
-                  </TableCaption>
+                  <TableCaption placement="top">Damage At Spell Slot Level</TableCaption>
                   <Thead>
                     <Tr>
                       <Th>Level</Th>
@@ -210,12 +165,8 @@ export default function SpellDetail({ spellDetails }) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(
-                      spellDetails.damage.damageAtSlotLevel
-                    ).map((key) => {
-                      const value =
-                        spellDetails.damage
-                          .damageAtSlotLevel[key];
+                    {Object.keys(spellDetails.damage.damageAtSlotLevel).map((key) => {
+                      const value = spellDetails.damage.damageAtSlotLevel[key];
                       return (
                         <Tr key={`Key-${key}`}>
                           <Td>{key}</Td>
@@ -239,15 +190,12 @@ export default function SpellDetail({ spellDetails }) {
                   <Thead>
                     <Tr>
                       <Th>Level</Th>
-                      <Th>Mx/Current HP Raised By</Th>
+                      <Th>Max/Current HP Raised By</Th>
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(
-                      spellDetails.healAtSlotLevel
-                    ).map((key) => {
-                      const value =
-                        spellDetails.healAtSlotLevel[key];
+                    {Object.keys(spellDetails.healAtSlotLevel).map((key) => {
+                      const value = spellDetails.healAtSlotLevel[key];
                       return (
                         <Tr key={`Key-${key}`}>
                           <Td>{key}</Td>
@@ -280,62 +228,35 @@ export default function SpellDetail({ spellDetails }) {
               Description
             </Heading>
             <Box>
-              {spellDetails.desc.map((string, i) => {
-                if (
-                  (string.startsWith('*') ||
-                    string.startsWith('#') ||
-                    string.startsWith('|')) &&
-                  (string[i + 1].startsWith('*') ||
-                    string[i + 1].startsWith('#') ||
-                    string[i + 1].startsWith('|'))
-                ) {
-                  const markdown = string.concat(
-                    '\n',
-                    string[i + 1]
-                  );
-                  return (
+              {spellDetails.desc.map((paragraph, i) => {
+                return paragraph.includes('|') ? (
+                  <TableContainer>
                     <ReactMarkdown
-                      key={`key-${string}`}
+                      components={{
+                        table: (props) => <Table {...props} />,
+                        thead: (props) => <Thead {...props} />,
+                        tbody: (props) => <Tbody {...props} />,
+                        tr: (props) => <Tr {...props} />,
+                        td: (props) => <Td {...props} />,
+                      }}
+                      key={`key-${i}`}
                       remarkPlugins={[gfm]}
                     >
-                      {markdown}
+                      {paragraph}
                     </ReactMarkdown>
-                  );
-                } else if (
-                  string.startsWith('*') ||
-                  string.startsWith('#') ||
-                  string.startsWith('|')
-                ) {
-                  return (
+                  </TableContainer>
+                ) : (
+                  <Text pt="2" fontSize="sm">
                     <ReactMarkdown
-                      key={`key-${string}`}
-                      remarkPlugins={[gfm]}
+                      components={{
+                        h5: 'strong',
+                      }}
                     >
-                      {string}
+                      {paragraph}
                     </ReactMarkdown>
-                  );
-                } else {
-                  return (
-                    <Text
-                      key={`key-${string}`}
-                      pt="2"
-                      fontSize="sm"
-                    >
-                      {string}
-                    </Text>
-                  );
-                }
+                  </Text>
+                );
               })}
-              {/* <ReactMarkdown remarkPlugins={[gfm]}>
-                {markdown}
-              </ReactMarkdown> */}
-              {/* {spellDetails.desc.reduce((acc, p) => {
-                if (p.startsWith('*') || p.startsWith('#') || p.startsWith('|'))
-                  return `${acc}\n 
-                  ${p}`;
-                console.log(typeof acc);
-                return acc;
-              }, '')} */}
             </Box>
           </Box>
           {spellDetails.higherLevel[0] && (

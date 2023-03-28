@@ -6,7 +6,6 @@ import SpellCard from '../Spells/SpellCard';
 export default function AllSpellsPage() {
   const { allSpells, allSpellDetails, loading } =
     useAllSpells();
-  console.log(allSpells.length);
 
   return (
     <>
