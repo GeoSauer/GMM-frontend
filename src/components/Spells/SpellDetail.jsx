@@ -59,22 +59,22 @@ export default function SpellDetail({ spellDetails }) {
               <Heading size="xs" textTransform="uppercase">
                 Components
               </Heading>
-              {spellDetails.components.map((component) => {
+              {spellDetails.components.map((component, i) => {
                 if (component === 'V') {
                   return (
-                    <Text key={`key-${component}`} pt="2" fontSize="sm">
+                    <Text key={i} pt="2" fontSize="sm">
                       Verbal
                     </Text>
                   );
                 } else if (component === 'S') {
                   return (
-                    <Text key={`key-${component}`} pt="2" fontSize="sm">
+                    <Text key={i} pt="2" fontSize="sm">
                       Somatic
                     </Text>
                   );
                 } else if (component === 'M') {
                   return (
-                    <Text key={`key-${component}`} pt="2" fontSize="sm">
+                    <Text key={i} pt="2" fontSize="sm">
                       Material
                     </Text>
                   );
@@ -139,12 +139,12 @@ export default function SpellDetail({ spellDetails }) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key) => {
+                    {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key, i) => {
                       const value = spellDetails.damage.damageAtCharacterLevel[key];
                       return (
-                        <Tr key={`Key-${key}`}>
-                          <Td>{key}</Td>
-                          <Td>{value}</Td>
+                        <Tr key={i}>
+                          <Td key={key}>{key}</Td>
+                          <Td key={value}>{value}</Td>
                         </Tr>
                       );
                     })}
@@ -165,12 +165,12 @@ export default function SpellDetail({ spellDetails }) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(spellDetails.damage.damageAtSlotLevel).map((key) => {
+                    {Object.keys(spellDetails.damage.damageAtSlotLevel).map((key, i) => {
                       const value = spellDetails.damage.damageAtSlotLevel[key];
                       return (
-                        <Tr key={`Key-${key}`}>
-                          <Td>{key}</Td>
-                          <Td>{value}</Td>
+                        <Tr key={i}>
+                          <Td key={key}>{key}</Td>
+                          <Td key={value}>{value}</Td>
                         </Tr>
                       );
                     })}
@@ -194,12 +194,12 @@ export default function SpellDetail({ spellDetails }) {
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {Object.keys(spellDetails.healAtSlotLevel).map((key) => {
+                    {Object.keys(spellDetails.healAtSlotLevel).map((key, i) => {
                       const value = spellDetails.healAtSlotLevel[key];
                       return (
-                        <Tr key={`Key-${key}`}>
-                          <Td>{key}</Td>
-                          <Td>{value}</Td>
+                        <Tr key={i}>
+                          <Td key={key}>{key}</Td>
+                          <Td key={value}>{value}</Td>
                         </Tr>
                       );
                     })}
@@ -230,27 +230,32 @@ export default function SpellDetail({ spellDetails }) {
             <Box>
               {spellDetails.desc.map((paragraph, i) => {
                 return paragraph.includes('|') ? (
-                  <TableContainer>
+                  <TableContainer key={i}>
                     <ReactMarkdown
                       components={{
                         table: (props) => <Table {...props} />,
                         thead: (props) => <Thead {...props} />,
                         tbody: (props) => <Tbody {...props} />,
-                        tr: (props) => <Tr {...props} />,
-                        td: (props) => <Td {...props} />,
+                        tr: ({ node, children }) => {
+                          return <Tr {...{ node, children }} />;
+                        },
+                        td: ({ node, children }) => {
+                          return <Td {...{ node, children }} />;
+                        },
                       }}
-                      key={`key-${i}`}
+                      key={paragraph}
                       remarkPlugins={[gfm]}
                     >
                       {paragraph}
                     </ReactMarkdown>
                   </TableContainer>
                 ) : (
-                  <Text pt="2" fontSize="sm">
+                  <Text key={i} as={'span'} pt="2" fontSize="sm">
                     <ReactMarkdown
                       components={{
                         h5: 'strong',
                       }}
+                      key={paragraph}
                     >
                       {paragraph}
                     </ReactMarkdown>
