@@ -32,12 +32,12 @@ export default function SignInForm() {
       .email('Invalid email')
       .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'Invalid email')
       .required('Required'),
-    password: Yup.string().min(8, 'Too short!').required('Required'),
-    username: Yup.string().min(2, 'Too Short!').required('Required'),
-    charName: Yup.string().min(2, 'Too Short!').required('Required'),
-    charClass: Yup.string().required('Required'),
-    charLvl: Yup.number().moreThan(0, 'Choose One').required('Required'),
-    charMod: Yup.number().moreThan(0, 'Choose One').required('Required'),
+    password: Yup.string().min(8, 'Too short!').required('Also required'),
+    username: Yup.string().min(2, 'Too Short!').required('Yea this one too'),
+    charName: Yup.string().min(2, 'Too Short!').required('And this one'),
+    charClass: Yup.string().required('Please'),
+    charLvl: Yup.number().moreThan(0, 'Choose One').required('Be reasonable'),
+    charMod: Yup.number().moreThan(0, 'Choose One').required('Last one I promise'),
   });
 
   return (
@@ -85,6 +85,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="password">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.password && form.touched.password}>
@@ -107,6 +108,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="username">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.username && form.touched.username}>
@@ -118,6 +120,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="charName">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charName && form.touched.charName}>
@@ -129,6 +132,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="charClass">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
@@ -149,6 +153,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="charLvl">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charLvl && form.touched.charLvl}>
@@ -168,6 +173,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="charMod">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charMod && form.touched.charMod}>
@@ -187,6 +193,7 @@ export default function SignInForm() {
                       </FormControl>
                     )}
                   </Field>
+
                   <Stack spacing={5}>
                     <Button
                       bg={'blue.400'}
@@ -199,6 +206,7 @@ export default function SignInForm() {
                     >
                       Sign up
                     </Button>
+
                     <Button
                       bg={'blue.400'}
                       color={'white'}

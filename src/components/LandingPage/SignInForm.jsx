@@ -1,8 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import { useState } from 'react';
-import * as Yup from 'yup';
-
 import {
   Flex,
   Box,
@@ -28,14 +26,6 @@ export default function SignInForm() {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const SigninSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email')
-      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'Invalid email'),
-    password: Yup.string().required('Required'),
-    username: Yup.string(),
-  });
-
   return (
     <Flex
       minH={'100vh'}
@@ -57,7 +47,6 @@ export default function SignInForm() {
                 username: '',
                 password: '',
               }}
-              validationSchema={SigninSchema}
               onSubmit={async (values, actions) => {
                 await signIn(values);
                 actions.setSubmitting(false);
@@ -72,10 +61,10 @@ export default function SignInForm() {
                           Email
                         </FormLabel>
                         <Input {...field} placeholder="Email" />
-                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="username">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.username && form.touched.username}>
@@ -83,10 +72,10 @@ export default function SignInForm() {
                           Username
                         </FormLabel>
                         <Input {...field} placeholder="Username" />
-                        <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
+
                   <Field name="password">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.username && form.touched.username}>
@@ -106,7 +95,6 @@ export default function SignInForm() {
                           </InputRightElement>
                         </InputGroup>
                         <FormHelperText color={'red.500'}>{error}</FormHelperText>
-                        <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
@@ -123,6 +111,7 @@ export default function SignInForm() {
                     >
                       Sign in
                     </Button>
+
                     <Button
                       bg={'blue.400'}
                       color={'white'}
