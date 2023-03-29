@@ -1,9 +1,4 @@
-import {
-  useState,
-  useContext,
-  createContext,
-  useEffect,
-} from 'react';
+import { useState, useContext, createContext, useEffect } from 'react';
 
 import {
   signInUser,
@@ -51,11 +46,7 @@ export default function UserProvider({ children }) {
     setUserInfo,
   };
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 
 export function useUser() {
@@ -77,6 +68,7 @@ export function useUserInfo() {
 }
 
 export function useAuth() {
+  //TODO I'm no longer using this error, so let's scrub it?
   const [error, setError] = useState(null);
   const { setUser } = useContext(UserContext);
 

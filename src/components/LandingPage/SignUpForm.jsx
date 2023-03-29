@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import { useState } from 'react';
-
+import * as Yup from 'yup';
 import {
   Flex,
   Box,
@@ -14,70 +14,32 @@ import {
   useColorModeValue,
   InputGroup,
   InputRightElement,
-  FormHelperText,
   Select,
+  FormErrorMessage,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 
 export default function SignInForm() {
   const navigate = useNavigate();
-  const { signUp, error } = useAuth();
+  const { signUp } = useAuth();
 
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  // * for taking the input values and signing the user up
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-    username: '',
-    charName: '',
-    charClass: '',
-    charLvl: '',
-    charMod: '',
+  const SignupSchema = Yup.object().shape({
+    email: Yup.string()
+      .email('Invalid email')
+      .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, 'Invalid email')
+      .required('Required'),
+    password: Yup.string().min(8, 'Too short!').required('Required'),
+    username: Yup.string().min(2, 'Too Short!').required('Required'),
+    charName: Yup.string().min(2, 'Too Short!').required('Required'),
+    charClass: Yup.string().required('Required'),
+    charLvl: Yup.number().moreThan(0, 'Choose One').required('Required'),
+    charMod: Yup.number().moreThan(0, 'Choose One').required('Required'),
   });
 
-  const handleChange = ({ target }) => {
-    setUserInfo((data) => ({
-      ...data,
-      [target.name]: target.value,
-    }));
-  };
-
-  const [isValid, setIsValid] = useState(false);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formValues = Object.values(userInfo);
-    if (formValues.every((value) => value)) {
-      setIsValid(true);
-    }
-    if (!isValid) {
-      alert('All fields are required');
-    } else {
-      await signUp(userInfo);
-      navigate('/all-spells');
-    }
-  };
-
-  const isError =
-    !userInfo.email ||
-    !userInfo.password ||
-    !userInfo.charName ||
-    !userInfo.charClass ||
-    !userInfo.charLvl ||
-    !userInfo.charMod;
-  // {
-  //   email: !userInfo.email,
-  //   password: '',
-  //   username: '',
-  //   charName: '',
-  //   charClass: '',
-  //   charLvl: '',
-  //   charMod: '',
-  // };
-  //TODO still need to fix required not working
   return (
     <Flex
       minH={'100vh'}
@@ -93,136 +55,138 @@ export default function SignInForm() {
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
-            <Formik initialValues={userInfo} onSubmit={handleSubmit}>
+            <Formik
+              initialValues={{
+                email: '',
+                password: '',
+                username: '',
+                charName: '',
+                charClass: '',
+                charLvl: '',
+                charMod: '',
+              }}
+              validationSchema={SignupSchema}
+              onSubmit={async (values, actions) => {
+                await signUp(values);
+                navigate('/all-spells');
+                actions.setSubmitting(false);
+              }}
+            >
               {(props) => (
                 <Form>
-                  <Field name="email" validate={isValid}>
+                  <Field name="email">
                     {({ field, form }) => (
-                      <FormControl isInvalid={isError}>
+                      <FormControl isInvalid={form.errors.email && form.touched.email}>
                         <FormLabel htmlFor="email" fontWeight={'normal'}>
                           Email
                         </FormLabel>
-                        <Input
-                          // id="email"
-                          // type="email"
-                          // name="email"
-                          placeholder="Email"
-                          value={userInfo.email}
-                          onChange={handleChange}
-                        />
-                        {isError && <FormHelperText>{error}</FormHelperText>}
+                        <Input {...field} placeholder="Email" />
+                        <FormErrorMessage>{form.errors.email}</FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
-                  <FormControl isRequired isInvalid={isError}>
-                    <FormLabel htmlFor="password" fontWeight={'normal'} mt="2%">
-                      Password
-                    </FormLabel>
-                    <InputGroup size="md">
-                      <Input
-                        id="password"
-                        name="password"
-                        pr="4.5rem"
-                        type={show ? 'text' : 'password'}
-                        placeholder="Password"
-                        value={userInfo.password}
-                        onChange={handleChange}
-                      />
-                      <InputRightElement width="4.5rem">
-                        <Button h="2rem" size="sm" rounded={'full'} onClick={handleClick}>
-                          {show ? '🫣' : '😳'}
-                        </Button>
-                      </InputRightElement>
-                    </InputGroup>
-                  </FormControl>
-                  <FormControl isRequired isInvalid={isError}>
-                    <FormLabel htmlFor="username" fontWeight={'normal'}>
-                      Username
-                    </FormLabel>
-                    <Input
-                      id="username"
-                      type="text"
-                      name="username"
-                      placeholder="Username"
-                      value={userInfo.username}
-                      onChange={handleChange}
-                    />
-                  </FormControl>
-                  <FormControl isRequired isInvalid={isError}>
-                    <FormLabel htmlFor="charName" fontWeight={'normal'}>
-                      Character Name
-                    </FormLabel>
-                    <Input
-                      id="charName"
-                      type="text"
-                      name="charName"
-                      placeholder="Character Name"
-                      value={userInfo.charName}
-                      onChange={handleChange}
-                    />
-                  </FormControl>
-                  <FormControl isRequired isInvalid={isError}>
-                    <FormLabel htmlFor="charClass" fontWeight={'normal'}>
-                      Character Class
-                    </FormLabel>
-                    <Select
-                      id="charClass"
-                      name="charClass"
-                      placeholder="Choose One"
-                      value={userInfo.charClass}
-                      onChange={handleChange}
-                    >
-                      <option value="Bard">Bard</option>
-                      <option value="Cleric">Cleric</option>
-                      <option value="Druid">Druid</option>
-                      <option value="Paladin">Paladin</option>
-                      <option value="Ranger">Ranger</option>
-                      <option value="Sorcerer">Sorcerer</option>
-                      <option value="Warlock">Warlock</option>
-                      <option value="Wizard">Wizard</option>
-                    </Select>
-                  </FormControl>{' '}
-                  <FormControl isRequired isInvalid={isError}>
-                    <FormLabel htmlFor="charLvl" fontWeight={'normal'}>
-                      Character Level
-                    </FormLabel>
-                    <Select
-                      id="charLvl"
-                      name="charLvl"
-                      placeholder="Choose One"
-                      value={userInfo.charLvl}
-                      onChange={handleChange}
-                    >
-                      {[...Array(20)].map((_, i) => {
-                        return (
-                          <option key={`key-${i}`} value={i + 1}>
-                            {i + 1}
-                          </option>
-                        );
-                      })}
-                    </Select>
-                  </FormControl>
-                  <FormControl isRequired isInvalid={isError}>
-                    <FormLabel htmlFor="charMod" fontWeight={'normal'}>
-                      Spellcasting Ability Modifier
-                    </FormLabel>
-                    <Select
-                      id="charMod"
-                      name="charMod"
-                      placeholder="Choose One"
-                      value={userInfo.charMod}
-                      onChange={handleChange}
-                    >
-                      {[...Array(10)].map((_, i) => {
-                        return (
-                          <option key={`key-${i}`} value={i + 1}>
-                            {i + 1}
-                          </option>
-                        );
-                      })}
-                    </Select>
-                    <FormHelperText color={'red.500'}>{error}</FormHelperText>
-                  </FormControl>
+                  <Field name="password">
+                    {({ field, form }) => (
+                      <FormControl isInvalid={form.errors.password && form.touched.password}>
+                        <FormLabel htmlFor="password" fontWeight={'normal'}>
+                          Password
+                        </FormLabel>
+                        <InputGroup size="md">
+                          <Input
+                            {...field}
+                            type={show ? 'text' : 'password'}
+                            placeholder="Password"
+                          />
+                          <InputRightElement width="4.5rem">
+                            <Button h="2rem" size="sm" rounded={'full'} onClick={handleClick}>
+                              {show ? '🫣' : '😳'}
+                            </Button>
+                          </InputRightElement>
+                        </InputGroup>
+                        <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="username">
+                    {({ field, form }) => (
+                      <FormControl isInvalid={form.errors.username && form.touched.username}>
+                        <FormLabel htmlFor="username" fontWeight={'normal'}>
+                          Username
+                        </FormLabel>
+                        <Input {...field} placeholder="Username" />
+                        <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="charName">
+                    {({ field, form }) => (
+                      <FormControl isInvalid={form.errors.charName && form.touched.charName}>
+                        <FormLabel htmlFor="charName" fontWeight={'normal'}>
+                          Character Name
+                        </FormLabel>
+                        <Input {...field} placeholder="Character Name" />
+                        <FormErrorMessage>{form.errors.charName}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="charClass">
+                    {({ field, form }) => (
+                      <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
+                        <FormLabel htmlFor="charClass" fontWeight={'normal'}>
+                          Character Class
+                        </FormLabel>
+                        <Select {...field} placeholder="Choose One">
+                          <option value="Bard">Bard</option>
+                          <option value="Cleric">Cleric</option>
+                          <option value="Druid">Druid</option>
+                          <option value="Paladin">Paladin</option>
+                          <option value="Ranger">Ranger</option>
+                          <option value="Sorcerer">Sorcerer</option>
+                          <option value="Warlock">Warlock</option>
+                          <option value="Wizard">Wizard</option>
+                        </Select>
+                        <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="charLvl">
+                    {({ field, form }) => (
+                      <FormControl isInvalid={form.errors.charLvl && form.touched.charLvl}>
+                        <FormLabel htmlFor="charLvl" fontWeight={'normal'}>
+                          Character Level
+                        </FormLabel>
+                        <Select {...field} placeholder="Choose One">
+                          {[...Array(20)].map((_, i) => {
+                            return (
+                              <option key={`key-${i}`} value={i + 1}>
+                                {i + 1}
+                              </option>
+                            );
+                          })}
+                        </Select>
+                        <FormErrorMessage>{form.errors.charLvl}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="charMod">
+                    {({ field, form }) => (
+                      <FormControl isInvalid={form.errors.charMod && form.touched.charMod}>
+                        <FormLabel htmlFor="charMod" fontWeight={'normal'}>
+                          Spellcasting Ability Modifier
+                        </FormLabel>
+                        <Select {...field} placeholder="Choose One">
+                          {[...Array(10)].map((_, i) => {
+                            return (
+                              <option key={`key-${i}`} value={i + 1}>
+                                {i + 1}
+                              </option>
+                            );
+                          })}
+                        </Select>
+                        <FormErrorMessage>{form.errors.charMod}</FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
                   <Stack spacing={5}>
                     <Button
                       bg={'blue.400'}
@@ -230,7 +194,8 @@ export default function SignInForm() {
                       _hover={{
                         bg: 'blue.500',
                       }}
-                      // onClick={handleSubmit}
+                      isLoading={props.isSubmitting}
+                      type="submit"
                     >
                       Sign up
                     </Button>

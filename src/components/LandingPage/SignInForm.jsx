@@ -49,33 +49,16 @@ export default function SignInForm() {
       justify={'center'}
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
-      <Stack
-        spacing={8}
-        mx={'auto'}
-        maxWidth={'lg'}
-        py={12}
-        px={6}
-      >
+      <Stack spacing={8} mx={'auto'} maxWidth={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading
-            fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}
-            marginTop={5}
-          >
+          <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} marginTop={5}>
             Sign in to your account
           </Heading>
         </Stack>
-        <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}
-        >
+        <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
             <FormControl>
-              <FormLabel
-                htmlFor="email"
-                fontWeight={'normal'}
-              >
+              <FormLabel htmlFor="email" fontWeight={'normal'}>
                 Email
               </FormLabel>
               <Input
@@ -88,10 +71,7 @@ export default function SignInForm() {
               />
             </FormControl>{' '}
             <FormControl>
-              <FormLabel
-                htmlFor="username"
-                fontWeight={'normal'}
-              >
+              <FormLabel htmlFor="username" fontWeight={'normal'}>
                 Username
               </FormLabel>
               <Input
@@ -104,11 +84,7 @@ export default function SignInForm() {
               />
             </FormControl>{' '}
             <FormControl>
-              <FormLabel
-                htmlFor="password"
-                fontWeight={'normal'}
-                mt="2%"
-              >
+              <FormLabel htmlFor="password" fontWeight={'normal'} mt="2%">
                 Password
               </FormLabel>
               <InputGroup size="md">
@@ -123,20 +99,13 @@ export default function SignInForm() {
                   onChange={handleChange}
                 />
                 <InputRightElement width="4.5rem">
-                  <Button
-                    h="2rem"
-                    size="sm"
-                    rounded={'full'}
-                    onClick={handleClick}
-                  >
+                  <Button h="2rem" size="sm" rounded={'full'} onClick={handleClick}>
                     {show ? '🫣' : '😳'}
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              <FormHelperText color={'red.500'}>
-                {error}
-              </FormHelperText>
-            </FormControl>{' '}
+              <FormHelperText color={'red.500'}>{error}</FormHelperText>
+            </FormControl>
             <Stack spacing={5}>
               <Button
                 bg={'blue.400'}
