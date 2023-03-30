@@ -13,5 +13,3 @@ export async function updateUserInfo(updatedInfo) {
   const response = await patch(`${URL}/update`, updatedInfo);
   return response.body;
 }
-
-// export async function getUserByLogin(credentials)

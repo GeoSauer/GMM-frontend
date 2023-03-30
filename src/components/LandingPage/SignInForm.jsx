@@ -13,7 +13,6 @@ import {
   useColorModeValue,
   InputGroup,
   InputRightElement,
-  FormErrorMessage,
   FormHelperText,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';

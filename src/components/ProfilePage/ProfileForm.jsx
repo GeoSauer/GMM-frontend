@@ -15,10 +15,25 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function ProfileForm() {
   const navigate = useNavigate();
   const { userInfo, setUserInfo } = useUserInfo();
+  const [updatedInfo, setUpdatedInfo] = useState({
+    username: '',
+    charName: '',
+    charClass: '',
+    charLvl: '',
+    charMod: '',
+  });
+
+  useEffect(() => {
+    if (userInfo.username) {
+      setUpdatedInfo(userInfo);
+    }
+  }, [userInfo]);
 
   const ProfileSchema = Yup.object().shape({
     username: Yup.string().min(2, 'Too Short!'),
@@ -36,13 +51,16 @@ export default function ProfileForm() {
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
             <Formik
-              initialValues={{
-                username: '',
-                charName: '',
-                charClass: '',
-                charLvl: '',
-                charMod: '',
-              }}
+              //TODO everything works great with normal navigation, but if page is refreshed fields revert to placeholders (grayed out but accurate uers/char name, reverts to first option on selects, Bard, 1, 1) and text inputs trigger un/controlled error on change
+              initialValues={
+                userInfo
+                // {                username: '',
+                //                 charName: '',
+                //                 charClass: '',
+                //                 charLvl: '',
+                //                 charMod: '',
+                // }
+              }
               validationSchema={ProfileSchema}
               onSubmit={async (values, actions) => {
                 await updateUserInfo(values);
@@ -50,7 +68,6 @@ export default function ProfileForm() {
                   return { ...prevState, ...values };
                 });
                 navigate('/all-spells');
-
                 actions.setSubmitting(false);
               }}
             >
@@ -62,7 +79,7 @@ export default function ProfileForm() {
                         <FormLabel htmlFor="username" fontWeight={'normal'}>
                           Username
                         </FormLabel>
-                        <Input {...field} placeholder={userInfo.username} />
+                        <Input {...field} placeholder={updatedInfo.username} />
                         <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -74,7 +91,7 @@ export default function ProfileForm() {
                         <FormLabel htmlFor="charName" fontWeight={'normal'}>
                           Character Name
                         </FormLabel>
-                        <Input {...field} placeholder={userInfo.charName} />
+                        <Input {...field} placeholder={updatedInfo.charName} />
                         <FormErrorMessage>{form.errors.charName}</FormErrorMessage>
                       </FormControl>
                     )}
@@ -86,8 +103,7 @@ export default function ProfileForm() {
                         <FormLabel htmlFor="charClass" fontWeight={'normal'}>
                           Character Class
                         </FormLabel>
-                        <Select {...field} value={userInfo.charClass}>
-                          <option value={userInfo.charClass}>{userInfo.charClass}</option>
+                        <Select {...field} placeholder={updatedInfo.charClass}>
                           <option value="Bard">Bard</option>
                           <option value="Cleric">Cleric</option>
                           <option value="Druid">Druid</option>
@@ -108,8 +124,7 @@ export default function ProfileForm() {
                         <FormLabel htmlFor="charLvl" fontWeight={'normal'}>
                           Character Level
                         </FormLabel>
-                        <Select {...field} value={userInfo.charLvl}>
-                          <option value={userInfo.charLvl}>{userInfo.charLvl}</option>
+                        <Select {...field} placeholder={updatedInfo.charLvl}>
                           {[...Array(20)].map((_, i) => {
                             return (
                               <option key={`key-${i}`} value={i + 1}>
@@ -128,8 +143,7 @@ export default function ProfileForm() {
                         <FormLabel htmlFor="charMod" fontWeight={'normal'}>
                           Spellcasting Ability Modifier
                         </FormLabel>
-                        <Select {...field} value={userInfo.charMod}>
-                          <option value={userInfo.charMod}>{userInfo.charMod}</option>
+                        <Select {...field} placeholder={updatedInfo.charMod}>
                           {[...Array(10)].map((_, i) => {
                             return (
                               <option key={`key-${i}`} value={i + 1}>
