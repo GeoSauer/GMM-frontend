@@ -55,20 +55,21 @@ export function useUser() {
 }
 
 export function useUserInfo() {
-  const { userInfo, setUserInfo } = useContext(UserContext);
+  const { userInfo, setUserInfo, loading, setLoading } = useContext(UserContext);
 
   useEffect(() => {
+    setLoading(true);
     const fetchUserInfo = async () => {
       const results = await getUserById();
       setUserInfo(results);
+      setLoading(false);
     };
     fetchUserInfo();
-  }, [setUserInfo]);
-  return { userInfo, setUserInfo };
+  }, [setUserInfo, setLoading]);
+  return { userInfo, setUserInfo, loading };
 }
 
 export function useAuth() {
-  //TODO I'm no longer using this error, so let's scrub it?
   const [error, setError] = useState(null);
   const { setUser } = useContext(UserContext);
 

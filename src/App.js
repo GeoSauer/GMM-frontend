@@ -1,5 +1,4 @@
-// import { Navigate, Route, Routes } from 'react-router-dom';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
 import Auth from './components/LandingPage/Auth';
 import SignInForm from './components/LandingPage/SignInForm';
@@ -10,9 +9,7 @@ import AboutPage from './components/AboutPage/AboutPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import ProfileForm from './components/ProfilePage/ProfileForm';
 import SettingsPage from './components/SettingsPage/SettingsPage';
-import PreparedSpellsPage from './components/PreparedSpellsPage/PreparedSpellsPage';
-import AllSpellsPage from './components/AllSpellsPage/AllSpellsPage';
-import KnownSpellsPage from './components/KnownSpellsPage/KnownSpellsPage';
+import SpellDisplay from './components/Spells/SpellDisplay';
 
 function App() {
   return (
@@ -24,33 +21,18 @@ function App() {
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route element={<Layout />}>
-          <Route
-            path="prepared-spells"
-            element={<PreparedSpellsPage />}
-          />
-          <Route
-            path="known-spells"
-            element={<KnownSpellsPage />}
-          />
-          <Route
-            path="all-spells"
-            element={<AllSpellsPage />}
-          />
+          <Route path="all-spells" element={<SpellDisplay />} />
+          <Route path="known-spells" element={<SpellDisplay />} />
+          <Route path="prepared-spells" element={<SpellDisplay />} />
           <Route path="profile">
             <Route index element={<ProfilePage />} />
             <Route path="edit" element={<ProfileForm />} />
           </Route>
-          <Route
-            path="settings"
-            element={<SettingsPage />}
-          />
+          <Route path="settings" element={<SettingsPage />} />
           <Route path="about" element={<AboutPage />} />
         </Route>
       </Route>
-      {/* <Route
-        path="*"
-        element={<Navigate to="prepared-spells" replace />}
-      /> */}
+      <Route path="*" element={<Navigate replace to="prepared-spells" />} />
     </Routes>
   );
 }

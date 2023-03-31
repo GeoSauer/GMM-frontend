@@ -1,9 +1,5 @@
 {
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended"
-  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-hooks/recommended"],
   "parserOptions": {
     "ecmaVersion": 2020,
     "ecmaFeatures": {
@@ -24,10 +20,11 @@
     "cy": false
   },
   "rules": {
+    "no-debugger": "warn",
     "eqeqeq": ["error", "always"],
     "no-console": ["warn", { "allow": ["info", "error"] }],
     "indent": [
-      "error",
+      "warn",
       2,
       {
         "SwitchCase": 1,

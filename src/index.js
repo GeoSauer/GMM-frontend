@@ -6,19 +6,17 @@ import App from './App';
 import SpellProvider from './context/SpellContext';
 import UserProvider from './context/UserContext';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root')
-);
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider>
-      <BrowserRouter>
-        <UserProvider>
-          <SpellProvider>
+      <UserProvider>
+        <SpellProvider>
+          <BrowserRouter>
             <App />
-          </SpellProvider>
-        </UserProvider>
-      </BrowserRouter>
+          </BrowserRouter>
+        </SpellProvider>
+      </UserProvider>
     </ChakraProvider>
   </React.StrictMode>
 );

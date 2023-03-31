@@ -1,15 +1,12 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import {
   getAvailableSpells,
   getKnownSpells,
   getPreparedSpells,
   getSpellDetails,
+  learnSpell,
 } from '../services/spells';
+import { useUserInfo } from './UserContext';
 
 const SpellContext = createContext();
 
@@ -17,14 +14,12 @@ export default function SpellProvider({ children }) {
   const [allSpells, setAllSpells] = useState([]);
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
-  const [allSpellDetails, setAllSpellDetails] = useState(
-    []
-  );
-  const [knownSpellDetails, setKnownSpellDetails] =
-    useState([]);
-  const [preparedSpellDetails, setPreparedSpellDetails] =
-    useState([]);
+  const [allSpellDetails, setAllSpellDetails] = useState([]);
+  const [knownSpellDetails, setKnownSpellDetails] = useState([]);
+  const [preparedSpellDetails, setPreparedSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const { userInfo } = useUserInfo();
 
   const value = {
     allSpells,
@@ -42,100 +37,64 @@ export default function SpellProvider({ children }) {
     loading,
     setLoading,
   };
-  return (
-    <SpellContext.Provider value={value}>
-      {children}
-    </SpellContext.Provider>
-  );
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchSpellsAndDetails = async () => {
+      const fetchedSpells = await getAvailableSpells();
+      const fetchedKnownSpells = await getKnownSpells();
+      const fetchedPreparedSpells = await getPreparedSpells();
+
+      const fetchedSpellDetails = await Promise.all(
+        fetchedSpells.map(async (spell) => {
+          return await getSpellDetails(spell.id);
+        })
+      );
+      const filteredKnownSpellDetails = fetchedSpellDetails.filter((spell) => {
+        return fetchedKnownSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
+      });
+      const filteredPreparedSellDetails = fetchedSpellDetails.filter((spell) => {
+        return fetchedPreparedSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
+      });
+      setAllSpells(fetchedSpells);
+      setAllSpellDetails(fetchedSpellDetails);
+      setKnownSpellDetails(filteredKnownSpellDetails);
+      setKnownSpells(fetchedKnownSpells);
+      setPreparedSpells(fetchedPreparedSpells);
+      setPreparedSpellDetails(filteredPreparedSellDetails);
+      setLoading(false);
+    };
+    fetchSpellsAndDetails();
+  }, [userInfo]);
+
+  return <SpellContext.Provider value={value}>{children}</SpellContext.Provider>;
 }
 
-export function useAllSpells() {
+export function useSpellDetails() {
   const {
     allSpells,
-    setAllSpells,
-    allSpellDetails,
-    setAllSpellDetails,
-    loading,
-    setLoading,
-  } = useContext(SpellContext);
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchAllSpells = async () => {
-      const response = await getAvailableSpells();
-      setAllSpells(response);
-      const details = await Promise.all(
-        response.map(async (spell) => {
-          const results = await getSpellDetails(spell.id);
-          return results;
-        })
-      );
-      setAllSpellDetails(details);
-      setLoading(false);
-    };
-    fetchAllSpells();
-  }, [setAllSpells, setAllSpellDetails, setLoading]);
-  return { allSpells, allSpellDetails, loading };
-}
-
-export function useKnownSpells() {
-  const {
     knownSpells,
-    setKnownSpells,
+    preparedSpells,
+    allSpellDetails,
     knownSpellDetails,
-    setKnownSpellDetails,
+    preparedSpellDetails,
     loading,
-    setLoading,
   } = useContext(SpellContext);
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchKnownSpells = async () => {
-      const response = await getKnownSpells();
-      setKnownSpells(response);
-      const details = await Promise.all(
-        response.map(async (spell) => {
-          const results = await getSpellDetails(spell.id);
-          return results;
-        })
-      );
-      setKnownSpellDetails(details);
-      setLoading(false);
-    };
-    fetchKnownSpells();
-  }, [setKnownSpells, setKnownSpellDetails, setLoading]);
-  return { knownSpells, knownSpellDetails, loading };
+  return {
+    allSpells,
+    knownSpells,
+    preparedSpells,
+    allSpellDetails,
+    knownSpellDetails,
+    preparedSpellDetails,
+    loading,
+  };
 }
 
-export function usePreparedSpells() {
-  const {
-    preparedSpells,
-    setPreparedSpells,
-    preparedSpellDetails,
-    setPreparedSpellDetails,
-    loading,
-    setLoading,
-  } = useContext(SpellContext);
+export function useSpell() {
+  const learn = async (id) => {
+    await learnSpell(id);
+  };
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchPreparedSpells = async () => {
-      const response = await getPreparedSpells();
-      setPreparedSpells(response);
-      const details = await Promise.all(
-        response.map(async (spell) => {
-          const results = await getSpellDetails(spell.id);
-          return results;
-        })
-      );
-      setPreparedSpellDetails(details);
-      setLoading(false);
-    };
-    fetchPreparedSpells();
-  }, [
-    setPreparedSpells,
-    setPreparedSpellDetails,
-    setLoading,
-  ]);
-  return { preparedSpells, preparedSpellDetails, loading };
+  return { learn };
 }

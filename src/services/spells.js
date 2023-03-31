@@ -4,8 +4,7 @@ import { get, patch, post, del } from './requests';
 // const SPELLS = 'https://gmm.herokuapp.com/api/v1/spells';
 // const KNOWN_SPELLS = 'https://gmm.herokuapp.com/api/v1/known-spells';
 const SPELLS = 'http://localhost:7890/api/v1/spells';
-const KNOWN_SPELLS =
-  'http://localhost:7890/api/v1/known-spells';
+const KNOWN_SPELLS = 'http://localhost:7890/api/v1/known-spells';
 
 export async function getAvailableSpells() {
   const { data } = await get(`${SPELLS}/`);
@@ -17,9 +16,10 @@ export async function getSpellDetails(id) {
   return data;
 }
 
-export async function learnSpell(spell) {
-  const { data } = await post(`${SPELLS}/learn`, spell);
-  return data;
+//TODO
+export async function learnSpell(id) {
+  const { body } = await post(`${SPELLS}/learn`, id);
+  return body;
 }
 
 export async function getKnownSpells() {
@@ -33,10 +33,7 @@ export async function getPreparedSpells() {
 }
 
 export async function updateSpellPreparation(updatedInfo) {
-  const { body } = await patch(
-    `${KNOWN_SPELLS}/prepare`,
-    updatedInfo
-  );
+  const { body } = await patch(`${KNOWN_SPELLS}/prepare`, updatedInfo);
   return body;
 }
 
