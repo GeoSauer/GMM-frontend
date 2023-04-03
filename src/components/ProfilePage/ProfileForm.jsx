@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useUserInfo } from '../../context/UserContext';
 import { updateUserInfo } from '../../services/users';
 import * as Yup from 'yup';
 import {
@@ -15,13 +14,12 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import Loading from '../PageLayout/Loading';
+import { useUser } from '../../context/UserContext';
 
 export default function ProfileForm() {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo, loading } = useUserInfo();
+  const { userInfo, setUserInfo, loading } = useUser();
   const ProfileSchema = Yup.object().shape({
     username: Yup.string().min(2, 'Too Short!'),
     charName: Yup.string().min(2, 'Too Short!'),

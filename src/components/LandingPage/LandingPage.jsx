@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 
 export default function LandingPage() {
-  const user = useUser();
+  const { user } = useUser();
   if (user) return <Navigate to="/prepared-spells" />;
 
   return (

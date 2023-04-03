@@ -6,7 +6,7 @@ import {
   signOutUser,
   getLocalUser,
   storeLocalUser,
-  // verifyUser,
+  verifyUser,
 } from '../services/auth.js';
 
 import { getUserById } from '../services/users';
@@ -15,31 +15,41 @@ const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const localUser = getLocalUser();
-  const [user, setUserState] = useState(localUser);
+  const [user, setUser] = useState(localUser);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
 
   //TODO figure out what this whole ball o wax is doing
   //? it looks like this was functioning as it should and throwing a 401 on page load since !user
   //? keeping it turned off for now to keep errors clear
-  // const verify = async () => {
-  //   const response = await verifyUser();
-  //   setUser(response.user || null);
-  //   setLoading(false);
-  // };
-
-  // useEffect(() => {
-  //   verify();
-  // }, []);
-
-  const setUser = (user) => {
-    storeLocalUser(user);
-    setUserState(user);
+  const verify = async () => {
+    const response = await verifyUser();
+    setUser(response.user || null);
+    setLoading(false);
   };
+
+  useEffect(() => {
+    verify();
+  }, []);
+
+  const setUserState = (user) => {
+    storeLocalUser(user);
+    setUser(user);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    const fetchUserInfo = async () => {
+      const results = await getUserById();
+      setUserInfo(results);
+      setLoading(false);
+    };
+    fetchUserInfo();
+  }, []);
 
   const value = {
     user,
-    setUser,
+    setUserState,
     loading,
     setLoading,
     userInfo,
@@ -50,28 +60,28 @@ export default function UserProvider({ children }) {
 }
 
 export function useUser() {
-  const { user } = useContext(UserContext);
+  const user = useContext(UserContext);
   return user;
 }
 
-export function useUserInfo() {
-  const { userInfo, setUserInfo, loading, setLoading } = useContext(UserContext);
+// export function useUserInfo() {
+//   const { userInfo, setUserInfo, loading, setLoading } = useContext(UserContext);
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchUserInfo = async () => {
-      const results = await getUserById();
-      setUserInfo(results);
-      setLoading(false);
-    };
-    fetchUserInfo();
-  }, [setUserInfo, setLoading]);
-  return { userInfo, setUserInfo, loading };
-}
+//   useEffect(() => {
+//     setLoading(true);
+//     const fetchUserInfo = async () => {
+//       const results = await getUserById();
+//       setUserInfo(results);
+//       setLoading(false);
+//     };
+//     fetchUserInfo();
+//   }, [setUserInfo, setLoading]);
+//   return { userInfo, setUserInfo, loading };
+// }
 
 export function useAuth() {
   const [error, setError] = useState(null);
-  const { setUser } = useContext(UserContext);
+  const { setUserState } = useContext(UserContext);
 
   const handleResponse = ({ user, error }) => {
     if (error) {
@@ -79,7 +89,7 @@ export function useAuth() {
       console.log(error);
       setError(error.message);
     } else {
-      setUser(user);
+      setUserState(user);
       setError(null);
     }
   };
@@ -95,7 +105,7 @@ export function useAuth() {
 
   const signOut = async () => {
     const response = await signOutUser();
-    setUser(null);
+    setUserState(null);
     handleResponse(response);
   };
 

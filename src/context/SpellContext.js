@@ -6,7 +6,7 @@ import {
   getSpellDetails,
   learnSpell,
 } from '../services/spells';
-import { useUserInfo } from './UserContext';
+import { useUser } from './UserContext';
 
 const SpellContext = createContext();
 
@@ -19,24 +19,7 @@ export default function SpellProvider({ children }) {
   const [preparedSpellDetails, setPreparedSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { userInfo } = useUserInfo();
-
-  const value = {
-    allSpells,
-    setAllSpells,
-    knownSpells,
-    setKnownSpells,
-    preparedSpells,
-    setPreparedSpells,
-    allSpellDetails,
-    setAllSpellDetails,
-    knownSpellDetails,
-    setKnownSpellDetails,
-    preparedSpellDetails,
-    setPreparedSpellDetails,
-    loading,
-    setLoading,
-  };
+  const { userInfo } = useUser();
 
   useEffect(() => {
     setLoading(true);
@@ -64,8 +47,26 @@ export default function SpellProvider({ children }) {
       setPreparedSpellDetails(filteredPreparedSellDetails);
       setLoading(false);
     };
+    // debugger;
     fetchSpellsAndDetails();
   }, [userInfo]);
+
+  const value = {
+    allSpells,
+    setAllSpells,
+    knownSpells,
+    setKnownSpells,
+    preparedSpells,
+    setPreparedSpells,
+    allSpellDetails,
+    setAllSpellDetails,
+    knownSpellDetails,
+    setKnownSpellDetails,
+    preparedSpellDetails,
+    setPreparedSpellDetails,
+    loading,
+    setLoading,
+  };
 
   return <SpellContext.Provider value={value}>{children}</SpellContext.Provider>;
 }

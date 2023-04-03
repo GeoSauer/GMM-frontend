@@ -1,4 +1,3 @@
-import { useUserInfo } from '../../context/UserContext';
 import { Outlet, useNavigate } from 'react-router-dom';
 import {
   Heading,
@@ -12,9 +11,10 @@ import {
   Button,
   useColorModeValue,
 } from '@chakra-ui/react';
+import { useUser } from '../../context/UserContext';
 
 export default function ProfilePage() {
-  const { userInfo } = useUserInfo();
+  const { userInfo } = useUser();
   const navigate = useNavigate();
 
   return (
@@ -39,9 +39,7 @@ export default function ProfilePage() {
         <Flex justify={'center'} mt={-12}>
           <Avatar
             size={'xl'}
-            src={
-              userInfo.avatarUrl ? userInfo.avatarUrl : null
-            }
+            src={userInfo.avatarUrl ? userInfo.avatarUrl : null}
             alt={'Avatar'}
             css={{
               border: '2px solid white',
@@ -51,18 +49,10 @@ export default function ProfilePage() {
 
         <Box p={6}>
           <Stack spacing={0} align={'center'} mb={5}>
-            <Heading
-              fontSize={'2xl'}
-              fontWeight={500}
-              fontFamily={'body'}
-            >
+            <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
               {userInfo.username}
             </Heading>
-            <Heading
-              fontSize={'xl'}
-              fontWeight={500}
-              fontFamily={'body'}
-            >
+            <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
               {userInfo.charName}
             </Heading>
             <Text color={'gray.500'}>

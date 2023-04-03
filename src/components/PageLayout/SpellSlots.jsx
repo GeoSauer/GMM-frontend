@@ -1,31 +1,15 @@
-import {
-  Flex,
-  Text,
-  Box,
-  useDisclosure,
-  Button,
-  Collapse,
-} from '@chakra-ui/react';
-import { useUserInfo } from '../../context/UserContext';
+import { Flex, Text, Box, useDisclosure, Button, Collapse } from '@chakra-ui/react';
+import { useUser } from '../../context/UserContext';
 
 export default function SpellSlots() {
   const { isOpen, onToggle } = useDisclosure();
   return (
     <>
-      <Button
-        w={'full'}
-        rounded={'none'}
-        onClick={onToggle}
-      >
+      <Button w={'full'} rounded={'none'} onClick={onToggle}>
         Spell Slots
       </Button>
       <Collapse in={isOpen} animateOpacity>
-        <Box
-          p="40px"
-          color="white"
-          bg="teal.500"
-          shadow="md"
-        >
+        <Box p="40px" color="white" bg="teal.500" shadow="md">
           <SpellSlotsDisplay />
         </Box>
       </Collapse>
@@ -34,13 +18,9 @@ export default function SpellSlots() {
 }
 
 const SpellSlotsDisplay = () => {
-  const { userInfo } = useUserInfo();
+  const { userInfo } = useUser();
   return (
-    <Flex
-      w="full"
-      justifyContent="space-around"
-      alignItems="center"
-    >
+    <Flex w="full" justifyContent="space-around" alignItems="center">
       {[...Array(9)].map((_, i) => {
         const number = i + 1;
         return userInfo[`level${number}SpellSlots`] ? (
