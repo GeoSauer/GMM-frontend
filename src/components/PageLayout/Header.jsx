@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import { useAuth, useUser } from '../../context/UserContext';
+import { NavLink } from 'react-router-dom';
+import { useAuth, useUser, useUserInfo } from '../../context/UserContext';
 import UserInfo from './UserInfo';
 import {
   Box,
@@ -18,19 +18,16 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { getKnownSpells } from '../../services/spells';
 
 export default function Header() {
-  const { signOut } = useAuth();
-  const navigate = useNavigate();
-  const { userInfo } = useUser();
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate('welcome', { replace: true });
-  };
-
+  // const { userInfo } = useUser();
+  const { userInfo } = useUserInfo();
+  const { handleSignOut } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  // const handleKnownSpells = async () => {
+  //   await getKnownSpells()
+  // }
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
@@ -47,7 +44,12 @@ export default function Header() {
             <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
               Prepared Spells
             </NavLink>
-            <NavLink to="known-spells" alt="known" title="Known Spells">
+            <NavLink
+              to="known-spells"
+              alt="known"
+              title="Known Spells"
+              onClick={async () => await getKnownSpells()}
+            >
               Known Spells
             </NavLink>
             <NavLink to="all-spells" alt="all" title="All Spells">

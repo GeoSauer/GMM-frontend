@@ -1,12 +1,14 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import {
+  forgetSpell,
   getAvailableSpells,
   getKnownSpells,
   getPreparedSpells,
   getSpellDetails,
   learnSpell,
+  updateSpellPreparation,
 } from '../services/spells';
-import { useUser } from './UserContext';
+import { useUser, useUserInfo } from './UserContext';
 
 const SpellContext = createContext();
 
@@ -19,9 +21,12 @@ export default function SpellProvider({ children }) {
   const [preparedSpellDetails, setPreparedSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { userInfo } = useUser();
+  const { userInfo } = useUserInfo();
+  // const { userInfo } = useUser();
 
+  //TODO if you refresh at welcome this whole useEffect runs and throws a ton of errors since no one is logged in.  If after that you do log in you'll be greeted by a white screen and more errors but a refresh fixes it
   useEffect(() => {
+    // if (userInfo.username) {
     setLoading(true);
     const fetchSpellsAndDetails = async () => {
       const fetchedSpells = await getAvailableSpells();
@@ -49,6 +54,7 @@ export default function SpellProvider({ children }) {
     };
     // debugger;
     fetchSpellsAndDetails();
+    // }
   }, [userInfo]);
 
   const value = {
@@ -72,30 +78,57 @@ export default function SpellProvider({ children }) {
 }
 
 export function useSpellDetails() {
-  const {
-    allSpells,
-    knownSpells,
-    preparedSpells,
-    allSpellDetails,
-    knownSpellDetails,
-    preparedSpellDetails,
-    loading,
-  } = useContext(SpellContext);
-  return {
-    allSpells,
-    knownSpells,
-    preparedSpells,
-    allSpellDetails,
-    knownSpellDetails,
-    preparedSpellDetails,
-    loading,
-  };
+  const context = useContext(SpellContext);
+  return context;
 }
+// export function useSpellDetails() {
+//   const {
+//     allSpells,
+//     knownSpells,
+//     preparedSpells,
+//     allSpellDetails,
+//     knownSpellDetails,
+//     preparedSpellDetails,
+//     loading,
+//   } = useContext(SpellContext);
+//   return {
+//     allSpells,
+//     knownSpells,
+//     preparedSpells,
+//     allSpellDetails,
+//     knownSpellDetails,
+//     preparedSpellDetails,
+//     loading,
+//   };
+// }
 
 export function useSpell() {
-  const learn = async (id) => {
-    await learnSpell(id);
-  };
+  const [error, setError] = useState(null);
 
-  return { learn };
+  const handleResponse = () => {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      setError(error.message);
+    } else {
+      setError(null);
+    }
+  };
+  const learn = async (id) => {
+    const response = await learnSpell({ id });
+    handleResponse(response);
+  };
+  const forget = async (id) => {
+    const response = await forgetSpell(id);
+    handleResponse(response);
+  };
+  const prepare = async (updatedInfo) => {
+    const response = await updateSpellPreparation(updatedInfo);
+    handleResponse(response);
+  };
+  const unprepare = async (updatedInfo) => {
+    const response = await updateSpellPreparation(updatedInfo);
+    handleResponse(response);
+  };
+  return { learn, forget, prepare, unprepare, error };
 }

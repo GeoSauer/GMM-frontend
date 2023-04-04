@@ -15,11 +15,14 @@ import {
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
-import { useUser } from '../../context/UserContext';
+import { useUser, useUserInfo } from '../../context/UserContext';
 
 export default function ProfileForm() {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo, loading } = useUser();
+  // const { userInfo, setUserInfo, loading } = useUser();
+  const { setUserInfo, loading } = useUser();
+  const { userInfo } = useUserInfo();
+
   const ProfileSchema = Yup.object().shape({
     username: Yup.string().min(2, 'Too Short!'),
     charName: Yup.string().min(2, 'Too Short!'),

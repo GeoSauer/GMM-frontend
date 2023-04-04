@@ -6,6 +6,7 @@ import {
   HStack,
   Text,
   useDisclosure,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
@@ -13,35 +14,86 @@ import { useSpell } from '../../context/SpellContext';
 import { getSuffix } from '../../utils/utils';
 import SpellDetail from './SpellDetail';
 
-// export default function SpellCard({ id, name, level, school, spellDetails }) {
-export default function SpellCard(spell) {
+export default function SpellCard({ id, name, level, school, prepared, spellDetails }) {
   const { isOpen, onToggle } = useDisclosure();
-  const suffix = getSuffix(spell.level);
+  const suffix = getSuffix(level);
   const location = useLocation();
+  const toast = useToast();
   //TODO get this working
-  const { learn } = useSpell();
-  const handleLearn = () => learn();
+  const { learn, forget, prepare, unprepare, error } = useSpell();
+  // const { handleLearn } = useSpell();
+  const handleLearn = async (spellId) => {
+    await learn(spellId);
+    // if (error) {
+    // toast({
+    //   title: { error },
+    //   status: 'warning',
+    //   duration: 1500,
+    //   isClosable: true,
+    // });
+    // } else {
+    toast({
+      title: `${name} learned!`,
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    });
+    // }
+  };
+  const handleForget = async (spellId) => {
+    await forget(spellId);
+    toast({
+      title: `${name} forgotten!`,
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    });
+  };
+  const handlePrepare = async (spellId, prepared) => {
+    await prepare({ spellId, prepared });
+    toast({
+      title: `${name} prepared!`,
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    });
+  };
+  const handleUnprepare = async (spellId, prepared) => {
+    await unprepare({ spellId, prepared });
+    toast({
+      title: `${name} un-prepared!`,
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    });
+  };
 
   return (
     <>
       <HStack>
         <Button onClick={onToggle} display={'block'} w={'sm'} h={'20'} p={'2'} mt={'2'}>
-          <Heading size="md">{spell.name}</Heading>
+          <Heading size="md">{name}</Heading>
           <Text>
-            {spell.level > 0
-              ? `${spell.level}
-            ${suffix}-Level ${spell.school}`
-              : `${spell.school} Cantrip`}
+            {level > 0
+              ? `${level}
+            ${suffix}-Level ${school}`
+              : `${school} Cantrip`}
           </Text>
         </Button>
         <VStack>
           {location.pathname === '/all-spells' && (
-            <Button onClick={() => handleLearn(spell.id)}>Learn</Button>
+            <Button onClick={() => handleLearn(id)}>Learn</Button>
           )}
-          {location.pathname === '/known-spells' && <Button>Prepare</Button>}
-          {location.pathname === '/known-spells' && <Button>Forget</Button>}
+          {location.pathname === '/known-spells' && (
+            <Button onClick={() => handlePrepare(id, true)}>{prepared ? '✅' : 'Prepare'}</Button>
+          )}
+          {location.pathname === '/known-spells' && (
+            <Button onClick={() => handleForget(id)}>Forget</Button>
+          )}
           {location.pathname === '/prepared-spells' && <Button>Cast</Button>}
-          {location.pathname === '/prepared-spells' && <Button>Un-Prepare</Button>}
+          {location.pathname === '/prepared-spells' && (
+            <Button onClick={() => handleUnprepare(id, false)}>Un-Prepare</Button>
+          )}
         </VStack>
       </HStack>
       <Collapse in={isOpen} animateOpacity>
@@ -53,7 +105,7 @@ export default function SpellCard(spell) {
           shadow="md"
           // onClick={onToggle}
         >
-          <SpellDetail spellDetails={spell.spellDetails} />
+          <SpellDetail spellDetails={spellDetails} />
         </Box>
       </Collapse>
     </>

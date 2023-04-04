@@ -1,7 +1,8 @@
-import { useUser } from '../../context/UserContext';
+import { useUser, useUserInfo } from '../../context/UserContext';
 
 export default function UserInfo() {
-  const { userInfo } = useUser();
+  // const { userInfo } = useUser();
+  const { userInfo } = useUserInfo();
 
   return (
     <div className="userCard">

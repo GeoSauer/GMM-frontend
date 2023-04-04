@@ -1,5 +1,5 @@
 import { Flex, Text, Box, useDisclosure, Button, Collapse } from '@chakra-ui/react';
-import { useUser } from '../../context/UserContext';
+import { useUser, useUserInfo } from '../../context/UserContext';
 
 export default function SpellSlots() {
   const { isOpen, onToggle } = useDisclosure();
@@ -18,7 +18,8 @@ export default function SpellSlots() {
 }
 
 const SpellSlotsDisplay = () => {
-  const { userInfo } = useUser();
+  // const { userInfo } = useUser();
+  const { userInfo } = useUserInfo();
   return (
     <Flex w="full" justifyContent="space-around" alignItems="center">
       {[...Array(9)].map((_, i) => {

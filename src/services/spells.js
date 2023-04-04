@@ -11,17 +11,6 @@ export async function getAvailableSpells() {
   return data;
 }
 
-export async function getSpellDetails(id) {
-  const { data } = await get(`${SPELLS}/${id}/details`);
-  return data;
-}
-
-//TODO
-export async function learnSpell(id) {
-  const { body } = await post(`${SPELLS}/learn`, id);
-  return body;
-}
-
 export async function getKnownSpells() {
   const { data } = await get(`${KNOWN_SPELLS}/`);
   return data;
@@ -32,12 +21,23 @@ export async function getPreparedSpells() {
   return data;
 }
 
-export async function updateSpellPreparation(updatedInfo) {
-  const { body } = await patch(`${KNOWN_SPELLS}/prepare`, updatedInfo);
-  return body;
+export async function getSpellDetails(id) {
+  const { data } = await get(`${SPELLS}/${id}/details`);
+  return data;
+}
+
+//TODO
+export async function learnSpell(id) {
+  const { data } = await post(`${SPELLS}/learn`, id);
+  return data;
 }
 
 export async function forgetSpell(id) {
-  const { body } = await del(`${KNOWN_SPELLS}/${id}`);
+  const { data } = await del(`${KNOWN_SPELLS}/${id}`);
+  return data;
+}
+
+export async function updateSpellPreparation(updatedInfo) {
+  const { body } = await patch(`${KNOWN_SPELLS}/prepare`, updatedInfo);
   return body;
 }

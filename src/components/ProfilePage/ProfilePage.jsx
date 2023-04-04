@@ -11,10 +11,11 @@ import {
   Button,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useUser } from '../../context/UserContext';
+import { useUser, useUserInfo } from '../../context/UserContext';
 
 export default function ProfilePage() {
-  const { userInfo } = useUser();
+  // const { userInfo } = useUser();
+  const { userInfo } = useUserInfo();
   const navigate = useNavigate();
 
   return (
