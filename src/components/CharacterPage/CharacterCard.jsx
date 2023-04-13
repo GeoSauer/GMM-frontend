@@ -12,13 +12,19 @@ import {
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useUserInfo } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
+import { Character } from '../../services/Characters';
 
-export default function ProfileCard(character) {
+export default function CharacterCard(character) {
   const navigate = useNavigate();
   const { userInfo } = useUserInfo();
   const { setCharacterState } = useCharacter();
   const handleCharacterChange = () => {
     setCharacterState(character.id);
+    navigate('/prepared-spells');
+  };
+  //TODO add a confirm/cancel modal
+  const handleDelete = async () => {
+    await Character.deleteCharacter(character.id);
   };
 
   return (
@@ -73,6 +79,20 @@ export default function ProfileCard(character) {
             transform: 'translateY(-2px)',
             boxShadow: 'lg',
           }}
+          onClick={handleCharacterChange}
+        >
+          Set Active Character
+        </Button>
+        <Button
+          w={'full'}
+          mt={8}
+          bg={useColorModeValue('#151f21', 'gray.900')}
+          color={'white'}
+          rounded={'md'}
+          _hover={{
+            transform: 'translateY(-2px)',
+            boxShadow: 'lg',
+          }}
           onClick={() => {
             navigate('edit');
           }}
@@ -89,11 +109,10 @@ export default function ProfileCard(character) {
             transform: 'translateY(-2px)',
             boxShadow: 'lg',
           }}
-          onClick={handleCharacterChange}
+          onClick={handleDelete}
         >
-          Set Active Character
+          Delete Character
         </Button>
-
         <Outlet />
       </Box>
     </Box>

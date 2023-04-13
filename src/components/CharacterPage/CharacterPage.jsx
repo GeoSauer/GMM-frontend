@@ -16,6 +16,7 @@ import { useCharacter } from '../../context/CharacterContext';
 import CharacterCard from './CharacterCard';
 import { useLocation } from 'react-router-dom';
 import Loading from '../PageLayout/Loading';
+import ChooseCharacterCard from './ChooseCharacterCard';
 
 export default function CharacterPage() {
   // const { userInfo } = useUser();
@@ -38,15 +39,9 @@ export default function CharacterPage() {
       )}
       {location.pathname === '/choose-character' && !loading && (
         <Flex direction={'column'} alignItems={'center'}>
+          <Heading>Which Character Are You Playing Today?</Heading>
           {characterList.map((character) => {
-            return (
-              <Avatar
-                key={character.id}
-                size={'xl'}
-                src={character.avatarUrl ? character.avatarUrl : null}
-                alt={character.charName}
-              />
-            );
+            return <ChooseCharacterCard key={character.id} {...character} />;
           })}
         </Flex>
       )}
