@@ -13,7 +13,6 @@ export default function CharacterProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   // const { userInfo } = useUserInfo();
-
   useEffect(() => {
     setLoading(true);
     const fetchCharacters = async () => {
@@ -23,7 +22,9 @@ export default function CharacterProvider({ children }) {
       //     return await Character.getCharacterById(userInfo.id, character.id);
       //   })
       // );
-      console.log({ characters });
+      const character = await Character.getCharacterById(currentCharacter);
+
+      setCharacterInfo(character);
       setCharacterList(characters);
       setLoading(false);
     };
@@ -34,7 +35,7 @@ export default function CharacterProvider({ children }) {
     // };
     fetchCharacters();
     // fetchCharacterInfo();
-  }, []);
+  }, [currentCharacter]);
 
   const setCharacterState = (charId) => {
     storeLocalCharacter(charId);

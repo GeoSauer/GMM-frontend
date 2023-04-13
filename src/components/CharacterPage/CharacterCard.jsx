@@ -81,7 +81,7 @@ export default function CharacterCard(character) {
           }}
           onClick={handleCharacterChange}
         >
-          Set Active Character
+          Set Active
         </Button>
         <Button
           w={'full'}
@@ -97,7 +97,7 @@ export default function CharacterCard(character) {
             navigate('edit');
           }}
         >
-          Edit Character
+          Edit
         </Button>
         <Button
           w={'full'}
@@ -111,7 +111,7 @@ export default function CharacterCard(character) {
           }}
           onClick={handleDelete}
         >
-          Delete Character
+          Delete
         </Button>
         <Outlet />
       </Box>
