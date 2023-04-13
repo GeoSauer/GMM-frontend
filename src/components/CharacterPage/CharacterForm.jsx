@@ -16,15 +16,18 @@ import {
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
 import { useUser, useUserInfo } from '../../context/UserContext';
+import { useCharacter } from '../../context/CharacterContext';
+import { Character } from '../../services/Characters';
 
 export default function CharacterForm() {
   const navigate = useNavigate();
   // const { userInfo, setUserInfo, loading } = useUser();
-  const { setUserInfo, loading } = useUser();
-  const { userInfo } = useUserInfo();
+  // const { setUserInfo, loading } = useUser();
+  // const { userInfo } = useUserInfo();
+  const { characterInfo, setCharacterInfo, loading } = useCharacter();
 
   const ProfileSchema = Yup.object().shape({
-    username: Yup.string().min(2, 'Too Short!'),
+    // username: Yup.string().min(2, 'Too Short!'),
     charName: Yup.string().min(2, 'Too Short!'),
   });
 
@@ -42,11 +45,11 @@ export default function CharacterForm() {
               <Loading />
             ) : (
               <Formik
-                initialValues={userInfo}
+                initialValues={characterInfo}
                 validationSchema={ProfileSchema}
                 onSubmit={async (values, actions) => {
-                  await updateUserInfo(values);
-                  setUserInfo((prevState) => {
+                  await Character.updateCharacterInfo(values);
+                  setCharacterInfo((prevState) => {
                     return { ...prevState, ...values };
                   });
                   navigate('/all-spells');
@@ -55,7 +58,7 @@ export default function CharacterForm() {
               >
                 {(props) => (
                   <Form>
-                    <Field name="username">
+                    {/* <Field name="username">
                       {({ field, form }) => (
                         <FormControl isInvalid={form.errors.username && form.touched.username}>
                           <FormLabel htmlFor="username" fontWeight={'normal'}>
@@ -65,7 +68,7 @@ export default function CharacterForm() {
                           <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                         </FormControl>
                       )}
-                    </Field>
+                    </Field> */}
 
                     <Field name="charName">
                       {({ field, form }) => (
@@ -73,7 +76,7 @@ export default function CharacterForm() {
                           <FormLabel htmlFor="charName" fontWeight={'normal'}>
                             Character Name
                           </FormLabel>
-                          <Input {...field} placeholder={userInfo.charName} />
+                          <Input {...field} placeholder={characterInfo.charName} />
                           <FormErrorMessage>{form.errors.charName}</FormErrorMessage>
                         </FormControl>
                       )}
@@ -85,7 +88,7 @@ export default function CharacterForm() {
                           <FormLabel htmlFor="charClass" fontWeight={'normal'}>
                             Character Class
                           </FormLabel>
-                          <Select {...field} placeholder={userInfo.charClass}>
+                          <Select {...field} placeholder={characterInfo.charClass}>
                             <option value="Bard">Bard</option>
                             <option value="Cleric">Cleric</option>
                             <option value="Druid">Druid</option>
@@ -106,7 +109,7 @@ export default function CharacterForm() {
                           <FormLabel htmlFor="charLvl" fontWeight={'normal'}>
                             Character Level
                           </FormLabel>
-                          <Select {...field} placeholder={userInfo.charLvl}>
+                          <Select {...field} placeholder={characterInfo.charLvl}>
                             {[...Array(20)].map((_, i) => {
                               return (
                                 <option key={`key-${i}`} value={i + 1}>
@@ -125,7 +128,7 @@ export default function CharacterForm() {
                           <FormLabel htmlFor="charMod" fontWeight={'normal'}>
                             Spellcasting Ability Modifier
                           </FormLabel>
-                          <Select {...field} placeholder={userInfo.charMod}>
+                          <Select {...field} placeholder={characterInfo.charMod}>
                             {[...Array(10)].map((_, i) => {
                               return (
                                 <option key={`key-${i}`} value={i + 1}>

@@ -7,20 +7,22 @@ import {
   Image,
   Stack,
   Text,
+  VStack,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useUserInfo } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
+import { getLocalCharacter } from '../../services/auth';
 
 export default function CharacterCard(character) {
   const navigate = useNavigate();
+  const localCharacter = getLocalCharacter();
   const { userInfo } = useUserInfo();
   const { setCharacterState } = useCharacter();
   const handleCharacterChange = () => {
     setCharacterState(character.id);
-    navigate('/prepared-spells');
   };
   //TODO add a confirm/cancel modal
   const handleDelete = async () => {
@@ -69,50 +71,61 @@ export default function CharacterCard(character) {
             Level: {character.charLvl} {character.charClass}
           </Text>
         </Stack>
-        <Button
-          w={'full'}
-          mt={8}
-          bg={useColorModeValue('#151f21', 'gray.900')}
-          color={'white'}
-          rounded={'md'}
-          _hover={{
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          }}
-          onClick={handleCharacterChange}
-        >
-          Set Active
-        </Button>
-        <Button
-          w={'full'}
-          mt={8}
-          bg={useColorModeValue('#151f21', 'gray.900')}
-          color={'white'}
-          rounded={'md'}
-          _hover={{
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          }}
-          onClick={() => {
-            navigate('edit');
-          }}
-        >
-          Edit
-        </Button>
-        <Button
-          w={'full'}
-          mt={8}
-          bg={useColorModeValue('#151f21', 'gray.900')}
-          color={'white'}
-          rounded={'md'}
-          _hover={{
-            transform: 'translateY(-2px)',
-            boxShadow: 'lg',
-          }}
-          onClick={handleDelete}
-        >
-          Delete
-        </Button>
+        {character.id !== localCharacter && (
+          <VStack>
+            <Button
+              w={'fit'}
+              mt={8}
+              // bg={useColorModeValue('#151f21', 'gray.900')}
+              bg={'gray.900'}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              onClick={handleCharacterChange}
+            >
+              Set Active
+            </Button>
+          </VStack>
+        )}
+        {character.id === localCharacter && (
+          <VStack>
+            <Button
+              w={'fit'}
+              mt={8}
+              // bg={useColorModeValue('#151f21', 'gray.900')}
+              bg={'gray.900'}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              onClick={() => {
+                navigate('edit');
+              }}
+            >
+              Edit
+            </Button>
+            <Button
+              w={'fit'}
+              mt={8}
+              // bg={useColorModeValue('#151f21', 'gray.900')}
+              bg={'gray.900'}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
+          </VStack>
+        )}
         <Outlet />
       </Box>
     </Box>

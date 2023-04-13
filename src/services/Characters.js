@@ -20,8 +20,8 @@ export class Character {
     return data;
   }
 
-  static async updateCharacterInfo(charId, updatedInfo) {
-    const { body } = await patch(`${CHARACTERS}/update`, { charId, updatedInfo });
+  static async updateCharacterInfo(updatedInfo) {
+    const { body } = await patch(`${CHARACTERS}/update`, updatedInfo);
     return body;
   }
 
