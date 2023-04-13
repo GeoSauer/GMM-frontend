@@ -18,15 +18,15 @@ export default function SpellProvider({ children }) {
   const { userInfo } = useUserInfo();
   // const { userInfo } = useUser();
   const { characterInfo } = useCharacter();
-
+  console.log({ characterInfo });
   //TODO if you refresh at welcome this whole useEffect runs and throws a ton of errors since no one is logged in.  If after that you do log in you'll be greeted by a white screen and more errors but a refresh fixes it
   useEffect(() => {
     // if (userInfo.username) {
     setLoading(true);
     const fetchSpellsAndDetails = async () => {
-      const fetchedSpells = await Spells.getAvailableSpells();
-      const fetchedKnownSpells = await Spells.getKnownSpells();
-      const fetchedPreparedSpells = await Spells.getPreparedSpells();
+      const fetchedSpells = await Spells.getAvailableSpells(characterInfo.id);
+      const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
+      const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
 
       const fetchedSpellDetails = await Promise.all(
         fetchedSpells.map(async (spell) => {
@@ -77,33 +77,33 @@ export function useSpellDetails() {
   return context;
 }
 
-export function useSpell() {
-  const [error, setError] = useState(null);
+// export function useSpell() {
+//   const [error, setError] = useState(null);
 
-  const handleResponse = () => {
-    if (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      setError(error.message);
-    } else {
-      setError(null);
-    }
-  };
-  const learn = async (id) => {
-    const response = await Spells.learnSpell({ id });
-    handleResponse(response);
-  };
-  const forget = async (id) => {
-    const response = await Spells.forgetSpell(id);
-    handleResponse(response);
-  };
-  const prepare = async (updatedInfo) => {
-    const response = await Spells.updateSpellPreparation(updatedInfo);
-    handleResponse(response);
-  };
-  const unprepare = async (updatedInfo) => {
-    const response = await Spells.updateSpellPreparation(updatedInfo);
-    handleResponse(response);
-  };
-  return { learn, forget, prepare, unprepare, error };
-}
+//   const handleResponse = () => {
+//     if (error) {
+//       // eslint-disable-next-line no-console
+//       console.log(error);
+//       setError(error.message);
+//     } else {
+//       setError(null);
+//     }
+//   };
+//   const learn = async (charId, spellId) => {
+//     const response = await Spells.learnSpell({ charId, spellId });
+//     handleResponse(response);
+//   };
+//   const forget = async (id) => {
+//     const response = await Spells.forgetSpell(id);
+//     handleResponse(response);
+//   };
+//   const prepare = async (updatedInfo) => {
+//     const response = await Spells.updateSpellPreparation(updatedInfo);
+//     handleResponse(response);
+//   };
+//   const unprepare = async (updatedInfo) => {
+//     const response = await Spells.updateSpellPreparation(updatedInfo);
+//     handleResponse(response);
+//   };
+//   return { learn, forget, prepare, unprepare, error };
+// }

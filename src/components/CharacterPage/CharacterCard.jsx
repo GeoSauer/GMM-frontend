@@ -50,7 +50,7 @@ export default function CharacterCard(character) {
       <Flex justify={'center'} mt={-12}>
         <Avatar
           size={'xl'}
-          src={userInfo.avatarUrl ? userInfo.avatarUrl : null}
+          src={character.avatarUrl ? character.avatarUrl : null}
           alt={'Avatar'}
           css={{
             border: '2px solid white',

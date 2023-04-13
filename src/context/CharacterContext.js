@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Character } from '../services/Characters';
 import { getLocalCharacter, storeLocalCharacter } from '../services/auth';
-// import { useUserInfo } from './UserContext';
 
 const CharacterContext = createContext();
 
@@ -12,29 +11,17 @@ export default function CharacterProvider({ children }) {
   const [characterInfo, setCharacterInfo] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // const { userInfo } = useUserInfo();
   useEffect(() => {
     setLoading(true);
     const fetchCharacters = async () => {
       const characters = await Character.getAllCharacters();
-      // const characterDetails = await Promise.all(
-      //   characters.map(async (character) => {
-      //     return await Character.getCharacterById(userInfo.id, character.id);
-      //   })
-      // );
       const character = await Character.getCharacterById(currentCharacter);
 
       setCharacterInfo(character);
       setCharacterList(characters);
       setLoading(false);
     };
-    // const fetchCharacterInfo = async () => {
-    //   const results = await Character.getCharacterById(charId);
-    //   setCharacterInfo(results);
-    //   setLoading(false);
-    // };
     fetchCharacters();
-    // fetchCharacterInfo();
   }, [currentCharacter]);
 
   const setCharacterState = (charId) => {
@@ -56,8 +43,41 @@ export default function CharacterProvider({ children }) {
   return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>;
 }
 
-// export function useCharacter() {
-export const useCharacter = () => {
+export function useCharacter() {
   const character = useContext(CharacterContext);
   return character;
-};
+}
+
+export function useSpell() {
+  const [error, setError] = useState(null);
+  const handleResponse = () => {
+    if (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      setError(error.message);
+    } else {
+      setError(null);
+    }
+  };
+  const learn = async (charId, spellId) => {
+    const response = await Character.learnSpell(charId, spellId);
+    handleResponse(response);
+  };
+  const forget = async (charId, spellId) => {
+    const response = await Character.forgetSpell(charId, spellId);
+    handleResponse(response);
+  };
+  const prepare = async (updatedInfo) => {
+    const response = await Character.updateSpellPreparation(updatedInfo);
+    handleResponse(response);
+  };
+  const unprepare = async (updatedInfo) => {
+    const response = await Character.updateSpellPreparation(updatedInfo);
+    handleResponse(response);
+  };
+  const cast = async (charId, slotLevel) => {
+    const response = await Character.castSpell(charId, slotLevel);
+    handleResponse(response);
+  };
+  return { learn, forget, prepare, unprepare, cast, error };
+}

@@ -2,7 +2,9 @@ import { get, patch, post, del } from './requests';
 
 //TODO switch this over after deploy
 // const CHARACTERS = 'https://gmm.herokuapp.com/api/v1/characters';
+// const SPELLS = 'https://gmm.herokuapp.com/api/v1/spells';
 const CHARACTERS = 'http://localhost:7890/api/v1/characters';
+const SPELLS = 'http://localhost:7890/api/v1/spells';
 
 export class Character {
   static async createCharacter(info) {
@@ -30,8 +32,13 @@ export class Character {
     return data;
   }
 
-  static async castSpell(charId, slotLevel) {
-    const { data } = await patch(`${CHARACTERS}/cast`, { charId, slotLevel });
+  static async learnSpell(charId, spellId) {
+    const { data } = await post(`${SPELLS}/learn`, { charId, spellId });
+    return data;
+  }
+
+  static async forgetSpell(charId, spellId) {
+    const { data } = await del(`${CHARACTERS}/${charId}/${spellId}`);
     return data;
   }
 
@@ -40,8 +47,8 @@ export class Character {
     return data;
   }
 
-  static async forgetSpell(charId, spellId) {
-    const { data } = await del(`${CHARACTERS}/${charId}/${spellId}`);
+  static async castSpell(charId, slotLevel) {
+    const { data } = await patch(`${CHARACTERS}/cast`, { charId, slotLevel });
     return data;
   }
 }

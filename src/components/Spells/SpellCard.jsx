@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import { useSpell } from '../../context/SpellContext';
+import { useSpell } from '../../context/CharacterContext';
 import { getSuffix } from '../../utils/utils';
 import SpellDetail from './SpellDetail';
 

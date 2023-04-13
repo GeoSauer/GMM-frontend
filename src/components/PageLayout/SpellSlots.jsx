@@ -1,5 +1,6 @@
 import { Flex, Text, Box, useDisclosure, Button, Collapse } from '@chakra-ui/react';
 import { useUser, useUserInfo } from '../../context/UserContext';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellSlots() {
   const { isOpen, onToggle } = useDisclosure();
@@ -18,13 +19,13 @@ export default function SpellSlots() {
 }
 
 const SpellSlotsDisplay = () => {
-  // const { userInfo } = useUser();
-  const { userInfo } = useUserInfo();
+  const { characterInfo } = useCharacter();
+
   return (
     <Flex w="full" justifyContent="space-around" alignItems="center">
       {[...Array(9)].map((_, i) => {
         const number = i + 1;
-        return userInfo[`level${number}SpellSlots`] ? (
+        return characterInfo[`level${number}SpellSlots`] ? (
           <Box key={`key-${i}`} pos="relative">
             <Text>Level {number}:</Text>
             <Text
@@ -37,7 +38,7 @@ const SpellSlotsDisplay = () => {
               bg="red.600"
               rounded="full"
             >
-              {userInfo[`level${number}SpellSlots`]}
+              {characterInfo[`level${number}SpellSlots`]}
             </Text>
           </Box>
         ) : null;

@@ -18,17 +18,14 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useCharacter } from '../../context/CharacterContext';
 // import { getKnownSpells } from '../../services/spells';
 // const Spells = require('../../services/spells');
 
 export default function Header() {
-  // const { userInfo } = useUser();
-  const { userInfo } = useUserInfo();
   const { handleSignOut } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const handleKnownSpells = async () => {
-  //   await getKnownSpells()
-  // }
+  const { characterInfo } = useCharacter();
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
@@ -64,8 +61,8 @@ export default function Header() {
               <Avatar
                 size={{ base: 'sm', md: 'md' }}
                 src={
-                  userInfo.avatarUrl
-                    ? userInfo.avatarUrl
+                  characterInfo.avatarUrl
+                    ? characterInfo.avatarUrl
                     : 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                 }
               />
