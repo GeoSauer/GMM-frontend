@@ -1,4 +1,5 @@
-import { useUser, useUserInfo } from '../../context/UserContext';
+import { useUserInfo } from '../../context/UserContext';
+// import { useUser } from '../../context/UserContext';
 
 export default function UserInfo() {
   // const { userInfo } = useUser();

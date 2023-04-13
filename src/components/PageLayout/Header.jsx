@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth, useUser, useUserInfo } from '../../context/UserContext';
+import { useAuth, useUserInfo } from '../../context/UserContext';
 import UserInfo from './UserInfo';
 import {
   Box,
@@ -18,7 +18,8 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { getKnownSpells } from '../../services/spells';
+// import { getKnownSpells } from '../../services/spells';
+// const Spells = require('../../services/spells');
 
 export default function Header() {
   // const { userInfo } = useUser();
@@ -48,7 +49,7 @@ export default function Header() {
               to="known-spells"
               alt="known"
               title="Known Spells"
-              onClick={async () => await getKnownSpells()}
+              // onClick={async () => await Spells.getKnownSpells()}
             >
               Known Spells
             </NavLink>

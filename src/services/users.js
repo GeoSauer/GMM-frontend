@@ -10,6 +10,6 @@ export async function getUserById() {
 }
 
 export async function updateUserInfo(updatedInfo) {
-  const response = await patch(`${URL}/update`, updatedInfo);
-  return response.body;
+  const { body } = await patch(`${URL}/update`, updatedInfo);
+  return body;
 }
