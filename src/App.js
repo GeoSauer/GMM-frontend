@@ -6,8 +6,8 @@ import SignUpForm from './components/LandingPage/SignUpForm';
 import ProtectedRoute from './components/LandingPage/ProtectedRoutes';
 import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
-import ProfilePage from './components/ProfilePage/ProfilePage';
-import ProfileForm from './components/ProfilePage/ProfileForm';
+import CharacterPage from './components/CharacterPage/CharacterPage';
+import CharacterForm from './components/CharacterPage/CharacterForm';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 
@@ -24,9 +24,10 @@ function App() {
           <Route path="all-spells" element={<SpellDisplay />} />
           <Route path="known-spells" element={<SpellDisplay />} />
           <Route path="prepared-spells" element={<SpellDisplay />} />
-          <Route path="profile">
-            <Route index element={<ProfilePage />} />
-            <Route path="edit" element={<ProfileForm />} />
+          <Route path="choose-character" element={<CharacterPage />} />
+          <Route path="characters">
+            <Route index element={<CharacterPage />} />
+            <Route path="edit" element={<CharacterForm />} />
           </Route>
           <Route path="settings" element={<SettingsPage />} />
           <Route path="about" element={<AboutPage />} />

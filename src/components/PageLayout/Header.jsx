@@ -74,8 +74,8 @@ export default function Header() {
               <UserInfo />
               <MenuDivider />
               <MenuItem>
-                <NavLink to="profile" alt="profile" title="profile">
-                  Profile
+                <NavLink to="characters" alt="characters" title="characters">
+                  Characters
                 </NavLink>
               </MenuItem>
               <MenuItem>

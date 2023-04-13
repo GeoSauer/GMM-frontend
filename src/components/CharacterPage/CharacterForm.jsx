@@ -17,7 +17,7 @@ import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
 import { useUser, useUserInfo } from '../../context/UserContext';
 
-export default function ProfileForm() {
+export default function CharacterForm() {
   const navigate = useNavigate();
   // const { userInfo, setUserInfo, loading } = useUser();
   const { setUserInfo, loading } = useUser();
@@ -157,7 +157,7 @@ export default function ProfileForm() {
                         bg: 'blue.500',
                       }}
                       onClick={() => {
-                        navigate('/profile');
+                        navigate('/characters');
                       }}
                     >
                       Back

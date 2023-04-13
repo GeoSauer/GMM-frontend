@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+// import { Outlet, useNavigate } from 'react-router-dom';
 import {
   Heading,
   Avatar,
@@ -11,16 +11,49 @@ import {
   Button,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useUser, useUserInfo } from '../../context/UserContext';
+// import { useUser, useUserInfo } from '../../context/UserContext';
+import { useCharacter } from '../../context/CharacterContext';
+import CharacterCard from './CharacterCard';
+import { useLocation } from 'react-router-dom';
+import Loading from '../PageLayout/Loading';
 
-export default function ProfilePage() {
+export default function CharacterPage() {
   // const { userInfo } = useUser();
-  const { userInfo } = useUserInfo();
-  const navigate = useNavigate();
-
+  // const { userInfo } = useUserInfo();
+  // const navigate = useNavigate();
+  const { characterList, loading } = useCharacter();
+  const location = useLocation();
+  // const handleCharacter = () => {
+  //   setCharacterState(characterList[0].id);
+  // };
   return (
-    <Center py={6}>
-      <Box
+    <>
+      {loading && <Loading />}
+      {location.pathname === '/characters' && !loading && (
+        <Flex direction={'column'} alignItems={'center'}>
+          {characterList.map((character) => {
+            return <CharacterCard key={character.id} {...character} />;
+          })}
+        </Flex>
+      )}
+      {location.pathname === '/choose-character' && !loading && (
+        <Flex direction={'column'} alignItems={'center'}>
+          {characterList.map((character) => {
+            return (
+              <Avatar
+                key={character.id}
+                size={'xl'}
+                src={character.avatarUrl ? character.avatarUrl : null}
+                alt={character.charName}
+              />
+            );
+          })}
+        </Flex>
+      )}
+    </>
+  );
+
+  /* <Box
         maxW={'270px'}
         w={'full'}
         bg={useColorModeValue('white', 'gray.800')}
@@ -78,7 +111,7 @@ export default function ProfilePage() {
           </Button>
           <Outlet />
         </Box>
-      </Box>
-    </Center>
-  );
+      </Box> */
+
+  // );
 }
