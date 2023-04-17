@@ -18,15 +18,15 @@ export default function SpellProvider({ children }) {
   // const { userInfo, setLoading } = useUserInfo();
   const { user } = useUser();
   const { characterInfo } = useCharacter();
-  console.log({ characterInfo });
   useEffect(() => {
-    if (user) {
+    if (characterInfo.id) {
       setLoading(true);
       const fetchSpellsAndDetails = async () => {
         const fetchedSpells = await Spells.getAvailableSpells(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
         const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
 
+        console.log({ fetchedSpells });
         const fetchedSpellDetails = await Promise.all(
           fetchedSpells.map(async (spell) => {
             return await Spells.getSpellDetails(spell.id);

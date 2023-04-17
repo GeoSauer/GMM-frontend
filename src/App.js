@@ -20,11 +20,11 @@ function App() {
         <Route path="sign-in" element={<SignInForm />} />
       </Route>
       <Route element={<ProtectedRoute />}>
+        <Route path="choose-character" element={<CharacterPage />} />
         <Route element={<Layout />}>
           <Route path="all-spells" element={<SpellDisplay />} />
           <Route path="known-spells" element={<SpellDisplay />} />
           <Route path="prepared-spells" element={<SpellDisplay />} />
-          <Route path="choose-character" element={<CharacterPage />} />
           <Route path="characters">
             <Route index element={<CharacterPage />} />
             <Route path="edit" element={<CharacterForm />} />

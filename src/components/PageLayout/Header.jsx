@@ -26,6 +26,7 @@ export default function Header() {
   const { handleSignOut } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { characterInfo } = useCharacter();
+
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
@@ -69,7 +70,7 @@ export default function Header() {
               />
             </MenuButton>
             <MenuList alignContent={'center'}>
-              {characterInfo && <UserInfo />}
+              <UserInfo />
               <MenuDivider />
               <MenuItem>
                 <NavLink to="characters" alt="characters" title="characters">
