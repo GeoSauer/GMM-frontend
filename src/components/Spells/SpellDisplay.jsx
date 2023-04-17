@@ -5,6 +5,8 @@ import { useSpellDetails } from '../../context/SpellContext';
 import Loading from '../PageLayout/Loading';
 import SpellSlots from '../PageLayout/SpellSlots';
 import SpellCard from '../Spells/SpellCard';
+import { useCharacter } from '../../context/CharacterContext';
+// import { useUserInfo } from '../../context/UserContext';
 
 export default function SpellDisplay() {
   const {
@@ -16,7 +18,9 @@ export default function SpellDisplay() {
     preparedSpellDetails,
     loading,
   } = useSpellDetails();
+  const { characterInfo } = useCharacter();
   const location = useLocation();
+  // const { loading } = useUserInfo();
   // const navigate = useNavigate();
   return (
     <>
@@ -65,7 +69,7 @@ export default function SpellDisplay() {
       )}
       {/* </TabList>
         <TabPanels> */}
-      {location.pathname === '/prepared-spells' && !loading && (
+      {location.pathname === '/prepared-spells' && !loading && characterInfo && (
         // <TabPanel>
         //TODO try moving this Flex outside of the conditionals to cut down on redundant code
         <Flex direction={'column'} alignItems={'center'}>
@@ -75,7 +79,7 @@ export default function SpellDisplay() {
         </Flex>
         // </TabPanel>
       )}
-      {location.pathname === '/known-spells' && !loading && (
+      {location.pathname === '/known-spells' && !loading && characterInfo && (
         // <TabPanel>
         <Flex direction={'column'} alignItems={'center'}>
           {knownSpells.map((spell, index) => {
@@ -84,7 +88,7 @@ export default function SpellDisplay() {
         </Flex>
         // </TabPanel>
       )}
-      {location.pathname === '/all-spells' && !loading && (
+      {location.pathname === '/all-spells' && !loading && characterInfo && (
         // <TabPanel>
         <Flex direction={'column'} alignItems={'center'}>
           {allSpells.map((spell, index) => (

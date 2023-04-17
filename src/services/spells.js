@@ -1,4 +1,4 @@
-import { get, post } from './requests';
+import { get } from './requests';
 
 //TODO switch this over after deploy
 // const SPELLS = 'https://gmm.herokuapp.com/api/v1/spells';

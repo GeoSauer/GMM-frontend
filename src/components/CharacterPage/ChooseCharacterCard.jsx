@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Box,
   Button,
   Collapse,
   HStack,
@@ -48,7 +49,6 @@ export default function ChooseCharacterCard(character) {
         > */}
         <Button
           w={'full'}
-          mt={8}
           bg={useColorModeValue('#151f21', 'gray.900')}
           color={'white'}
           rounded={'md'}
@@ -58,7 +58,7 @@ export default function ChooseCharacterCard(character) {
           }}
           onClick={handleCharacterChange}
         >
-          Choose {character.charName}?
+          Choose {character.charName} the {character.charClass}?
         </Button>
         {/* </Box> */}
       </Collapse>

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Character } from '../services/Characters';
 import { getLocalCharacter, storeLocalCharacter } from '../services/auth';
+import { useUser } from '../context/UserContext';
 
 const CharacterContext = createContext();
 
@@ -10,19 +11,22 @@ export default function CharacterProvider({ children }) {
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const { user } = useUser();
+  // const { setLoading } = useUserInfo();
   useEffect(() => {
-    setLoading(true);
-    const fetchCharacters = async () => {
-      const characters = await Character.getAllCharacters();
-      const character = await Character.getCharacterById(currentCharacter);
+    if (user) {
+      setLoading(true);
+      const fetchCharacters = async () => {
+        const characters = await Character.getAllCharacters();
+        const character = await Character.getCharacterById(currentCharacter);
 
-      setCharacterInfo(character);
-      setCharacterList(characters);
-      setLoading(false);
-    };
-    fetchCharacters();
-  }, [currentCharacter]);
+        setCharacterInfo(character);
+        setCharacterList(characters);
+        setLoading(false);
+      };
+      fetchCharacters();
+    }
+  }, [currentCharacter, setLoading]);
 
   const setCharacterState = (charId) => {
     storeLocalCharacter(charId);

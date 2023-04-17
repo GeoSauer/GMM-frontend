@@ -18,6 +18,7 @@ import {
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
+import { Character } from '../../services/Characters';
 
 export default function SignInForm() {
   const navigate = useNavigate();
@@ -67,7 +68,11 @@ export default function SignInForm() {
               }}
               validationSchema={SignupSchema}
               onSubmit={async (values, actions) => {
+                //TODO look into making two separate values variables?  Right now values has all user and character info
+                console.log({ values });
                 await signUp(values);
+                //TODO this is creating a character in the db but
+                await Character.createCharacter(values);
                 navigate('/all-spells');
                 actions.setSubmitting(false);
               }}

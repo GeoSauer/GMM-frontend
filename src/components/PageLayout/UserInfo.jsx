@@ -7,17 +7,11 @@ export default function UserInfo() {
   const { userInfo } = useUserInfo();
   const { characterInfo } = useCharacter();
   return (
-    <div className="userCard">
-      <div className="info">
-        <p>{userInfo.username}</p>
-        <p>{characterInfo.charName}</p>
-        <p>{characterInfo.charClass}</p>
-        {characterInfo.charLvl && <p>Level: {characterInfo.charLvl}</p>}
-      </div>
-      {/* //TODO sort out avatar stuff */}
-      {/* {userInfo.avatarUrl && (
-        <img alt="user avatar" src="" />
-      )} */}
+    <div className="info">
+      <p>{userInfo.username}</p>
+      <p>{characterInfo.charName}</p>
+      <p>{characterInfo.charClass}</p>
+      {characterInfo.charLvl && <p>Level: {characterInfo.charLvl}</p>}
     </div>
   );
 }

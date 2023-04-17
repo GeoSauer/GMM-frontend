@@ -23,8 +23,8 @@ export class Character {
   }
 
   static async updateCharacterInfo(updatedInfo) {
-    const { body } = await patch(`${CHARACTERS}/update`, updatedInfo);
-    return body;
+    const { data } = await patch(`${CHARACTERS}/update`, updatedInfo);
+    return data;
   }
 
   static async deleteCharacter(charId) {

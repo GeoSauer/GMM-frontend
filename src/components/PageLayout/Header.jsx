@@ -61,14 +61,15 @@ export default function Header() {
               <Avatar
                 size={{ base: 'sm', md: 'md' }}
                 src={
-                  characterInfo.avatarUrl
-                    ? characterInfo.avatarUrl
-                    : 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                  'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                  // characterInfo.avatarUrl
+                  //   ? characterInfo.avatarUrl
+                  //   : 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
                 }
               />
             </MenuButton>
             <MenuList alignContent={'center'}>
-              <UserInfo />
+              {characterInfo && <UserInfo />}
               <MenuDivider />
               <MenuItem>
                 <NavLink to="characters" alt="characters" title="characters">

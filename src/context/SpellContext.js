@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Spells } from '../services/Spells';
-import { useUserInfo } from './UserContext';
+// import { useUserInfo } from './UserContext';
 import { useCharacter } from './CharacterContext';
-// import { useUser } from './UserContext';
+import { useUser } from './UserContext';
 
 const SpellContext = createContext();
 
@@ -15,42 +15,41 @@ export default function SpellProvider({ children }) {
   const [preparedSpellDetails, setPreparedSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const { userInfo } = useUserInfo();
-  // const { userInfo } = useUser();
+  // const { userInfo, setLoading } = useUserInfo();
+  const { user } = useUser();
   const { characterInfo } = useCharacter();
   console.log({ characterInfo });
   //TODO if you refresh at welcome this whole useEffect runs and throws a ton of errors since no one is logged in.  If after that you do log in you'll be greeted by a white screen and more errors but a refresh fixes it
   useEffect(() => {
-    // if (userInfo.username) {
-    setLoading(true);
-    const fetchSpellsAndDetails = async () => {
-      const fetchedSpells = await Spells.getAvailableSpells(characterInfo.id);
-      const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
-      const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
+    if (user) {
+      setLoading(true);
+      const fetchSpellsAndDetails = async () => {
+        const fetchedSpells = await Spells.getAvailableSpells(characterInfo.id);
+        const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
+        const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
 
-      const fetchedSpellDetails = await Promise.all(
-        fetchedSpells.map(async (spell) => {
-          return await Spells.getSpellDetails(spell.id);
-        })
-      );
-      const filteredKnownSpellDetails = fetchedSpellDetails.filter((spell) => {
-        return fetchedKnownSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
-      });
-      const filteredPreparedSellDetails = fetchedSpellDetails.filter((spell) => {
-        return fetchedPreparedSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
-      });
-      setAllSpells(fetchedSpells);
-      setAllSpellDetails(fetchedSpellDetails);
-      setKnownSpellDetails(filteredKnownSpellDetails);
-      setKnownSpells(fetchedKnownSpells);
-      setPreparedSpells(fetchedPreparedSpells);
-      setPreparedSpellDetails(filteredPreparedSellDetails);
-      setLoading(false);
-    };
-    // debugger;
-    fetchSpellsAndDetails();
-    // }
-  }, [userInfo, characterInfo]);
+        const fetchedSpellDetails = await Promise.all(
+          fetchedSpells.map(async (spell) => {
+            return await Spells.getSpellDetails(spell.id);
+          })
+        );
+        const filteredKnownSpellDetails = fetchedSpellDetails.filter((spell) => {
+          return fetchedKnownSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
+        });
+        const filteredPreparedSellDetails = fetchedSpellDetails.filter((spell) => {
+          return fetchedPreparedSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
+        });
+        setAllSpells(fetchedSpells);
+        setAllSpellDetails(fetchedSpellDetails);
+        setKnownSpellDetails(filteredKnownSpellDetails);
+        setKnownSpells(fetchedKnownSpells);
+        setPreparedSpells(fetchedPreparedSpells);
+        setPreparedSpellDetails(filteredPreparedSellDetails);
+        setLoading(false);
+      };
+      fetchSpellsAndDetails();
+    }
+  }, [characterInfo]);
 
   const value = {
     allSpells,
