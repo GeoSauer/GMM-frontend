@@ -72,7 +72,6 @@ export default function SpellDisplay() {
         <TabPanels> */}
       {location.pathname === '/prepared-spells' && !loading && (
         // <TabPanel>
-        //TODO try moving this Flex outside of the conditionals to cut down on redundant code
         <Flex direction={'column'} alignItems={'center'}>
           {preparedSpells.map((spell, index) => (
             <SpellCard key={spell.id} spellDetails={preparedSpellDetails[index]} {...spell} />

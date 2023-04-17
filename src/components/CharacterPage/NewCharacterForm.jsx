@@ -52,7 +52,7 @@ export default function NewCharacterForm() {
               onSubmit={async (values, actions) => {
                 //TODO Need to figure out how to set the newly created character as the current character
                 await Character.createCharacter(values);
-                navigate('/all-spells');
+                navigate('/characters');
                 actions.setSubmitting(false);
               }}
             >

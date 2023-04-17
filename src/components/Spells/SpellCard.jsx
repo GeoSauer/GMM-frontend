@@ -10,7 +10,7 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import { useSpell } from '../../context/CharacterContext';
+import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { getSuffix } from '../../utils/utils';
 import SpellDetail from './SpellDetail';
 
@@ -21,9 +21,10 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
   const toast = useToast();
   //TODO get this working
   const { learn, forget, prepare, unprepare, error } = useSpell();
+  const { characterInfo } = useCharacter();
   // const { handleLearn } = useSpell();
-  const handleLearn = async (spellId) => {
-    await learn(spellId);
+  const handleLearn = async (charId, spellId) => {
+    await learn(charId, spellId);
     // if (error) {
     // toast({
     //   title: { error },
@@ -40,8 +41,8 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
     });
     // }
   };
-  const handleForget = async (spellId) => {
-    await forget(spellId);
+  const handleForget = async (charId, spellId) => {
+    await forget(charId, spellId);
     toast({
       title: `${name} forgotten!`,
       status: 'success',
@@ -49,8 +50,8 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
       isClosable: true,
     });
   };
-  const handlePrepare = async (spellId, prepared) => {
-    await prepare({ spellId, prepared });
+  const handlePrepare = async (charId, spellId, prepared) => {
+    await prepare({ charId, spellId, prepared });
     toast({
       title: `${name} prepared!`,
       status: 'success',
@@ -58,8 +59,8 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
       isClosable: true,
     });
   };
-  const handleUnprepare = async (spellId, prepared) => {
-    await unprepare({ spellId, prepared });
+  const handleUnprepare = async (charId, spellId, prepared) => {
+    await unprepare({ charId, spellId, prepared });
     toast({
       title: `${name} un-prepared!`,
       status: 'success',
@@ -82,17 +83,19 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
         </Button>
         <VStack>
           {location.pathname === '/all-spells' && (
-            <Button onClick={() => handleLearn(id)}>Learn</Button>
+            <Button onClick={() => handleLearn(characterInfo.id, id)}>Learn</Button>
           )}
           {location.pathname === '/known-spells' && (
-            <Button onClick={() => handlePrepare(id, true)}>{prepared ? '✅' : 'Prepare'}</Button>
+            <Button onClick={() => handlePrepare(characterInfo.id, id, true)}>
+              {prepared ? '✅' : 'Prepare'}
+            </Button>
           )}
           {location.pathname === '/known-spells' && (
-            <Button onClick={() => handleForget(id)}>Forget</Button>
+            <Button onClick={() => handleForget(characterInfo.id, id)}>Forget</Button>
           )}
           {location.pathname === '/prepared-spells' && <Button>Cast</Button>}
           {location.pathname === '/prepared-spells' && (
-            <Button onClick={() => handleUnprepare(id, false)}>Un-Prepare</Button>
+            <Button onClick={() => handleUnprepare(characterInfo.id, id, false)}>Un-Prepare</Button>
           )}
         </VStack>
       </HStack>
