@@ -71,7 +71,7 @@ export default function SignInForm() {
                 //TODO look into making two separate values variables?  Right now values has all user and character info
                 console.log({ values });
                 await signUp(values);
-                //TODO this is creating a character in the db but
+                //TODO this is creating a character in the db but not setting it to the current character
                 await Character.createCharacter(values);
                 navigate('/all-spells');
                 actions.setSubmitting(false);

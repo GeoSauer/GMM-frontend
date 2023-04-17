@@ -11,7 +11,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { useUserInfo } from '../../context/UserContext';
+import { useUser, useUserInfo } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 import { getLocalCharacter } from '../../services/auth';
@@ -19,7 +19,7 @@ import { getLocalCharacter } from '../../services/auth';
 export default function CharacterCard(character) {
   const navigate = useNavigate();
   const localCharacter = getLocalCharacter();
-  const { userInfo } = useUserInfo();
+  const { userInfo } = useUser();
   const { setCharacterState } = useCharacter();
   const handleCharacterChange = () => {
     setCharacterState(character.id);

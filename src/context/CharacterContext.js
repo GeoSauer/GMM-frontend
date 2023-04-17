@@ -10,12 +10,11 @@ export default function CharacterProvider({ children }) {
   const [currentCharacter, setCurrentCharacter] = useState(localCharacter);
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const { user } = useUser();
-  // const { setLoading } = useUserInfo();
+  // const [loading, setLoading] = useState(true);
+  const { user, setLoading } = useUser();
   useEffect(() => {
     if (user) {
-      setLoading(true);
+      // setLoading(true);
       const fetchCharacters = async () => {
         const characters = await Character.getAllCharacters();
         const character = await Character.getCharacterById(currentCharacter);
@@ -26,7 +25,7 @@ export default function CharacterProvider({ children }) {
       };
       fetchCharacters();
     }
-  }, [currentCharacter, setLoading]);
+  }, [currentCharacter, setLoading, user]);
 
   const setCharacterState = (charId) => {
     storeLocalCharacter(charId);
@@ -41,7 +40,7 @@ export default function CharacterProvider({ children }) {
     characterInfo,
     setCharacterInfo,
     setCharacterState,
-    loading,
+    // loading,
     setLoading,
   };
   return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>;

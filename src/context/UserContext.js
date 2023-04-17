@@ -19,7 +19,6 @@ export default function UserProvider({ children }) {
   const [user, setUser] = useState(localUser);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
-
   //TODO figure out what this whole ball o wax is doing
   //? it looks like this was functioning as it should and throwing a 401 on page load since !user
   //? keeping it turned off for now to keep errors clear
@@ -38,15 +37,17 @@ export default function UserProvider({ children }) {
     setUser(user);
   };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const fetchUserInfo = async () => {
-  //     const results = await getUserById();
-  //     setUserInfo(results);
-  //     setLoading(false);
-  //   };
-  //   fetchUserInfo();
-  // }, []);
+  useEffect(() => {
+    if (user) {
+      setLoading(true);
+      const fetchUserInfo = async () => {
+        const results = await getUserById();
+        setUserInfo(results);
+        // setLoading(false);
+      };
+      fetchUserInfo();
+    }
+  }, [user]);
 
   const value = {
     user,
@@ -65,20 +66,20 @@ export function useUser() {
   return user;
 }
 
-export function useUserInfo() {
-  const { userInfo, setUserInfo, loading, setLoading } = useContext(UserContext);
+// export function useUserInfo() {
+//   const { userInfo, setUserInfo, loading, setLoading } = useContext(UserContext);
 
-  useEffect(() => {
-    setLoading(true);
-    const fetchUserInfo = async () => {
-      const results = await getUserById();
-      setUserInfo(results);
-      setLoading(false);
-    };
-    fetchUserInfo();
-  }, [setUserInfo, setLoading]);
-  return { userInfo, setUserInfo, loading };
-}
+//   useEffect(() => {
+//     setLoading(true);
+//     const fetchUserInfo = async () => {
+//       const results = await getUserById();
+//       setUserInfo(results);
+//       setLoading(false);
+//     };
+//     fetchUserInfo();
+//   }, [setUserInfo, setLoading]);
+//   return { userInfo, setUserInfo, loading };
+// }
 
 export function useAuth() {
   const [error, setError] = useState(null);

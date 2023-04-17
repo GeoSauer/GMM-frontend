@@ -6,6 +6,7 @@ import Loading from '../PageLayout/Loading';
 import SpellSlots from '../PageLayout/SpellSlots';
 import SpellCard from '../Spells/SpellCard';
 import { useCharacter } from '../../context/CharacterContext';
+import { useUser } from '../../context/UserContext';
 // import { useUserInfo } from '../../context/UserContext';
 
 export default function SpellDisplay() {
@@ -20,7 +21,7 @@ export default function SpellDisplay() {
   } = useSpellDetails();
   const { characterInfo } = useCharacter();
   const location = useLocation();
-  // const { loading } = useUserInfo();
+  // const { loading } = useUser();
   // const navigate = useNavigate();
   return (
     <>

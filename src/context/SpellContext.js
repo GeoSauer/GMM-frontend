@@ -19,7 +19,6 @@ export default function SpellProvider({ children }) {
   const { user } = useUser();
   const { characterInfo } = useCharacter();
   console.log({ characterInfo });
-  //TODO if you refresh at welcome this whole useEffect runs and throws a ton of errors since no one is logged in.  If after that you do log in you'll be greeted by a white screen and more errors but a refresh fixes it
   useEffect(() => {
     if (user) {
       setLoading(true);
@@ -49,7 +48,7 @@ export default function SpellProvider({ children }) {
       };
       fetchSpellsAndDetails();
     }
-  }, [characterInfo]);
+  }, [characterInfo, user]);
 
   const value = {
     allSpells,

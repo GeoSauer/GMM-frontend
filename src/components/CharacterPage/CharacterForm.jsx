@@ -21,11 +21,11 @@ import { Character } from '../../services/Characters';
 
 export default function CharacterForm() {
   const navigate = useNavigate();
-  // const { userInfo, setUserInfo, loading } = useUser();
-  // const { setUserInfo, loading } = useUser();
-  const { userInfo } = useUserInfo();
-  const { characterInfo, setCharacterInfo, loading } = useCharacter();
-  // const { characterInfo, setCharacterInfo } = useCharacter();
+  const { loading } = useUser();
+  // const { userInfo } = useUser();
+  // const { userInfo } = useUserInfo();
+  // const { characterInfo, setCharacterInfo, loading } = useCharacter();
+  const { characterInfo, setCharacterInfo } = useCharacter();
 
   const ProfileSchema = Yup.object().shape({
     // username: Yup.string().min(2, 'Too Short!'),

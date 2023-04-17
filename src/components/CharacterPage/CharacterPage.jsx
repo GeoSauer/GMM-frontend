@@ -19,10 +19,12 @@ import Loading from '../PageLayout/Loading';
 import ChooseCharacterCard from './ChooseCharacterCard';
 
 export default function CharacterPage() {
-  const { characterList, loading } = useCharacter();
+  // const { characterList, loading } = useCharacter();
+  const { characterList } = useCharacter();
   // const { characterList } = useCharacter();
   // const { loading } = useUserInfo();
-  const { userInfo } = useUserInfo();
+  // const { userInfo } = useUserInfo();
+  const { userInfo, loading } = useUser();
   const location = useLocation();
   return (
     <>
