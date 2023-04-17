@@ -7,9 +7,10 @@ import ProtectedRoute from './components/LandingPage/ProtectedRoutes';
 import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
 import CharacterPage from './components/CharacterPage/CharacterPage';
-import CharacterForm from './components/CharacterPage/CharacterForm';
+import EditCharacterForm from './components/CharacterPage/EditCharacterForm';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
+import NewCharacterForm from './components/CharacterPage/NewCharacterForm';
 
 function App() {
   return (
@@ -27,9 +28,12 @@ function App() {
           <Route path="prepared-spells" element={<SpellDisplay />} />
           <Route path="characters">
             <Route index element={<CharacterPage />} />
-            <Route path="edit" element={<CharacterForm />} />
+            <Route path="edit" element={<EditCharacterForm />} />
+            <Route path="new" element={<NewCharacterForm />} />
           </Route>
-          <Route path="settings" element={<SettingsPage />} />
+          <Route path="settings">
+            <Route index element={<SettingsPage />} />
+          </Route>
           <Route path="about" element={<AboutPage />} />
         </Route>
       </Route>

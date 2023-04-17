@@ -11,20 +11,17 @@ import {
   Button,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { useUser, useUserInfo } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import CharacterCard from './CharacterCard';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Loading from '../PageLayout/Loading';
 import ChooseCharacterCard from './ChooseCharacterCard';
 
 export default function CharacterPage() {
-  // const { characterList, loading } = useCharacter();
   const { characterList } = useCharacter();
-  // const { characterList } = useCharacter();
-  // const { loading } = useUserInfo();
-  // const { userInfo } = useUserInfo();
   const { userInfo, loading } = useUser();
+  const navigate = useNavigate();
   const location = useLocation();
   return (
     <>
@@ -34,6 +31,19 @@ export default function CharacterPage() {
           {characterList.map((character) => {
             return <CharacterCard key={character.id} {...character} />;
           })}
+          <Button
+            bg={'blue.400'}
+            mb={'30'}
+            color={'white'}
+            _hover={{
+              bg: 'blue.500',
+            }}
+            onClick={() => {
+              navigate('new');
+            }}
+          >
+            New Character
+          </Button>
         </Flex>
       )}
       {location.pathname === '/choose-character' && !loading && (

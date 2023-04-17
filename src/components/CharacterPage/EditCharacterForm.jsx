@@ -27,7 +27,7 @@ export default function CharacterForm() {
   // const { characterInfo, setCharacterInfo, loading } = useCharacter();
   const { characterInfo, setCharacterInfo } = useCharacter();
 
-  const ProfileSchema = Yup.object().shape({
+  const CharacterSchema = Yup.object().shape({
     // username: Yup.string().min(2, 'Too Short!'),
     charName: Yup.string().min(2, 'Too Short!'),
   });
@@ -47,7 +47,7 @@ export default function CharacterForm() {
             ) : (
               <Formik
                 initialValues={characterInfo}
-                validationSchema={ProfileSchema}
+                validationSchema={CharacterSchema}
                 onSubmit={async (values, actions) => {
                   await Character.updateCharacterInfo(values);
                   setCharacterInfo((prevState) => {

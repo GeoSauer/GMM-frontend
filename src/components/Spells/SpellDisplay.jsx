@@ -70,7 +70,7 @@ export default function SpellDisplay() {
       )}
       {/* </TabList>
         <TabPanels> */}
-      {location.pathname === '/prepared-spells' && !loading && characterInfo && (
+      {location.pathname === '/prepared-spells' && !loading && (
         // <TabPanel>
         //TODO try moving this Flex outside of the conditionals to cut down on redundant code
         <Flex direction={'column'} alignItems={'center'}>
@@ -80,7 +80,7 @@ export default function SpellDisplay() {
         </Flex>
         // </TabPanel>
       )}
-      {location.pathname === '/known-spells' && !loading && characterInfo && (
+      {location.pathname === '/known-spells' && !loading && (
         // <TabPanel>
         <Flex direction={'column'} alignItems={'center'}>
           {knownSpells.map((spell, index) => {
@@ -89,7 +89,7 @@ export default function SpellDisplay() {
         </Flex>
         // </TabPanel>
       )}
-      {location.pathname === '/all-spells' && !loading && characterInfo && (
+      {location.pathname === '/all-spells' && !loading && (
         // <TabPanel>
         <Flex direction={'column'} alignItems={'center'}>
           {allSpells.map((spell, index) => (
