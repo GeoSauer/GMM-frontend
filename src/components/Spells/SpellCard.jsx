@@ -20,7 +20,7 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
   const location = useLocation();
   const toast = useToast();
   //TODO get this working
-  const { learn, forget, prepare, unprepare, error } = useSpell();
+  const { learn, forget, prepare, unprepare, cast, error } = useSpell();
   const { characterInfo } = useCharacter();
   // const { handleLearn } = useSpell();
   const handleLearn = async (charId, spellId) => {
@@ -68,6 +68,15 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
       isClosable: true,
     });
   };
+  const handleCast = async (charId, slotLevel) => {
+    await cast(charId, slotLevel);
+    toast({
+      title: `${name} cast!`,
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    });
+  };
 
   return (
     <>
@@ -93,7 +102,10 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
           {location.pathname === '/known-spells' && (
             <Button onClick={() => handleForget(characterInfo.id, id)}>Forget</Button>
           )}
-          {location.pathname === '/prepared-spells' && <Button>Cast</Button>}
+          {/* TODO look into a popup modal that asks what level to cast the spell at */}
+          {location.pathname === '/prepared-spells' && (
+            <Button onClick={() => handleCast(characterInfo.id)}>Cast</Button>
+          )}
           {location.pathname === '/prepared-spells' && (
             <Button onClick={() => handleUnprepare(characterInfo.id, id, false)}>Un-Prepare</Button>
           )}

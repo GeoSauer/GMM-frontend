@@ -73,34 +73,3 @@ export function useSpellDetails() {
   const context = useContext(SpellContext);
   return context;
 }
-
-// export function useSpell() {
-//   const [error, setError] = useState(null);
-
-//   const handleResponse = () => {
-//     if (error) {
-//       // eslint-disable-next-line no-console
-//       console.log(error);
-//       setError(error.message);
-//     } else {
-//       setError(null);
-//     }
-//   };
-//   const learn = async (charId, spellId) => {
-//     const response = await Spells.learnSpell({ charId, spellId });
-//     handleResponse(response);
-//   };
-//   const forget = async (id) => {
-//     const response = await Spells.forgetSpell(id);
-//     handleResponse(response);
-//   };
-//   const prepare = async (updatedInfo) => {
-//     const response = await Spells.updateSpellPreparation(updatedInfo);
-//     handleResponse(response);
-//   };
-//   const unprepare = async (updatedInfo) => {
-//     const response = await Spells.updateSpellPreparation(updatedInfo);
-//     handleResponse(response);
-//   };
-//   return { learn, forget, prepare, unprepare, error };
-// }
