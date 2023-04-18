@@ -8,7 +8,6 @@ import {
   Input,
   Stack,
   Button,
-  Heading,
   useColorModeValue,
   Select,
   FormErrorMessage,
@@ -34,11 +33,6 @@ export default function NewCharacterForm() {
       bg={useColorModeValue('gray.50', 'gray.800')}
     >
       <Stack spacing={8} mx={'auto'} maxWidth={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} marginTop={5}>
-            Create a Character
-          </Heading>
-        </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
             <Formik
@@ -142,19 +136,6 @@ export default function NewCharacterForm() {
                       type="submit"
                     >
                       Submit
-                    </Button>
-
-                    <Button
-                      bg={'blue.400'}
-                      color={'white'}
-                      _hover={{
-                        bg: 'blue.500',
-                      }}
-                      onClick={() => {
-                        navigate('/characters');
-                      }}
-                    >
-                      Back
                     </Button>
                   </Stack>
                 </Form>

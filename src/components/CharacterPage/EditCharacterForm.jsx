@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-// import { updateUserInfo } from '../../services/users';
 import * as Yup from 'yup';
 import {
   Flex,
@@ -15,20 +14,16 @@ import {
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
-import { useUser, useUserInfo } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 
-export default function CharacterForm() {
+export default function EditCharacterForm() {
   const navigate = useNavigate();
   const { loading } = useUser();
-  // const { userInfo } = useUser();
-  // const { userInfo } = useUserInfo();
-  // const { characterInfo, setCharacterInfo, loading } = useCharacter();
   const { characterInfo, setCharacterInfo } = useCharacter();
 
   const CharacterSchema = Yup.object().shape({
-    // username: Yup.string().min(2, 'Too Short!'),
     charName: Yup.string().min(2, 'Too Short!'),
   });
 
@@ -59,18 +54,6 @@ export default function CharacterForm() {
               >
                 {(props) => (
                   <Form>
-                    {/* <Field name="username">
-                      {({ field, form }) => (
-                        <FormControl isInvalid={form.errors.username && form.touched.username}>
-                          <FormLabel htmlFor="username" fontWeight={'normal'}>
-                            Username
-                          </FormLabel>
-                          <Input {...field} placeholder={userInfo.username} />
-                          <FormErrorMessage>{form.errors.username}</FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field> */}
-
                     <Field name="charName">
                       {({ field, form }) => (
                         <FormControl isInvalid={form.errors.charName && form.touched.charName}>

@@ -2,6 +2,12 @@ import {
   Avatar,
   Box,
   Button,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
   Flex,
   Heading,
   Image,
@@ -9,18 +15,23 @@ import {
   Text,
   VStack,
   useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useUser, useUserInfo } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 import { getLocalCharacter } from '../../services/auth';
+import { useRef } from 'react';
+import EditCharacterForm from './EditCharacterForm';
 
 export default function CharacterCard(character) {
   const navigate = useNavigate();
   const localCharacter = getLocalCharacter();
   const { userInfo } = useUser();
   const { setCharacterState } = useCharacter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef();
   const handleCharacterChange = () => {
     setCharacterState(character.id);
   };
@@ -60,11 +71,7 @@ export default function CharacterCard(character) {
 
       <Box p={6}>
         <Stack spacing={0} align={'center'} mb={5}>
-          <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
-            {userInfo.username}
-          </Heading>
           <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
-            {/* {characterDetails.charName} */}
             {character.charName}
           </Heading>
           <Text color={'gray.500'}>
@@ -88,11 +95,56 @@ export default function CharacterCard(character) {
             >
               Set Active
             </Button>
+            <Button
+              w={'fit'}
+              mt={8}
+              bg={'gray.900'}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              onClick={onOpen}
+            >
+              Edit
+            </Button>
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              initialFocusRef={firstField}
+              onClose={onClose}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px">Edit {character.charName}</DrawerHeader>
+                <DrawerBody>
+                  <EditCharacterForm />
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+
+            <Button
+              w={'fit'}
+              mt={8}
+              // bg={useColorModeValue('#151f21', 'gray.900')}
+              bg={'gray.900'}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              onClick={handleDelete}
+            >
+              Delete
+            </Button>
           </VStack>
         )}
         {character.id === localCharacter && (
           <VStack>
-            <Button
+            {/* <Button
               w={'fit'}
               mt={8}
               // bg={useColorModeValue('#151f21', 'gray.900')}
@@ -108,7 +160,37 @@ export default function CharacterCard(character) {
               }}
             >
               Edit
+            </Button> */}
+            <Button
+              w={'fit'}
+              mt={8}
+              bg={'gray.900'}
+              color={'white'}
+              rounded={'md'}
+              _hover={{
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              onClick={onOpen}
+            >
+              Edit
             </Button>
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              initialFocusRef={firstField}
+              onClose={onClose}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton />
+                <DrawerHeader borderBottomWidth="1px">Edit {character.charName}</DrawerHeader>
+                <DrawerBody>
+                  <EditCharacterForm />
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+
             <Button
               w={'fit'}
               mt={8}

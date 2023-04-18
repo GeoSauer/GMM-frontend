@@ -7,11 +7,12 @@ import ProtectedRoute from './components/LandingPage/ProtectedRoutes';
 import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
 import CharacterPage from './components/CharacterPage/CharacterPage';
-import EditCharacterForm from './components/CharacterPage/EditCharacterForm';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
-import NewCharacterForm from './components/CharacterPage/NewCharacterForm';
-
+//TODO here's some stuff to do...
+// make a Buttons folder with custom button components to slim things down
+// have character set on signup/create
+//
 function App() {
   return (
     <Routes>
@@ -26,11 +27,7 @@ function App() {
           <Route path="all-spells" element={<SpellDisplay />} />
           <Route path="known-spells" element={<SpellDisplay />} />
           <Route path="prepared-spells" element={<SpellDisplay />} />
-          <Route path="characters">
-            <Route index element={<CharacterPage />} />
-            <Route path="edit" element={<EditCharacterForm />} />
-            <Route path="new" element={<NewCharacterForm />} />
-          </Route>
+          <Route path="characters" element={<CharacterPage />} />
           <Route path="settings">
             <Route index element={<SettingsPage />} />
           </Route>

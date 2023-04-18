@@ -19,7 +19,6 @@ export default function SpellCard({ id, name, level, school, prepared, spellDeta
   const suffix = getSuffix(level);
   const location = useLocation();
   const toast = useToast();
-  //TODO get this working
   const { learn, forget, prepare, unprepare, cast, error } = useSpell();
   const { characterInfo } = useCharacter();
   // const { handleLearn } = useSpell();
