@@ -11,6 +11,15 @@ import {
   Flex,
   Heading,
   Image,
+  Portal,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverCloseButton,
+  PopoverContent,
+  PopoverFooter,
+  PopoverHeader,
+  PopoverTrigger,
   Stack,
   Text,
   VStack,
@@ -78,6 +87,7 @@ export default function CharacterCard(character) {
             Level: {character.charLvl} {character.charClass}
           </Text>
         </Stack>
+
         {character.id !== localCharacter && (
           <VStack>
             <Button
@@ -125,42 +135,50 @@ export default function CharacterCard(character) {
               </DrawerContent>
             </Drawer>
 
-            <Button
-              w={'fit'}
-              mt={8}
-              // bg={useColorModeValue('#151f21', 'gray.900')}
-              bg={'gray.900'}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
+            <Popover>
+              <PopoverTrigger>
+                <Button
+                  w={'fit'}
+                  mt={8}
+                  bg={'gray.900'}
+                  color={'white'}
+                  rounded={'md'}
+                  _hover={{
+                    transform: 'translateY(-2px)',
+                    boxShadow: 'lg',
+                  }}
+                >
+                  Delete
+                </Button>
+              </PopoverTrigger>
+              <Portal>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverHeader>Sure you wanna delete {character.charName}?</PopoverHeader>
+                  <PopoverCloseButton />
+                  <PopoverBody alignSelf={'center'}>
+                    <Button
+                      w={'fit'}
+                      mt={8}
+                      bg={'gray.900'}
+                      color={'white'}
+                      rounded={'md'}
+                      _hover={{
+                        transform: 'translateY(-2px)',
+                        boxShadow: 'lg',
+                      }}
+                      onClick={handleDelete}
+                    >
+                      Confirm
+                    </Button>
+                  </PopoverBody>
+                </PopoverContent>
+              </Portal>
+            </Popover>
           </VStack>
         )}
         {character.id === localCharacter && (
           <VStack>
-            {/* <Button
-              w={'fit'}
-              mt={8}
-              // bg={useColorModeValue('#151f21', 'gray.900')}
-              bg={'gray.900'}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-              onClick={() => {
-                navigate('edit');
-              }}
-            >
-              Edit
-            </Button> */}
             <Button
               w={'fit'}
               mt={8}
@@ -190,22 +208,6 @@ export default function CharacterCard(character) {
                 </DrawerBody>
               </DrawerContent>
             </Drawer>
-
-            <Button
-              w={'fit'}
-              mt={8}
-              // bg={useColorModeValue('#151f21', 'gray.900')}
-              bg={'gray.900'}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
           </VStack>
         )}
         <Outlet />

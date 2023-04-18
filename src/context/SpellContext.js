@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Spells } from '../services/Spells';
-// import { useUserInfo } from './UserContext';
 import { useCharacter } from './CharacterContext';
-import { useUser } from './UserContext';
 
 const SpellContext = createContext();
 
@@ -14,10 +12,8 @@ export default function SpellProvider({ children }) {
   const [knownSpellDetails, setKnownSpellDetails] = useState([]);
   const [preparedSpellDetails, setPreparedSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // const { userInfo, setLoading } = useUserInfo();
-  const { user } = useUser();
   const { characterInfo } = useCharacter();
+
   useEffect(() => {
     if (characterInfo.id) {
       setLoading(true);
@@ -47,7 +43,7 @@ export default function SpellProvider({ children }) {
       };
       fetchSpellsAndDetails();
     }
-  }, [characterInfo, user]);
+  }, [characterInfo]);
 
   const value = {
     allSpells,

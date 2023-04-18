@@ -11,6 +11,7 @@ import {
   useColorModeValue,
   Select,
   FormErrorMessage,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
@@ -48,7 +49,7 @@ export default function EditCharacterForm() {
                   setCharacterInfo((prevState) => {
                     return { ...prevState, ...values };
                   });
-                  navigate('/all-spells');
+                  navigate('/characters');
                   actions.setSubmitting(false);
                 }}
               >
@@ -135,19 +136,6 @@ export default function EditCharacterForm() {
                       type="submit"
                     >
                       Submit
-                    </Button>
-
-                    <Button
-                      bg={'blue.400'}
-                      color={'white'}
-                      _hover={{
-                        bg: 'blue.500',
-                      }}
-                      onClick={() => {
-                        navigate('/characters');
-                      }}
-                    >
-                      Back
                     </Button>
                   </Form>
                 )}

@@ -26,6 +26,7 @@ export default function CharacterPage() {
   const location = useLocation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
+
   return (
     <Flex direction={'column'} alignItems={'center'} mb={'30'}>
       {loading && <Loading />}

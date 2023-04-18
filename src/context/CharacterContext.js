@@ -10,22 +10,28 @@ export default function CharacterProvider({ children }) {
   const [currentCharacter, setCurrentCharacter] = useState(localCharacter);
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  const { user, setLoading } = useUser();
+  const { userInfo, setLoading } = useUser();
+
   useEffect(() => {
-    if (user) {
-      // setLoading(true);
+    if (userInfo.id) {
       const fetchCharacters = async () => {
         const characters = await Character.getAllCharacters();
-        const character = await Character.getCharacterById(currentCharacter);
-
-        setCharacterInfo(character);
         setCharacterList(characters);
         setLoading(false);
       };
       fetchCharacters();
     }
-  }, [currentCharacter, setLoading, user]);
+  }, [currentCharacter, setLoading, userInfo]);
+
+  useEffect(() => {
+    if (characterList[0]) {
+      const fetchCharacter = async () => {
+        const character = await Character.getCharacterById(currentCharacter);
+        setCharacterInfo(character);
+      };
+      fetchCharacter();
+    }
+  }, [characterList, currentCharacter]);
 
   const setCharacterState = (charId) => {
     storeLocalCharacter(charId);
