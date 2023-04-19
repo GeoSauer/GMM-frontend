@@ -11,7 +11,6 @@ import {
   useColorModeValue,
   Select,
   FormErrorMessage,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
@@ -23,7 +22,6 @@ export default function EditCharacterForm() {
   const navigate = useNavigate();
   const { loading } = useUser();
   const { characterInfo, setCharacterInfo } = useCharacter();
-
   const CharacterSchema = Yup.object().shape({
     charName: Yup.string().min(2, 'Too Short!'),
   });
@@ -54,7 +52,7 @@ export default function EditCharacterForm() {
                 }}
               >
                 {(props) => (
-                  <Form>
+                  <Form id="my-form">
                     <Field name="charName">
                       {({ field, form }) => (
                         <FormControl isInvalid={form.errors.charName && form.touched.charName}>

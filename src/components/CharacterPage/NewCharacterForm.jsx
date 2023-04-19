@@ -8,15 +8,18 @@ import {
   Input,
   Stack,
   Button,
+  Heading,
   useColorModeValue,
   Select,
   FormErrorMessage,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Characters';
 
 export default function NewCharacterForm() {
   const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const CharacterSchema = Yup.object().shape({
     charName: Yup.string().min(2, 'Too Short!').required('Still required'),

@@ -53,7 +53,7 @@ export default function CharacterPage() {
         Create Character
       </Button>
       <Drawer isOpen={isOpen} placement="right" initialFocusRef={firstField} onClose={onClose}>
-        <DrawerOverlay />
+        <DrawerOverlay backdropFilter="blur(5px)" />
         <DrawerContent>
           <DrawerCloseButton />
           <DrawerHeader borderBottomWidth="1px">Create a new Character</DrawerHeader>

@@ -6,6 +6,7 @@ import {
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
+  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   Flex,
@@ -26,8 +27,7 @@ import {
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react';
-import { Outlet, useNavigate } from 'react-router-dom';
-import { useUser, useUserInfo } from '../../context/UserContext';
+import { Outlet } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 import { getLocalCharacter } from '../../services/auth';
@@ -35,18 +35,25 @@ import { useRef } from 'react';
 import EditCharacterForm from './EditCharacterForm';
 
 export default function CharacterCard(character) {
-  const navigate = useNavigate();
   const localCharacter = getLocalCharacter();
-  const { userInfo } = useUser();
-  const { setCharacterState } = useCharacter();
+  const { setCharacterState, characterList } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
   const handleCharacterChange = () => {
     setCharacterState(character.id);
+    //TODO so this returns the array in the order I want but doesn't reorder the character cards on the page
+    characterList.unshift(
+      characterList.splice(
+        characterList.findIndex((char) => char.id === character.id),
+        1
+      )[0]
+    );
+    // console.log({ characterList });
   };
-  //TODO add a confirm/cancel modal
+
   const handleDelete = async () => {
     await Character.deleteCharacter(character.id);
+    onClose;
   };
 
   return (
@@ -93,7 +100,6 @@ export default function CharacterCard(character) {
             <Button
               w={'fit'}
               mt={8}
-              // bg={useColorModeValue('#151f21', 'gray.900')}
               bg={'gray.900'}
               color={'white'}
               rounded={'md'}
@@ -125,13 +131,19 @@ export default function CharacterCard(character) {
               initialFocusRef={firstField}
               onClose={onClose}
             >
-              <DrawerOverlay />
+              <DrawerOverlay backdropFilter="blur(5px)" />
               <DrawerContent>
                 <DrawerCloseButton />
                 <DrawerHeader borderBottomWidth="1px">Edit {character.charName}</DrawerHeader>
                 <DrawerBody>
                   <EditCharacterForm />
                 </DrawerBody>
+
+                {/* <DrawerFooter>
+                  <Button type="submit" form="my-form">
+                    Save
+                  </Button>
+                </DrawerFooter> */}
               </DrawerContent>
             </Drawer>
 
@@ -196,10 +208,11 @@ export default function CharacterCard(character) {
             <Drawer
               isOpen={isOpen}
               placement="right"
+              bg={'transparent'}
               initialFocusRef={firstField}
               onClose={onClose}
             >
-              <DrawerOverlay />
+              <DrawerOverlay backdropFilter="blur(5px)" />
               <DrawerContent>
                 <DrawerCloseButton />
                 <DrawerHeader borderBottomWidth="1px">Edit {character.charName}</DrawerHeader>

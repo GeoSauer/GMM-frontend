@@ -211,19 +211,6 @@ export default function SignInForm() {
                     >
                       Sign up
                     </Button>
-
-                    <Button
-                      bg={'blue.400'}
-                      color={'white'}
-                      _hover={{
-                        bg: 'blue.500',
-                      }}
-                      onClick={() => {
-                        navigate('/welcome');
-                      }}
-                    >
-                      Back
-                    </Button>
                   </Stack>
                 </Form>
               )}

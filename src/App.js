@@ -1,8 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
 import Auth from './components/LandingPage/Auth';
-import SignInForm from './components/LandingPage/SignInForm';
-import SignUpForm from './components/LandingPage/SignUpForm';
 import ProtectedRoute from './components/LandingPage/ProtectedRoutes';
 import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
@@ -10,16 +8,21 @@ import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
-// make a Buttons folder with custom button components to slim things down
-// have character set on signup/create
-//
+//? make a Buttons folder with custom button components to slim things down
+//? have character set on signup/create
+//? have drawer close on submit/delete on edit/create/delete character
+//? make the edit button correspond to the correct character
+//? make a demo button on landing page that logs in a dummy account
+//? make a short/long rest button
+//? consolidate signin credentials to one input
+//? consider refactoring a number of pages to slim routes down and create better flow
+//? add a signout confirmation
+
 function App() {
   return (
     <Routes>
       <Route path="welcome" element={<LandingPage />}>
         <Route index element={<Auth />} />
-        <Route path="sign-up" element={<SignUpForm />} />
-        <Route path="sign-in" element={<SignInForm />} />
       </Route>
       <Route element={<ProtectedRoute />}>
         <Route path="choose-character" element={<CharacterPage />} />

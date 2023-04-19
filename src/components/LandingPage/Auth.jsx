@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import {
   Button,
   Flex,
@@ -7,15 +7,29 @@ import {
   Stack,
   Text,
   useBreakpointValue,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
 } from '@chakra-ui/react';
+import { useRef, useState } from 'react';
+import SignUpForm from './SignUpForm';
+import SignInForm from './SignInForm';
 
 export default function Auth() {
-  const navigate = useNavigate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const firstField = useRef();
+  const [option, setOption] = useState('');
+
+  const handleClick = (newOption) => {
+    setOption(newOption);
+    onOpen();
+  };
+  const options = ['up', 'in'];
   return (
-    <Stack
-      minH={'100vh'}
-      direction={{ base: 'column', md: 'row' }}
-    >
+    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex
         p={8}
         flex={1}
@@ -23,16 +37,11 @@ export default function Auth() {
         justify={'center'}
         w={'full'}
         h={'100vh'}
-        // backgroundImage={
-        //   'url(https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg)'
-        // }
         backgroundSize={'cover'}
         backgroundPosition={'center center'}
       >
         <Stack spacing={6} w={'full'} maxW={'lg'}>
-          <Heading
-            fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
-          >
+          <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
             <Text
               as={'span'}
               position={'relative'}
@@ -64,44 +73,37 @@ export default function Auth() {
             bg={'gray.50'}
             rounded={'lg'}
           >
-            <strong>
-              The Grimoire for the Modern Mage
-            </strong>{' '}
-            is specifically for those exhausted by constant
-            erasing and re-writing, dealing with illegible
-            shorthand, and sifting through spells irrelevant
-            to their character. Adding just a few pieces of
-            information to your profile will leave you with
-            a personalized list of available spells to
-            learn, prepare, and cast, regardless of where
-            you are in your adventure. So, what are you
-            waiting for?
+            <strong>The Grimoire for the Modern Mage</strong> is specifically for those exhausted by
+            constant erasing and re-writing, dealing with illegible shorthand, and sifting through
+            spells irrelevant to their character. Adding just a few pieces of information to your
+            profile will leave you with a personalized list of available spells to learn, prepare,
+            and cast, regardless of where you are in your adventure. So, what are you waiting for?
           </Text>
-          <Stack
-            direction={{ base: 'column', md: 'row' }}
-            spacing={4}
-          >
-            <Button
-              rounded={'full'}
-              bg={'cyan.800'}
-              color={'white'}
-              _hover={{
-                bg: 'teal.500',
-              }}
-              onClick={() => {
-                navigate('sign-up');
-              }}
-            >
-              Let&apos;s Get Started!
-            </Button>
-            <Button
-              rounded={'full'}
-              onClick={() => {
-                navigate('sign-in');
-              }}
-            >
-              I Already Have An Account
-            </Button>
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+            {options.map((option) => (
+              <Button
+                rounded={'full'}
+                bg={option === 'up' ? 'cyan.800' : 'gray.400'}
+                color={option === 'up' ? 'white' : ''}
+                _hover={{
+                  bg: option === 'up' ? 'teal.500' : 'gray.300',
+                }}
+                onClick={() => handleClick(option)}
+                key={option}
+              >
+                {option === 'up' ? "Let's Get Started!" : 'I Already Have An Account'}
+              </Button>
+            ))}
+            <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
+              <ModalOverlay backdropFilter="blur(5px)" />
+              <ModalContent>
+                <ModalCloseButton />
+                <ModalBody>
+                  {option === 'up' && <SignUpForm />}
+                  {option === 'in' && <SignInForm />}
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </Stack>
         </Stack>
       </Flex>
@@ -109,9 +111,7 @@ export default function Auth() {
         <Image
           alt={'Login Image'}
           objectFit={'cover'}
-          src={
-            'https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg'
-          }
+          src={'https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg'}
         />
       </Flex>
       <Outlet />
