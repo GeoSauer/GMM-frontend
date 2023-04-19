@@ -53,6 +53,9 @@ export default function SignInForm() {
           <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} marginTop={5}>
             Create an Account
           </Heading>
+          <Heading fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}>
+            (Don&apos;t worry you can add more chatacters later)
+          </Heading>
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>

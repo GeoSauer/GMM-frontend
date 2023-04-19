@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { useAuth, useUserInfo } from '../../context/UserContext';
+import { useAuth } from '../../context/UserContext';
 import UserInfo from './UserInfo';
 import {
   Box,
@@ -16,16 +16,21 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  ModalHeader,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useCharacter } from '../../context/CharacterContext';
-// import { getKnownSpells } from '../../services/spells';
-// const Spells = require('../../services/spells');
+import { useRef } from 'react';
 
 export default function Header() {
   const { handleSignOut } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { characterInfo } = useCharacter();
+  const firstField = useRef();
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -43,12 +48,7 @@ export default function Header() {
             <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
               Prepared Spells
             </NavLink>
-            <NavLink
-              to="known-spells"
-              alt="known"
-              title="Known Spells"
-              // onClick={async () => await Spells.getKnownSpells()}
-            >
+            <NavLink to="known-spells" alt="known" title="Known Spells">
               Known Spells
             </NavLink>
             <NavLink to="all-spells" alt="all" title="All Spells">
@@ -83,7 +83,17 @@ export default function Header() {
                 </NavLink>
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
+              <MenuItem onClick={onOpen}>Sign Out</MenuItem>
+              <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
+                <ModalOverlay backdropFilter="blur(5px)" />
+                <ModalContent>
+                  <ModalHeader>For real for real???</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <Button onClick={handleSignOut}>Yes fam :(</Button>
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
             </MenuList>
           </Menu>
         </Flex>

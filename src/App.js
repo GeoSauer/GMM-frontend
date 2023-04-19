@@ -17,7 +17,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? consolidate signin credentials to one input
 //? consider refactoring a number of pages to slim routes down and create better flow
 //? add a signout confirmation
-
+//? refactor auth.jsx into layout.jsx?
 function App() {
   return (
     <Routes>

@@ -114,7 +114,6 @@ export default function Auth() {
           src={'https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg'}
         />
       </Flex>
-      <Outlet />
     </Stack>
   );
 }
