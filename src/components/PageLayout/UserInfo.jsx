@@ -1,3 +1,4 @@
+import { MenuDivider } from '@chakra-ui/react';
 import { useCharacter } from '../../context/CharacterContext';
 import { useUser } from '../../context/UserContext';
 
@@ -7,6 +8,7 @@ export default function UserInfo() {
   return (
     <div className="info">
       <p>{userInfo.username}</p>
+      <MenuDivider />
       <p>{characterInfo.charName}</p>
       <p>{characterInfo.charClass}</p>
       {characterInfo.charLvl && <p>Level: {characterInfo.charLvl}</p>}

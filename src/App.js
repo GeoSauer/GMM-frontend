@@ -16,8 +16,8 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? make a short/long rest button
 //? consolidate signin credentials to one input
 //? consider refactoring a number of pages to slim routes down and create better flow
-//? add a signout confirmation
 //? refactor auth.jsx into layout.jsx?
+//?add error handling to toasts on spell buttons
 function App() {
   return (
     <Routes>

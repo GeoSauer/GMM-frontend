@@ -10,104 +10,79 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { getSuffix } from '../../utils/utils';
 import SpellDetail from './SpellDetail';
+import CastConcentrationSpellButton from '../Buttons/CastConcentrationSpellButton';
+import LearnSpellButton from '../Buttons/LearnSpellButton';
+import PrepareSpellButton from '../Buttons/PrepareSpellButton';
+import UnprepareSpellButton from '../Buttons/UnprepareSpellButton';
+import ForgetSpellButton from '../Buttons/ForgetSpellButton';
+import CastRitualSpellButton from '../Buttons/CastRitualSpellButton';
+import { useCharacter, useSpell } from '../../context/CharacterContext';
+import SpellLevelModal from '../Modals/SpellLevelModal';
+import CastSpellButton from '../Buttons/CastSpellButton';
 
-export default function SpellCard({ id, name, level, school, prepared, spellDetails }) {
+export default function SpellCard({ spellDetails, spell }) {
   const { isOpen, onToggle } = useDisclosure();
-  const suffix = getSuffix(level);
-  const location = useLocation();
-  const toast = useToast();
-  const { learn, forget, prepare, unprepare, cast, error } = useSpell();
   const { characterInfo } = useCharacter();
-  // const { handleLearn } = useSpell();
-  const handleLearn = async (charId, spellId) => {
-    await learn(charId, spellId);
-    // if (error) {
-    // toast({
-    //   title: { error },
-    //   status: 'warning',
-    //   duration: 1500,
-    //   isClosable: true,
-    // });
-    // } else {
-    toast({
-      title: `${name} learned!`,
-      status: 'success',
-      duration: 1500,
-      isClosable: true,
-    });
-    // }
-  };
-  const handleForget = async (charId, spellId) => {
-    await forget(charId, spellId);
-    toast({
-      title: `${name} forgotten!`,
-      status: 'success',
-      duration: 1500,
-      isClosable: true,
-    });
-  };
-  const handlePrepare = async (charId, spellId, prepared) => {
-    await prepare({ charId, spellId, prepared });
-    toast({
-      title: `${name} prepared!`,
-      status: 'success',
-      duration: 1500,
-      isClosable: true,
-    });
-  };
-  const handleUnprepare = async (charId, spellId, prepared) => {
-    await unprepare({ charId, spellId, prepared });
-    toast({
-      title: `${name} un-prepared!`,
-      status: 'success',
-      duration: 1500,
-      isClosable: true,
-    });
-  };
+  const suffix = getSuffix(spell.level);
+  const location = useLocation();
+  const { cast } = useSpell();
+  const toast = useToast();
+
   const handleCast = async (charId, slotLevel) => {
-    await cast(charId, slotLevel);
+    if (spell.level > 0) {
+      await cast(charId, slotLevel);
+    }
     toast({
-      title: `${name} cast!`,
+      title: `${spell.name} cast!`,
       status: 'success',
       duration: 1500,
       isClosable: true,
     });
   };
 
+  console.log({ spell });
   return (
     <>
       <HStack>
         <Button onClick={onToggle} display={'block'} w={'sm'} h={'20'} p={'2'} mt={'2'}>
-          <Heading size="md">{name}</Heading>
+          <Heading size="md">{spell.name}</Heading>
           <Text>
-            {level > 0
-              ? `${level}
-            ${suffix}-Level ${school}`
-              : `${school} Cantrip`}
+            {spell.level > 0
+              ? `${spell.level}
+            ${suffix}-Level ${spell.school}`
+              : `${spell.school} Cantrip`}
           </Text>
         </Button>
         <VStack>
-          {location.pathname === '/all-spells' && (
-            <Button onClick={() => handleLearn(characterInfo.id, id)}>Learn</Button>
+          {location.pathname === '/all-spells' && !spell.known && (
+            <LearnSpellButton spell={spell} />
           )}
-          {location.pathname === '/known-spells' && (
-            <Button onClick={() => handlePrepare(characterInfo.id, id, true)}>
-              {prepared ? '✅' : 'Prepare'}
-            </Button>
+
+          {location.pathname === '/known-spells' && !spell.prepared && (
+            <PrepareSpellButton spell={spell} />
           )}
-          {location.pathname === '/known-spells' && (
-            <Button onClick={() => handleForget(characterInfo.id, id)}>Forget</Button>
-          )}
-          {/* TODO look into a popup modal that asks what level to cast the spell at */}
-          {location.pathname === '/prepared-spells' && (
-            <Button onClick={() => handleCast(characterInfo.id)}>Cast</Button>
-          )}
-          {location.pathname === '/prepared-spells' && (
-            <Button onClick={() => handleUnprepare(characterInfo.id, id, false)}>Un-Prepare</Button>
-          )}
+
+          {location.pathname === '/known-spells' && <ForgetSpellButton spell={spell} />}
+
+          {location.pathname === '/prepared-spells' && <UnprepareSpellButton spell={spell} />}
+          {/* {location.pathname === '/prepared-spells' && (
+            <Button onClick={() => handleCast(characterInfo.id, level)}>Cast</Button>
+          )} */}
+          {location.pathname === '/prepared-spells' && spellDetails.ritual ? (
+            <CastRitualSpellButton spell={spell} />
+          ) : null}
+          {location.pathname === '/prepared-spells' && spellDetails.concentration ? (
+            <CastConcentrationSpellButton spell={spell} spellDetails={spellDetails} />
+          ) : null}
+          {location.pathname === '/prepared-spells' &&
+          !spellDetails.concentration &&
+          !spellDetails.ritual ? (
+            <CastSpellButton spell={spell} />
+          ) : // <SpellLevelModal spell={spell} />
+          // <Button onClick={() => handleCast(characterInfo.id, 2)}>Cast</Button>
+          null}
         </VStack>
       </HStack>
       <Collapse in={isOpen} animateOpacity>

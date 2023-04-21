@@ -35,8 +35,8 @@ export default function SpellProvider({ children }) {
         });
         setAllSpells(fetchedSpells);
         setAllSpellDetails(fetchedSpellDetails);
-        setKnownSpellDetails(filteredKnownSpellDetails);
         setKnownSpells(fetchedKnownSpells);
+        setKnownSpellDetails(filteredKnownSpellDetails);
         setPreparedSpells(fetchedPreparedSpells);
         setPreparedSpellDetails(filteredPreparedSellDetails);
         setLoading(false);

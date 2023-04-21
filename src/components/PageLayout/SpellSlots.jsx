@@ -1,5 +1,4 @@
 import { Flex, Text, Box, useDisclosure, Button, Collapse } from '@chakra-ui/react';
-import { useUser, useUserInfo } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellSlots() {
