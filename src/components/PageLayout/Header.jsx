@@ -26,6 +26,7 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { useCharacter } from '../../context/CharacterContext';
 import { useRef } from 'react';
+import SignOutButton from '../Buttons/SignOutButton';
 
 export default function Header() {
   const { handleSignOut } = useAuth();
@@ -83,17 +84,7 @@ export default function Header() {
                 </NavLink>
               </MenuItem>
               <MenuDivider />
-              <MenuItem onClick={onOpen}>Sign Out</MenuItem>
-              <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-                <ModalOverlay backdropFilter="blur(5px)" />
-                <ModalContent>
-                  <ModalHeader>For real for real???</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    <Button onClick={handleSignOut}>Yes fam :(</Button>
-                  </ModalBody>
-                </ModalContent>
-              </Modal>
+              <SignOutButton />
             </MenuList>
           </Menu>
         </Flex>
