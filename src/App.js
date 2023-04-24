@@ -19,6 +19,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //?add messages when known/prepared spells === 0
 //? add light/dark/themes modes to settings
 //? Cantrips are auto prepared, so that's gotta happen
+//? Cantrips also probable just cast like rituals?
 //? sections for spell levels
 //? add validation to slotLevel so you can't cast at choose one
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now

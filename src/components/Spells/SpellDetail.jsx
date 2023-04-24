@@ -24,7 +24,6 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import gfm from 'remark-gfm';
 
 export default function SpellDetail({ spellDetails }) {
-  console.log({ spellDetails });
   return (
     // <Accordion defaultIndex={[0]} allowMultiple>
     //   {spellDetails.castingTime && (
