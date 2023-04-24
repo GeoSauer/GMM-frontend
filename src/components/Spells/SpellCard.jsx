@@ -18,31 +18,13 @@ import PrepareSpellButton from '../Buttons/PrepareSpellButton';
 import UnprepareSpellButton from '../Buttons/UnprepareSpellButton';
 import ForgetSpellButton from '../Buttons/ForgetSpellButton';
 import CastRitualSpellButton from '../Buttons/CastRitualSpellButton';
-import { useCharacter, useSpell } from '../../context/CharacterContext';
-import SpellLevelModal from '../Modals/SpellLevelModal';
 import CastSpellButton from '../Buttons/CastSpellButton';
 
 export default function SpellCard({ spellDetails, spell }) {
   const { isOpen, onToggle } = useDisclosure();
-  const { characterInfo } = useCharacter();
   const suffix = getSuffix(spell.level);
   const location = useLocation();
-  const { cast } = useSpell();
-  const toast = useToast();
 
-  const handleCast = async (charId, slotLevel) => {
-    if (spell.level > 0) {
-      await cast(charId, slotLevel);
-    }
-    toast({
-      title: `${spell.name} cast!`,
-      status: 'success',
-      duration: 1500,
-      isClosable: true,
-    });
-  };
-
-  console.log({ spell });
   return (
     <>
       <HStack>

@@ -18,6 +18,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? add truncating to long user/character names
 // {username.length > 20 ? username.slice(0, 20) + '...' : username}
 //?add messages when known/prepared spells === 0
+//? add light/dark/themes modes to settings
 function App() {
   return (
     <Routes>

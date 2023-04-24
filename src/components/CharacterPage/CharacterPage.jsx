@@ -3,12 +3,12 @@ import {
   Flex,
   Button,
   useDisclosure,
-  Drawer,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  DrawerHeader,
-  DrawerBody,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalBody,
+  ModalHeader,
 } from '@chakra-ui/react';
 import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
@@ -52,16 +52,16 @@ export default function CharacterPage() {
       <Button leftIcon={<AddIcon />} colorScheme="teal" onClick={onOpen}>
         Create Character
       </Button>
-      <Drawer isOpen={isOpen} placement="right" initialFocusRef={firstField} onClose={onClose}>
-        <DrawerOverlay backdropFilter="blur(5px)" />
-        <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader borderBottomWidth="1px">Create a new Character</DrawerHeader>
-          <DrawerBody>
-            <NewCharacterForm />
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+      <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
+        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalContent>
+          <ModalHeader>New Character</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <NewCharacterForm onClose={onClose} />
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 }

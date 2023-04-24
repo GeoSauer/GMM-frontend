@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import {
   Flex,
@@ -18,10 +17,10 @@ import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 
-export default function EditCharacterForm() {
-  const navigate = useNavigate();
+export default function EditCharacterForm({ onClose }) {
   const { loading } = useUser();
   const { characterInfo, setCharacterInfo } = useCharacter();
+
   const CharacterSchema = Yup.object().shape({
     charName: Yup.string().min(2, 'Too Short!'),
   });
@@ -47,7 +46,7 @@ export default function EditCharacterForm() {
                   setCharacterInfo((prevState) => {
                     return { ...prevState, ...values };
                   });
-                  navigate('/characters');
+                  onClose();
                   actions.setSubmitting(false);
                 }}
               >

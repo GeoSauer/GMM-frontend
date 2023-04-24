@@ -2,12 +2,6 @@ import {
   Avatar,
   Box,
   Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
   Heading,
   Image,
@@ -24,6 +18,12 @@ import {
   VStack,
   useColorModeValue,
   useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalCloseButton,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
 } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
@@ -168,22 +168,16 @@ export default function CharacterCard(character) {
             >
               Edit
             </Button>
-            <Drawer
-              isOpen={isOpen}
-              placement="right"
-              bg={'transparent'}
-              initialFocusRef={firstField}
-              onClose={onClose}
-            >
-              <DrawerOverlay backdropFilter="blur(5px)" />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px">Edit {character.charName}</DrawerHeader>
-                <DrawerBody>
-                  <EditCharacterForm />
-                </DrawerBody>
-              </DrawerContent>
-            </Drawer>
+            <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
+              <ModalOverlay backdropFilter="blur(5px)" />
+              <ModalContent>
+                <ModalHeader>Editing {character.charName}</ModalHeader>
+                <ModalCloseButton />
+                <ModalBody>
+                  <EditCharacterForm onClose={onClose} />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </VStack>
         )}
         <Outlet />

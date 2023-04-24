@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import {
   Flex,
@@ -11,15 +10,11 @@ import {
   useColorModeValue,
   Select,
   FormErrorMessage,
-  useDisclosure,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Characters';
 
-export default function NewCharacterForm() {
-  const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
+export default function NewCharacterForm({ onClose }) {
   const CharacterSchema = Yup.object().shape({
     charName: Yup.string().min(2, 'Too Short!').required('Still required'),
     charClass: Yup.string().required('Please'),
@@ -48,7 +43,7 @@ export default function NewCharacterForm() {
               onSubmit={async (values, actions) => {
                 //TODO Need to figure out how to set the newly created character as the current character
                 await Character.createCharacter(values);
-                navigate('/characters');
+                onClose();
                 actions.setSubmitting(false);
               }}
             >
