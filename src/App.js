@@ -8,7 +8,6 @@ import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
-//? have drawer close on submit/delete on edit/create/delete character
 //? make a demo button on landing page that logs in a dummy account
 //? make a short/long rest button
 //? consolidate signin credentials to one input
