@@ -8,7 +8,6 @@ import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
-//? have character set on signup/create
 //? have drawer close on submit/delete on edit/create/delete character
 //? make a demo button on landing page that logs in a dummy account
 //? make a short/long rest button
@@ -18,6 +17,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //?add error handling to toasts on spell buttons, and literally everywhere else
 //? add truncating to long user/character names
 // {username.length > 20 ? username.slice(0, 20) + '...' : username}
+//?add messages when known/prepared spells === 0
 function App() {
   return (
     <Routes>

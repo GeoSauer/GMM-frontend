@@ -19,11 +19,12 @@ import {
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Characters';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function SignInForm() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
-
+  const { setCharacterState } = useCharacter();
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -72,9 +73,8 @@ export default function SignInForm() {
               validationSchema={SignupSchema}
               onSubmit={async (values, actions) => {
                 await signUp(values);
-                //TODO this is creating a character in the db but not setting it to the current character
-                console.log({ values });
-                await Character.createCharacter(values);
+                const character = await Character.createCharacter(values);
+                setCharacterState(character.id);
                 navigate('/all-spells');
                 actions.setSubmitting(false);
               }}
