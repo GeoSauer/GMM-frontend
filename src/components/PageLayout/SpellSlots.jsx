@@ -24,7 +24,8 @@ const SpellSlotsDisplay = () => {
     <Flex w="full" justifyContent="space-around" alignItems="center">
       {[...Array(9)].map((_, i) => {
         const number = i + 1;
-        return characterInfo[`level${number}SpellSlots`] ? (
+        const spellsAvailableAtSlotLevel = characterInfo[`level${number}SpellSlots`];
+        return spellsAvailableAtSlotLevel ? (
           <Box key={`key-${i}`} pos="relative">
             <Text>Level {number}:</Text>
             <Text
@@ -37,7 +38,7 @@ const SpellSlotsDisplay = () => {
               bg="red.600"
               rounded="full"
             >
-              {characterInfo[`level${number}SpellSlots`]}
+              {spellsAvailableAtSlotLevel}
             </Text>
           </Box>
         ) : null;

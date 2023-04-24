@@ -4,15 +4,19 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
+  ModalHeader,
   ModalOverlay,
+  Select,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
+import { useState } from 'react';
 
-export default function SpellLevelModal({ spell }) {
+export default function SpellLevelModal({ spell, higherLevel, damage }) {
   const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
   const { characterInfo } = useCharacter();
+  const [slotLevel, setSlotLevel] = useState('');
   const toast = useToast();
   const { cast } = useSpell();
   const handleCast = async (charId, slotLevel) => {
@@ -34,12 +38,32 @@ export default function SpellLevelModal({ spell }) {
       {spell.concentration && <Button onClick={onOpen}>Cast Anyway</Button>} */}
       <Button onClick={onOpen}>Cast with a spell slot</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
+        <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
-          {/* <ModalHeader>Modal Title</ModalHeader> */}
+          <ModalHeader>What level would you like to cast {spell.name} at?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Button onClick={() => handleCast(characterInfo.id, spell.level)}>Continue</Button>
+            <Select
+              value={slotLevel}
+              placeholder="Choose One"
+              onChange={(e) => setSlotLevel(e.target.value)}
+            >
+              {[...Array(9)].map((_, i) => {
+                const number = i + 1;
+                const spellsAvailableAtSlotLevel = characterInfo[`level${number}SpellSlots`];
+
+                if (spell.level <= number) {
+                  return (
+                    spellsAvailableAtSlotLevel && (
+                      <option key={`key-${i}`} value={number}>
+                        {number}
+                      </option>
+                    )
+                  );
+                }
+              })}
+            </Select>
+            <Button onClick={() => handleCast(characterInfo.id, slotLevel)}>Continue</Button>
           </ModalBody>
 
           {/* <ModalFooter>

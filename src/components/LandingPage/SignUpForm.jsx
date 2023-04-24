@@ -54,7 +54,7 @@ export default function SignInForm() {
             Create an Account
           </Heading>
           <Heading fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}>
-            (Don&apos;t worry you can add more chatacters later)
+            (Don&apos;t worry you can add/edit more characters later)
           </Heading>
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
@@ -71,10 +71,9 @@ export default function SignInForm() {
               }}
               validationSchema={SignupSchema}
               onSubmit={async (values, actions) => {
-                //TODO look into making two separate values variables?  Right now values has all user and character info
-                console.log({ values });
                 await signUp(values);
                 //TODO this is creating a character in the db but not setting it to the current character
+                console.log({ values });
                 await Character.createCharacter(values);
                 navigate('/all-spells');
                 actions.setSubmitting(false);

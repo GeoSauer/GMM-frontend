@@ -16,7 +16,7 @@ export default function SpellDisplay() {
     loading,
   } = useSpellDetails();
   const location = useLocation();
-  console.log({ knownSpellDetails });
+
   return (
     <>
       <SpellSlots />

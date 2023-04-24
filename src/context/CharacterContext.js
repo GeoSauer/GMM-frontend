@@ -16,15 +16,16 @@ export default function CharacterProvider({ children }) {
     if (userInfo.id) {
       const fetchCharacters = async () => {
         const characters = await Character.getAllCharacters();
+        console.log({ characters });
         setCharacterList(characters);
         setLoading(false);
       };
       fetchCharacters();
     }
-  }, [currentCharacter, setLoading, userInfo]);
+  }, [setLoading, userInfo]);
 
   useEffect(() => {
-    if (characterList[0]) {
+    if (currentCharacter) {
       const fetchCharacter = async () => {
         const character = await Character.getCharacterById(currentCharacter);
         setCharacterInfo(character);

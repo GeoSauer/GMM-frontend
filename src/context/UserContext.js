@@ -11,6 +11,7 @@ import {
 } from '../services/auth.js';
 
 import { getUserById } from '../services/users';
+import { useCharacter } from './CharacterContext';
 
 const UserContext = createContext();
 
@@ -84,6 +85,7 @@ export function useUser() {
 export function useAuth() {
   const [error, setError] = useState(null);
   const { setUserState } = useContext(UserContext);
+  const { setCharacterState } = useCharacter();
   const navigate = useNavigate();
 
   const handleResponse = ({ user, error }) => {
@@ -109,6 +111,7 @@ export function useAuth() {
   const signOut = async () => {
     const response = await signOutUser();
     setUserState(null);
+    setCharacterState(null);
     handleResponse(response);
   };
 

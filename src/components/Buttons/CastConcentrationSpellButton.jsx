@@ -41,7 +41,7 @@ export default function CastConcentrationSpellButton({ spell }) {
 
   return (
     <>
-      <Button onClick={onOpen}>Cast</Button>
+      {/* <Button onClick={onOpen}>Cast</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
@@ -54,8 +54,8 @@ export default function CastConcentrationSpellButton({ spell }) {
             <SpellLevelModal spell={spell} />
           </ModalBody>
         </ModalContent>
-      </Modal>
-      {/* <Popover>
+      </Modal> */}
+      <Popover>
         <PopoverTrigger>
           <Button>Cast</Button>
         </PopoverTrigger>
@@ -63,7 +63,7 @@ export default function CastConcentrationSpellButton({ spell }) {
           <PopoverContent>
             <PopoverArrow />
             <PopoverHeader>
-              Warning! Casting this spell will end the effects of any spell you are already
+              Warning! Casting {spell.name} will end the effects of any spell you are already
               concentrating on!
             </PopoverHeader>
             <PopoverCloseButton />
@@ -72,7 +72,7 @@ export default function CastConcentrationSpellButton({ spell }) {
             </PopoverBody>
           </PopoverContent>
         </Portal>
-      </Popover> */}
+      </Popover>
     </>
   );
 }

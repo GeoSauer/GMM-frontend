@@ -109,41 +109,6 @@ export default function CharacterCard(character) {
             >
               Set Active
             </Button>
-            <Button
-              w={'fit'}
-              mt={8}
-              bg={'gray.900'}
-              color={'white'}
-              rounded={'md'}
-              _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-              onClick={onOpen}
-            >
-              Edit
-            </Button>
-            <Drawer
-              isOpen={isOpen}
-              placement="right"
-              initialFocusRef={firstField}
-              onClose={onClose}
-            >
-              <DrawerOverlay backdropFilter="blur(5px)" />
-              <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader borderBottomWidth="1px">Edit {character.charName}</DrawerHeader>
-                <DrawerBody>
-                  <EditCharacterForm />
-                </DrawerBody>
-
-                {/* <DrawerFooter>
-                  <Button type="submit" form="my-form">
-                    Save
-                  </Button>
-                </DrawerFooter> */}
-              </DrawerContent>
-            </Drawer>
 
             <Popover>
               <PopoverTrigger>

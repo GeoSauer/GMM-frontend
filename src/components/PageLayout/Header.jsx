@@ -1,6 +1,3 @@
-import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../context/UserContext';
-import UserInfo from './UserInfo';
 import {
   Box,
   Flex,
@@ -16,22 +13,14 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
-  ModalHeader,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { useCharacter } from '../../context/CharacterContext';
-import { useRef } from 'react';
+import { NavLink } from 'react-router-dom';
+import UserInfo from './UserInfo';
 import SignOutButton from '../Buttons/SignOutButton';
 
 export default function Header() {
-  const { handleSignOut } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = useRef();
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>

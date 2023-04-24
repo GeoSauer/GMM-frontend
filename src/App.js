@@ -8,16 +8,16 @@ import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
-//? make a Buttons folder with custom button components to slim things down
 //? have character set on signup/create
 //? have drawer close on submit/delete on edit/create/delete character
-//? make the edit button correspond to the correct character
 //? make a demo button on landing page that logs in a dummy account
 //? make a short/long rest button
 //? consolidate signin credentials to one input
 //? consider refactoring a number of pages to slim routes down and create better flow
 //? refactor auth.jsx into layout.jsx?
-//?add error handling to toasts on spell buttons
+//?add error handling to toasts on spell buttons, and literally everywhere else
+//? add truncating to long user/character names
+// {username.length > 20 ? username.slice(0, 20) + '...' : username}
 function App() {
   return (
     <Routes>
