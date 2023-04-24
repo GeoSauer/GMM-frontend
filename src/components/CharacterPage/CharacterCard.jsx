@@ -51,7 +51,7 @@ export default function CharacterCard(character) {
 
   const handleDelete = async () => {
     await Character.deleteCharacter(character.id);
-    onClose;
+    onClose();
   };
 
   return (

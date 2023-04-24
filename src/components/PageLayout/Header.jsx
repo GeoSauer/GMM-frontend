@@ -18,6 +18,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
 import UserInfo from './UserInfo';
 import SignOutButton from '../Buttons/SignOutButton';
+import LongRestButton from '../Buttons/LongRestButton';
 
 export default function Header() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,6 +45,7 @@ export default function Header() {
             <NavLink to="all-spells" alt="all" title="All Spells">
               All Spells
             </NavLink>
+            <LongRestButton />
           </HStack>
         </HStack>
         <Flex alignItems={'center'}>
@@ -80,6 +82,27 @@ export default function Header() {
       </Flex>
 
       {isOpen ? (
+        // <Menu>
+        //   <MenuList alignContent={'center'}>
+        //     <MenuItem>
+        //       <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
+        //         Prepared Spells
+        //       </NavLink>
+        //     </MenuItem>
+        //     <MenuItem>
+        //       <NavLink to="known-spells" alt="known" title="Known Spells">
+        //         Known Spells
+        //       </NavLink>
+        //     </MenuItem>
+        //     <MenuItem>
+        //       <NavLink to="all-spells" alt="all" title="All Spells">
+        //         All Spells
+        //       </NavLink>
+        //     </MenuItem>
+        //     <MenuDivider />
+        //     <LongRestButton />
+        //   </MenuList>
+        // </Menu>
         <Box pb={4} display={{ md: 'none' }}>
           <Stack as={'nav'} spacing={4}>
             <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
@@ -91,6 +114,7 @@ export default function Header() {
             <NavLink to="all-spells" alt="all" title="All Spells">
               All Spells
             </NavLink>
+            <LongRestButton />
           </Stack>
         </Box>
       ) : null}
