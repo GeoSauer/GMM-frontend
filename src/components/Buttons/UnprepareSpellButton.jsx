@@ -24,7 +24,7 @@ export default function UnprepareSpellButton({ spell }) {
     toast({
       title: `${spell.name} un-prepared!`,
       status: 'success',
-      duration: 1500,
+      duration: 2000,
       isClosable: true,
     });
   };

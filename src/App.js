@@ -20,6 +20,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? Cantrips are auto prepared, so that's gotta happen
 //? Cantrips also probable just cast like rituals?
 //? sections for spell levels
+//? when ^ is done remove level from spell card
 //! add validation to slotLevel so you can't cast at choose one
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components

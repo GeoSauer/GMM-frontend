@@ -24,7 +24,7 @@ export default function ForgetSpellButton({ spell }) {
     toast({
       title: `${spell.name} forgotten!`,
       status: 'success',
-      duration: 1500,
+      duration: 2000,
       isClosable: true,
     });
   };

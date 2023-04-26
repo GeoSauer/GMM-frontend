@@ -21,8 +21,10 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useState } from 'react';
+
+import { useCharacter, useSpell } from '../../context/CharacterContext';
+import { getSuffix } from '../../utils/utils';
 import { Spells } from '../../services/Spells';
 
 export default function SpellLevelModal({ spell }) {
@@ -40,14 +42,16 @@ export default function SpellLevelModal({ spell }) {
   };
 
   const handleCast = async (charId, slotLevel) => {
+    const suffix = getSuffix(slotLevel);
     if (spell.level > 0) {
       await cast(charId, slotLevel);
     }
     onClose();
     toast({
-      title: `${spell.name} cast!`,
+      title: `${spell.name} cast at ${slotLevel}
+      ${suffix}-Level!`,
       status: 'success',
-      duration: 1500,
+      duration: 2000,
       isClosable: true,
     });
   };
