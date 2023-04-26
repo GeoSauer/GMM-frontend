@@ -38,8 +38,6 @@ export default function SpellLevelModal({ spell }) {
     setSpellDetails(details);
     onOpen();
   };
-  //!fsdsgdfgdfgdhdghdh
-  console.log(spellDetails.higherLevel);
 
   const handleCast = async (charId, slotLevel) => {
     if (spell.level > 0) {

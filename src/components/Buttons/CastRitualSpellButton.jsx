@@ -27,29 +27,27 @@ export default function CastRitualSpellButton({ spell }) {
   };
 
   return (
-    <>
-      <Popover initialFocusRef={initRef}>
-        {({ isOpen, onClose }) => (
-          <>
-            <PopoverTrigger>
-              <Button>Cast</Button>
-            </PopoverTrigger>
-            <Portal>
-              <PopoverContent>
-                <PopoverArrow />
-                <PopoverHeader>How would you like to cast {spell.name}?</PopoverHeader>
-                <PopoverCloseButton />
-                <PopoverBody>
-                  <Button ref={initRef} onClick={() => handleRitual(onClose)}>
-                    As a ritual
-                  </Button>
-                  <SpellLevelModal spell={spell} />
-                </PopoverBody>
-              </PopoverContent>
-            </Portal>
-          </>
-        )}
-      </Popover>
-    </>
+    <Popover initialFocusRef={initRef}>
+      {({ onClose }) => (
+        <>
+          <PopoverTrigger>
+            <Button>Cast</Button>
+          </PopoverTrigger>
+          <Portal>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverHeader>How would you like to cast {spell.name}?</PopoverHeader>
+              <PopoverCloseButton />
+              <PopoverBody>
+                <Button ref={initRef} onClick={() => handleRitual(onClose)}>
+                  As a ritual
+                </Button>
+                <SpellLevelModal spell={spell} />
+              </PopoverBody>
+            </PopoverContent>
+          </Portal>
+        </>
+      )}
+    </Popover>
   );
 }

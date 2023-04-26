@@ -9,20 +9,22 @@ import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
 //? make a demo button on landing page that logs in a dummy account
-//? make a short/long rest button
+//? make a short rest button?
 //? consolidate signin credentials to one input
 //? consider refactoring a number of pages to slim routes down and create better flow
 //? refactor auth.jsx into layout.jsx?
 //?add error handling to toasts on spell buttons, and literally everywhere else
 //? add truncating to long user/character names
 // {username.length > 20 ? username.slice(0, 20) + '...' : username}
-//?add messages when known/prepared spells === 0
 //? add light/dark/themes modes to settings
 //? Cantrips are auto prepared, so that's gotta happen
 //? Cantrips also probable just cast like rituals?
 //? sections for spell levels
-//? add validation to slotLevel so you can't cast at choose one
+//! add validation to slotLevel so you can't cast at choose one
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
+//? consider making some spellDetail (and SpellLevelModal) bits into components
+//? add a wishlist to ALL, favorites to KNOWN
+//? add search/filters to ALL
 function App() {
   return (
     <Routes>

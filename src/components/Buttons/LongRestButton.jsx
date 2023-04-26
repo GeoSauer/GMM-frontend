@@ -24,28 +24,26 @@ export default function LongRestButton() {
     onClose();
   };
   return (
-    <>
-      <Popover initialFocusRef={initRef}>
-        {({ onClose }) => (
-          <>
-            <PopoverTrigger>
-              <Button onClick={onOpen}>Long Rest</Button>
-            </PopoverTrigger>
-            <Portal>
-              <PopoverContent>
-                <PopoverArrow />
-                <PopoverHeader>Are you sure you want to take a long rest?</PopoverHeader>
-                <PopoverCloseButton />
-                <PopoverBody>
-                  <Button ref={initRef} onClick={() => handleLongRest(onClose)}>
-                    LFG
-                  </Button>
-                </PopoverBody>
-              </PopoverContent>
-            </Portal>
-          </>
-        )}
-      </Popover>
-    </>
+    <Popover initialFocusRef={initRef}>
+      {({ onClose }) => (
+        <>
+          <PopoverTrigger>
+            <Button onClick={onOpen}>Long Rest</Button>
+          </PopoverTrigger>
+          <Portal>
+            <PopoverContent>
+              <PopoverArrow />
+              <PopoverHeader>Are you sure you want to take a long rest?</PopoverHeader>
+              <PopoverCloseButton />
+              <PopoverBody>
+                <Button ref={initRef} onClick={() => handleLongRest(onClose)}>
+                  Yes please! So tired!
+                </Button>
+              </PopoverBody>
+            </PopoverContent>
+          </Portal>
+        </>
+      )}
+    </Popover>
   );
 }
