@@ -16,7 +16,6 @@ export default function CharacterProvider({ children }) {
     if (userInfo.id) {
       const fetchCharacters = async () => {
         const characters = await Character.getAllCharacters();
-        console.log({ characters });
         setCharacterList(characters);
         setLoading(false);
       };

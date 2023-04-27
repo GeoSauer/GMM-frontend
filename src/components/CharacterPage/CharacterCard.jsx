@@ -34,19 +34,15 @@ import EditCharacterForm from './EditCharacterForm';
 
 export default function CharacterCard(character) {
   const localCharacter = getLocalCharacter();
-  const { setCharacterState, characterList } = useCharacter();
+  const { setCharacterState, characterList, setCharacterList } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
   const handleCharacterChange = () => {
     setCharacterState(character.id);
-    //TODO so this returns the array in the order I want but doesn't reorder the character cards on the page
-    characterList.unshift(
-      characterList.splice(
-        characterList.findIndex((char) => char.id === character.id),
-        1
-      )[0]
-    );
-    // console.log({ characterList });
+    const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
+    const currentCharacter = characterList.splice(currentCharacterIndex, 1)[0];
+    characterList.unshift(currentCharacter);
+    setCharacterList(characterList);
   };
 
   const handleDelete = async () => {

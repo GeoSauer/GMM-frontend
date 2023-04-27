@@ -42,18 +42,28 @@ export default function SpellLevelModal({ spell }) {
   };
 
   const handleCast = async (charId, slotLevel) => {
-    const suffix = getSuffix(slotLevel);
-    if (spell.level > 0) {
-      await cast(charId, slotLevel);
-    }
-    onClose();
-    toast({
-      title: `${spell.name} cast at ${slotLevel}
+    if (slotLevel) {
+      const suffix = getSuffix(slotLevel);
+      if (spell.level > 0) {
+        await cast(charId, slotLevel);
+      }
+      onClose();
+      toast({
+        title: `${spell.name} cast at ${slotLevel}
       ${suffix}-Level!`,
-      status: 'success',
-      duration: 2000,
-      isClosable: true,
-    });
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
+      //TODO I don't love this method, but don't want to make it a form just for Yup
+    } else {
+      toast({
+        title: 'Please choose a level!',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+    }
   };
   return (
     <>
