@@ -6,11 +6,9 @@ import {
   HStack,
   Text,
   useDisclosure,
-  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
-import { getSuffix } from '../../utils/utils';
 import SpellDetail from './SpellDetail';
 import CastConcentrationSpellButton from '../Buttons/CastConcentrationSpellButton';
 import LearnSpellButton from '../Buttons/LearnSpellButton';
@@ -19,10 +17,10 @@ import UnprepareSpellButton from '../Buttons/UnprepareSpellButton';
 import ForgetSpellButton from '../Buttons/ForgetSpellButton';
 import CastRitualSpellButton from '../Buttons/CastRitualSpellButton';
 import CastSpellButton from '../Buttons/CastSpellButton';
+import CastCantripButton from '../Buttons/CastCantripButton';
 
 export default function SpellCard({ spellDetails, spell }) {
   const { isOpen, onToggle } = useDisclosure();
-  const suffix = getSuffix(spell.level);
   const location = useLocation();
 
   return (
@@ -44,9 +42,10 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/known-spells' && <ForgetSpellButton spell={spell} />}
 
           {location.pathname === '/prepared-spells' && <UnprepareSpellButton spell={spell} />}
-          {/* {location.pathname === '/prepared-spells' && (
-            <Button onClick={() => handleCast(characterInfo.id, level)}>Cast</Button>
-          )} */}
+
+          {location.pathname === '/prepared-spells' && spell.level === 0 ? (
+            <CastCantripButton spell={spell} />
+          ) : null}
           {location.pathname === '/prepared-spells' && spellDetails.ritual ? (
             <CastRitualSpellButton spell={spell} />
           ) : null}
@@ -57,9 +56,7 @@ export default function SpellCard({ spellDetails, spell }) {
           !spellDetails.concentration &&
           !spellDetails.ritual ? (
             <CastSpellButton spell={spell} />
-          ) : // <SpellLevelModal spell={spell} />
-          // <Button onClick={() => handleCast(characterInfo.id, 2)}>Cast</Button>
-          null}
+          ) : null}
         </VStack>
       </HStack>
       <Collapse in={isOpen} animateOpacity>

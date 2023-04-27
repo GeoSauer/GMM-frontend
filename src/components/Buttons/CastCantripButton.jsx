@@ -1,5 +1,6 @@
 import {
   Button,
+  useToast,
   Popover,
   PopoverTrigger,
   Portal,
@@ -8,24 +9,17 @@ import {
   PopoverHeader,
   PopoverCloseButton,
   PopoverBody,
-  useDisclosure,
-  useToast,
 } from '@chakra-ui/react';
-import { useCharacter } from '../../context/CharacterContext';
-import { Character } from '../../services/Characters';
+import SpellLevelModal from '../Modals/SpellLevelModal';
 import { useRef } from 'react';
 
-export default function LongRestButton() {
+export default function CastCantripButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
-  const { onOpen } = useDisclosure();
-  const { characterInfo } = useCharacter();
-
-  const handleLongRest = async (onClose) => {
-    await Character.updateCharacterInfo(characterInfo);
+  const handleCantrip = (onClose) => {
     onClose();
     toast({
-      title: 'Spell Slots Replenished!',
+      title: `${spell.name} cast!`,
       status: 'success',
       duration: 2000,
       isClosable: true,
@@ -37,16 +31,16 @@ export default function LongRestButton() {
       {({ onClose }) => (
         <>
           <PopoverTrigger>
-            <Button onClick={onOpen}>Long Rest</Button>
+            <Button>Cast</Button>
           </PopoverTrigger>
           <Portal>
             <PopoverContent>
               <PopoverArrow />
-              <PopoverHeader>Are you sure you want to take a long rest?</PopoverHeader>
+              <PopoverHeader>Are you sure you want to cast {spell.name}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button ref={initRef} onClick={() => handleLongRest(onClose)}>
-                  Yes please! So tired!
+                <Button ref={initRef} onClick={() => handleCantrip(onClose)}>
+                  Cast
                 </Button>
               </PopoverBody>
             </PopoverContent>
