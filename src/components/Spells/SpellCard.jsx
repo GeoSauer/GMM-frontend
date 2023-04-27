@@ -41,22 +41,23 @@ export default function SpellCard({ spellDetails, spell }) {
 
           {location.pathname === '/known-spells' && <ForgetSpellButton spell={spell} />}
 
-          {location.pathname === '/prepared-spells' && <UnprepareSpellButton spell={spell} />}
-
-          {location.pathname === '/prepared-spells' && spell.level === 0 ? (
+          {location.pathname === '/prepared-spells' && spell.level === 0 && (
             <CastCantripButton spell={spell} />
-          ) : null}
-          {location.pathname === '/prepared-spells' && spellDetails.ritual ? (
+          )}
+          {location.pathname === '/prepared-spells' && spellDetails.ritual && (
             <CastRitualSpellButton spell={spell} />
-          ) : null}
-          {location.pathname === '/prepared-spells' && spellDetails.concentration ? (
+          )}
+          {location.pathname === '/prepared-spells' && spellDetails.concentration && (
             <CastConcentrationSpellButton spell={spell} spellDetails={spellDetails} />
-          ) : null}
+          )}
           {location.pathname === '/prepared-spells' &&
-          !spellDetails.concentration &&
-          !spellDetails.ritual ? (
-            <CastSpellButton spell={spell} />
-          ) : null}
+            !spellDetails.concentration &&
+            !spellDetails.ritual &&
+            spell.level > 0 && <CastSpellButton spell={spell} />}
+
+          {location.pathname === '/prepared-spells' && spell.level > 0 && (
+            <UnprepareSpellButton spell={spell} />
+          )}
         </VStack>
       </HStack>
       <Collapse in={isOpen} animateOpacity>

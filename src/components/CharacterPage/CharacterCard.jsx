@@ -37,6 +37,10 @@ export default function CharacterCard(character) {
   const { setCharacterState, characterList, setCharacterList } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
+
+  const truncatedCharacterName =
+    character.charName.length > 20 ? character.charName.slice(0, 20) + '...' : character.charName;
+
   const handleCharacterChange = () => {
     setCharacterState(character.id);
     const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
@@ -82,7 +86,7 @@ export default function CharacterCard(character) {
       <Box p={6}>
         <Stack spacing={0} align={'center'} mb={5}>
           <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
-            {character.charName}
+            {truncatedCharacterName}
           </Heading>
           <Text color={'gray.500'}>
             Level: {character.charLvl} {character.charClass}
@@ -125,7 +129,7 @@ export default function CharacterCard(character) {
               <Portal>
                 <PopoverContent>
                   <PopoverArrow />
-                  <PopoverHeader>Sure you wanna delete {character.charName}?</PopoverHeader>
+                  <PopoverHeader>Sure you wanna delete {truncatedCharacterName}?</PopoverHeader>
                   <PopoverCloseButton />
                   <PopoverBody alignSelf={'center'}>
                     <Button
@@ -167,7 +171,7 @@ export default function CharacterCard(character) {
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
               <ModalOverlay backdropFilter="blur(5px)" />
               <ModalContent>
-                <ModalHeader>Editing {character.charName}</ModalHeader>
+                <ModalHeader>Editing {truncatedCharacterName}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
                   <EditCharacterForm onClose={onClose} />

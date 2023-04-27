@@ -18,15 +18,15 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 // {username.length > 20 ? username.slice(0, 20) + '...' : username}
 //? add light/dark/themes modes to settings
 //? Cantrips are auto prepared, so that's gotta happen
-//? Cantrips also probable just cast like rituals?
 
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
-//? add a wishlist to ALL, favorites to KNOWN
-//? add search/filters to ALL
+//* add a wishlist to ALL, favorites to KNOWN
+//* add search/filters to ALL
 //? if a character is edited to a lower level make them forget spells they no longer have access to
 //? if a character is edited to go up a level, confetti???
-//? add a long rest toast
+//! signing in with an email, borked???
+//! save dc and attack bonus display
 function App() {
   return (
     <Routes>

@@ -1,17 +1,30 @@
-import { MenuDivider } from '@chakra-ui/react';
+import { MenuDivider, Text } from '@chakra-ui/react';
 import { useCharacter } from '../../context/CharacterContext';
 import { useUser } from '../../context/UserContext';
 
 export default function UserInfo() {
-  const { userInfo } = useUser();
+  const { userInfo, loading } = useUser();
   const { characterInfo } = useCharacter();
+
   return (
-    <div className="info">
-      <p>{userInfo.username}</p>
-      <MenuDivider />
-      <p>{characterInfo.charName}</p>
-      <p>{characterInfo.charClass}</p>
-      {characterInfo.charLvl && <p>Level: {characterInfo.charLvl}</p>}
-    </div>
+    <>
+      {!loading && (
+        <>
+          <Text>
+            {userInfo.username.length > 20
+              ? userInfo.username.slice(0, 20) + '...'
+              : userInfo.username}
+          </Text>
+          <MenuDivider />
+          <Text>
+            {characterInfo.charName.length > 20
+              ? characterInfo.charName.slice(0, 20) + '...'
+              : characterInfo.charName}
+          </Text>
+          <Text>{characterInfo.charClass}</Text>
+          <Text>Level: {characterInfo.charLvl}</Text>
+        </>
+      )}
+    </>
   );
 }

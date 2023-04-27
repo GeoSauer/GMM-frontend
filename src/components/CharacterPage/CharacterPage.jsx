@@ -41,7 +41,13 @@ export default function CharacterPage() {
 
       {location.pathname === '/choose-character' && !loading && (
         <>
-          <Heading>Welcome {userInfo.username}!</Heading>
+          <Heading>
+            Welcome
+            {userInfo.username.length > 20
+              ? userInfo.username.slice(0, 20) + '...'
+              : userInfo.username}
+            !
+          </Heading>
           <Heading>Which Character Are You Playing Today?</Heading>
           {characterList.map((character) => {
             return <ChooseCharacterCard key={character.id} {...character} />;

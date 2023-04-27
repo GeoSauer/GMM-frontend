@@ -9,14 +9,11 @@ import {
   Stack,
   Button,
   useColorModeValue,
-  Select,
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
-import { useUser, useUserInfo } from '../../context/UserContext';
-import { useCharacter } from '../../context/CharacterContext';
-import { Character } from '../../services/Characters';
+import { useUser } from '../../context/UserContext';
 import { updateUserInfo } from '../../services/users';
 
 export default function SettingsPage() {
