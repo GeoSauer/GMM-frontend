@@ -19,8 +19,6 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? add light/dark/themes modes to settings
 //? Cantrips are auto prepared, so that's gotta happen
 //? Cantrips also probable just cast like rituals?
-//? sections for spell levels
-//? when ^ is done remove level from spell card
 
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
@@ -28,6 +26,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? add search/filters to ALL
 //? if a character is edited to a lower level make them forget spells they no longer have access to
 //? if a character is edited to go up a level, confetti???
+//? add a long rest toast
 function App() {
   return (
     <Routes>

@@ -30,12 +30,7 @@ export default function SpellCard({ spellDetails, spell }) {
       <HStack>
         <Button onClick={onToggle} display={'block'} w={'sm'} h={'20'} p={'2'} mt={'2'}>
           <Heading size="md">{spell.name}</Heading>
-          <Text>
-            {spell.level > 0
-              ? `${spell.level}
-            ${suffix}-Level ${spell.school}`
-              : `${spell.school} Cantrip`}
-          </Text>
+          <Text>{spell.school}</Text>
         </Button>
         <VStack>
           {location.pathname === '/all-spells' && !spell.known && (
