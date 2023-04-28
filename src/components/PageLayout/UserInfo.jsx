@@ -8,7 +8,7 @@ export default function UserInfo() {
 
   return (
     <>
-      {!loading && (
+      {!loading && userInfo.username && characterInfo.charName && (
         <>
           <Text>
             {userInfo.username.length > 20

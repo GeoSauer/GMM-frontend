@@ -6,16 +6,17 @@ import SpellSlots from '../PageLayout/SpellSlots';
 import SpellCard from '../Spells/SpellCard';
 
 export default function SpellDisplay() {
-  const {
-    allSpells,
-    allSpellDetails,
-    knownSpells,
-    knownSpellDetails,
-    preparedSpells,
-    preparedSpellDetails,
-    loading,
-  } = useSpellDetails();
+  const { allSpells, allSpellDetails, knownSpells, preparedSpells, loading } = useSpellDetails();
   const location = useLocation();
+
+  const findSpellDetails = (spellName) => {
+    if (!loading) {
+      const spellDetails = allSpellDetails.find((spell) => spell.name === spellName);
+      return spellDetails;
+    } else {
+      return {};
+    }
+  };
 
   return (
     <>
@@ -28,26 +29,24 @@ export default function SpellDisplay() {
       <Flex direction={'column'} alignItems={'center'}>
         {location.pathname === '/prepared-spells' && !loading && (
           <>
-            {preparedSpells
-              .sort((a, b) => a.level - b.level)
-              .map((spell, index) => {
-                const previousSpell = preparedSpells[index - 1];
-                if (spell.level !== previousSpell?.level) {
-                  return (
-                    <Flex key={index} direction={'column'} alignItems={'center'}>
-                      {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                      <SpellCard spellDetails={preparedSpellDetails[index]} spell={spell} />
-                    </Flex>
-                  );
-                }
+            {preparedSpells.map((spell, index) => {
+              const previousSpell = preparedSpells[index - 1];
+              if (spell.level !== previousSpell?.level) {
                 return (
-                  <SpellCard
-                    key={spell.name}
-                    spellDetails={preparedSpellDetails[index]}
-                    spell={spell}
-                  />
+                  <Flex key={index} direction={'column'} alignItems={'center'}>
+                    {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+                    <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                  </Flex>
                 );
-              })}
+              }
+              return (
+                <SpellCard
+                  key={spell.name}
+                  spellDetails={findSpellDetails(spell.name)}
+                  spell={spell}
+                />
+              );
+            })}
           </>
         )}
 
@@ -56,47 +55,47 @@ export default function SpellDisplay() {
         )}
         {location.pathname === '/known-spells' && !loading && (
           <>
-            {knownSpells
-              .sort((a, b) => a.level - b.level)
-              .map((spell, index) => {
-                const previousSpell = knownSpells[index - 1];
-                if (spell.level !== previousSpell?.level) {
-                  return (
-                    <Flex key={index} direction={'column'} alignItems={'center'}>
-                      {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                      <SpellCard spellDetails={knownSpellDetails[index]} spell={spell} />
-                    </Flex>
-                  );
-                }
+            {knownSpells.map((spell, index) => {
+              const previousSpell = knownSpells[index - 1];
+              if (spell.level !== previousSpell?.level) {
                 return (
-                  <SpellCard
-                    key={spell.name}
-                    spellDetails={knownSpellDetails[index]}
-                    spell={spell}
-                  />
+                  <Flex key={index} direction={'column'} alignItems={'center'}>
+                    {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+                    <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                  </Flex>
                 );
-              })}
+              }
+              return (
+                <SpellCard
+                  key={spell.name}
+                  spellDetails={findSpellDetails(spell.name)}
+                  spell={spell}
+                />
+              );
+            })}
           </>
         )}
 
         {location.pathname === '/all-spells' && !loading && (
           <>
-            {allSpells
-              .sort((a, b) => a.level - b.level)
-              .map((spell, index) => {
-                const previousSpell = allSpells[index - 1];
-                if (spell.level !== previousSpell?.level) {
-                  return (
-                    <Flex key={index} direction={'column'} alignItems={'center'}>
-                      {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                      <SpellCard spellDetails={allSpellDetails[index]} spell={spell} />
-                    </Flex>
-                  );
-                }
+            {allSpells.map((spell, index) => {
+              const previousSpell = allSpells[index - 1];
+              if (spell.level !== previousSpell?.level) {
                 return (
-                  <SpellCard key={spell.name} spellDetails={allSpellDetails[index]} spell={spell} />
+                  <Flex key={index} direction={'column'} alignItems={'center'}>
+                    {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+                    <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                  </Flex>
                 );
-              })}
+              }
+              return (
+                <SpellCard
+                  key={spell.name}
+                  spellDetails={findSpellDetails(spell.name)}
+                  spell={spell}
+                />
+              );
+            })}
           </>
         )}
       </Flex>

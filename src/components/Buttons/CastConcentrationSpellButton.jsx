@@ -1,10 +1,5 @@
 import {
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -13,14 +8,10 @@ import {
   PopoverHeader,
   PopoverTrigger,
   Portal,
-  useDisclosure,
-  useToast,
-  ModalHeader,
 } from '@chakra-ui/react';
-import { useCharacter, useSpell } from '../../context/CharacterContext';
 import SpellLevelModal from '../Modals/SpellLevelModal';
 
-export default function CastConcentrationSpellButton({ spell }) {
+export default function CastConcentrationSpellButton({ spell, spellDetails }) {
   return (
     <Popover>
       <PopoverTrigger>
@@ -35,7 +26,7 @@ export default function CastConcentrationSpellButton({ spell }) {
           </PopoverHeader>
           <PopoverCloseButton />
           <PopoverBody>
-            <SpellLevelModal spell={spell} />
+            <SpellLevelModal spell={spell} spellDetails={spellDetails} />
           </PopoverBody>
         </PopoverContent>
       </Portal>

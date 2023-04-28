@@ -9,8 +9,6 @@ export default function SpellProvider({ children }) {
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [allSpellDetails, setAllSpellDetails] = useState([]);
-  const [knownSpellDetails, setKnownSpellDetails] = useState([]);
-  const [preparedSpellDetails, setPreparedSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const { characterInfo } = useCharacter();
 
@@ -27,18 +25,10 @@ export default function SpellProvider({ children }) {
             return await Spells.getSpellDetails(spell.id);
           })
         );
-        const filteredKnownSpellDetails = fetchedSpellDetails.filter((spell) => {
-          return fetchedKnownSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
-        });
-        const filteredPreparedSellDetails = fetchedSpellDetails.filter((spell) => {
-          return fetchedPreparedSpells.some((fetchedSpell) => fetchedSpell.index === spell.index);
-        });
         setAllSpells(fetchedSpells);
         setAllSpellDetails(fetchedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
-        setKnownSpellDetails(filteredKnownSpellDetails);
         setPreparedSpells(fetchedPreparedSpells);
-        setPreparedSpellDetails(filteredPreparedSellDetails);
         setLoading(false);
       };
       fetchSpellsAndDetails();
@@ -54,10 +44,6 @@ export default function SpellProvider({ children }) {
     setPreparedSpells,
     allSpellDetails,
     setAllSpellDetails,
-    knownSpellDetails,
-    setKnownSpellDetails,
-    preparedSpellDetails,
-    setPreparedSpellDetails,
     loading,
     setLoading,
   };

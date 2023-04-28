@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import SpellLevelModal from '../Modals/SpellLevelModal';
 
-export default function CastSpellButton({ spell }) {
+export default function CastSpellButton({ spell, spellDetails }) {
   return (
     <>
       <Popover>
@@ -24,7 +24,7 @@ export default function CastSpellButton({ spell }) {
             <PopoverHeader>Are you sure you want to cast {spell.name}?</PopoverHeader>
             <PopoverCloseButton />
             <PopoverBody>
-              <SpellLevelModal spell={spell} />
+              <SpellLevelModal spell={spell} spellDetails={spellDetails} />
             </PopoverBody>
           </PopoverContent>
         </Portal>

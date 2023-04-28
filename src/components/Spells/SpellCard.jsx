@@ -38,7 +38,6 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
           )}
-
           {location.pathname === '/known-spells' && <ForgetSpellButton spell={spell} />}
 
           {location.pathname === '/prepared-spells' && spell.level === 0 && (
@@ -53,8 +52,7 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/prepared-spells' &&
             !spellDetails.concentration &&
             !spellDetails.ritual &&
-            spell.level > 0 && <CastSpellButton spell={spell} />}
-
+            spell.level > 0 && <CastSpellButton spell={spell} spellDetails={spellDetails} />}
           {location.pathname === '/prepared-spells' && spell.level > 0 && (
             <UnprepareSpellButton spell={spell} />
           )}

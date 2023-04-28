@@ -136,7 +136,7 @@ export default function SpellDetail({ spellDetails }) {
               </Text>
             </Box>
           )}
-          {spellDetails.damage.damageType && (
+          {spellDetails.damage?.damageType && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 {spellDetails.damage.damageAtCharacterLevel || spellDetails.damage.damageAtSlotLevel
@@ -150,7 +150,7 @@ export default function SpellDetail({ spellDetails }) {
               </Text>
             </Box>
           )}
-          {spellDetails.damage.damageAtCharacterLevel && (
+          {spellDetails.damage?.damageAtCharacterLevel && (
             <Box>
               <TableContainer>
                 <Table>
@@ -176,7 +176,7 @@ export default function SpellDetail({ spellDetails }) {
               </TableContainer>
             </Box>
           )}
-          {spellDetails.damage.damageAtSlotLevel && (
+          {spellDetails.damage?.damageAtSlotLevel && (
             <Box>
               <TableContainer>
                 <Table>
@@ -231,7 +231,7 @@ export default function SpellDetail({ spellDetails }) {
               </TableContainer>
             </Box>
           )}
-          {spellDetails.saveDc.type && (
+          {spellDetails.saveDc?.type && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Save DC
@@ -251,7 +251,7 @@ export default function SpellDetail({ spellDetails }) {
               Description
             </Heading>
             <Box>
-              {spellDetails.desc.map((paragraph, i) => {
+              {spellDetails.desc?.map((paragraph, i) => {
                 return paragraph.includes('|') ? (
                   <TableContainer key={i}>
                     <ReactMarkdown
@@ -287,7 +287,7 @@ export default function SpellDetail({ spellDetails }) {
               })}
             </Box>
           </Box>
-          {spellDetails.higherLevel[0] && (
+          {spellDetails.higherLevel?.length && (
             <Box>
               <Heading size="xs" textTransform="uppercase">
                 Higher Level

@@ -25,21 +25,13 @@ import { useState } from 'react';
 
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { getSuffix } from '../../utils/utils';
-import { Spells } from '../../services/Spells';
 
-export default function SpellLevelModal({ spell }) {
-  const { isOpen, onToggle, onOpen, onClose } = useDisclosure();
+export default function SpellLevelModal({ spell, spellDetails }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { characterInfo } = useCharacter();
   const [slotLevel, setSlotLevel] = useState('');
-  const [spellDetails, setSpellDetails] = useState([]);
   const toast = useToast();
   const { cast } = useSpell();
-
-  const handleClick = async (spellId) => {
-    const details = await Spells.getSpellDetails(spell.id);
-    setSpellDetails(details);
-    onOpen();
-  };
 
   const handleCast = async (charId, slotLevel) => {
     if (slotLevel) {
@@ -55,7 +47,6 @@ export default function SpellLevelModal({ spell }) {
         duration: 2000,
         isClosable: true,
       });
-      //TODO I don't love this method, but don't want to make it a form just for Yup
     } else {
       toast({
         title: 'Please choose a level!',
@@ -67,9 +58,7 @@ export default function SpellLevelModal({ spell }) {
   };
   return (
     <>
-      {/* {spell.ritual && <Button onClick={onOpen}>With a spell slot</Button>}
-      {spell.concentration && <Button onClick={onOpen}>Cast Anyway</Button>} */}
-      <Button onClick={() => handleClick(spell.id)}>Cast with a spell slot</Button>
+      <Button onClick={onOpen}>Cast with a spell slot</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
@@ -97,8 +86,7 @@ export default function SpellLevelModal({ spell }) {
               })}
             </Select>
             <Button onClick={() => handleCast(characterInfo.id, slotLevel)}>Continue</Button>
-            {/* //TODO figure out why this condition is showing false positives */}
-            {spellDetails.higherLevel !== [] && (
+            {spellDetails?.higherLevel.length && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Higher Level
@@ -108,18 +96,18 @@ export default function SpellLevelModal({ spell }) {
                 </Text>
               </Box>
             )}
-            {spellDetails.attackType && (
+            {spellDetails?.attackType && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Attack Type
                 </Heading>
                 <Text pt="2" fontSize="sm">
-                  +{characterInfo.attackBonus} {spellDetails.attackType}{' '}
-                  {spellDetails.damage.damageType.name} Attack
+                  +{characterInfo.attackBonus} {spellDetails?.attackType}{' '}
+                  {spellDetails?.damage.damageType.name} Attack
                 </Text>
               </Box>
             )}
-            {spellDetails.damage?.damageAtSlotLevel && (
+            {spellDetails?.damage.damageAtSlotLevel && (
               <Box>
                 <TableContainer>
                   <Table>
@@ -145,7 +133,7 @@ export default function SpellLevelModal({ spell }) {
                 </TableContainer>
               </Box>
             )}
-            {spellDetails.damage?.damageAtCharacterLevel && (
+            {spellDetails?.damage.damageAtCharacterLevel && (
               <Box>
                 <TableContainer>
                   <Table>
@@ -171,7 +159,7 @@ export default function SpellLevelModal({ spell }) {
                 </TableContainer>
               </Box>
             )}
-            {spellDetails.healAtSlotLevel && (
+            {spellDetails?.healAtSlotLevel && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Heal At Spell Slot Level
@@ -200,7 +188,7 @@ export default function SpellLevelModal({ spell }) {
                 </TableContainer>
               </Box>
             )}
-            {spellDetails.saveDc?.type && (
+            {spellDetails?.saveDc.type && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Save DC
