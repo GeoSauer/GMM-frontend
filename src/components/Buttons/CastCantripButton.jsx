@@ -40,7 +40,7 @@ export default function CastCantripButton({ spell }) {
               <PopoverCloseButton />
               <PopoverBody>
                 <Button ref={initRef} onClick={() => handleCantrip(onClose)}>
-                  Cast
+                  Yup!
                 </Button>
               </PopoverBody>
             </PopoverContent>

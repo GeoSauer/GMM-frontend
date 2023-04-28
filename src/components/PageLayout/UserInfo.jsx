@@ -23,6 +23,8 @@ export default function UserInfo() {
           </Text>
           <Text>{characterInfo.charClass}</Text>
           <Text>Level: {characterInfo.charLvl}</Text>
+          <Text>Save DC: {characterInfo.saveDC}</Text>
+          <Text>Attack Bonus: {characterInfo.attackBonus}</Text>
         </>
       )}
     </>

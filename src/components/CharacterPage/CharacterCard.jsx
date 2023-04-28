@@ -91,6 +91,8 @@ export default function CharacterCard(character) {
           <Text color={'gray.500'}>
             Level: {character.charLvl} {character.charClass}
           </Text>
+          <Text color={'gray.500'}>Save DC: {character.saveDC}</Text>
+          <Text color={'gray.500'}>Attack Bonus: {character.attackBonus}</Text>
         </Stack>
 
         {character.id !== localCharacter && (

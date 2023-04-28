@@ -14,19 +14,18 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //? consider refactoring a number of pages to slim routes down and create better flow
 //? refactor auth.jsx into layout.jsx?
 //?add error handling to toasts on spell buttons, and literally everywhere else
-//? add light/dark/themes modes to settings
-//? Cantrips are auto prepared, so that's gotta happen
 
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
+//* add light/dark/themes modes to settings
 //* add a wishlist to ALL, favorites to KNOWN
 //* add search/filters to ALL
 //? if a character is edited to a lower level make them forget spells they no longer have access to
 //? if a character is edited to go up a level, confetti???
-//! signing in with an email, borked??? but maybe not?????
 //! save dc and attack bonus display
 //* make sure test don't wipe prod db
 //! bonus spells/scrolls
+//! reaction spells
 function App() {
   return (
     <Routes>

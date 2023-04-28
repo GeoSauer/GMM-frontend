@@ -85,7 +85,19 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 }
               })}
             </Select>
-            <Button onClick={() => handleCast(characterInfo.id, slotLevel)}>Continue</Button>
+            <Button onClick={() => handleCast(characterInfo.id, slotLevel)}>Cast</Button>
+            {spellDetails?.attackType && (
+              <Box>
+                <Heading size="xs" textTransform="uppercase">
+                  Attack Type
+                </Heading>
+                <Text pt="2" fontSize="sm">
+                  {spellDetails?.attackType} spell attack, roll 1d20 + {characterInfo.attackBonus}{' '}
+                  to hit.
+                </Text>
+              </Box>
+            )}
+            {/*//! this is printing 0 on Arcane Sword */}
             {spellDetails?.higherLevel.length && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
@@ -96,17 +108,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </Text>
               </Box>
             )}
-            {spellDetails?.attackType && (
-              <Box>
-                <Heading size="xs" textTransform="uppercase">
-                  Attack Type
-                </Heading>
-                <Text pt="2" fontSize="sm">
-                  +{characterInfo.attackBonus} {spellDetails?.attackType}{' '}
-                  {spellDetails?.damage.damageType.name} Attack
-                </Text>
-              </Box>
-            )}
+            {/*//! make this not print if there's only one damage level */}
             {spellDetails?.damage.damageAtSlotLevel && (
               <Box>
                 <TableContainer>
