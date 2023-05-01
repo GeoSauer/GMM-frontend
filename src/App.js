@@ -25,6 +25,9 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //! save dc and attack bonus display
 //* make sure test don't wipe prod db
 //! bonus spells/scrolls
+//! add a bonus_spells column not affected by stats
+//! add more confirmation on learn, learn from level progression, learn from scroll, etc.
+//! when classes get bonus spells that others don't add some logic to the stat utils
 //! reaction spells
 function App() {
   return (

@@ -22,8 +22,12 @@ import {
 } from '@chakra-ui/react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import gfm from 'remark-gfm';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellDetail({ spellDetails }) {
+  const { characterInfo } = useCharacter();
+  console.log({ characterInfo });
+
   return (
     // <Accordion defaultIndex={[0]} allowMultiple>
     //   {spellDetails.castingTime && (
@@ -82,22 +86,22 @@ export default function SpellDetail({ spellDetails }) {
               <Heading size="xs" textTransform="uppercase">
                 Components
               </Heading>
-              {spellDetails.components.map((component, i) => {
+              {spellDetails.components.map((component, index) => {
                 if (component === 'V') {
                   return (
-                    <Text key={i} pt="2" fontSize="sm">
+                    <Text key={index} pt="2" fontSize="sm">
                       Verbal
                     </Text>
                   );
                 } else if (component === 'S') {
                   return (
-                    <Text key={i} pt="2" fontSize="sm">
+                    <Text key={index} pt="2" fontSize="sm">
                       Somatic
                     </Text>
                   );
                 } else if (component === 'M') {
                   return (
-                    <Text key={i} pt="2" fontSize="sm">
+                    <Text key={index} pt="2" fontSize="sm">
                       Material
                     </Text>
                   );
@@ -237,13 +241,11 @@ export default function SpellDetail({ spellDetails }) {
                 Save DC
               </Heading>
               <Text pt="2" fontSize="sm">
-                {spellDetails.saveDc.type.name}
+                DC {characterInfo.saveDC} {spellDetails.saveDc.type.name.toLowerCase()} save.
               </Text>
-              {spellDetails.saveDc.success !== 'none' && (
-                <Text pt="2" fontSize="sm">
-                  {spellDetails.saveDc.success}
-                </Text>
-              )}
+              <Text pt="2" fontSize="sm">
+                On success damage taken is {spellDetails.saveDc.success}.
+              </Text>
             </Box>
           )}
           <Box>

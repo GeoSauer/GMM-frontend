@@ -97,7 +97,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </Text>
               </Box>
             )}
-            {/*//! this is printing 0 on Arcane Sword */}
+            {/*//! this is printing 0 on Arcane Sword, and  */}
             {spellDetails?.higherLevel.length && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
@@ -135,7 +135,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </TableContainer>
               </Box>
             )}
-            {spellDetails?.damage.damageAtCharacterLevel && (
+            {/* {spellDetails?.damage.damageAtCharacterLevel && (
               <Box>
                 <TableContainer>
                   <Table>
@@ -160,7 +160,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                   </Table>
                 </TableContainer>
               </Box>
-            )}
+            )} */}
             {spellDetails?.healAtSlotLevel && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
