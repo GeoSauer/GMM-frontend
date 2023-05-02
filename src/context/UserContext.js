@@ -63,8 +63,7 @@ export default function UserProvider({ children }) {
 }
 
 export function useUser() {
-  const user = useContext(UserContext);
-  return user;
+  return useContext(UserContext);
 }
 
 // export function useUserInfo() {

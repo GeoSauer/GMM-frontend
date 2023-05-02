@@ -20,10 +20,11 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 //* add light/dark/themes modes to settings
 //* add a wishlist to ALL, favorites to KNOWN
 //* add search/filters to ALL
-//? if a character is edited to a lower level make them forget spells they no longer have access to
-//? if a character is edited to go up a level, confetti???
 //! save dc and attack bonus display
 //* make sure test don't wipe prod db
+//* should players even be able to edit class?  Right it borks everything, could make changing class reset spells/cantrips known
+//? if a character is edited to a lower level make them forget spells they no longer have access to
+//? if a character is edited to go up a level, confetti???
 //! bonus spells/scrolls
 //! add a bonus_spells column not affected by stats
 //! add more confirmation on learn, learn from level progression, learn from scroll, etc.

@@ -10,16 +10,20 @@ import {
   Portal,
   useToast,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
+import { useSpellDetails } from '../../context/SpellContext';
 
 export default function LearnSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
+  // const { knownSpells, setKnownSpells } = useSpellDetails();
   const handleLearn = async (charId, spellId, onClose) => {
     await learn(charId, spellId);
+    // const learnedSpell = await learn(charId, spellId);
+    // setKnownSpells([...knownSpells, learnedSpell]);
     onClose();
     if (error) {
       toast({

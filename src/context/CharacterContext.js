@@ -53,8 +53,7 @@ export default function CharacterProvider({ children }) {
 }
 
 export function useCharacter() {
-  const character = useContext(CharacterContext);
-  return character;
+  return useContext(CharacterContext);
 }
 
 export function useSpell() {

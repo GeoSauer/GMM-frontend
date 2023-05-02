@@ -11,7 +11,7 @@ export default function SpellProvider({ children }) {
   const [allSpellDetails, setAllSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const { characterInfo } = useCharacter();
-
+  console.log({ characterInfo });
   useEffect(() => {
     if (characterInfo.id) {
       setLoading(true);
@@ -52,6 +52,5 @@ export default function SpellProvider({ children }) {
 }
 
 export function useSpellDetails() {
-  const context = useContext(SpellContext);
-  return context;
+  return useContext(SpellContext);
 }
