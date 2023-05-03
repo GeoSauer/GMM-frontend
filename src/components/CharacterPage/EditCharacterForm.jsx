@@ -85,6 +85,24 @@ export default function EditCharacterForm({ onClose }) {
                       )}
                     </Field>
 
+                    {/* //!Just testing this out, need it to be conditional on the previous value */}
+                    {/* {characterInfo.charClass === 'Bard' && (
+                      <Field name="bardSchool">
+                        {({ field, form }) => (
+                          <FormControl>
+                            <FormLabel htmlFor="bardSchool" fontWeight={'normal'}>
+                              Bard College
+                            </FormLabel>
+                            <Select {...field} placeholder="Choose One">
+                              <option value="Bard">Lore</option>
+                              <option value="Cleric">Valor</option>
+                            </Select>
+                            <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                    )} */}
+
                     <Field name="charLvl">
                       {({ field }) => (
                         <FormControl>

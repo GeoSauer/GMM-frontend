@@ -8,28 +8,36 @@ import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
+
+//TODO V1 stuff
 //? make a demo button on landing page that logs in a dummy account
 //? make a short rest button?
 //? consolidate signin credentials to one input
 //? consider refactoring a number of pages to slim routes down and create better flow
 //? refactor auth.jsx into layout.jsx?
 //?add error handling to toasts on spell buttons, and literally everywhere else
-
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
-//* add light/dark/themes modes to settings
-//* add a wishlist to ALL, favorites to KNOWN
-//* add search/filters to ALL
 //! save dc and attack bonus display
-//* make sure test don't wipe prod db
 //* should players even be able to edit class?  Right it borks everything, could make changing class reset spells/cantrips known
 //? if a character is edited to a lower level make them forget spells they no longer have access to
 //? if a character is edited to go up a level, confetti???
+//? Display amount of cantrips/spells available to learn
+//* make sure test don't wipe prod db
+
+//TODO V2 stuff
+//* add light/dark/themes modes to settings
+//* add a wishlist to ALL, favorites to KNOWN
+//* add search/filters to ALL
+//? On level increase throw a message that reminds them of what they can do/add?
 //! bonus spells/scrolls
 //! add a bonus_spells column not affected by stats
-//! add more confirmation on learn, learn from level progression, learn from scroll, etc.
 //! when classes get bonus spells that others don't add some logic to the stat utils
 //! reaction spells
+
+//TODO Things that need context/state adjustments
+//? on character edit the info updates in UserInfo but not in CharacterCard
+
 function App() {
   return (
     <Routes>

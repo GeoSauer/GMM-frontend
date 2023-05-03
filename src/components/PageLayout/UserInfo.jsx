@@ -25,6 +25,12 @@ export default function UserInfo() {
           <Text>Level: {characterInfo.charLvl}</Text>
           <Text>Save DC: {characterInfo.saveDC}</Text>
           <Text>Attack Bonus: {characterInfo.attackBonus}</Text>
+          <Text>
+            Cantrips: {characterInfo.cantripsKnown}/{characterInfo.cantripsAvailable}
+          </Text>
+          <Text>
+            Spells: {characterInfo.spellsKnown}/{characterInfo.spellsAvailable}
+          </Text>
         </>
       )}
     </>

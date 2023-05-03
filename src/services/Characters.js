@@ -33,7 +33,7 @@ export class Character {
   }
 
   static async learnSpell(charId, spellId) {
-    const { data } = await post(`${SPELLS}/learn`, { charId, spellId });
+    const { data } = await post(`${CHARACTERS}/learn`, { charId, spellId });
     return data;
   }
 
