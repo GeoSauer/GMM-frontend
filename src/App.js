@@ -37,7 +37,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 
 //TODO Things that need context/state adjustments
 //? on character edit the info updates in UserInfo but not in CharacterCard
-
+//? All of the spell related buttons
 function App() {
   return (
     <Routes>

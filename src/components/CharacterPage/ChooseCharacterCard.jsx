@@ -1,13 +1,13 @@
 import { Avatar, Box, Button, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
 import { useCharacter } from '../../context/CharacterContext';
 import { useNavigate } from 'react-router-dom';
+import { truncateCharacterName } from '../../utils/utils';
 
 export default function ChooseCharacterCard(character) {
   const navigate = useNavigate();
   const { setCharacterState } = useCharacter();
 
-  const truncatedCharacterName =
-    character.charName.length > 20 ? character.charName.slice(0, 20) + '...' : character.charName;
+  const truncatedCharacterName = truncateCharacterName(character);
 
   const handleCharacterChange = () => {
     setCharacterState(character.id);

@@ -31,15 +31,16 @@ import { Character } from '../../services/Characters';
 import { getLocalCharacter } from '../../services/auth';
 import { useRef } from 'react';
 import EditCharacterForm from './EditCharacterForm';
+import DeleteCharacterButton from '../Buttons/DeleteCharacterButton';
+import { truncateCharacterName } from '../../utils/utils';
 
 export default function CharacterCard(character) {
   const localCharacter = getLocalCharacter();
   const { setCharacterState, characterList, setCharacterList } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const firstField = useRef();
+  const { firstField, initRef } = useRef();
 
-  const truncatedCharacterName =
-    character.charName.length > 20 ? character.charName.slice(0, 20) + '...' : character.charName;
+  const truncatedCharacterName = truncateCharacterName(character);
 
   const handleCharacterChange = () => {
     setCharacterState(character.id);
@@ -49,7 +50,10 @@ export default function CharacterCard(character) {
     setCharacterList(characterList);
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (onClose) => {
+    const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
+    characterList.splice(currentCharacterIndex, 1)[0];
+
     await Character.deleteCharacter(character.id);
     onClose();
   };
@@ -111,29 +115,11 @@ export default function CharacterCard(character) {
             >
               Set Active
             </Button>
-
-            <Popover>
-              <PopoverTrigger>
-                <Button
-                  w={'fit'}
-                  mt={8}
-                  bg={'gray.900'}
-                  color={'white'}
-                  rounded={'md'}
-                  _hover={{
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
-                  }}
-                >
-                  Delete
-                </Button>
-              </PopoverTrigger>
-              <Portal>
-                <PopoverContent>
-                  <PopoverArrow />
-                  <PopoverHeader>Sure you wanna delete {truncatedCharacterName}?</PopoverHeader>
-                  <PopoverCloseButton />
-                  <PopoverBody alignSelf={'center'}>
+            {/* <DeleteCharacterButton character={character} /> */}
+            <Popover initialFocusRef={initRef}>
+              {({ onClose }) => (
+                <>
+                  <PopoverTrigger>
                     <Button
                       w={'fit'}
                       mt={8}
@@ -144,13 +130,35 @@ export default function CharacterCard(character) {
                         transform: 'translateY(-2px)',
                         boxShadow: 'lg',
                       }}
-                      onClick={handleDelete}
                     >
-                      Confirm
+                      Delete
                     </Button>
-                  </PopoverBody>
-                </PopoverContent>
-              </Portal>
+                  </PopoverTrigger>
+                  <Portal>
+                    <PopoverContent>
+                      <PopoverArrow />
+                      <PopoverHeader>Sure you wanna delete {truncatedCharacterName}?</PopoverHeader>
+                      <PopoverCloseButton />
+                      <PopoverBody alignSelf={'center'}>
+                        <Button
+                          w={'fit'}
+                          mt={8}
+                          bg={'gray.900'}
+                          color={'white'}
+                          rounded={'md'}
+                          _hover={{
+                            transform: 'translateY(-2px)',
+                            boxShadow: 'lg',
+                          }}
+                          onClick={() => handleDelete(onClose)}
+                        >
+                          Confirm
+                        </Button>
+                      </PopoverBody>
+                    </PopoverContent>
+                  </Portal>
+                </>
+              )}
             </Popover>
           </VStack>
         )}

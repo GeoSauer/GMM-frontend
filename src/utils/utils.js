@@ -1,10 +1,10 @@
-const getSuffix = (num) => {
+const getSuffix = (level) => {
   let suffix;
-  if (+num === 1) {
+  if (+level === 1) {
     suffix = 'st';
-  } else if (+num === 2) {
+  } else if (+level === 2) {
     suffix = 'nd';
-  } else if (+num === 3) {
+  } else if (+level === 3) {
     suffix = 'rd';
   } else {
     suffix = 'th';
@@ -12,4 +12,10 @@ const getSuffix = (num) => {
   return suffix;
 };
 
-module.exports = { getSuffix };
+const truncateCharacterName = (character) => {
+  const truncatedCharacterName =
+    character.charName.length > 20 ? character.charName.slice(0, 20) + '...' : character.charName;
+  return truncatedCharacterName;
+};
+
+module.exports = { getSuffix, truncateCharacterName };

@@ -11,7 +11,7 @@ export default function SpellProvider({ children }) {
   const [allSpellDetails, setAllSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const { characterInfo } = useCharacter();
-  console.log({ characterInfo });
+
   useEffect(() => {
     if (characterInfo.id) {
       setLoading(true);
@@ -34,6 +34,49 @@ export default function SpellProvider({ children }) {
       fetchSpellsAndDetails();
     }
   }, [characterInfo]);
+
+  // useEffect(() => {
+  //   if (characterInfo.id) {
+  //     setLoading(true);
+  //     const fetchAllSpellsAndDetails = async () => {
+  //       const fetchedSpells = await Spells.getAvailableSpells(characterInfo.id);
+
+  //       const fetchedSpellDetails = await Promise.all(
+  //         fetchedSpells.map(async (spell) => {
+  //           return await Spells.getSpellDetails(spell.id);
+  //         })
+  //       );
+  //       setAllSpells(fetchedSpells);
+  //       setAllSpellDetails(fetchedSpellDetails);
+  //       setLoading(false);
+  //     };
+  //     fetchAllSpellsAndDetails();
+  //   }
+  // }, [characterInfo, knownSpells]);
+
+  // useEffect(() => {
+  //   if (allSpells !== []) {
+  //     setLoading(true);
+  //     const fetchKnownSpells = async () => {
+  //       const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
+  //       setKnownSpells(fetchedKnownSpells);
+  //       setLoading(false);
+  //     };
+  //     fetchKnownSpells();
+  //   }
+  // }, [characterInfo, preparedSpells]);
+
+  // useEffect(() => {
+  //   if (knownSpells !== []) {
+  //     setLoading(true);
+  //     const fetchPreparedSpells = async () => {
+  //       const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
+  //       setPreparedSpells(fetchedPreparedSpells);
+  //       setLoading(false);
+  //     };
+  //     fetchPreparedSpells();
+  //   }
+  // }, [characterInfo]);
 
   const value = {
     allSpells,
