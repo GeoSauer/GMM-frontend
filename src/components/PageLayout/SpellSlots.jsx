@@ -4,6 +4,7 @@ import { useCharacter } from '../../context/CharacterContext';
 export default function SpellSlots() {
   const { isOpen, onToggle } = useDisclosure();
   const { characterInfo } = useCharacter();
+
   return (
     <>
       <Button w={'full'} rounded={'none'} onClick={onToggle}>
@@ -11,7 +12,6 @@ export default function SpellSlots() {
       </Button>
       <Collapse in={isOpen} animateOpacity>
         <Box p="40px" color="white" bg="teal.500" shadow="md">
-          {/* <SpellSlotsDisplay /> */}
           <Flex w="full" justifyContent="space-around" alignItems="center">
             {[...Array(9)].map((_, i) => {
               const number = i + 1;

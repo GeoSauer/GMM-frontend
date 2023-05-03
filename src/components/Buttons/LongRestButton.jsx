@@ -19,10 +19,11 @@ export default function LongRestButton() {
   const toast = useToast();
   const initRef = useRef();
   const { onOpen } = useDisclosure();
-  const { characterInfo } = useCharacter();
+  const { characterInfo, setCharacterInfo } = useCharacter();
 
   const handleLongRest = async (onClose) => {
-    await Character.updateCharacterInfo(characterInfo);
+    const restedCharacter = await Character.updateCharacterInfo(characterInfo);
+    setCharacterInfo(restedCharacter);
     onClose();
     toast({
       title: 'Spell Slots Replenished!',
