@@ -23,6 +23,7 @@ export default function LearnSpellButton({ spell }) {
   const handleLearn = async (charId, spellId, onClose) => {
     // await learn(charId, spellId);
     const learnedSpell = await learn(charId, spellId);
+    //TODO this format works when the SpellContext useEffects are split up, but breaks other stuff
     setKnownSpells(...knownSpells, learnedSpell);
     onClose();
     if (error) {

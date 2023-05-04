@@ -9,6 +9,11 @@ import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 //TODO here's some stuff to do...
 
+//TODO harsh realities....
+//? adding all of the individual class progression logic is going to be too much for V1
+//? Gotta slim it back a bit and rely more on the honor system, ie doing away with availableSpells/Cantrips for the time being
+//? to hit MVP I've gotta just have this be an app that doesn't restrict a user any more than a paper character sheet does.
+
 //TODO V1 stuff
 //? make a demo button on landing page that logs in a dummy account
 //? make a short rest button?
