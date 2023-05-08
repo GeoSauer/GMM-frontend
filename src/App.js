@@ -6,10 +6,10 @@ import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
 import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
-import SpellDisplay from './components/Spells/SpellDisplay';
 import AvailableSpellDisplay from './components/Spells/AvailableSpellDisplay';
 import KnownSpellDisplay from './components/Spells/KnownSpellDisplay';
 import PreparedSpellDisplay from './components/Spells/PreparedSpellDisplay';
+import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //TODO here's some stuff to do...
 
 //TODO harsh realities....
@@ -55,7 +55,7 @@ function App() {
       <Route element={<ProtectedRoute />}>
         <Route path="choose-character" element={<CharacterPage />} />
         <Route element={<Layout />}>
-          <Route path="all-spells" element={<SpellDisplay />} />
+          <Route path="all-spells" element={<AllSpellDisplay />} />
           <Route path="available-spells" element={<AvailableSpellDisplay />} />
           <Route path="known-spells" element={<KnownSpellDisplay />} />
           <Route path="prepared-spells" element={<PreparedSpellDisplay />} />
