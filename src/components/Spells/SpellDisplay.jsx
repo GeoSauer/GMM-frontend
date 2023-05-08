@@ -6,13 +6,19 @@ import SpellSlots from '../PageLayout/SpellSlots';
 import SpellCard from '../Spells/SpellCard';
 
 export default function SpellDisplay() {
-  const { availableSpells, allSpellDetails, knownSpells, preparedSpells, loading } =
-    useSpellDetails();
+  const {
+    allSpells,
+    availableSpells,
+    availableSpellDetails,
+    knownSpells,
+    preparedSpells,
+    loading,
+  } = useSpellDetails();
   const location = useLocation();
 
   const findSpellDetails = (spellName) => {
     if (!loading) {
-      const spellDetails = allSpellDetails.find((spell) => spell.name === spellName);
+      const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
       return spellDetails;
     } else {
       return {};
@@ -99,6 +105,23 @@ export default function SpellDisplay() {
             })}
           </>
         )}
+
+        {/* {location.pathname === '/all-spells' && !loading && (
+        <>
+        {allSpells.map((spell, index) => {
+          const previousSpell = allSpells[index - 1];
+          if (spell.level !== previousSpell?.level) {
+            return (
+              <Flex key={index} direction={'column'} alignItems={'center'}>
+              {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+              <SpellCard spell={spell} />
+              </Flex>
+              );
+            }
+            return <SpellCard key={spell.name} spell={spell} />;
+          })}
+          </>
+        )} */}
       </Flex>
     </>
   );
