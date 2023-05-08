@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { useSpellDetails } from '../../context/SpellContext';
 import Loading from '../PageLayout/Loading';
 import SpellSlots from '../PageLayout/SpellSlots';
-import SpellCard from '../Spells/SpellCard';
+import AvailableSpellCard from './AvailableSpellCard';
 
 export default function SpellDisplay() {
   const {
@@ -42,12 +42,12 @@ export default function SpellDisplay() {
                 return (
                   <Flex key={index} direction={'column'} alignItems={'center'}>
                     {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                    <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                    <AvailableSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
                   </Flex>
                 );
               }
               return (
-                <SpellCard
+                <AvailableSpellCard
                   key={spell.name}
                   spellDetails={findSpellDetails(spell.name)}
                   spell={spell}
@@ -68,12 +68,12 @@ export default function SpellDisplay() {
                 return (
                   <Flex key={index} direction={'column'} alignItems={'center'}>
                     {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                    <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                    <AvailableSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
                   </Flex>
                 );
               }
               return (
-                <SpellCard
+                <AvailableSpellCard
                   key={spell.name}
                   spellDetails={findSpellDetails(spell.name)}
                   spell={spell}
@@ -91,12 +91,12 @@ export default function SpellDisplay() {
                 return (
                   <Flex key={index} direction={'column'} alignItems={'center'}>
                     {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                    <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                    <AvailableSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
                   </Flex>
                 );
               }
               return (
-                <SpellCard
+                <AvailableSpellCard
                   key={spell.name}
                   spellDetails={findSpellDetails(spell.name)}
                   spell={spell}
@@ -114,11 +114,11 @@ export default function SpellDisplay() {
             return (
               <Flex key={index} direction={'column'} alignItems={'center'}>
               {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-              <SpellCard spell={spell} />
+              <AvailableSpellCard spell={spell} />
               </Flex>
               );
             }
-            return <SpellCard key={spell.name} spell={spell} />;
+            return <AvailableSpellCard key={spell.name} spell={spell} />;
           })}
           </>
         )} */}

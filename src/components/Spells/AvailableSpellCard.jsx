@@ -19,7 +19,7 @@ import CastRitualSpellButton from '../Buttons/CastRitualSpellButton';
 import CastSpellButton from '../Buttons/CastSpellButton';
 import CastCantripButton from '../Buttons/CastCantripButton';
 
-export default function SpellCard({ spellDetails, spell }) {
+export default function AvailableSpellCard({ spellDetails, spell }) {
   const { isOpen, onToggle } = useDisclosure();
   const location = useLocation();
 
