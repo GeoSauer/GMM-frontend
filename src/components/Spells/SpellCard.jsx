@@ -31,7 +31,7 @@ export default function SpellCard({ spellDetails, spell }) {
           <Text>{spell.school}</Text>
         </Button>
         <VStack>
-          {location.pathname === '/all-spells' && !spell.known && (
+          {location.pathname === '/available-spells' && !spell.known && (
             <LearnSpellButton spell={spell} />
           )}
 

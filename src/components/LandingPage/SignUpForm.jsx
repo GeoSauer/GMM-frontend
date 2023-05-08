@@ -75,7 +75,7 @@ export default function SignInForm() {
                 await signUp(values);
                 const character = await Character.createCharacter(values);
                 setCharacterState(character.id);
-                navigate('/all-spells');
+                navigate('/available-spells');
                 actions.setSubmitting(false);
               }}
             >

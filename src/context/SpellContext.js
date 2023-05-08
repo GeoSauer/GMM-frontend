@@ -5,7 +5,7 @@ import { useCharacter } from './CharacterContext';
 const SpellContext = createContext();
 
 export default function SpellProvider({ children }) {
-  const [allSpells, setAllSpells] = useState([]);
+  const [availableSpells, setAvailableSpells] = useState([]);
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [allSpellDetails, setAllSpellDetails] = useState([]);
@@ -25,7 +25,7 @@ export default function SpellProvider({ children }) {
             return await Spells.getSpellDetails(spell.id);
           })
         );
-        setAllSpells(fetchedSpells);
+        setAvailableSpells(fetchedSpells);
         setAllSpellDetails(fetchedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
@@ -46,7 +46,7 @@ export default function SpellProvider({ children }) {
   //           return await Spells.getSpellDetails(spell.id);
   //         })
   //       );
-  //       setAllSpells(fetchedSpells);
+  //       setAvailableSpells(fetchedSpells);
   //       setAllSpellDetails(fetchedSpellDetails);
   //       setLoading(false);
   //     };
@@ -55,7 +55,7 @@ export default function SpellProvider({ children }) {
   // }, [characterInfo, knownSpells]);
 
   // useEffect(() => {
-  //   if (allSpells !== []) {
+  //   if (availableSpells !== []) {
   //     setLoading(true);
   //     const fetchKnownSpells = async () => {
   //       const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
@@ -79,8 +79,8 @@ export default function SpellProvider({ children }) {
   // }, [characterInfo]);
 
   const value = {
-    allSpells,
-    setAllSpells,
+    availableSpells,
+    setAvailableSpells,
     knownSpells,
     setKnownSpells,
     preparedSpells,

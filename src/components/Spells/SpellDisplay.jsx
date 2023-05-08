@@ -6,7 +6,8 @@ import SpellSlots from '../PageLayout/SpellSlots';
 import SpellCard from '../Spells/SpellCard';
 
 export default function SpellDisplay() {
-  const { allSpells, allSpellDetails, knownSpells, preparedSpells, loading } = useSpellDetails();
+  const { availableSpells, allSpellDetails, knownSpells, preparedSpells, loading } =
+    useSpellDetails();
   const location = useLocation();
 
   const findSpellDetails = (spellName) => {
@@ -76,10 +77,10 @@ export default function SpellDisplay() {
           </>
         )}
 
-        {location.pathname === '/all-spells' && !loading && (
+        {location.pathname === '/available-spells' && !loading && (
           <>
-            {allSpells.map((spell, index) => {
-              const previousSpell = allSpells[index - 1];
+            {availableSpells.map((spell, index) => {
+              const previousSpell = availableSpells[index - 1];
               if (spell.level !== previousSpell?.level) {
                 return (
                   <Flex key={index} direction={'column'} alignItems={'center'}>

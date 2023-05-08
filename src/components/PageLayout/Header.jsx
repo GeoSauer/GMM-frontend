@@ -42,8 +42,8 @@ export default function Header() {
             <NavLink to="known-spells" alt="known" title="Known Spells">
               Known Spells
             </NavLink>
-            <NavLink to="all-spells" alt="all" title="All Spells">
-              All Spells
+            <NavLink to="available-spells" alt="all" title="Available Spells">
+              Available Spells
             </NavLink>
             <LongRestButton />
           </HStack>
@@ -95,8 +95,8 @@ export default function Header() {
         //       </NavLink>
         //     </MenuItem>
         //     <MenuItem>
-        //       <NavLink to="all-spells" alt="all" title="All Spells">
-        //         All Spells
+        //       <NavLink to="available-spells" alt="all" title="Available Spells">
+        //         Available Spells
         //       </NavLink>
         //     </MenuItem>
         //     <MenuDivider />
@@ -111,8 +111,8 @@ export default function Header() {
             <NavLink to="known-spells" alt="known" title="Known Spells">
               Known Spells
             </NavLink>
-            <NavLink to="all-spells" alt="all" title="All Spells">
-              All Spells
+            <NavLink to="available-spells" alt="all" title="Available Spells">
+              Available Spells
             </NavLink>
             <LongRestButton />
           </Stack>
