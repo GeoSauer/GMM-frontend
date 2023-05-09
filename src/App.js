@@ -30,13 +30,13 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //* should players even be able to edit class?  Right it borks everything, could make changing class reset spells/cantrips known
 //? if a character is edited to a lower level make them forget spells they no longer have access to
 //? if a character is edited to go up a level, confetti???
-//? Display amount of cantrips/spells available to learn
 //* make sure test don't wipe prod db
 
 //TODO V2 stuff
 //* add light/dark/themes modes to settings
 //* add a wishlist to ALL, favorites to KNOWN
 //* add search/filters to ALL
+//? Display amount of cantrips/spells available to learn
 //? On level increase throw a message that reminds them of what they can do/add?
 //! bonus spells/scrolls
 //! add a bonus_spells column not affected by stats
@@ -45,7 +45,9 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 
 //TODO Things that need context/state adjustments
 //? on character edit the info updates in UserInfo but not in CharacterCard
-//? All of the spell related buttons
+//* AllSpells and AvailableSpells loading properly and re-rendering when a spell is learned
+//! KnownSpells is broken
+//! PreparedSpells is broken
 function App() {
   return (
     <Routes>

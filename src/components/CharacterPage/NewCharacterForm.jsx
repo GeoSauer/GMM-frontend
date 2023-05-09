@@ -10,6 +10,7 @@ import {
   useColorModeValue,
   Select,
   FormErrorMessage,
+  Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Characters';
@@ -76,7 +77,7 @@ export default function NewCharacterForm({ onClose }) {
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
                         <FormLabel htmlFor="charClass" fontWeight={'normal'}>
-                          Character Class
+                          Character Class<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
                           <option value="Bard">Bard</option>
@@ -92,6 +93,25 @@ export default function NewCharacterForm({ onClose }) {
                       </FormControl>
                     )}
                   </Field>
+
+                  {/* //TODO */}
+                  {/* //!Just testing this out, need it to be conditional on the previous value, could be used for colleges/domains/etc */}
+                  {/* {characterInfo.charClass === 'Bard' && (
+                      <Field name="bardSchool">
+                        {({ field, form }) => (
+                          <FormControl>
+                            <FormLabel htmlFor="bardSchool" fontWeight={'normal'}>
+                              Bard College
+                            </FormLabel>
+                            <Select {...field} placeholder="Choose One">
+                              <option value="Bard">Lore</option>
+                              <option value="Cleric">Valor</option>
+                            </Select>
+                            <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
+                          </FormControl>
+                        )}
+                      </Field>
+                    )} */}
 
                   <Field name="charLvl">
                     {({ field, form }) => (
@@ -145,6 +165,9 @@ export default function NewCharacterForm({ onClose }) {
                     >
                       Submit
                     </Button>
+                    <Text>
+                      <span style={{ color: 'red' }}>*</span> cannot be changed later
+                    </Text>
                   </Stack>
                 </Form>
               )}

@@ -16,6 +16,7 @@ import {
   InputRightElement,
   Select,
   FormErrorMessage,
+  Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Characters';
@@ -85,7 +86,7 @@ export default function SignInForm() {
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.email && form.touched.email}>
                         <FormLabel htmlFor="email" fontWeight={'normal'}>
-                          Email
+                          Email<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <Input {...field} placeholder="Email" />
                         <FormErrorMessage>{form.errors.email}</FormErrorMessage>
@@ -97,7 +98,7 @@ export default function SignInForm() {
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.password && form.touched.password}>
                         <FormLabel htmlFor="password" fontWeight={'normal'}>
-                          Password
+                          Password<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <InputGroup size="md">
                           <Input
@@ -144,7 +145,7 @@ export default function SignInForm() {
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
                         <FormLabel htmlFor="charClass" fontWeight={'normal'}>
-                          Character Class
+                          Character Class<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
                           <option value="Bard">Bard</option>
@@ -213,6 +214,9 @@ export default function SignInForm() {
                     >
                       Sign up
                     </Button>
+                    <Text>
+                      <span style={{ color: 'red' }}>*</span> cannot be changed later
+                    </Text>
                   </Stack>
                 </Form>
               )}

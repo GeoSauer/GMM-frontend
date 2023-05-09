@@ -64,45 +64,6 @@ export default function EditCharacterForm({ onClose }) {
                       )}
                     </Field>
 
-                    <Field name="charClass">
-                      {({ field, form }) => (
-                        <FormControl>
-                          <FormLabel htmlFor="charClass" fontWeight={'normal'}>
-                            Character Class
-                          </FormLabel>
-                          <Select {...field} placeholder={characterInfo.charClass}>
-                            <option value="Bard">Bard</option>
-                            <option value="Cleric">Cleric</option>
-                            <option value="Druid">Druid</option>
-                            <option value="Paladin">Paladin</option>
-                            <option value="Ranger">Ranger</option>
-                            <option value="Sorcerer">Sorcerer</option>
-                            <option value="Warlock">Warlock</option>
-                            <option value="Wizard">Wizard</option>
-                          </Select>
-                          <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
-
-                    {/* //!Just testing this out, need it to be conditional on the previous value */}
-                    {/* {characterInfo.charClass === 'Bard' && (
-                      <Field name="bardSchool">
-                        {({ field, form }) => (
-                          <FormControl>
-                            <FormLabel htmlFor="bardSchool" fontWeight={'normal'}>
-                              Bard College
-                            </FormLabel>
-                            <Select {...field} placeholder="Choose One">
-                              <option value="Bard">Lore</option>
-                              <option value="Cleric">Valor</option>
-                            </Select>
-                            <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
-                          </FormControl>
-                        )}
-                      </Field>
-                    )} */}
-
                     <Field name="charLvl">
                       {({ field }) => (
                         <FormControl>
