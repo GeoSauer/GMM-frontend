@@ -28,6 +28,7 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //? consider making some spellDetail (and SpellLevelModal) bits into components
 //* make sure test don't wipe prod db
 //! refreshing CharacterPage puts them out of order, ie current character can be not at top
+//* futz with react-rewards for spell animations? Maybe naw
 
 //TODO V2 stuff
 //* add light/dark/themes modes to settings

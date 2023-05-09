@@ -10,26 +10,24 @@ export default function AllSpellDisplay() {
   return (
     <>
       <SpellSlots />
-      {loadingAll && <Loading />}
-
-      <Flex direction={'column'} alignItems={'center'}>
-        {!loadingAll && (
-          <>
-            {allSpells.map((spell, index) => {
-              const previousSpell = allSpells[index - 1];
-              if (spell.level !== previousSpell?.level) {
-                return (
-                  <Flex key={index} direction={'column'} alignItems={'center'}>
-                    {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                    <AllSpellCard spell={spell} />
-                  </Flex>
-                );
-              }
-              return <AllSpellCard key={spell.name} spell={spell} />;
-            })}
-          </>
-        )}
-      </Flex>
+      {loadingAll ? (
+        <Loading />
+      ) : (
+        <Flex direction={'column'} alignItems={'center'}>
+          {allSpells.map((spell, index) => {
+            const previousSpell = allSpells[index - 1];
+            if (spell.level !== previousSpell?.level) {
+              return (
+                <Flex key={index} direction={'column'} alignItems={'center'}>
+                  {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+                  <AllSpellCard spell={spell} />
+                </Flex>
+              );
+            }
+            return <AllSpellCard key={spell.name} spell={spell} />;
+          })}
+        </Flex>
+      )}
     </>
   );
 }

@@ -13,32 +13,30 @@ export default function AvailableSpellDisplay() {
   return (
     <>
       <SpellSlots />
-      {loadingAvailable && <Loading />}
-
-      <Flex direction={'column'} alignItems={'center'}>
-        {!loadingAvailable && (
-          <>
-            {availableSpells.map((spell, index) => {
-              const previousSpell = availableSpells[index - 1];
-              if (spell.level !== previousSpell?.level) {
-                return (
-                  <Flex key={index} direction={'column'} alignItems={'center'}>
-                    {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                    <AvailableSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
-                  </Flex>
-                );
-              }
+      {loadingAvailable ? (
+        <Loading />
+      ) : (
+        <Flex direction={'column'} alignItems={'center'}>
+          {availableSpells.map((spell, index) => {
+            const previousSpell = availableSpells[index - 1];
+            if (spell.level !== previousSpell?.level) {
               return (
-                <AvailableSpellCard
-                  key={spell.name}
-                  spellDetails={findSpellDetails(spell.name)}
-                  spell={spell}
-                />
+                <Flex key={index} direction={'column'} alignItems={'center'}>
+                  {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+                  <AvailableSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                </Flex>
               );
-            })}
-          </>
-        )}
-      </Flex>
+            }
+            return (
+              <AvailableSpellCard
+                key={spell.name}
+                spellDetails={findSpellDetails(spell.name)}
+                spell={spell}
+              />
+            );
+          })}
+        </Flex>
+      )}
     </>
   );
 }

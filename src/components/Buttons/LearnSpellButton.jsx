@@ -20,6 +20,7 @@ export default function LearnSpellButton({ spell }) {
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
   const { knownSpells, setKnownSpells } = useSpellDetails();
+
   const handleLearn = async (charId, spellId, onClose) => {
     const learnedSpell = await learn(charId, spellId);
     setKnownSpells(...knownSpells, learnedSpell);
