@@ -7,14 +7,8 @@ import PreparedSpellCard from './PreparedSpellCard';
 export default function PreparedSpellDisplay() {
   const { preparedSpells, availableSpellDetails, loading } = useSpellDetails();
 
-  const findSpellDetails = (spellName) => {
-    if (!loading) {
-      const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
-      return spellDetails;
-    } else {
-      return {};
-    }
-  };
+  const findSpellDetails = (spellName) =>
+    availableSpellDetails.find((spell) => spell.name === spellName);
 
   return (
     <>

@@ -7,14 +7,8 @@ import KnownSpellCard from './KnownSpellCard';
 export default function KnownSpellDisplay() {
   const { knownSpells, availableSpellDetails, loading } = useSpellDetails();
 
-  const findSpellDetails = (spellName) => {
-    if (!loading) {
-      const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
-      return spellDetails;
-    } else {
-      return {};
-    }
-  };
+  const findSpellDetails = (spellName) =>
+    availableSpellDetails.find((spell) => spell.name === spellName);
 
   return (
     <>

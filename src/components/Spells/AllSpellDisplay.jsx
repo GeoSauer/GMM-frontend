@@ -2,10 +2,19 @@ import { Flex, Text } from '@chakra-ui/react';
 import Loading from '../PageLayout/Loading';
 import SpellSlots from '../PageLayout/SpellSlots';
 import { useSpellDetails } from '../../context/SpellContext';
-import AvailableSpellCard from './AvailableSpellCard';
+import AllSpellCard from './AllSpellCard';
+import { Spells } from '../../services/Spells';
 
 export default function AllSpellDisplay() {
   const { allSpells, loading } = useSpellDetails();
+
+  const fetchSpellDetails = async (spellId) => {
+    const fetchedSpellDetails = await Spells.getSpellDetails(spellId);
+    console.log({ fetchedSpellDetails });
+    return fetchedSpellDetails;
+  };
+
+  // const fetchSpellDetails = async (spellId) => await Spells.getSpellDetails(spellId);
 
   return (
     <>
@@ -21,11 +30,17 @@ export default function AllSpellDisplay() {
                 return (
                   <Flex key={index} direction={'column'} alignItems={'center'}>
                     {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                    <AvailableSpellCard spell={spell} />
+                    <AllSpellCard spellDetails={fetchSpellDetails(spell.id)} spell={spell} />
                   </Flex>
                 );
               }
-              return <AvailableSpellCard key={spell.name} spell={spell} />;
+              return (
+                <AllSpellCard
+                  key={spell.name}
+                  spellDetails={fetchSpellDetails(spell.id)}
+                  spell={spell}
+                />
+              );
             })}
           </>
         )}

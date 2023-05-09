@@ -26,7 +26,7 @@ import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellDetail({ spellDetails }) {
   const { characterInfo } = useCharacter();
-  console.log({ characterInfo });
+  console.log({ spellDetails });
 
   return (
     // <Accordion defaultIndex={[0]} allowMultiple>
