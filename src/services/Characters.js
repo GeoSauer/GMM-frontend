@@ -4,7 +4,6 @@ import { get, patch, post, del } from './requests';
 // const CHARACTERS = 'https://gmm.herokuapp.com/api/v1/characters';
 // const SPELLS = 'https://gmm.herokuapp.com/api/v1/spells';
 const CHARACTERS = 'http://localhost:7890/api/v1/characters';
-const SPELLS = 'http://localhost:7890/api/v1/spells';
 
 export class Character {
   static async createCharacter(info) {

@@ -1,4 +1,3 @@
-import * as Yup from 'yup';
 import {
   Flex,
   Box,
@@ -11,14 +10,8 @@ import {
   Select,
   FormErrorMessage,
   useToast,
-  useDisclosure,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  Text,
 } from '@chakra-ui/react';
+import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
 import { useUser } from '../../context/UserContext';
@@ -27,8 +20,7 @@ import { Character } from '../../services/Characters';
 
 export default function EditCharacterForm({ close }) {
   const { loading } = useUser();
-  const { characterInfo, setCharacterInfo, levelUp, setLevelUp } = useCharacter();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { characterInfo, setCharacterInfo, setLevelUp } = useCharacter();
   const toast = useToast();
 
   const CharacterSchema = Yup.object().shape({
@@ -66,6 +58,7 @@ export default function EditCharacterForm({ close }) {
                       isClosable: true,
                     });
                   }
+                  setTimeout(() => setLevelUp(false), 5000);
                   actions.setSubmitting(false);
                 }}
               >
@@ -131,27 +124,9 @@ export default function EditCharacterForm({ close }) {
                       }}
                       isLoading={props.isSubmitting}
                       type="submit"
-                      onClick={levelUp ? onOpen : null}
                     >
                       Submit
                     </Button>
-                    <Modal isOpen={isOpen} onClose={onClose}>
-                      <ModalContent>
-                        <ModalHeader>Modal Title</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                          <Text>
-                            CONGRATS {characterInfo.charName.toUpperCase()}!!!! YOU MADE IT TO LEVEL{' '}
-                            {characterInfo.charLvl}!!!
-                          </Text>
-                        </ModalBody>
-
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
-                          Close
-                        </Button>
-                        <Button variant="ghost">Secondary Action</Button>
-                      </ModalContent>
-                    </Modal>
                   </Form>
                 )}
               </Formik>

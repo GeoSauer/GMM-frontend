@@ -10,7 +10,7 @@ import {
   Portal,
   useToast,
 } from '@chakra-ui/react';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 
@@ -21,11 +21,8 @@ export default function LearnSpellButton({ spell }) {
   const { characterInfo } = useCharacter();
   const { knownSpells, setKnownSpells } = useSpellDetails();
   const handleLearn = async (charId, spellId, onClose) => {
-    // await learn(charId, spellId);
     const learnedSpell = await learn(charId, spellId);
-    //TODO this format works when the SpellContext useEffects are split up, but breaks other stuff
     setKnownSpells(...knownSpells, learnedSpell);
-    console.log({ knownSpells });
     onClose();
     if (error) {
       toast({

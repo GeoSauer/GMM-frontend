@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, VStack, HStack, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, Box, Button, useColorModeValue } from '@chakra-ui/react';
 import { useCharacter } from '../../context/CharacterContext';
 import { useNavigate } from 'react-router-dom';
 import { truncateCharacterName } from '../../utils/utils';
@@ -27,7 +27,6 @@ export default function ChooseCharacterCard(character) {
       }}
       onClick={handleCharacterChange}
     >
-      {/* <VStack> */}
       <Box>
         <Avatar
           size={'xl'}
@@ -36,7 +35,6 @@ export default function ChooseCharacterCard(character) {
         />
         {truncatedCharacterName} the level {character.charLvl} {character.charClass}
       </Box>
-      {/* </VStack> */}
     </Button>
   );
 }

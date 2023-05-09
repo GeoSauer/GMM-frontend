@@ -26,9 +26,8 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //?add error handling to toasts on spell buttons, and literally everywhere else
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
-//? if a character is edited to a lower level make them forget spells they no longer have access to
-//? if a character is edited to go up a level, confetti???
 //* make sure test don't wipe prod db
+//! refreshing CharacterPage puts them out of order, ie current character can be not at top
 
 //TODO V2 stuff
 //* add light/dark/themes modes to settings
