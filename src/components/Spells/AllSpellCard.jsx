@@ -12,33 +12,38 @@ import SpellDetail from './SpellDetail';
 import LearnSpellButton from '../Buttons/LearnSpellButton';
 import { Spells } from '../../services/Spells';
 import { useState } from 'react';
+import Loading from '../PageLayout/Loading';
 
-export default function AllSpellCard({ spellDetails, spell }) {
+export default function AllSpellCard({ spell }) {
   const { isOpen, onToggle } = useDisclosure();
-  // const [spellDetails, setSpellDetails] = useState([]);
+  const [spellDetails, setSpellDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // const spellDetails = async (spellId) => await Spells.getSpellDetails(spellId);
-  // const fetchSpellDetails = async (spellId) => {
-  // if (spellId) {
-  // const fetchedSpellDetails = await Spells.getSpellDetails(spellId);
-  // setSpellDetails(fetchedSpellDetails);
-  // const fetchedSpellDetails = await Spells.getSpellDetails(spellId);
-  // console.log({ fetchedSpellDetails });
-  // return fetchedSpellDetails;
-  // const spellDetails = fetchedSpellDetails.PromiseResult;
-  // return spellDetails;
-  // } else {
-  //   return {};
-  // }
-  // fetchSpellDetails();
-  // };
+  const handleClick = () => {
+    if (spell.id && !isOpen) {
+      setLoading(true);
+      const fetchSpellDetails = async () => {
+        const fetchedSpellDetails = await Spells.getSpellDetails(spell.id);
+        setSpellDetails(fetchedSpellDetails);
+        setLoading(false);
+        onToggle();
+      };
+      fetchSpellDetails();
+    } else onToggle();
+  };
 
   return (
     <>
       <HStack>
-        <Button onClick={onToggle} display={'block'} w={'sm'} h={'20'} p={'2'} mt={'2'}>
-          <Heading size="md">{spell.name}</Heading>
-          <Text>{spell.school}</Text>
+        <Button onClick={handleClick} display={'block'} w={'sm'} h={'20'} p={'2'} mt={'2'}>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              <Heading size="md">{spell.name}</Heading>
+              <Text>{spell.school}</Text>
+            </>
+          )}
         </Button>
         <VStack>{!spell.known && <LearnSpellButton spell={spell} />}</VStack>
       </HStack>
@@ -51,9 +56,7 @@ export default function AllSpellCard({ spellDetails, spell }) {
           shadow="md"
           // onClick={onToggle}
         >
-          <SpellDetail spellDetails={spellDetails} />
-          {/* <SpellDetail spellDetails={fetchSpellDetails(spell.id)} /> */}
-          {/* <SpellDetail spellDetails={async () => await Spells.getSpellDetails(spell.id)} /> */}
+          {!loading ? <SpellDetail spellDetails={spellDetails} /> : <Loading />}
         </Box>
       </Collapse>
     </>
