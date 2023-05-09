@@ -15,20 +15,18 @@ import { Character } from '../../services/Characters';
 import { truncateCharacterName } from '../../utils/utils';
 
 export default function DeleteCharacterButton(character) {
-  console.log({ character });
   const toast = useToast();
   const initRef = useRef();
 
   const truncatedCharacterName = truncateCharacterName(character);
 
   const handleDelete = async (onClose) => {
-    console.log({ character });
     await Character.deleteCharacter(character.id);
     onClose();
     toast({
       title: `${character.charName} deleted!`,
       status: 'success',
-      duration: 2000,
+      duration: 3000,
       isClosable: true,
     });
   };
@@ -55,13 +53,7 @@ export default function DeleteCharacterButton(character) {
           <Portal>
             <PopoverContent>
               <PopoverArrow />
-              <PopoverHeader>
-                Sure you wanna delete
-                {/* {character.charName.length > 20
-                  ? character.charName.slice(0, 20) + '...'
-                  : character.charName} */}
-                ?
-              </PopoverHeader>
+              <PopoverHeader>Sure you wanna delete {truncatedCharacterName}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody alignSelf={'center'}>
                 <Button

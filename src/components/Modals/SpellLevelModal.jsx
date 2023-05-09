@@ -44,14 +44,14 @@ export default function SpellLevelModal({ spell, spellDetails }) {
         title: `${spell.name} cast at ${slotLevel}
       ${suffix}-Level!`,
         status: 'success',
-        duration: 2000,
+        duration: 3000,
         isClosable: true,
       });
     } else {
       toast({
         title: 'Please choose a level!',
         status: 'error',
-        duration: 2000,
+        duration: 3000,
         isClosable: true,
       });
     }

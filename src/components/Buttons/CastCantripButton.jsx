@@ -10,7 +10,6 @@ import {
   PopoverCloseButton,
   PopoverBody,
 } from '@chakra-ui/react';
-import SpellLevelModal from '../Modals/SpellLevelModal';
 import { useRef } from 'react';
 
 export default function CastCantripButton({ spell }) {
@@ -21,7 +20,7 @@ export default function CastCantripButton({ spell }) {
     toast({
       title: `${spell.name} cast!`,
       status: 'success',
-      duration: 2000,
+      duration: 3000,
       isClosable: true,
     });
   };

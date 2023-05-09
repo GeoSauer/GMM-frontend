@@ -10,6 +10,7 @@ export default function CharacterProvider({ children }) {
   const [currentCharacter, setCurrentCharacter] = useState(localCharacter);
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
+  const [levelUp, setLevelUp] = useState(false);
   const { userInfo, setLoading } = useUser();
 
   useEffect(() => {
@@ -48,6 +49,8 @@ export default function CharacterProvider({ children }) {
     setCharacterState,
     // loading,
     setLoading,
+    levelUp,
+    setLevelUp,
   };
   return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>;
 }

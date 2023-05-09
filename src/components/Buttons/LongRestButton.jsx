@@ -28,7 +28,7 @@ export default function LongRestButton() {
     toast({
       title: 'Spell Slots Replenished!',
       status: 'success',
-      duration: 2000,
+      duration: 3000,
       isClosable: true,
     });
   };

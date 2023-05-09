@@ -10,6 +10,14 @@ import {
   useColorModeValue,
   Select,
   FormErrorMessage,
+  useToast,
+  useDisclosure,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
@@ -17,9 +25,11 @@ import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 
-export default function EditCharacterForm({ onClose }) {
+export default function EditCharacterForm({ close }) {
   const { loading } = useUser();
-  const { characterInfo, setCharacterInfo } = useCharacter();
+  const { characterInfo, setCharacterInfo, levelUp, setLevelUp } = useCharacter();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const CharacterSchema = Yup.object().shape({
     charName: Yup.string().min(2, 'Too Short!'),
@@ -42,12 +52,20 @@ export default function EditCharacterForm({ onClose }) {
                 initialValues={characterInfo}
                 validationSchema={CharacterSchema}
                 onSubmit={async (values, actions) => {
-                  console.log({ values });
                   await Character.updateCharacterInfo(values);
                   setCharacterInfo((prevState) => {
                     return { ...prevState, ...values };
                   });
-                  onClose();
+                  close();
+                  if (values.charLvl > characterInfo.charLvl) {
+                    setLevelUp(true);
+                    toast({
+                      title: `${characterInfo.charName} leveled up!`,
+                      status: 'success',
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                  }
                   actions.setSubmitting(false);
                 }}
               >
@@ -113,9 +131,27 @@ export default function EditCharacterForm({ onClose }) {
                       }}
                       isLoading={props.isSubmitting}
                       type="submit"
+                      onClick={levelUp ? onOpen : null}
                     >
                       Submit
                     </Button>
+                    <Modal isOpen={isOpen} onClose={onClose}>
+                      <ModalContent>
+                        <ModalHeader>Modal Title</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          <Text>
+                            CONGRATS {characterInfo.charName.toUpperCase()}!!!! YOU MADE IT TO LEVEL{' '}
+                            {characterInfo.charLvl}!!!
+                          </Text>
+                        </ModalBody>
+
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                          Close
+                        </Button>
+                        <Button variant="ghost">Secondary Action</Button>
+                      </ModalContent>
+                    </Modal>
                   </Form>
                 )}
               </Formik>

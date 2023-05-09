@@ -24,7 +24,7 @@ export default function PrepareSpellButton({ spell }) {
     toast({
       title: `${spell.name} prepared!`,
       status: 'success',
-      duration: 2000,
+      duration: 3000,
       isClosable: true,
     });
   };

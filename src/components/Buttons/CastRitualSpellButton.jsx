@@ -21,7 +21,7 @@ export default function CastRitualSpellButton({ spell }) {
     toast({
       title: `${spell.name} cast as ritual!`,
       status: 'success',
-      duration: 2000,
+      duration: 3000,
       isClosable: true,
     });
   };

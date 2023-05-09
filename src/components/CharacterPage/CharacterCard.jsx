@@ -31,7 +31,6 @@ import { Character } from '../../services/Characters';
 import { getLocalCharacter } from '../../services/auth';
 import { useRef } from 'react';
 import EditCharacterForm from './EditCharacterForm';
-import DeleteCharacterButton from '../Buttons/DeleteCharacterButton';
 import { truncateCharacterName } from '../../utils/utils';
 
 export default function CharacterCard(character) {
@@ -93,7 +92,7 @@ export default function CharacterCard(character) {
             {truncatedCharacterName}
           </Heading>
           <Text color={'gray.500'}>
-            Level: {character.charLvl} {character.charClass}
+            Level {character.charLvl} {character.charClass}
           </Text>
           <Text color={'gray.500'}>Save DC: {character.saveDC}</Text>
           <Text color={'gray.500'}>Attack Bonus: {character.attackBonus}</Text>
@@ -115,7 +114,7 @@ export default function CharacterCard(character) {
             >
               Set Active
             </Button>
-            {/* <DeleteCharacterButton character={character} /> */}
+
             <Popover initialFocusRef={initRef}>
               {({ onClose }) => (
                 <>
@@ -184,7 +183,7 @@ export default function CharacterCard(character) {
                 <ModalHeader>Editing {truncatedCharacterName}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <EditCharacterForm onClose={onClose} />
+                  <EditCharacterForm close={onClose} />
                 </ModalBody>
               </ModalContent>
             </Modal>

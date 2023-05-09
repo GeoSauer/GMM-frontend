@@ -31,14 +31,14 @@ export default function LearnSpellButton({ spell }) {
       toast({
         title: { error },
         status: 'error',
-        duration: 2000,
+        duration: 3000,
         isClosable: true,
       });
     } else {
       toast({
         title: `${spell.name} learned!`,
         status: 'success',
-        duration: 2000,
+        duration: 3000,
         isClosable: true,
       });
     }

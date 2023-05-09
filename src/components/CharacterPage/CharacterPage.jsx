@@ -9,6 +9,7 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalHeader,
+  Text,
 } from '@chakra-ui/react';
 import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
@@ -19,13 +20,19 @@ import ChooseCharacterCard from './ChooseCharacterCard';
 import { useRef } from 'react';
 import NewCharacterForm from './NewCharacterForm';
 import { AddIcon } from '@chakra-ui/icons';
+import Confetti from 'react-confetti';
 
 export default function CharacterPage() {
-  const { characterList } = useCharacter();
+  const { characterInfo, characterList, levelUp, setLevelUp } = useCharacter();
   const { userInfo, loading } = useUser();
   const location = useLocation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
+
+  const handleClick = () => {
+    setLevelUp(false);
+    onClose();
+  };
 
   return (
     <Flex direction={'column'} alignItems={'center'} mb={'30'}>
@@ -68,6 +75,44 @@ export default function CharacterPage() {
           </ModalBody>
         </ModalContent>
       </Modal>
+      {levelUp && (
+        <>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalContent>
+              <ModalHeader>Modal Title</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Text>
+                  CONGRATS {characterInfo.charName.toUpperCase()}!!!! YOU MADE IT TO LEVEL{' '}
+                  {characterInfo.charLvl}!!!
+                </Text>
+              </ModalBody>
+
+              <Button colorScheme="blue" mr={3} onClick={handleClick}>
+                Close
+              </Button>
+              <Button variant="ghost">Secondary Action</Button>
+            </ModalContent>
+          </Modal>
+
+          <Confetti
+            width={1000}
+            height={1000}
+            numberOfPieces={500}
+            drawShape={(ctx) => {
+              ctx.beginPath();
+              for (let i = 0; i < 22; i++) {
+                const angle = 0.35 * i;
+                const x = (0.2 + 1.5 * angle) * Math.cos(angle);
+                const y = (0.2 + 1.5 * angle) * Math.sin(angle);
+                ctx.lineTo(x, y);
+              }
+              ctx.stroke();
+              ctx.closePath();
+            }}
+          />
+        </>
+      )}
     </Flex>
   );
 }
