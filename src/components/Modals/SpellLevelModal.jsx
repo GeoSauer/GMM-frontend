@@ -97,6 +97,8 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </Text>
               </Box>
             )}
+
+            {/* //TODO */}
             {/*//! this is printing 0 on Arcane Sword, and  */}
             {spellDetails?.higherLevel.length && (
               <Box>
@@ -108,6 +110,8 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </Text>
               </Box>
             )}
+
+            {/* //TODO */}
             {/*//! make this not print if there's only one damage level */}
             {spellDetails?.damage.damageAtSlotLevel && (
               <Box>
@@ -135,6 +139,8 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </TableContainer>
               </Box>
             )}
+            {/* //TODO */}
+            {/* //! I believe this only applies to cantrips, need to investigate */}
             {/* {spellDetails?.damage.damageAtCharacterLevel && (
               <Box>
                 <TableContainer>

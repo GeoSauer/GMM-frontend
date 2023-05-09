@@ -42,6 +42,7 @@ export default function EditCharacterForm({ onClose }) {
                 initialValues={characterInfo}
                 validationSchema={CharacterSchema}
                 onSubmit={async (values, actions) => {
+                  console.log({ values });
                   await Character.updateCharacterInfo(values);
                   setCharacterInfo((prevState) => {
                     return { ...prevState, ...values };
@@ -72,11 +73,13 @@ export default function EditCharacterForm({ onClose }) {
                           </FormLabel>
                           <Select {...field} placeholder={characterInfo.charLvl}>
                             {[...Array(20)].map((_, i) => {
-                              return (
-                                <option key={`key-${i}`} value={i + 1}>
-                                  {i + 1}
-                                </option>
-                              );
+                              const number = i + 1;
+                              if (characterInfo.charLvl <= number)
+                                return (
+                                  <option key={`key-${i}`} value={number}>
+                                    {number}
+                                  </option>
+                                );
                             })}
                           </Select>
                         </FormControl>

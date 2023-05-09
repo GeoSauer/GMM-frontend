@@ -26,8 +26,6 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //?add error handling to toasts on spell buttons, and literally everywhere else
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
-//! save dc and attack bonus display
-//* should players even be able to edit class?  Right it borks everything, could make changing class reset spells/cantrips known
 //? if a character is edited to a lower level make them forget spells they no longer have access to
 //? if a character is edited to go up a level, confetti???
 //* make sure test don't wipe prod db
