@@ -5,15 +5,15 @@ import { useSpellDetails } from '../../context/SpellContext';
 import AllSpellCard from './AllSpellCard';
 
 export default function AllSpellDisplay() {
-  const { allSpells, loading } = useSpellDetails();
+  const { allSpells, loadingAll } = useSpellDetails();
 
   return (
     <>
       <SpellSlots />
-      {loading && <Loading />}
+      {loadingAll && <Loading />}
 
       <Flex direction={'column'} alignItems={'center'}>
-        {!loading && (
+        {!loadingAll && (
           <>
             {allSpells.map((spell, index) => {
               const previousSpell = allSpells[index - 1];

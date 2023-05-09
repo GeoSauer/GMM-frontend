@@ -10,76 +10,67 @@ export default function SpellProvider({ children }) {
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [availableSpellDetails, setAvailableSpellDetails] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingAll, setLoadingAll] = useState(true);
+  const [loadingAvailable, setLoadingAvailable] = useState(true);
+  const [loadingKnown, setLoadingKnown] = useState(true);
+  const [loadingPrepared, setLoadingPrepared] = useState(true);
+
   const { characterInfo } = useCharacter();
 
   useEffect(() => {
     if (characterInfo.id) {
-      setLoading(true);
-      const fetchSpellsAndDetails = async () => {
+      setLoadingAll(true);
+      const fetchAllSpells = async () => {
         const fetchedAllSpells = await Spells.getAllSpells(characterInfo.id);
+        setAllSpells(fetchedAllSpells);
+        setLoadingAll(false);
+      };
+      fetchAllSpells();
+    }
+  }, [characterInfo, knownSpells]);
+
+  useEffect(() => {
+    if (characterInfo.id) {
+      setLoadingAvailable(true);
+      const fetchAvailableSpellsAndDetails = async () => {
         const fetchedAvailableSpells = await Spells.getAvailableSpells(characterInfo.id);
-        const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
-        const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
 
         const fetchedSpellDetails = await Promise.all(
           fetchedAvailableSpells.map(async (spell) => {
             return await Spells.getSpellDetails(spell.id);
           })
         );
-        setAllSpells(fetchedAllSpells);
         setAvailableSpells(fetchedAvailableSpells);
         setAvailableSpellDetails(fetchedSpellDetails);
-        setKnownSpells(fetchedKnownSpells);
-        setPreparedSpells(fetchedPreparedSpells);
-        setLoading(false);
+        setLoadingAvailable(false);
       };
-      fetchSpellsAndDetails();
+      fetchAvailableSpellsAndDetails();
+    }
+  }, [characterInfo, knownSpells]);
+
+  useEffect(() => {
+    if (characterInfo.id) {
+      setLoadingKnown(true);
+      const fetchKnownSpells = async () => {
+        const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
+        setKnownSpells(fetchedKnownSpells);
+        setLoadingKnown(false);
+      };
+      fetchKnownSpells();
+    }
+  }, [characterInfo, preparedSpells]);
+
+  useEffect(() => {
+    if (characterInfo.id) {
+      setLoadingPrepared(true);
+      const fetchPreparedSpells = async () => {
+        const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
+        setPreparedSpells(fetchedPreparedSpells);
+        setLoadingPrepared(false);
+      };
+      fetchPreparedSpells();
     }
   }, [characterInfo]);
-
-  // useEffect(() => {
-  //   if (characterInfo.id) {
-  //     setLoading(true);
-  //     const fetchAllSpellsAndDetails = async () => {
-  //       const fetchedAvailableSpells = await Spells.getAvailableSpells(characterInfo.id);
-
-  //       const fetchedSpellDetails = await Promise.all(
-  //         fetchedAvailableSpells.map(async (spell) => {
-  //           return await Spells.getSpellDetails(spell.id);
-  //         })
-  //       );
-  //       setAvailableSpells(fetchedAvailableSpells);
-  //       setAvailableSpellDetails(fetchedSpellDetails);
-  //       setLoading(false);
-  //     };
-  //     fetchAllSpellsAndDetails();
-  //   }
-  // }, [characterInfo, knownSpells]);
-
-  // useEffect(() => {
-  //   if (availableSpells !== []) {
-  //     setLoading(true);
-  //     const fetchKnownSpells = async () => {
-  //       const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
-  //       setKnownSpells(fetchedKnownSpells);
-  //       setLoading(false);
-  //     };
-  //     fetchKnownSpells();
-  //   }
-  // }, [characterInfo, preparedSpells]);
-
-  // useEffect(() => {
-  //   if (knownSpells !== []) {
-  //     setLoading(true);
-  //     const fetchPreparedSpells = async () => {
-  //       const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
-  //       setPreparedSpells(fetchedPreparedSpells);
-  //       setLoading(false);
-  //     };
-  //     fetchPreparedSpells();
-  //   }
-  // }, [characterInfo]);
 
   const value = {
     allSpells,
@@ -92,8 +83,10 @@ export default function SpellProvider({ children }) {
     setPreparedSpells,
     availableSpellDetails,
     setAvailableSpellDetails,
-    loading,
-    setLoading,
+    loadingAll,
+    loadingAvailable,
+    loadingKnown,
+    loadingPrepared,
   };
 
   return <SpellContext.Provider value={value}>{children}</SpellContext.Provider>;
