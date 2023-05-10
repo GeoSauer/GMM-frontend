@@ -10,7 +10,6 @@ export default function KnownSpellDisplay() {
 
   const findSpellDetails = (spellName) => {
     const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
-    console.log({ spellName, spellDetails, availableSpellDetails });
     return spellDetails;
   };
 

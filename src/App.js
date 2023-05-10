@@ -43,9 +43,6 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 
 //TODO Things that need context/state adjustments
 //? on character edit the info updates in UserInfo but not in CharacterCard
-//* AllSpells and AvailableSpells loading properly and re-rendering when a spell is learned
-//! KnownSpells is broken
-//! PreparedSpells is broken
 function App() {
   return (
     <Routes>
