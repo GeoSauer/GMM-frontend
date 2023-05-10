@@ -16,13 +16,14 @@ export default function SpellSlots() {
             const suffix = getSuffix(number);
             const spellsAvailableAtSlotLevel = characterInfo[`level${number}SpellSlots`];
             return spellsAvailableAtSlotLevel ? (
-              <Box key={`key-${i}`} pos="relative">
+              <Flex key={`key-${i}`} pos="relative" justifyContent={'center'}>
                 <Text>
                   {number}
-                  {suffix}:
+                  {suffix} Level:
                 </Text>
                 <Text
                   pos="absolute"
+                  mt={6}
                   px={2}
                   py={1}
                   fontSize="xs"
@@ -33,7 +34,7 @@ export default function SpellSlots() {
                 >
                   {spellsAvailableAtSlotLevel}
                 </Text>
-              </Box>
+              </Flex>
             ) : null;
           })}
         </Flex>

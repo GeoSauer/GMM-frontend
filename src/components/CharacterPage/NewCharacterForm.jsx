@@ -18,7 +18,7 @@ import { useCharacter } from '../../context/CharacterContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewCharacterForm({ onClose }) {
-  const { characterList, setCharacterList, setCharacterState } = useCharacter();
+  const { setCharacterState } = useCharacter();
   const navigate = useNavigate();
 
   const CharacterSchema = Yup.object().shape({

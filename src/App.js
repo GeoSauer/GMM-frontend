@@ -27,9 +27,8 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //? maybe the mobile width menu should be a drawer instead? Also it's just a mess now
 //? consider making some spellDetail (and SpellLevelModal) bits into components
 //* make sure test don't wipe prod db
-//! refreshing CharacterPage puts them out of order, ie current character can be not at top
 //* futz with react-rewards for spell animations? Maybe naw
-//! OMG spells aren't populating correctly for the current character
+//! OMG spells aren't populating correctly for the current character OR user
 //! DeleteCharacterButton not triggering re-render
 
 //TODO V2 stuff
