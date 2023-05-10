@@ -12,14 +12,18 @@ import {
 } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
+import { useSpellDetails } from '../../context/SpellContext';
 
 export default function PrepareSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
   const { prepare } = useSpell();
   const { characterInfo } = useCharacter();
+  const { preparedSpells, setPreparedSpells } = useSpellDetails();
+
   const handlePrepare = async (charId, spellId, prepared, onClose) => {
     await prepare({ charId, spellId, prepared });
+    setPreparedSpells([...preparedSpells, spell]);
     onClose();
     toast({
       title: `${spell.name} prepared!`,

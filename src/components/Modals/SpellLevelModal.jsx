@@ -56,6 +56,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
       });
     }
   };
+
   return (
     <>
       <Button onClick={onOpen}>Cast with a spell slot</Button>

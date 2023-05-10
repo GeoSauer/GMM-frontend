@@ -5,24 +5,26 @@ import { useSpellDetails } from '../../context/SpellContext';
 import KnownSpellCard from './KnownSpellCard';
 
 export default function KnownSpellDisplay() {
-  const { knownSpells, availableSpellDetails, loadingKnown, loadingAll } = useSpellDetails();
+  const { knownSpells, availableSpellDetails, loadingKnown, loadingAll, loadingAvailable } =
+    useSpellDetails();
 
   const findSpellDetails = (spellName) => {
     const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
+    console.log({ spellName, spellDetails, availableSpellDetails });
     return spellDetails;
   };
 
   return (
     <>
       <SpellSlots />
-      {loadingAll && loadingKnown ? (
+      {loadingKnown ? (
         <Loading />
       ) : (
         <Flex direction={'column'} alignItems={'center'}>
           {!knownSpells.length && (
             <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
           )}
-          {!loadingAll && (
+          {!loadingAll && !loadingAvailable && (
             <>
               {knownSpells.map((spell, index) => {
                 const previousSpell = knownSpells[index - 1];
