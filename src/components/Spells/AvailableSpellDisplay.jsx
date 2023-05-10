@@ -5,7 +5,7 @@ import { useSpellDetails } from '../../context/SpellContext';
 import AvailableSpellCard from './AvailableSpellCard';
 
 export default function AvailableSpellDisplay() {
-  const { availableSpells, availableSpellDetails, loadingAvailable } = useSpellDetails();
+  const { availableSpells, availableSpellDetails, loadingAvailable, loading } = useSpellDetails();
 
   const findSpellDetails = (spellName) =>
     availableSpellDetails.find((spell) => spell.name === spellName);
@@ -13,7 +13,8 @@ export default function AvailableSpellDisplay() {
   return (
     <>
       <SpellSlots />
-      {loadingAvailable ? (
+      {/* {loadingAvailable ? ( */}
+      {loading ? (
         <Loading />
       ) : (
         <Flex direction={'column'} alignItems={'center'}>

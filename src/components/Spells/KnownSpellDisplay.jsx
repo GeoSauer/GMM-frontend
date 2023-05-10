@@ -5,8 +5,14 @@ import { useSpellDetails } from '../../context/SpellContext';
 import KnownSpellCard from './KnownSpellCard';
 
 export default function KnownSpellDisplay() {
-  const { knownSpells, availableSpellDetails, loadingKnown, loadingAll, loadingAvailable } =
-    useSpellDetails();
+  const {
+    knownSpells,
+    availableSpellDetails,
+    loadingKnown,
+    loadingAll,
+    loadingAvailable,
+    loading,
+  } = useSpellDetails();
 
   const findSpellDetails = (spellName) => {
     const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
@@ -16,35 +22,36 @@ export default function KnownSpellDisplay() {
   return (
     <>
       <SpellSlots />
-      {loadingKnown ? (
+      {/* {loadingKnown ? ( */}
+      {loading ? (
         <Loading />
       ) : (
         <Flex direction={'column'} alignItems={'center'}>
           {!knownSpells.length && (
             <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
           )}
-          {!loadingAll && !loadingAvailable && (
-            <>
-              {knownSpells.map((spell, index) => {
-                const previousSpell = knownSpells[index - 1];
-                if (spell.level !== previousSpell?.level) {
-                  return (
-                    <Flex key={index} direction={'column'} alignItems={'center'}>
-                      {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
-                      <KnownSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
-                    </Flex>
-                  );
-                }
+          {/* {!loadingAll && !loadingAvailable && ( */}
+          <>
+            {knownSpells.map((spell, index) => {
+              const previousSpell = knownSpells[index - 1];
+              if (spell.level !== previousSpell?.level) {
                 return (
-                  <KnownSpellCard
-                    key={spell.name}
-                    spellDetails={findSpellDetails(spell.name)}
-                    spell={spell}
-                  />
+                  <Flex key={index} direction={'column'} alignItems={'center'}>
+                    {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+                    <KnownSpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+                  </Flex>
                 );
-              })}
-            </>
-          )}
+              }
+              return (
+                <KnownSpellCard
+                  key={spell.name}
+                  spellDetails={findSpellDetails(spell.name)}
+                  spell={spell}
+                />
+              );
+            })}
+          </>
+          {/* )} */}
         </Flex>
       )}
     </>
