@@ -29,7 +29,8 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //* make sure test don't wipe prod db
 //! refreshing CharacterPage puts them out of order, ie current character can be not at top
 //* futz with react-rewards for spell animations? Maybe naw
-//!spells getting added to non-refresh state are ordered by when they were clicked
+//! OMG spells aren't populating correctly for the current character
+//! DeleteCharacterButton not triggering re-render
 
 //TODO V2 stuff
 //* add light/dark/themes modes to settings

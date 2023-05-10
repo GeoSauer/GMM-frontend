@@ -11,18 +11,29 @@ export default function CharacterProvider({ children }) {
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
   const [levelUp, setLevelUp] = useState(false);
+
   const { userInfo, setLoading } = useUser();
 
   useEffect(() => {
     if (userInfo.id) {
+      setLoading(true);
       const fetchCharacters = async () => {
         const characters = await Character.getAllCharacters();
         setCharacterList(characters);
+        if (currentCharacter) {
+          const currentCharacterIndex = characters.findIndex(
+            (char) => char.id === currentCharacter
+          );
+          const activeCharacter = characters.splice(currentCharacterIndex, 1)[0];
+          characters.unshift(activeCharacter);
+          setCharacterList(characters);
+        }
         setLoading(false);
       };
       fetchCharacters();
     }
-  }, [setLoading, userInfo]);
+    //TODO on signout a 401 pops because currentCharacter is changed
+  }, [setLoading, userInfo, currentCharacter]);
 
   useEffect(() => {
     if (currentCharacter) {

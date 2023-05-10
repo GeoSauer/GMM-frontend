@@ -15,9 +15,11 @@ import {
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Characters';
 import { useCharacter } from '../../context/CharacterContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function NewCharacterForm({ onClose }) {
   const { characterList, setCharacterList, setCharacterState } = useCharacter();
+  const navigate = useNavigate();
 
   const CharacterSchema = Yup.object().shape({
     charName: Yup.string().min(2, 'Too Short!').required('Still required'),
@@ -45,16 +47,9 @@ export default function NewCharacterForm({ onClose }) {
               }}
               validationSchema={CharacterSchema}
               onSubmit={async (values, actions) => {
-                //TODO Need to figure out how to get the list to re-render on add
-                //TODO it also reorders on refresh, memo it maybe?
                 const character = await Character.createCharacter(values);
                 setCharacterState(character.id);
-                const currentCharacterIndex = characterList.findIndex(
-                  (char) => char.id === character.id
-                );
-                const currentCharacter = characterList.splice(currentCharacterIndex, 1)[0];
-                characterList.unshift(currentCharacter);
-                setCharacterList(characterList);
+                navigate('/available-spells');
                 onClose();
                 actions.setSubmitting(false);
               }}
