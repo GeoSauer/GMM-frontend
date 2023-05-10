@@ -23,11 +23,9 @@ export default function UnprepareSpellButton({ spell }) {
 
   const handleUnprepare = async (charId, spellId, prepared, onClose) => {
     await unprepare({ charId, spellId, prepared });
-    //!LearnSpellButton and PrepareSpellButton are successfully updating state
-    //!this fella explodes if I use the setter
-    //!Prepared and Known spells blow up if you refresh on them.
-    //! You can use buttons on those pages and state updates, but clicking more than one blows it up
-    // setPreparedSpells(...preparedSpells);
+    const removeUnpreparedSpell = (unpreparedSpell) => spell.name !== unpreparedSpell.name;
+    const updatedPreparedSpells = preparedSpells.filter(removeUnpreparedSpell);
+    setPreparedSpells(updatedPreparedSpells);
     onClose();
     toast({
       title: `${spell.name} un-prepared!`,
