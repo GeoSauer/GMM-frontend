@@ -5,12 +5,13 @@ import { useSpellDetails } from '../../context/SpellContext';
 import AllSpellCard from './AllSpellCard';
 
 export default function AllSpellDisplay() {
-  const { allSpells, loadingAll } = useSpellDetails();
+  const { allSpells, loadingAll, loading } = useSpellDetails();
 
   return (
     <>
       <SpellSlots />
-      {loadingAll ? (
+      {/* {loadingAll ? ( */}
+      {loading ? (
         <Loading />
       ) : (
         <Flex direction={'column'} alignItems={'center'}>

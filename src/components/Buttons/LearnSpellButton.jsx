@@ -19,10 +19,16 @@ export default function LearnSpellButton({ spell }) {
   const initRef = useRef();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
-  const { knownSpells, setKnownSpells } = useSpellDetails();
+  const { knownSpells, setKnownSpells, preparedSpells, setPreparedSpells } = useSpellDetails();
 
   const handleLearn = async (charId, spellId, onClose) => {
     await learn(charId, spellId);
+    if (spell.level === 0) {
+      spell['prepared'] = true;
+      const updatedPreparedSpells = [...preparedSpells, spell];
+      const sortedPreparedSpells = updatedPreparedSpells.sort((a, b) => a.level - b.level);
+      setPreparedSpells(sortedPreparedSpells);
+    }
     const updatedKnownSpells = [...knownSpells, spell];
     const sortedKnownSpells = updatedKnownSpells.sort((a, b) => a.level - b.level);
     setKnownSpells(sortedKnownSpells);
