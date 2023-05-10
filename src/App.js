@@ -31,7 +31,8 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //! OMG spells aren't populating correctly for the current character OR user
 //! DeleteCharacterButton not triggering re-render
 //! choose-character is sometimes busted but fixes on refresh
-//! spell button and navigation is now so snap, but buttons don't render properly and things that change on fetch (prepared for cantrips) don't work
+//! tweak LongRestButton and SpellLevelModal so it doesn't cause a re-render
+//! push non-class spell details into spellDetails state once learned
 
 //TODO V2 stuff
 //* add light/dark/themes modes to settings

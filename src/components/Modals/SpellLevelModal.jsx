@@ -28,7 +28,7 @@ import { getSuffix } from '../../utils/utils';
 
 export default function SpellLevelModal({ spell, spellDetails }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { characterInfo } = useCharacter();
+  const { characterInfo, setCharacterInfo } = useCharacter();
   const [slotLevel, setSlotLevel] = useState('');
   const toast = useToast();
   const { cast } = useSpell();
@@ -38,6 +38,9 @@ export default function SpellLevelModal({ spell, spellDetails }) {
       const suffix = getSuffix(slotLevel);
       if (spell.level > 0) {
         await cast(charId, slotLevel);
+        const availableSlots = characterInfo[`level${slotLevel}SpellSlots`];
+        characterInfo[`level${slotLevel}SpellSlots`] = availableSlots - 1;
+        setCharacterInfo({ ...characterInfo, availableSlots });
       }
       onClose();
       toast({
