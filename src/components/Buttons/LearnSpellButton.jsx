@@ -23,6 +23,7 @@ export default function LearnSpellButton({ spell }) {
 
   const handleLearn = async (charId, spellId, onClose) => {
     await learn(charId, spellId);
+    spell['known'] = true;
     if (spell.level === 0) {
       spell['prepared'] = true;
       const updatedPreparedSpells = [...preparedSpells, spell];
