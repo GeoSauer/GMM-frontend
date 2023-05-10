@@ -23,7 +23,9 @@ export default function PrepareSpellButton({ spell }) {
 
   const handlePrepare = async (charId, spellId, prepared, onClose) => {
     await prepare({ charId, spellId, prepared });
-    setPreparedSpells([...preparedSpells, spell]);
+    const updatedPreparedSpells = [...preparedSpells, spell];
+    const sortedPreparedSpells = updatedPreparedSpells.sort((a, b) => a.level - b.level);
+    setPreparedSpells(sortedPreparedSpells);
     onClose();
     toast({
       title: `${spell.name} prepared!`,

@@ -23,7 +23,9 @@ export default function LearnSpellButton({ spell }) {
 
   const handleLearn = async (charId, spellId, onClose) => {
     await learn(charId, spellId);
-    setKnownSpells([...knownSpells, spell]);
+    const updatedKnownSpells = [...knownSpells, spell];
+    const sortedKnownSpells = updatedKnownSpells.sort((a, b) => a.level - b.level);
+    setKnownSpells(sortedKnownSpells);
     onClose();
     if (error) {
       toast({

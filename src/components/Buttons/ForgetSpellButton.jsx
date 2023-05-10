@@ -19,13 +19,15 @@ export default function ForgetSpellButton({ spell }) {
   const initRef = useRef();
   const { forget } = useSpell();
   const { characterInfo } = useCharacter();
-  const { knownSpells, setKnownSpells } = useSpellDetails();
+  const { knownSpells, setKnownSpells, preparedSpells, setPreparedSpells } = useSpellDetails();
 
   const handleForget = async (charId, spellId, onClose) => {
     await forget(charId, spellId);
     const removeForgottenSpell = (forgottenSpell) => spell.name !== forgottenSpell.name;
     const updatedKnownSpells = knownSpells.filter(removeForgottenSpell);
+    const updatedPreparedSpells = preparedSpells.filter(removeForgottenSpell);
     setKnownSpells(updatedKnownSpells);
+    setPreparedSpells(updatedPreparedSpells);
     onClose();
     toast({
       title: `${spell.name} forgotten!`,
