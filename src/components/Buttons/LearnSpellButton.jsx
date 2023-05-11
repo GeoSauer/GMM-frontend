@@ -65,7 +65,7 @@ export default function LearnSpellButton({ spell }) {
     const updatedAllSpells = [...filteredAllSpells, spell];
     const sortedAllSpells = updatedAllSpells.sort((a, b) => a.level - b.level);
     setAllSpells(sortedAllSpells);
-    console.log({ allSpells });
+
     onClose();
     if (error) {
       toast({

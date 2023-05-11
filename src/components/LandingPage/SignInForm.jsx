@@ -1,4 +1,3 @@
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/UserContext';
 import { useState } from 'react';
 import {
@@ -18,7 +17,6 @@ import {
 import { Field, Form, Formik } from 'formik';
 
 export default function SignInForm() {
-  const navigate = useNavigate();
   const { signIn, error } = useAuth();
 
   // * for showing/hiding the password value
