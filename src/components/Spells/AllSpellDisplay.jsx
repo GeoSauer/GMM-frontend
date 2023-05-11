@@ -5,12 +5,11 @@ import { useSpellDetails } from '../../context/SpellContext';
 import AllSpellCard from './AllSpellCard';
 
 export default function AllSpellDisplay() {
-  const { allSpells, loadingAll, loading } = useSpellDetails();
+  const { allSpells, loading } = useSpellDetails();
 
   return (
     <>
       <SpellSlots />
-      {/* {loadingAll ? ( */}
       {loading ? (
         <Loading />
       ) : (

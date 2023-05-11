@@ -26,9 +26,9 @@ export default function PreparedSpellCard({ spellDetails, spell }) {
           <Text>{spell.school}</Text>
         </Button>
         <VStack>
-          {spell.level === 0 && <CastCantripButton spell={spell} />}
+          {spell.level === 0 && <CastCantripButton spell={spell} spellDetails={spellDetails} />}
           {spellDetails.ritual && <CastRitualSpellButton spell={spell} />}
-          {spellDetails.concentration && (
+          {spellDetails.concentration && spell.level > 0 && (
             <CastConcentrationSpellButton spell={spell} spellDetails={spellDetails} />
           )}
           {!spellDetails.concentration && !spellDetails.ritual && spell.level > 0 && (

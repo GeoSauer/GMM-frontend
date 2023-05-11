@@ -5,14 +5,7 @@ import { useSpellDetails } from '../../context/SpellContext';
 import PreparedSpellCard from './PreparedSpellCard';
 
 export default function PreparedSpellDisplay() {
-  const {
-    preparedSpells,
-    availableSpellDetails,
-    loadingPrepared,
-    loadingAll,
-    loadingAvailable,
-    loading,
-  } = useSpellDetails();
+  const { preparedSpells, availableSpellDetails, loading } = useSpellDetails();
 
   const findSpellDetails = (spellName) => {
     const spellDetails = availableSpellDetails.find((spell) => spell.name === spellName);
@@ -22,7 +15,6 @@ export default function PreparedSpellDisplay() {
   return (
     <>
       <SpellSlots />
-      {/* {loadingPrepared ? ( */}
       {loading ? (
         <Loading />
       ) : (
@@ -30,7 +22,6 @@ export default function PreparedSpellDisplay() {
           {!preparedSpells.length && (
             <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
           )}
-          {/* {!loadingAll && !loadingAvailable && ( */}
           <>
             {preparedSpells.map((spell, index) => {
               const previousSpell = preparedSpells[index - 1];
@@ -51,7 +42,6 @@ export default function PreparedSpellDisplay() {
               );
             })}
           </>
-          {/* )} */}
         </Flex>
       )}
     </>

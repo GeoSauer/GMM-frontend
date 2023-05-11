@@ -42,6 +42,7 @@ export default function AllSpellCard({ spell }) {
             <>
               <Heading size="md">{spell.name}</Heading>
               <Text>{spell.school}</Text>
+              {/* <Text>{spell.classes}</Text> */}
             </>
           )}
         </Button>

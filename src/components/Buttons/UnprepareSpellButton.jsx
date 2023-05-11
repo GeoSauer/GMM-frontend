@@ -23,6 +23,7 @@ export default function UnprepareSpellButton({ spell }) {
 
   const handleUnprepare = async (charId, spellId, prepared, onClose) => {
     await unprepare({ charId, spellId, prepared });
+    spell.prepared = false;
     const removeUnpreparedSpell = (unpreparedSpell) => spell.name !== unpreparedSpell.name;
     const updatedPreparedSpells = preparedSpells.filter(removeUnpreparedSpell);
     setPreparedSpells(updatedPreparedSpells);
