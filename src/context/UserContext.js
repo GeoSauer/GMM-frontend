@@ -7,7 +7,7 @@ import {
   signOutUser,
   getLocalUser,
   storeLocalUser,
-  // verifyUser,
+  verifyUser,
 } from '../services/auth.js';
 
 import { getUserById } from '../services/users';
@@ -23,15 +23,15 @@ export default function UserProvider({ children }) {
   //TODO figure out what this whole ball o wax is doing
   //? it looks like this was functioning as it should and throwing a 401 on page load since !user
   //? keeping it turned off for now to keep errors clear
-  // const verify = async () => {
-  //   const response = await verifyUser();
-  //   setUser(response.user || null);
-  //   setLoading(false);
-  // };
+  const verify = async () => {
+    const response = await verifyUser();
+    setUser(response.user || null);
+    // setLoading(false);
+  };
 
-  // useEffect(() => {
-  //   verify();
-  // }, []);
+  useEffect(() => {
+    verify();
+  }, []);
 
   const setUserState = (user) => {
     storeLocalUser(user);
@@ -44,7 +44,7 @@ export default function UserProvider({ children }) {
       const fetchUserInfo = async () => {
         const results = await getUserById();
         setUserInfo(results);
-        // setLoading(false);
+        setLoading(false);
       };
       fetchUserInfo();
     }
@@ -65,21 +65,6 @@ export default function UserProvider({ children }) {
 export function useUser() {
   return useContext(UserContext);
 }
-
-// export function useUserInfo() {
-//   const { userInfo, setUserInfo, loading, setLoading } = useContext(UserContext);
-
-//   useEffect(() => {
-//     setLoading(true);
-//     const fetchUserInfo = async () => {
-//       const results = await getUserById();
-//       setUserInfo(results);
-//       setLoading(false);
-//     };
-//     fetchUserInfo();
-//   }, [setUserInfo, setLoading]);
-//   return { userInfo, setUserInfo, loading };
-// }
 
 export function useAuth() {
   const [error, setError] = useState(null);

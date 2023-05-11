@@ -11,8 +11,9 @@ export default function CharacterProvider({ children }) {
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState([]);
   const [levelUp, setLevelUp] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  const { userInfo, setLoading } = useUser();
+  const { userInfo, user } = useUser();
 
   useEffect(() => {
     if (userInfo.id) {
@@ -32,14 +33,16 @@ export default function CharacterProvider({ children }) {
       };
       fetchCharacters();
     }
-    //TODO on signout a 401 pops because currentCharacter is changed
-  }, [setLoading, userInfo, currentCharacter]);
+    //TODO on signout a 401 pops because currentCharacter is changed, annoying but kinda the same as verify in userContext
+  }, [userInfo, user, currentCharacter]);
 
   useEffect(() => {
     if (currentCharacter) {
+      setLoading(true);
       const fetchCharacter = async () => {
         const character = await Character.getCharacterById(currentCharacter);
         setCharacterInfo(character);
+        setLoading(false);
       };
       fetchCharacter();
     }
@@ -58,7 +61,7 @@ export default function CharacterProvider({ children }) {
     characterInfo,
     setCharacterInfo,
     setCharacterState,
-    // loading,
+    loading,
     setLoading,
     levelUp,
     setLevelUp,

@@ -22,8 +22,8 @@ import { AddIcon } from '@chakra-ui/icons';
 import Confetti from 'react-confetti';
 
 export default function CharacterPage() {
-  const { characterList, levelUp } = useCharacter();
-  const { userInfo, loading } = useUser();
+  const { characterList, levelUp, loading } = useCharacter();
+  const { userInfo } = useUser();
   const location = useLocation();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
@@ -40,7 +40,7 @@ export default function CharacterPage() {
         </>
       )}
 
-      {location.pathname === '/choose-character' && !loading && (
+      {location.pathname === '/choose-character' && !loading && characterList.length && (
         <>
           <Heading>
             Welcome

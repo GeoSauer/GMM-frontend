@@ -49,7 +49,6 @@ export default function SignInForm() {
               onSubmit={async (values, actions) => {
                 await signIn(values);
                 actions.setSubmitting(false);
-                navigate('/choose-character');
               }}
             >
               {(props) => (

@@ -3,8 +3,8 @@ import { useCharacter } from '../../context/CharacterContext';
 import { useUser } from '../../context/UserContext';
 
 export default function UserInfo() {
-  const { userInfo, loading } = useUser();
-  const { characterInfo } = useCharacter();
+  const { userInfo } = useUser();
+  const { characterInfo, loading } = useCharacter();
 
   return (
     <>

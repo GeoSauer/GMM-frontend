@@ -31,9 +31,6 @@ import AllSpellDisplay from './components/Spells/AllSpellDisplay';
 //! OMG spells aren't populating correctly for the current character OR user
 //! DeleteCharacterButton not triggering re-render
 //! choose-character is sometimes busted but fixes on refresh (something about going or refreshing, I don't remember)
-//! push non-class spell details into spellDetails state once learned
-//! ^^^ this is working for state but not persisting after refresh
-//! LearnSpell is also causing a re-render due to !spell.classes.includes()
 //! ^^^ it's also pushing dupes into allSpells
 //! Should AllSpells actually be....ALL??????? (not just up to character level?)
 

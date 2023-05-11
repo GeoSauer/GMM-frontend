@@ -14,13 +14,11 @@ import {
 import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
-import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Characters';
 
 export default function EditCharacterForm({ close }) {
-  const { loading } = useUser();
-  const { characterInfo, setCharacterInfo, setLevelUp } = useCharacter();
+  const { characterInfo, setCharacterInfo, setLevelUp, loading } = useCharacter();
   const toast = useToast();
 
   const CharacterSchema = Yup.object().shape({
