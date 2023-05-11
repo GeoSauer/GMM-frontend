@@ -23,13 +23,18 @@ export default function SpellProvider({ children }) {
         const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
         const fetchedAllSpells = await Spells.getAllSpells(characterInfo.id);
 
-        const fetchedSpellDetails = await Promise.all(
+        const fetchedAvailableSpellDetails = await Promise.all(
           fetchedAvailableSpells.map(async (spell) => {
             return await Spells.getSpellDetails(spell.id);
           })
         );
+        const fetchedKnownSpellDetails = await Promise.all(
+          fetchedKnownSpells.map(async (spell) => {
+            return await Spells.getSpellDetails(spell.id);
+          })
+        );
         setAvailableSpells(fetchedAvailableSpells);
-        setAvailableSpellDetails(fetchedSpellDetails);
+        setAvailableSpellDetails([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails]);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
         setAllSpells(fetchedAllSpells);

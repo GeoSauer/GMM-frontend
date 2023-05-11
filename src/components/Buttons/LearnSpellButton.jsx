@@ -40,7 +40,7 @@ export default function LearnSpellButton({ spell }) {
     spell.known = true;
 
     if (location.pathname === '/all-spells') {
-      if (!availableSpells.find((duplicateSpell) => duplicateSpell.name === spell.name)) {
+      if (!availableSpells.find((newSpell) => newSpell.name === spell.name)) {
         setLoading(true);
         const fetchedSpellDetails = await Spells.getSpellDetails(spell.id);
         setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
