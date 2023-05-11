@@ -16,7 +16,7 @@ export default function CharacterProvider({ children }) {
   const { userInfo, user } = useUser();
 
   useEffect(() => {
-    if (userInfo.id) {
+    if (userInfo.id && user) {
       setLoading(true);
       const fetchCharacters = async () => {
         const characters = await Character.getAllCharacters();

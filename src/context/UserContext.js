@@ -20,9 +20,8 @@ export default function UserProvider({ children }) {
   const [user, setUser] = useState(localUser);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
-  //TODO figure out what this whole ball o wax is doing
-  //? it looks like this was functioning as it should and throwing a 401 on page load since !user
-  //? keeping it turned off for now to keep errors clear
+
+  //TODO decide if I even wanna keep this
   const verify = async () => {
     const response = await verifyUser();
     setUser(response.user || null);

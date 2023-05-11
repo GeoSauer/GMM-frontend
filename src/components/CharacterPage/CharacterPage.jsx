@@ -40,7 +40,7 @@ export default function CharacterPage() {
         </>
       )}
 
-      {location.pathname === '/choose-character' && !loading && characterList.length && (
+      {location.pathname === '/choose-character' && !loading && (
         <>
           <Heading>
             Welcome
