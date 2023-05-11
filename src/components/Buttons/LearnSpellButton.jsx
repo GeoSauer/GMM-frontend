@@ -14,18 +14,21 @@ import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
+import { useLocation } from 'react-router-dom';
 
 export default function LearnSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
+  const location = useLocation();
   const {
     knownSpells,
     setKnownSpells,
     preparedSpells,
     setPreparedSpells,
     allSpells,
+    availableSpells,
     setAllSpells,
     setLoading,
     availableSpellDetails,
@@ -34,22 +37,19 @@ export default function LearnSpellButton({ spell }) {
 
   const handleLearn = async (charId, spellId, onClose) => {
     await learn(charId, spellId);
-    spell['known'] = true;
-    // if (spell.classes) {
-    //   const newSpell = allSpells.find((duplicateSpell) => duplicateSpell.name === spell.name);
-    //   const re = /\s*(?:;|$)\s*/;
-    //   const classList = spell.classes.split(re);
-    //   if (!classList?.includes(characterInfo.class)) {
-    //     // const classes = ['Cleric, Druid'];
-    //     // console.log(classes.includes('Cleric'));
-    //     setLoading(true);
-    //     const fetchedSpellDetails = await Spells.getSpellDetails(spell.id);
-    //     setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
-    //     setLoading(false);
-    //   }
-    // }
+    spell.known = true;
+
+    if (location.pathname === '/all-spells') {
+      if (!availableSpells.find((duplicateSpell) => duplicateSpell.name === spell.name)) {
+        setLoading(true);
+        const fetchedSpellDetails = await Spells.getSpellDetails(spell.id);
+        setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
+        setLoading(false);
+      }
+    }
+
     if (spell.level === 0) {
-      spell['prepared'] = true;
+      spell.prepared = true;
       const updatedPreparedSpells = [...preparedSpells, spell];
       const sortedPreparedSpells = updatedPreparedSpells.sort((a, b) => a.level - b.level);
       setPreparedSpells(sortedPreparedSpells);
