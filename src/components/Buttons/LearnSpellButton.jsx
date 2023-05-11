@@ -23,16 +23,17 @@ export default function LearnSpellButton({ spell }) {
   const { characterInfo } = useCharacter();
   const location = useLocation();
   const {
+    allSpells,
+    setAllSpells,
+    availableSpells,
+    setAvailableSpells,
+    availableSpellDetails,
+    setAvailableSpellDetails,
     knownSpells,
     setKnownSpells,
     preparedSpells,
     setPreparedSpells,
-    allSpells,
-    availableSpells,
-    setAllSpells,
     setLoading,
-    availableSpellDetails,
-    setAvailableSpellDetails,
   } = useSpellDetails();
 
   const handleLearn = async (charId, spellId, onClose) => {
@@ -51,19 +52,50 @@ export default function LearnSpellButton({ spell }) {
     if (spell.level === 0) {
       spell.prepared = true;
       const updatedPreparedSpells = [...preparedSpells, spell];
-      const sortedPreparedSpells = updatedPreparedSpells.sort((a, b) => a.level - b.level);
+      const sortedPreparedSpells = updatedPreparedSpells.sort((a, b) => {
+        if (a.level === b.level) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return a.level - b.level;
+        }
+      });
       setPreparedSpells(sortedPreparedSpells);
     }
 
     const updatedKnownSpells = [...knownSpells, spell];
-    const sortedKnownSpells = updatedKnownSpells.sort((a, b) => a.level - b.level);
+    const sortedKnownSpells = updatedKnownSpells.sort((a, b) => {
+      if (a.level === b.level) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.level - b.level;
+      }
+    });
     setKnownSpells(sortedKnownSpells);
+
+    const filteredAvailableSpells = availableSpells.filter(
+      (duplicateSpell) => duplicateSpell.name !== spell.name
+    );
+    const updatedAvailableSpells = [...filteredAvailableSpells, spell];
+    const sortedAvailableSpells = updatedAvailableSpells.sort((a, b) => {
+      if (a.level === b.level) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.level - b.level;
+      }
+    });
+    setAvailableSpells(sortedAvailableSpells);
 
     const filteredAllSpells = allSpells.filter(
       (duplicateSpell) => duplicateSpell.name !== spell.name
     );
     const updatedAllSpells = [...filteredAllSpells, spell];
-    const sortedAllSpells = updatedAllSpells.sort((a, b) => a.level - b.level);
+    const sortedAllSpells = updatedAllSpells.sort((a, b) => {
+      if (a.level === b.level) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.level - b.level;
+      }
+    });
     setAllSpells(sortedAllSpells);
 
     onClose();

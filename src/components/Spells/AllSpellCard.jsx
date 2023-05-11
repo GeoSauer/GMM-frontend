@@ -19,7 +19,7 @@ export default function AllSpellCard({ spell }) {
   const [spellDetails, setSpellDetails] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const classes = spell.classes.toString().replace(/,/g, ', ');
+  // const classes = spell?.classes.toString().replace(/,/g, ', ');
 
   const handleClick = () => {
     if (spell.id && !isOpen) {
@@ -44,7 +44,7 @@ export default function AllSpellCard({ spell }) {
             <>
               <Heading size="md">{spell.name}</Heading>
               <Text>{spell.school}</Text>
-              <Text>{classes} </Text>
+              {/* <Text>{classes} </Text> */}
             </>
           )}
         </Button>
