@@ -5,23 +5,23 @@ import { get } from './requests';
 const SPELLS = 'http://localhost:7890/api/v1/spells';
 
 export class Spells {
-  static async getAllSpells() {
+  static async getAll() {
     const { data } = await get(`${SPELLS}/all`);
     return data;
   }
-  static async getAvailableSpells(charId) {
+  static async getAvailable(charId) {
     const { data } = await get(`${SPELLS}/${charId}/available`);
     return data;
   }
-  static async getKnownSpells(charId) {
+  static async getKnown(charId) {
     const { data } = await get(`${SPELLS}/${charId}/known`);
     return data;
   }
-  static async getPreparedSpells(charId) {
+  static async getPrepared(charId) {
     const { data } = await get(`${SPELLS}/${charId}/prepared`);
     return data;
   }
-  static async getSpellDetails(spellId) {
+  static async getDetails(spellId) {
     const { data } = await get(`${SPELLS}/${spellId}/details`);
     return data;
   }

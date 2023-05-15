@@ -6,27 +6,27 @@ import { get, patch, post, del } from './requests';
 const CHARACTERS = 'http://localhost:7890/api/v1/characters';
 
 export class Character {
-  static async createCharacter(info) {
+  static async create(info) {
     const { data } = await post(`${CHARACTERS}/`, info);
     return data;
   }
 
-  static async getCharacterById(charId) {
+  static async getById(charId) {
     const { data } = await get(`${CHARACTERS}/${charId}`);
     return data;
   }
 
-  static async getAllCharacters() {
+  static async getAll() {
     const { data } = await get(`${CHARACTERS}/all`);
     return data;
   }
 
-  static async updateCharacterInfo(updatedInfo) {
+  static async updateInfo(updatedInfo) {
     const { data } = await patch(`${CHARACTERS}/update`, updatedInfo);
     return data;
   }
 
-  static async deleteCharacter(charId) {
+  static async delete(charId) {
     const { data } = await del(`${CHARACTERS}/${charId}`);
     return data;
   }

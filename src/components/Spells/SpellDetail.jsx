@@ -33,7 +33,7 @@ export default function SpellDetail({ spellDetails }) {
               </Heading>
               <Text pt="2" fontSize="sm">
                 {spellDetails.castingTime}
-                {spellDetails.ritual && ', or ritual (+10 minutes)'}
+                {spellDetails.ritual && ', or ritual (10 minutes)'}
               </Text>
             </Box>
           )}

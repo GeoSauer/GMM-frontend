@@ -23,7 +23,7 @@ export default function DeleteCharacterButton(character) {
 
   //TODO this should remove the need for a refresh to display changes, and yet
   const handleDelete = async (onClose) => {
-    await Character.deleteCharacter(character.id);
+    await Character.delete(character.id);
     const removeDeletedCharacter = (deletedCharacter) => character.id !== deletedCharacter.id;
     const updatedCharacterList = characterList.filter(removeDeletedCharacter);
     setCharacterList(updatedCharacterList);

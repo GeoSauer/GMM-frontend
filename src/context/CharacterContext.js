@@ -19,7 +19,7 @@ export default function CharacterProvider({ children }) {
     if (userInfo.id && user) {
       setLoading(true);
       const fetchCharacters = async () => {
-        const characters = await Character.getAllCharacters();
+        const characters = await Character.getAll();
         setCharacterList(characters);
         if (currentCharacter) {
           const currentCharacterIndex = characters.findIndex(
@@ -39,7 +39,7 @@ export default function CharacterProvider({ children }) {
     if (currentCharacter) {
       setLoading(true);
       const fetchCharacter = async () => {
-        const character = await Character.getCharacterById(currentCharacter);
+        const character = await Character.getById(currentCharacter);
         setCharacterInfo(character);
         setLoading(false);
       };

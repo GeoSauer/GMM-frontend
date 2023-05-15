@@ -53,9 +53,9 @@ export default function LearnSpellButton({ spell }) {
     spell.known = true;
 
     if (location.pathname === '/all-spells') {
-      if (!availableSpells.find((newSpell) => newSpell.name === spell.name)) {
+      if (availableSpells.find((newSpell) => newSpell.name !== spell.name)) {
         setLoading(true);
-        const fetchedSpellDetails = await Spells.getSpellDetails(spell.id);
+        const fetchedSpellDetails = await Spells.getDetails(spell.id);
         setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
         setLoading(false);
       }

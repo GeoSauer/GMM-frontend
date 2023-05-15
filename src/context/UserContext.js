@@ -25,7 +25,6 @@ export default function UserProvider({ children }) {
   const verify = async () => {
     const response = await verifyUser();
     setUser(response.user || null);
-    // setLoading(false);
   };
 
   useEffect(() => {

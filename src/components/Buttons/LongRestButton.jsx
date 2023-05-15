@@ -22,7 +22,7 @@ export default function LongRestButton() {
   const { characterInfo, setCharacterInfo } = useCharacter();
 
   const handleLongRest = async (onClose) => {
-    const restedCharacter = await Character.updateCharacterInfo(characterInfo);
+    const restedCharacter = await Character.updateInfo(characterInfo);
     setCharacterInfo(restedCharacter);
     onClose();
     toast({

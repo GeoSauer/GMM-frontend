@@ -22,13 +22,13 @@ export default function AllSpellCard({ spell }) {
   const [loading, setLoading] = useState(false);
   const { characterInfo } = useCharacter();
 
-  const classes = spell?.classes.toString().replace(/,/g, ', ');
+  const classes = spell.classes?.toString().replace(/,/g, ', ');
 
   const handleClick = () => {
     if (spell.id && !isOpen) {
       setLoading(true);
       const fetchSpellDetails = async () => {
-        const fetchedSpellDetails = await Spells.getSpellDetails(spell.id);
+        const fetchedSpellDetails = await Spells.getDetails(spell.id);
         setSpellDetails(fetchedSpellDetails);
         setLoading(false);
         onToggle();

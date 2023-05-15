@@ -74,7 +74,7 @@ export default function SignInForm() {
               validationSchema={SignupSchema}
               onSubmit={async (values, actions) => {
                 await signUp(values);
-                const character = await Character.createCharacter(values);
+                const character = await Character.create(values);
                 setCharacterState(character.id);
                 navigate('/available-spells');
                 actions.setSubmitting(false);

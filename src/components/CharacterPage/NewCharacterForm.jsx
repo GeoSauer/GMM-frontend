@@ -47,7 +47,7 @@ export default function NewCharacterForm({ onClose }) {
               }}
               validationSchema={CharacterSchema}
               onSubmit={async (values, actions) => {
-                const character = await Character.createCharacter(values);
+                const character = await Character.create(values);
                 setCharacterState(character.id);
                 navigate('/available-spells');
                 onClose();

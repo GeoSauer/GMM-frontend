@@ -42,7 +42,7 @@ export default function EditCharacterForm({ close }) {
                 initialValues={characterInfo}
                 validationSchema={CharacterSchema}
                 onSubmit={async (values, actions) => {
-                  await Character.updateCharacterInfo(values);
+                  await Character.updateInfo(values);
                   setCharacterInfo((prevState) => {
                     return { ...prevState, ...values };
                   });

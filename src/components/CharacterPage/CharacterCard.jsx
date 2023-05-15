@@ -53,7 +53,7 @@ export default function CharacterCard(character) {
     const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
     characterList.splice(currentCharacterIndex, 1)[0];
 
-    await Character.deleteCharacter(character.id);
+    await Character.delete(character.id);
     onClose();
   };
 
