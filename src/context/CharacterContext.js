@@ -33,7 +33,6 @@ export default function CharacterProvider({ children }) {
       };
       fetchCharacters();
     }
-    //TODO on signout a 401 pops because currentCharacter is changed, annoying but kinda the same as verify in userContext
   }, [userInfo, user, currentCharacter]);
 
   useEffect(() => {

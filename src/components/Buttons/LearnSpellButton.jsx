@@ -36,6 +36,18 @@ export default function LearnSpellButton({ spell }) {
     setLoading,
   } = useSpellDetails();
 
+  const updateSpellList = (spellArray, currentSpell) => {
+    const updatedSpellList = [...spellArray, currentSpell];
+    const sortedSpellList = updatedSpellList.sort((a, b) => {
+      if (a.level === b.level) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.level - b.level;
+      }
+    });
+    return sortedSpellList;
+  };
+
   const handleLearn = async (charId, spellId, onClose) => {
     await learn(charId, spellId);
     spell.known = true;
@@ -51,69 +63,41 @@ export default function LearnSpellButton({ spell }) {
 
     if (spell.level === 0) {
       spell.prepared = true;
-      const updatedPreparedSpells = [...preparedSpells, spell];
-      const sortedPreparedSpells = updatedPreparedSpells.sort((a, b) => {
-        if (a.level === b.level) {
-          return a.name.localeCompare(b.name);
-        } else {
-          return a.level - b.level;
-        }
-      });
-      setPreparedSpells(sortedPreparedSpells);
+      const updatedPreparedSpells = updateSpellList(preparedSpells, spell);
+      setPreparedSpells(updatedPreparedSpells);
     }
 
-    const updatedKnownSpells = [...knownSpells, spell];
-    const sortedKnownSpells = updatedKnownSpells.sort((a, b) => {
-      if (a.level === b.level) {
-        return a.name.localeCompare(b.name);
-      } else {
-        return a.level - b.level;
-      }
-    });
-    setKnownSpells(sortedKnownSpells);
+    const updatedKnownSpells = updateSpellList(knownSpells, spell);
+    setKnownSpells(updatedKnownSpells);
 
     const filteredAvailableSpells = availableSpells.filter(
       (duplicateSpell) => duplicateSpell.name !== spell.name
     );
-    const updatedAvailableSpells = [...filteredAvailableSpells, spell];
-    const sortedAvailableSpells = updatedAvailableSpells.sort((a, b) => {
-      if (a.level === b.level) {
-        return a.name.localeCompare(b.name);
-      } else {
-        return a.level - b.level;
-      }
-    });
-    setAvailableSpells(sortedAvailableSpells);
+    const updatedAvailableSpells = updateSpellList(filteredAvailableSpells, spell);
+    setAvailableSpells(updatedAvailableSpells);
 
     const filteredAllSpells = allSpells.filter(
       (duplicateSpell) => duplicateSpell.name !== spell.name
     );
-    const updatedAllSpells = [...filteredAllSpells, spell];
-    const sortedAllSpells = updatedAllSpells.sort((a, b) => {
-      if (a.level === b.level) {
-        return a.name.localeCompare(b.name);
-      } else {
-        return a.level - b.level;
-      }
-    });
-    setAllSpells(sortedAllSpells);
+    const updatedAllSpells = updateSpellList(filteredAllSpells, spell);
+    setAllSpells(updatedAllSpells);
 
     onClose();
-    if (error) {
-      toast({
-        title: { error },
-        status: 'error',
-        duration: 3000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: `${spell.name} learned!`,
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
-    }
+    // if (error) {
+    //   toast({
+    //     title: { error },
+    //     status: 'error',
+    //     duration: 3000,
+    //     isClosable: true,
+    //   });
+    // } else {
+    toast({
+      title: `${spell.name} learned!`,
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
+    // }
   };
 
   return (
