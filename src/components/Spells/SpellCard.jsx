@@ -28,7 +28,14 @@ export default function SpellCard({ spellDetails, spell }) {
   return (
     <>
       <VStack>
-        <Button onClick={onToggle} display={'block'} w={'800px'} h={'20'} p={'2'} mt={'2'}>
+        <Button
+          onClick={onToggle}
+          display={'block'}
+          w={{ base: '90vw', md: '600px' }}
+          h={'20'}
+          p={'2'}
+          mt={'2'}
+        >
           <Heading size="md">{spell.name}</Heading>
           <Text>{spell.school}</Text>
         </Button>
@@ -63,7 +70,7 @@ export default function SpellCard({ spellDetails, spell }) {
         </HStack>
       </VStack>
 
-      <Container maxW={'800px'} centerContent>
+      <Container maxW={'600px'} centerContent>
         <Collapse in={isOpen} animateOpacity>
           <Box
             p="40px"

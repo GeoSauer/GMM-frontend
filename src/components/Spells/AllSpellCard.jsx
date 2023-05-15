@@ -40,7 +40,14 @@ export default function AllSpellCard({ spell }) {
   return (
     <>
       <VStack>
-        <Button onClick={handleClick} display={'block'} w={'800px'} h={'20'} p={'2'} mt={'2'}>
+        <Button
+          onClick={handleClick}
+          display={'block'}
+          w={{ base: '90vw', md: '600px' }}
+          h={'20'}
+          p={'2'}
+          mt={'2'}
+        >
           {loading ? (
             <Loading />
           ) : (
@@ -59,7 +66,7 @@ export default function AllSpellCard({ spell }) {
         </HStack>
       </VStack>
 
-      <Container maxW={'800px'} centerContent>
+      <Container maxW={'600px'} centerContent>
         <Collapse in={isOpen} animateOpacity>
           <Box
             p="10px"
