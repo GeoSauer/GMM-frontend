@@ -13,6 +13,9 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
+  Tabs,
+  TabList,
+  Tab,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
@@ -36,18 +39,30 @@ export default function Header() {
         <HStack spacing={8} alignItems={'center'} justifyContent={'center'}>
           <Box>Grimoire for the Modern Mage</Box>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
-              Prepared Spells
-            </NavLink>
-            <NavLink to="known-spells" alt="known" title="Known Spells">
-              Known Spells
-            </NavLink>
-            <NavLink to="available-spells" alt="available" title="Available Spells">
-              Available Spells
-            </NavLink>
-            <NavLink to="all-spells" alt="all" title="All Spells">
-              All Spells
-            </NavLink>
+            <Tabs>
+              <TabList>
+                <Tab>
+                  <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
+                    Prepared Spells
+                  </NavLink>
+                </Tab>
+                <Tab>
+                  <NavLink to="known-spells" alt="known" title="Known Spells">
+                    Known Spells
+                  </NavLink>
+                </Tab>
+                <Tab>
+                  <NavLink to="available-spells" alt="available" title="Available Spells">
+                    Available Spells
+                  </NavLink>
+                </Tab>
+                <Tab>
+                  <NavLink to="all-spells" alt="all" title="All Spells">
+                    All Spells
+                  </NavLink>
+                </Tab>
+              </TabList>
+            </Tabs>
             <LongRestButton />
           </HStack>
         </HStack>
