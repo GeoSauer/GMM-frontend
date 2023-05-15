@@ -3,7 +3,6 @@ import {
   Flex,
   Avatar,
   HStack,
-  IconButton,
   Button,
   Menu,
   MenuButton,
@@ -16,6 +15,8 @@ import {
   Tabs,
   TabList,
   Tab,
+  Text,
+  MenuGroup,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
@@ -29,15 +30,47 @@ export default function Header() {
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
-        <IconButton
-          size={'md'}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          aria-label={'Open Menu'}
-          display={{ md: 'none' }}
-          onClick={isOpen ? onClose : onOpen}
-        />
+        {/* //* mobile nav ------------------------------ */}
+        <Stack display={{ base: 'sm', md: 'none' }}>
+          <Menu>
+            <MenuButton>
+              <HamburgerIcon />
+            </MenuButton>
+            <MenuList alignContent={'center'}>
+              <MenuGroup title="Spell Pages">
+                <MenuItem value="prepared">
+                  <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
+                    Prepared
+                  </NavLink>
+                </MenuItem>
+                <MenuItem value="known">
+                  <NavLink to="known-spells" alt="known" title="Known Spells">
+                    Known
+                  </NavLink>
+                </MenuItem>
+                <MenuItem value="available">
+                  <NavLink to="available-spells" alt="all" title="Available Spells">
+                    Available
+                  </NavLink>
+                </MenuItem>
+                <MenuItem value="all">
+                  <NavLink to="all-spells" alt="all" title="All Spells">
+                    All
+                  </NavLink>
+                </MenuItem>
+              </MenuGroup>
+              <MenuDivider />
+              <MenuGroup title="Actions">
+                <LongRestButton />
+              </MenuGroup>
+            </MenuList>
+          </Menu>
+        </Stack>
+        {/* //* mobile nav ------------------------------ */}
+
+        {/* //* desktop nav ============================== */}
         <HStack spacing={8} alignItems={'center'} justifyContent={'center'}>
-          <Box>Grimoire for the Modern Mage</Box>
+          <Text as="span">Grimoire for the Modern Mage</Text>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
             <Tabs>
               <TabList>
@@ -66,6 +99,9 @@ export default function Header() {
             <LongRestButton />
           </HStack>
         </HStack>
+        {/* //* desktop nav ============================== */}
+
+        {/* //* character/settings menu +++++++++++++++++++++++++++ */}
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
@@ -97,48 +133,8 @@ export default function Header() {
             </MenuList>
           </Menu>
         </Flex>
+        {/* //* character/settings menu +++++++++++++++++++++++++++ */}
       </Flex>
-
-      {isOpen ? (
-        // <Menu>
-        //   <MenuList alignContent={'center'}>
-        //     <MenuItem>
-        //       <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
-        //         Prepared Spells
-        //       </NavLink>
-        //     </MenuItem>
-        //     <MenuItem>
-        //       <NavLink to="known-spells" alt="known" title="Known Spells">
-        //         Known Spells
-        //       </NavLink>
-        //     </MenuItem>
-        //     <MenuItem>
-        //       <NavLink to="available-spells" alt="all" title="Available Spells">
-        //         Available Spells
-        //       </NavLink>
-        //     </MenuItem>
-        //     <MenuDivider />
-        //     <LongRestButton />
-        //   </MenuList>
-        // </Menu>
-        <Box pb={4} display={{ md: 'none' }}>
-          <Stack as={'nav'} spacing={4}>
-            <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
-              Prepared Spells
-            </NavLink>
-            <NavLink to="known-spells" alt="known" title="Known Spells">
-              Known Spells
-            </NavLink>
-            <NavLink to="available-spells" alt="available" title="Available Spells">
-              Available Spells
-            </NavLink>
-            <NavLink to="all-spells" alt="all" title="All Spells">
-              All Spells
-            </NavLink>
-            <LongRestButton />
-          </Stack>
-        </Box>
-      ) : null}
     </Box>
   );
 }
