@@ -21,7 +21,7 @@ export default function SpellProvider({ children }) {
         const fetchedAvailableSpells = await Spells.getAvailableSpells(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnownSpells(characterInfo.id);
         const fetchedPreparedSpells = await Spells.getPreparedSpells(characterInfo.id);
-        const fetchedAllSpells = await Spells.getAllSpells(characterInfo.id);
+        const fetchedAllSpells = await Spells.getAllSpells();
 
         const fetchedAvailableSpellDetails = await Promise.all(
           fetchedAvailableSpells.map(async (spell) => {

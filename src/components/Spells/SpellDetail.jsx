@@ -14,11 +14,6 @@ import {
   Td,
   TableCaption,
   TableContainer,
-  // Accordion,
-  // AccordionItem,
-  // AccordionButton,
-  // AccordionIcon,
-  // AccordionPanel,
 } from '@chakra-ui/react';
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import gfm from 'remark-gfm';
@@ -28,24 +23,6 @@ export default function SpellDetail({ spellDetails }) {
   const { characterInfo } = useCharacter();
 
   return (
-    // <Accordion defaultIndex={[0]} allowMultiple>
-    //   {spellDetails.castingTime && (
-    //     <AccordionItem>
-    //       <h2>
-    //         <AccordionButton>
-    //           <Box as="span" flex="1" textAlign="left" textTransform="uppercase">
-    //             Casting Time
-    //           </Box>
-    //           <AccordionIcon />
-    //         </AccordionButton>
-    //       </h2>
-    //       <AccordionPanel pb={4}>
-    //         {spellDetails.castingTime}
-    //         {spellDetails.ritual && ', or ritual (+10 minutes)'}
-    //       </AccordionPanel>
-    //     </AccordionItem>
-    //   )}
-    // </Accordion>
     <Card>
       <CardBody>
         <Stack divider={<StackDivider />} spacing="4">

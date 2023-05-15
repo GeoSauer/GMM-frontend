@@ -5,8 +5,8 @@ import { get } from './requests';
 const SPELLS = 'http://localhost:7890/api/v1/spells';
 
 export class Spells {
-  static async getAllSpells(charId) {
-    const { data } = await get(`${SPELLS}/${charId}/all`);
+  static async getAllSpells() {
+    const { data } = await get(`${SPELLS}/all`);
     return data;
   }
   static async getAvailableSpells(charId) {

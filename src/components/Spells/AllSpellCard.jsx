@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Collapse,
+  Container,
   Heading,
   HStack,
   Text,
@@ -13,13 +14,15 @@ import LearnSpellButton from '../Buttons/LearnSpellButton';
 import { Spells } from '../../services/Spells';
 import { useState } from 'react';
 import Loading from '../PageLayout/Loading';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function AllSpellCard({ spell }) {
   const { isOpen, onToggle } = useDisclosure();
   const [spellDetails, setSpellDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { characterInfo } = useCharacter();
 
-  // const classes = spell?.classes.toString().replace(/,/g, ', ');
+  const classes = spell?.classes.toString().replace(/,/g, ', ');
 
   const handleClick = () => {
     if (spell.id && !isOpen) {
@@ -36,32 +39,40 @@ export default function AllSpellCard({ spell }) {
 
   return (
     <>
-      <HStack>
-        <Button onClick={handleClick} display={'block'} w={'sm'} h={'20'} p={'2'} mt={'2'}>
+      <VStack>
+        <Button onClick={handleClick} display={'block'} w={'800px'} h={'20'} p={'2'} mt={'2'}>
           {loading ? (
             <Loading />
           ) : (
             <>
               <Heading size="md">{spell.name}</Heading>
               <Text>{spell.school}</Text>
-              {/* <Text>{classes} </Text> */}
+              <Text>{classes} </Text>
             </>
           )}
         </Button>
-        <VStack>{!spell.known && <LearnSpellButton spell={spell} />}</VStack>
-      </HStack>
-      <Collapse in={isOpen} animateOpacity>
-        <Box
-          p="40px"
-          color="white"
-          bg="teal.500"
-          rounded="md"
-          shadow="md"
-          // onClick={onToggle}
-        >
-          {!loading ? <SpellDetail spellDetails={spellDetails} /> : <Loading />}
-        </Box>
-      </Collapse>
+        <HStack>
+          {!spell.known && spell.level <= characterInfo.charLvl && (
+            <LearnSpellButton spell={spell} />
+          )}
+          {spell.level > characterInfo.charLvl && <Button isDisabled={true}> Learn</Button>}
+        </HStack>
+      </VStack>
+
+      <Container maxW={'800px'} centerContent>
+        <Collapse in={isOpen} animateOpacity>
+          <Box
+            p="10px"
+            color="white"
+            bg="teal.500"
+            rounded="md"
+            shadow="md"
+            // onClick={onToggle}
+          >
+            {!loading ? <SpellDetail spellDetails={spellDetails} /> : <Loading />}
+          </Box>
+        </Collapse>
+      </Container>
     </>
   );
 }

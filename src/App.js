@@ -6,10 +6,8 @@ import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
 import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
-import AvailableSpellDisplay from './components/Spells/AvailableSpellDisplay';
-import KnownSpellDisplay from './components/Spells/KnownSpellDisplay';
-import PreparedSpellDisplay from './components/Spells/PreparedSpellDisplay';
 import AllSpellDisplay from './components/Spells/AllSpellDisplay';
+import SpellDisplay from './components/Spells/SpellDisplay';
 
 function App() {
   return (
@@ -21,9 +19,9 @@ function App() {
         <Route path="choose-character" element={<CharacterPage />} />
         <Route element={<Layout />}>
           <Route path="all-spells" element={<AllSpellDisplay />} />
-          <Route path="available-spells" element={<AvailableSpellDisplay />} />
-          <Route path="known-spells" element={<KnownSpellDisplay />} />
-          <Route path="prepared-spells" element={<PreparedSpellDisplay />} />
+          <Route path="available-spells" element={<SpellDisplay />} />
+          <Route path="known-spells" element={<SpellDisplay />} />
+          <Route path="prepared-spells" element={<SpellDisplay />} />
           <Route path="characters" element={<CharacterPage />} />
           <Route path="settings">
             <Route index element={<SettingsPage />} />
