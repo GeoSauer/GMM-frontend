@@ -15,13 +15,12 @@ import { Character } from '../../services/Characters';
 import { truncateCharacterName } from '../../utils/utils';
 import { useCharacter } from '../../context/CharacterContext';
 
-export default function DeleteCharacterButton(character) {
+export default function DeleteCharacterButton({ character }) {
   const toast = useToast();
   const initRef = useRef();
   const { characterList, setCharacterList } = useCharacter();
   const truncatedCharacterName = truncateCharacterName(character);
 
-  //TODO this should remove the need for a refresh to display changes, and yet
   const handleDelete = async (onClose) => {
     await Character.delete(character.id);
     const removeDeletedCharacter = (deletedCharacter) => character.id !== deletedCharacter.id;

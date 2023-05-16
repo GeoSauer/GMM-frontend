@@ -5,14 +5,6 @@ import {
   Flex,
   Heading,
   Image,
-  Portal,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
   Stack,
   Text,
   VStack,
@@ -27,17 +19,17 @@ import {
 } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
-import { Character } from '../../services/Characters';
 import { getLocalCharacter } from '../../services/auth';
 import { useRef } from 'react';
 import EditCharacterForm from './EditCharacterForm';
 import { truncateCharacterName } from '../../utils/utils';
+import DeleteCharacterButton from '../Buttons/DeleteCharacterButton';
 
 export default function CharacterCard(character) {
   const localCharacter = getLocalCharacter();
-  const { setCharacterState, characterList, setCharacterList } = useCharacter();
+  const { setCharacterState, characterList } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { firstField, initRef } = useRef();
+  const { firstField } = useRef();
 
   const truncatedCharacterName = truncateCharacterName(character);
 
@@ -46,15 +38,6 @@ export default function CharacterCard(character) {
     const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
     const currentCharacter = characterList.splice(currentCharacterIndex, 1)[0];
     characterList.unshift(currentCharacter);
-    // setCharacterList(characterList);
-  };
-
-  const handleDelete = async (onClose) => {
-    const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
-    characterList.splice(currentCharacterIndex, 1)[0];
-
-    await Character.delete(character.id);
-    onClose();
   };
 
   return (
@@ -114,53 +97,10 @@ export default function CharacterCard(character) {
             >
               Set Active
             </Button>
-
-            <Popover initialFocusRef={initRef}>
-              {({ onClose }) => (
-                <>
-                  <PopoverTrigger>
-                    <Button
-                      w={'fit'}
-                      mt={8}
-                      bg={'gray.900'}
-                      color={'white'}
-                      rounded={'md'}
-                      _hover={{
-                        transform: 'translateY(-2px)',
-                        boxShadow: 'lg',
-                      }}
-                    >
-                      Delete
-                    </Button>
-                  </PopoverTrigger>
-                  <Portal>
-                    <PopoverContent>
-                      <PopoverArrow />
-                      <PopoverHeader>Sure you wanna delete {truncatedCharacterName}?</PopoverHeader>
-                      <PopoverCloseButton />
-                      <PopoverBody alignSelf={'center'}>
-                        <Button
-                          w={'fit'}
-                          mt={8}
-                          bg={'gray.900'}
-                          color={'white'}
-                          rounded={'md'}
-                          _hover={{
-                            transform: 'translateY(-2px)',
-                            boxShadow: 'lg',
-                          }}
-                          onClick={() => handleDelete(onClose)}
-                        >
-                          Confirm
-                        </Button>
-                      </PopoverBody>
-                    </PopoverContent>
-                  </Portal>
-                </>
-              )}
-            </Popover>
+            <DeleteCharacterButton character={character} />
           </VStack>
         )}
+
         {character.id === localCharacter && (
           <VStack>
             <Button

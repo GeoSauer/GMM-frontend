@@ -73,7 +73,7 @@ export default function SpellCard({ spellDetails, spell }) {
       <Container maxW={'600px'} centerContent>
         <Collapse in={isOpen} animateOpacity>
           <Box
-            p="40px"
+            p="10px"
             color="white"
             bg="teal.500"
             rounded="md"
