@@ -9,14 +9,15 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
-  useDisclosure,
   useColorModeValue,
+  useDisclosure,
   Stack,
   Tabs,
   TabList,
   Tab,
   Text,
   MenuGroup,
+  IconButton,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { NavLink } from 'react-router-dom';
@@ -27,14 +28,26 @@ import { useCharacter } from '../../context/CharacterContext';
 
 export default function Header() {
   const { characterInfo } = useCharacter();
-
+  const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
         {/* //* mobile nav ------------------------------ */}
         <Stack display={{ base: 'sm', md: 'none' }}>
           <Menu>
-            <MenuButton>
+            {/* <IconButton
+              size={'md'}
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              aria-label={'Open Menu'}
+              display={{ md: 'none' }}
+              onClick={isOpen ? onClose : onOpen}
+            /> */}
+            <MenuButton
+              icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              aria-label={'Open Menu'}
+              display={{ md: 'none' }}
+              onClick={isOpen ? onClose : onOpen}
+            >
               <HamburgerIcon />
             </MenuButton>
             <MenuList alignContent={'center'}>

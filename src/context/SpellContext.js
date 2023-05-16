@@ -24,19 +24,22 @@ export default function SpellProvider({ children }) {
         const fetchedAllSpells = await Spells.getAll();
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
 
-        // let fetchedKnownSpells;
-        // if (
-        //   characterInfo.charClass === 'Cleric' ||
-        //   characterInfo.charClass === 'Druid' ||
-        //   characterInfo.charClass === 'Paladin'
-        // ) {
-        //   fetchedKnownSpells = await Promise.all(
-        //     fetchedAvailableSpells.map(async (spell) => {
-        //       return await learn(characterInfo.id, spell.id);
-        //     })
-        //   );
-        // } else fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
-        // console.log({ fetchedAvailableSpells });
+        const combinedKnownAndAllSpells = Array.from(
+          new Set([...fetchedAllSpells, ...fetchedKnownSpells].map((spell) => spell.name))
+        ).map((spellName) => {
+          const uniqueSpell =
+            fetchedAllSpells.find((allSpell) => allSpell.name === spellName) ||
+            fetchedKnownSpells.find((knownSpell) => knownSpell.name === spellName);
+          return uniqueSpell;
+        });
+        //TODO the sorting doesn't seem necessary but I want to test it with more data
+        // const sortedAllSpells = combinedKnownAndAllSpells.sort((a, b) => {
+        //   if (a.level === b.level) {
+        //     return a.name.localeCompare(b.name);
+        //   } else {
+        //     return a.level - b.level;
+        //   }
+        // });
 
         const fetchedAvailableSpellDetails = await Promise.all(
           fetchedAvailableSpells.map(async (spell) => {
@@ -52,7 +55,8 @@ export default function SpellProvider({ children }) {
         setAvailableSpellDetails([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails]);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
-        setAllSpells(fetchedAllSpells);
+        // setAllSpells(sortedAllSpells);
+        setAllSpells(combinedKnownAndAllSpells);
         setLoading(false);
       };
       fetchAvailableSpellsAndDetails();
