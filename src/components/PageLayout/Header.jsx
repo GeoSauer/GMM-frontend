@@ -23,9 +23,10 @@ import { NavLink } from 'react-router-dom';
 import UserInfo from './UserInfo';
 import SignOutButton from '../Buttons/SignOutButton';
 import LongRestButton from '../Buttons/LongRestButton';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function Header() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { characterInfo } = useCharacter();
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -48,11 +49,15 @@ export default function Header() {
                     Known
                   </NavLink>
                 </MenuItem>
-                <MenuItem value="available">
-                  <NavLink to="available-spells" alt="all" title="Available Spells">
-                    Available
-                  </NavLink>
-                </MenuItem>
+                {characterInfo.charClass === 'Cleric' ||
+                characterInfo.charClass === 'Druid' ||
+                characterInfo.charClass === 'Paladin' ? null : (
+                  <MenuItem value="available">
+                    <NavLink to="available-spells" alt="all" title="Available Spells">
+                      Available
+                    </NavLink>
+                  </MenuItem>
+                )}
                 <MenuItem value="all">
                   <NavLink to="all-spells" alt="all" title="All Spells">
                     All
@@ -84,11 +89,15 @@ export default function Header() {
                     Known Spells
                   </NavLink>
                 </Tab>
-                <Tab>
-                  <NavLink to="available-spells" alt="available" title="Available Spells">
-                    Available Spells
-                  </NavLink>
-                </Tab>
+                {characterInfo.charClass === 'Cleric' ||
+                characterInfo.charClass === 'Druid' ||
+                characterInfo.charClass === 'Paladin' ? null : (
+                  <Tab>
+                    <NavLink to="available-spells" alt="available" title="Available Spells">
+                      Available Spells
+                    </NavLink>
+                  </Tab>
+                )}
                 <Tab>
                   <NavLink to="all-spells" alt="all" title="All Spells">
                     All Spells
