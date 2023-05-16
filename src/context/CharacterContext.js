@@ -9,7 +9,7 @@ export default function CharacterProvider({ children }) {
   const localCharacter = getLocalCharacter();
   const [currentCharacter, setCurrentCharacter] = useState(localCharacter);
   const [characterList, setCharacterList] = useState([]);
-  const [characterInfo, setCharacterInfo] = useState([]);
+  const [characterInfo, setCharacterInfo] = useState({});
   const [levelUp, setLevelUp] = useState(false);
   const [loading, setLoading] = useState(true);
   const [divineCaster, setDivineCaster] = useState(false);
@@ -85,34 +85,51 @@ export function useCharacter() {
 
 export function useSpell() {
   const [error, setError] = useState(null);
-  const handleResponse = () => {
-    if (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
-      setError(error.message);
-    } else {
+
+  const learn = async (charId, spellId) => {
+    try {
+      await Character.learnSpell(charId, spellId);
       setError(null);
+    } catch (error) {
+      setError(error);
     }
   };
-  const learn = async (charId, spellId) => {
-    const response = await Character.learnSpell(charId, spellId);
-    handleResponse(response);
-  };
+
   const forget = async (charId, spellId) => {
-    const response = await Character.forgetSpell(charId, spellId);
-    handleResponse(response);
+    try {
+      await Character.forgetSpell(charId, spellId);
+      setError(null);
+    } catch (error) {
+      setError(error);
+    }
   };
+
   const prepare = async (updatedInfo) => {
-    const response = await Character.updateSpellPreparation(updatedInfo);
-    handleResponse(response);
+    try {
+      await Character.updateSpellPreparation(updatedInfo);
+      setError(null);
+    } catch (error) {
+      setError(error);
+    }
   };
+
   const unprepare = async (updatedInfo) => {
-    const response = await Character.updateSpellPreparation(updatedInfo);
-    handleResponse(response);
+    try {
+      await Character.updateSpellPreparation(updatedInfo);
+      setError(null);
+    } catch (error) {
+      setError(error);
+    }
   };
+
   const cast = async (charId, slotLevel) => {
-    const response = await Character.castSpell(charId, slotLevel);
-    handleResponse(response);
+    try {
+      await Character.castSpell(charId, slotLevel);
+      setError(null);
+    } catch (error) {
+      setError(error);
+    }
   };
+
   return { learn, forget, prepare, unprepare, cast, error };
 }

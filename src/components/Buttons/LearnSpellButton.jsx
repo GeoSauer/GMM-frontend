@@ -83,21 +83,21 @@ export default function LearnSpellButton({ spell }) {
     setAllSpells(updatedAllSpells);
 
     onClose();
-    // if (error) {
-    //   toast({
-    //     title: { error },
-    //     status: 'error',
-    //     duration: 3000,
-    //     isClosable: true,
-    //   });
-    // } else {
-    toast({
-      title: `${spell.name} learned!`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
-    // }
+    if (error) {
+      toast({
+        title: { error },
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: `${spell.name} learned!`,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
