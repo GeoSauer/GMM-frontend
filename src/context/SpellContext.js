@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { Spells } from '../services/Spells';
-import { useCharacter, useSpell } from './CharacterContext';
+import { useCharacter } from './CharacterContext';
 
 const SpellContext = createContext();
 
@@ -13,7 +13,6 @@ export default function SpellProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const { characterInfo } = useCharacter();
-  const { learn } = useSpell();
 
   useEffect(() => {
     if (characterInfo.id) {
@@ -62,28 +61,6 @@ export default function SpellProvider({ children }) {
       fetchAvailableSpellsAndDetails();
     }
   }, [characterInfo.charLvl, characterInfo.id]);
-
-  // useEffect(() => {
-  //   if (
-  //     characterInfo.charClass === 'Cleric' ||
-  //     characterInfo.charClass === 'Druid' ||
-  //     characterInfo.charClass === 'Paladin'
-  //   ) {
-  //     setLoading(true);
-  //     const autoLearnClassSpells = async () => {
-  //       const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
-  //       const learnedSpells = await Promise.all(
-  //         fetchedAvailableSpells.map(async (spell) => {
-  //           return await learn(characterInfo.charId, spell.id);
-  //         })
-  //       );
-  //       console.log({ learnedSpells });
-  //       setKnownSpells(learnedSpells);
-  //       setLoading(false);
-  //     };
-  //     autoLearnClassSpells();
-  //   }
-  // }, [characterInfo, learn]);
 
   const value = {
     allSpells,

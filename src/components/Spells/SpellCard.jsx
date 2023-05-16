@@ -20,10 +20,12 @@ import CastConcentrationSpellButton from '../Buttons/CastConcentrationSpellButto
 import UnprepareSpellButton from '../Buttons/UnprepareSpellButton';
 
 import { useLocation } from 'react-router-dom';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellCard({ spellDetails, spell }) {
   const { isOpen, onToggle } = useDisclosure();
   const location = useLocation();
+  const { divineCaster } = useCharacter();
 
   return (
     <>
@@ -47,7 +49,9 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
           )}
-          {location.pathname === '/known-spells' && <ForgetSpellButton spell={spell} />}
+          {location.pathname === '/known-spells' && !divineCaster && (
+            <ForgetSpellButton spell={spell} />
+          )}
 
           {location.pathname === '/prepared-spells' && spell.level === 0 && (
             <CastCantripButton spell={spell} spellDetails={spellDetails} />

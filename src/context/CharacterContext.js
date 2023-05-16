@@ -12,7 +12,7 @@ export default function CharacterProvider({ children }) {
   const [characterInfo, setCharacterInfo] = useState([]);
   const [levelUp, setLevelUp] = useState(false);
   const [loading, setLoading] = useState(true);
-
+  const [divineCaster, setDivineCaster] = useState(false);
   const { userInfo, user } = useUser();
 
   useEffect(() => {
@@ -40,6 +40,15 @@ export default function CharacterProvider({ children }) {
       setLoading(true);
       const fetchCharacter = async () => {
         const character = await Character.getById(currentCharacter);
+        if (
+          character.charClass === 'Cleric' ||
+          character.charClass === 'Druid' ||
+          character.charClass === 'Paladin'
+        ) {
+          setDivineCaster(true);
+        } else {
+          setDivineCaster(false);
+        }
         setCharacterInfo(character);
         setLoading(false);
       };
@@ -64,6 +73,8 @@ export default function CharacterProvider({ children }) {
     setLoading,
     levelUp,
     setLevelUp,
+    divineCaster,
+    setDivineCaster,
   };
   return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>;
 }
