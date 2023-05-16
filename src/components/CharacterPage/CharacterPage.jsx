@@ -18,10 +18,10 @@ export default function CharacterPage() {
       {loading && <Loading />}
       {location.pathname === '/characters' && (
         <>
+          <CreateCharacterButton />
           {characterList.map((character) => {
             return <CharacterCard key={character.id} {...character} />;
           })}
-          <CreateCharacterButton />
         </>
       )}
 
@@ -35,10 +35,10 @@ export default function CharacterPage() {
             !
           </Heading>
           <Heading>Which Character Are You Playing Today?</Heading>
+          <CreateCharacterButton />
           {characterList.map((character) => {
             return <ChooseCharacterCard key={character.id} {...character} />;
           })}
-          <CreateCharacterButton />
         </>
       )}
 

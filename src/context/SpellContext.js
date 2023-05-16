@@ -18,27 +18,24 @@ export default function SpellProvider({ children }) {
     if (characterInfo.id) {
       setLoading(true);
       const fetchAvailableSpellsAndDetails = async () => {
-        const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
-        const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
         const fetchedAllSpells = await Spells.getAll();
+        const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
+        const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
 
-        const combinedKnownAndAllSpells = Array.from(
-          new Set([...fetchedAllSpells, ...fetchedKnownSpells].map((spell) => spell.name))
-        ).map((spellName) => {
-          const uniqueSpell =
-            fetchedAllSpells.find((allSpell) => allSpell.name === spellName) ||
-            fetchedKnownSpells.find((knownSpell) => knownSpell.name === spellName);
-          return uniqueSpell;
-        });
-        //TODO the sorting doesn't seem necessary but I want to test it with more data
-        // const sortedAllSpells = combinedKnownAndAllSpells.sort((a, b) => {
-        //   if (a.level === b.level) {
-        //     return a.name.localeCompare(b.name);
-        //   } else {
-        //     return a.level - b.level;
-        //   }
-        // });
+        const getUniqueSpells = (spells, knownSpells) => {
+          return Array.from(new Set([...spells, ...knownSpells].map((spell) => spell.name))).map(
+            (spellName) => {
+              const uniqueSpell =
+                knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
+                spells.find((spell) => spell.name === spellName);
+              return uniqueSpell;
+            }
+          );
+        };
+
+        const uniqueAllSpells = getUniqueSpells(fetchedAllSpells, fetchedKnownSpells);
+        const uniqueAvailableSpells = getUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells);
 
         const fetchedAvailableSpellDetails = await Promise.all(
           fetchedAvailableSpells.map(async (spell) => {
@@ -50,12 +47,11 @@ export default function SpellProvider({ children }) {
             return await Spells.getDetails(spell.id);
           })
         );
-        setAvailableSpells(fetchedAvailableSpells);
+        setAvailableSpells(uniqueAvailableSpells);
         setAvailableSpellDetails([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails]);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
-        // setAllSpells(sortedAllSpells);
-        setAllSpells(combinedKnownAndAllSpells);
+        setAllSpells(uniqueAllSpells);
         setLoading(false);
       };
       fetchAvailableSpellsAndDetails();
