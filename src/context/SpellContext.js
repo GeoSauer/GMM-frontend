@@ -17,13 +17,22 @@ export default function SpellProvider({ children }) {
   useEffect(() => {
     if (characterInfo.id) {
       setLoading(true);
-      const fetchAvailableSpellsAndDetails = async () => {
+      const fetchData = async () => {
         const fetchedAllSpells = await Spells.getAll();
         const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
         const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
 
-        const getUniqueSpells = (spells, knownSpells) => {
+        const fetchSpellDetails = async (spells) => {
+          const spellDetails = [];
+          for (const spell of spells) {
+            const details = await Spells.getDetails(spell.id);
+            spellDetails.push(details);
+          }
+          return spellDetails;
+        };
+
+        const combineUniqueSpells = (spells, knownSpells) => {
           return Array.from(new Set([...spells, ...knownSpells].map((spell) => spell.name))).map(
             (spellName) => {
               const uniqueSpell =
@@ -34,27 +43,26 @@ export default function SpellProvider({ children }) {
           );
         };
 
-        const uniqueAllSpells = getUniqueSpells(fetchedAllSpells, fetchedKnownSpells);
-        const uniqueAvailableSpells = getUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells);
+        const uniqueAllSpells = combineUniqueSpells(fetchedAllSpells, fetchedKnownSpells);
+        const uniqueAvailableSpells = combineUniqueSpells(
+          fetchedAvailableSpells,
+          fetchedKnownSpells
+        );
 
-        const fetchedAvailableSpellDetails = await Promise.all(
-          fetchedAvailableSpells.map(async (spell) => {
-            return await Spells.getDetails(spell.id);
-          })
+        const fetchedAvailableSpellDetails = await fetchSpellDetails(fetchedAvailableSpells);
+        const fetchedKnownSpellDetails = await fetchSpellDetails(fetchedKnownSpells);
+        const combinedSpellDetails = Array.from(
+          new Set([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails])
         );
-        const fetchedKnownSpellDetails = await Promise.all(
-          fetchedKnownSpells.map(async (spell) => {
-            return await Spells.getDetails(spell.id);
-          })
-        );
+
         setAvailableSpells(uniqueAvailableSpells);
-        setAvailableSpellDetails([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails]);
+        setAvailableSpellDetails(combinedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
         setAllSpells(uniqueAllSpells);
         setLoading(false);
       };
-      fetchAvailableSpellsAndDetails();
+      fetchData();
     }
   }, [characterInfo.charLvl, characterInfo.id]);
 
