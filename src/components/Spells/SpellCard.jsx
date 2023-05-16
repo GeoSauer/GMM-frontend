@@ -29,7 +29,7 @@ export default function SpellCard({ spellDetails, spell }) {
 
   return (
     <>
-      <VStack>
+      <VStack mb={'30px'}>
         <Button
           onClick={onToggle}
           display={'block'}

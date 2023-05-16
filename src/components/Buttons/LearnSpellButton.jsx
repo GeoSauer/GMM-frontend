@@ -37,8 +37,7 @@ export default function LearnSpellButton({ spell }) {
   } = useSpellDetails();
 
   const updateSpellList = (spellArray, currentSpell) => {
-    const updatedSpellList = [...spellArray, currentSpell];
-    const sortedSpellList = updatedSpellList.sort((a, b) => {
+    const sortedSpellList = [...spellArray, currentSpell].sort((a, b) => {
       if (a.level === b.level) {
         return a.name.localeCompare(b.name);
       } else {
@@ -52,13 +51,14 @@ export default function LearnSpellButton({ spell }) {
     await learn(charId, spellId);
     spell.known = true;
 
-    if (location.pathname === '/all-spells') {
-      if (availableSpells.find((newSpell) => newSpell.name !== spell.name)) {
-        setLoading(true);
-        const fetchedSpellDetails = await Spells.getDetails(spell.id);
-        setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
-        setLoading(false);
-      }
+    if (
+      location.pathname === '/all-spells' &&
+      availableSpells.find((newSpell) => newSpell.name !== spell.name)
+    ) {
+      setLoading(true);
+      const fetchedSpellDetails = await Spells.getDetails(spell.id);
+      setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
+      setLoading(false);
     }
 
     if (spell.level === 0) {

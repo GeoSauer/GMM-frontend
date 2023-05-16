@@ -12,14 +12,16 @@ export default function SpellDisplay() {
 
   const findSpellDetails = (spellName) =>
     availableSpellDetails.find((spell) => spell.name === spellName);
-
+  console.log({ knownSpells });
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
+      // const nextSpell = availableSpells[index + 1];
       const previousSpell = availableSpells[index - 1];
+      // if (spell.level !== nextSpell?.level) {
       if (spell.level !== previousSpell?.level) {
         return (
           <Stack key={index} divider={<StackDivider />}>
-            {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level}</Text>}
+            {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level} SPELLS</Text>}
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           </Stack>
         );

@@ -1,10 +1,4 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Link,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Box, Flex, Text, Link, useColorModeValue } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
@@ -16,15 +10,8 @@ export default function Footer() {
       bottom={'0px'}
       width={'full'}
     >
-      <Flex
-        h={6}
-        alignItems={'center'}
-        justifyContent={'center'}
-      >
-        <Text
-          as={'span'}
-          fontSize={{ base: 'sm', md: 'md' }}
-        >
+      <Flex h={6} alignItems={'center'} justifyContent={'center'}>
+        <Text as={'span'} fontSize={{ base: 'sm', md: 'md' }}>
           Lovingly made by{' '}
           <Link as={NavLink} to="about" fontWeight={'bold'}>
             Geo
