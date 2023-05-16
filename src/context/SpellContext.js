@@ -6,6 +6,7 @@ const SpellContext = createContext();
 
 export default function SpellProvider({ children }) {
   const [allSpells, setAllSpells] = useState([]);
+  const [initialAvailableSpells, setInitialAvailableSpell] = useState([]);
   const [availableSpells, setAvailableSpells] = useState([]);
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
@@ -32,30 +33,37 @@ export default function SpellProvider({ children }) {
           return spellDetails;
         };
 
-        const combineUniqueSpells = (spells, knownSpells) => {
-          return Array.from(new Set([...spells, ...knownSpells].map((spell) => spell.name))).map(
-            (spellName) => {
-              const uniqueSpell =
-                knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
-                spells.find((spell) => spell.name === spellName);
-              return uniqueSpell;
-            }
-          );
+        const findUniqueSpells = (spells, knownSpells) => {
+          const combinedSpells = [...spells, ...knownSpells];
+
+          const uniqueSpellNames = Array.from(new Set(combinedSpells.map((spell) => spell.name)));
+
+          const uniqueSpells = uniqueSpellNames.map((spellName) => {
+            const uniqueSpell =
+              spells.find((spell) => spell.name === spellName) ||
+              knownSpells.find((knownSpell) => knownSpell.name === spellName);
+            return uniqueSpell;
+          });
+          return uniqueSpells;
         };
 
-        const uniqueAllSpells = combineUniqueSpells(fetchedAllSpells, fetchedKnownSpells);
-        const uniqueAvailableSpells = combineUniqueSpells(
-          fetchedAvailableSpells,
-          fetchedKnownSpells
-        );
-
+        const uniqueAllSpells = findUniqueSpells(fetchedAllSpells, fetchedKnownSpells);
+        const uniqueAvailableSpells = findUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells);
+        const sortedAvailableSpells = uniqueAvailableSpells.sort((a, b) => {
+          if (a.level === b.level) {
+            return a.name.localeCompare(b.name);
+          } else {
+            return a.level - b.level;
+          }
+        });
         const fetchedAvailableSpellDetails = await fetchSpellDetails(fetchedAvailableSpells);
         const fetchedKnownSpellDetails = await fetchSpellDetails(fetchedKnownSpells);
         const combinedSpellDetails = Array.from(
           new Set([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails])
         );
 
-        setAvailableSpells(uniqueAvailableSpells);
+        setAvailableSpells(sortedAvailableSpells);
+        setInitialAvailableSpell(fetchedAvailableSpells);
         setAvailableSpellDetails(combinedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
@@ -71,6 +79,8 @@ export default function SpellProvider({ children }) {
     setAllSpells,
     availableSpells,
     setAvailableSpells,
+    initialAvailableSpells,
+    setInitialAvailableSpell,
     knownSpells,
     setKnownSpells,
     preparedSpells,

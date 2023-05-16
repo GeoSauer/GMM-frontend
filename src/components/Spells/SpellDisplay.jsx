@@ -13,6 +13,7 @@ export default function SpellDisplay() {
   const findSpellDetails = (spellName) =>
     availableSpellDetails.find((spell) => spell.name === spellName);
   console.log({ knownSpells });
+  console.log({ availableSpells });
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
       // const nextSpell = availableSpells[index + 1];
