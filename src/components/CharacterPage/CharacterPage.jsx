@@ -25,11 +25,11 @@ export default function CharacterPage() {
         </>
       )}
 
-      {location.pathname === '/choose-character' && !loading && (
+      {location.pathname === '/choose-character' && (
         <>
           <Heading>
             Welcome
-            {userInfo.username.length > 20
+            {userInfo.username?.length > 20
               ? userInfo.username.slice(0, 20) + '...'
               : userInfo.username}
             !
