@@ -4,26 +4,30 @@ import SpellSlots from '../PageLayout/SpellSlots';
 import { useSpellDetails } from '../../context/SpellContext';
 import SpellCard from './SpellCard';
 import { useLocation } from 'react-router-dom';
+import { getSuffix } from '../../utils/utils';
 
 export default function SpellDisplay() {
   const { availableSpells, availableSpellDetails, knownSpells, preparedSpells, loading } =
     useSpellDetails();
   const location = useLocation();
-
   const findSpellDetails = (spellName) =>
     availableSpellDetails.find((spell) => spell.name === spellName);
-  // console.log({ knownSpells });
-  // console.log({ knownSpells });
+
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
-      const previousSpell = availableSpells[index - 1];
-      // console.log({ index });
-      // console.log({ spell });
-      // console.log({ previousSpell });
+      const suffix = getSuffix(spell.level);
+      const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
           <Stack key={index} divider={<StackDivider />}>
-            {spell.level === 0 ? <Text>CANTRIPS</Text> : <Text>LEVEL {spell.level} SPELLS</Text>}
+            {spell.level === 0 ? (
+              <Text>Cantrips</Text>
+            ) : (
+              <Text>
+                {spell.level}
+                {suffix} Level
+              </Text>
+            )}
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           </Stack>
         );
