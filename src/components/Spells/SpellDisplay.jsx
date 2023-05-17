@@ -1,4 +1,4 @@
-import { Flex, Stack, StackDivider, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import Loading from '../PageLayout/Loading';
 import SpellSlots from '../PageLayout/SpellSlots';
 import { useSpellDetails } from '../../context/SpellContext';
@@ -19,17 +19,29 @@ export default function SpellDisplay() {
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          <Stack key={index} divider={<StackDivider />}>
-            {spell.level === 0 ? (
-              <Text>Cantrips</Text>
-            ) : (
-              <Text>
-                {spell.level}
-                {suffix} Level
-              </Text>
-            )}
-            <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
-          </Stack>
+          <Box key={spell.id}>
+            <Flex
+              key={index}
+              align="center"
+              justify="start"
+              py={2}
+              // bg="gray.200"
+              borderBottom="1px solid"
+              borderColor="gray.300"
+              fontSize="xl"
+              fontWeight="bold"
+            >
+              {spell.level === 0 ? (
+                <Text>Cantrips</Text>
+              ) : (
+                <Text>
+                  {spell.level}
+                  {suffix} Level
+                </Text>
+              )}
+            </Flex>
+            <SpellCard key={spell.name} spellDetails={findSpellDetails(spell.name)} spell={spell} />
+          </Box>
         );
       }
       return (
