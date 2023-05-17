@@ -36,8 +36,22 @@ export default function LearnSpellButton({ spell }) {
     setLoading,
   } = useSpellDetails();
 
+  // const sortSpellList = (spellArray, currentSpell) => {
+  //   const sortedSpellList = [...spellArray, currentSpell].sort((a, b) => {
+  //     if (a.level === b.level) {
+  //       return a.name.localeCompare(b.name);
+  //     } else {
+  //       return a.level - b.level;
+  //     }
+  //   });
+  //   return sortedSpellList;
+  // };
+
+  // const filterSpellList = (spellArray) =>
+  //   spellArray.filter((otherSpell) => otherSpell.name !== spell.name);
   const updateSpellList = (spellArray, currentSpell) => {
-    const sortedSpellList = [...spellArray, currentSpell].sort((a, b) => {
+    const filteredSpellList = spellArray.filter((otherSpell) => otherSpell.name !== spell.name);
+    const sortedSpellList = [...filteredSpellList, currentSpell].sort((a, b) => {
       if (a.level === b.level) {
         return a.name.localeCompare(b.name);
       } else {
@@ -53,7 +67,7 @@ export default function LearnSpellButton({ spell }) {
 
     if (
       location.pathname === '/all-spells' &&
-      availableSpells.find((newSpell) => newSpell.name !== spell.name)
+      availableSpells.find((otherSpell) => otherSpell.name !== spell.name)
     ) {
       setLoading(true);
       const fetchedSpellDetails = await Spells.getDetails(spell.id);
@@ -63,24 +77,27 @@ export default function LearnSpellButton({ spell }) {
 
     if (spell.level === 0) {
       spell.prepared = true;
-      const updatedPreparedSpells = updateSpellList(preparedSpells, spell);
-      setPreparedSpells(updatedPreparedSpells);
+      // const updatedPreparedSpells = sortSpellList(preparedSpells, spell);
+      // setPreparedSpells(updatedPreparedSpells);
+      setPreparedSpells(updateSpellList(preparedSpells, spell));
     }
 
-    const updatedKnownSpells = updateSpellList(knownSpells, spell);
-    setKnownSpells(updatedKnownSpells);
+    // const filteredKnownSpells = filterSpellList(knownSpells);
+    // const updatedKnownSpells = sortSpellList(filteredKnownSpells, spell);
+    // setKnownSpells(updatedKnownSpells);
 
-    const filteredAvailableSpells = availableSpells.filter(
-      (duplicateSpell) => duplicateSpell.name !== spell.name
-    );
-    const updatedAvailableSpells = updateSpellList(filteredAvailableSpells, spell);
-    setAvailableSpells(updatedAvailableSpells);
+    // const filteredAvailableSpells = filterSpellList(availableSpells);
+    // const updatedAvailableSpells = sortSpellList(filteredAvailableSpells, spell);
+    // setAvailableSpells(updatedAvailableSpells);
 
-    const filteredAllSpells = allSpells.filter(
-      (duplicateSpell) => duplicateSpell.name !== spell.name
-    );
-    const updatedAllSpells = updateSpellList(filteredAllSpells, spell);
-    setAllSpells(updatedAllSpells);
+    // const filteredAllSpells = filterSpellList(allSpells);
+    // const updatedAllSpells = sortSpellList(filteredAllSpells, spell);
+    // setAllSpells(updatedAllSpells);
+    setKnownSpells(updateSpellList(knownSpells, spell));
+
+    setAvailableSpells(updateSpellList(availableSpells, spell));
+
+    setAllSpells(updateSpellList(allSpells, spell));
 
     onClose();
     if (error) {

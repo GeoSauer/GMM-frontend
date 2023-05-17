@@ -36,12 +36,23 @@ export default function SpellProvider({ children }) {
         const findUniqueSpells = (spells, knownSpells) => {
           const combinedSpells = [...spells, ...knownSpells];
 
-          const uniqueSpellNames = Array.from(new Set(combinedSpells.map((spell) => spell.name)));
+          const uniqueSpellNames = Array.from(
+            new Set(
+              // combinedSpells.map((spell) => {
+              //   console.log({ spell });
+              //   if (spell.known === null) {
+              //     spell.known = true;
+              //   }
+              //   return spell.name;
+              // })
+              combinedSpells.map((spell) => spell.name)
+            )
+          );
 
           const uniqueSpells = uniqueSpellNames.map((spellName) => {
             const uniqueSpell =
-              spells.find((spell) => spell.name === spellName) ||
-              knownSpells.find((knownSpell) => knownSpell.name === spellName);
+              knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
+              spells.find((spell) => spell.name === spellName);
             return uniqueSpell;
           });
           return uniqueSpells;
