@@ -35,26 +35,14 @@ export default function SpellProvider({ children }) {
 
         const findUniqueSpells = (spells, knownSpells) => {
           const combinedSpells = [...spells, ...knownSpells];
-
-          const uniqueSpellNames = Array.from(
-            new Set(
-              // combinedSpells.map((spell) => {
-              //   console.log({ spell });
-              //   if (spell.known === null) {
-              //     spell.known = true;
-              //   }
-              //   return spell.name;
-              // })
-              combinedSpells.map((spell) => spell.name)
-            )
-          );
-
+          const uniqueSpellNames = Array.from(new Set(combinedSpells.map((spell) => spell.name)));
           const uniqueSpells = uniqueSpellNames.map((spellName) => {
             const uniqueSpell =
               knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
               spells.find((spell) => spell.name === spellName);
             return uniqueSpell;
           });
+          console.log({ uniqueSpells });
           return uniqueSpells;
         };
 
@@ -67,15 +55,12 @@ export default function SpellProvider({ children }) {
             return a.level - b.level;
           }
         });
-        const fetchedAvailableSpellDetails = await fetchSpellDetails(fetchedAvailableSpells);
-        const fetchedKnownSpellDetails = await fetchSpellDetails(fetchedKnownSpells);
-        const combinedSpellDetails = Array.from(
-          new Set([...fetchedAvailableSpellDetails, ...fetchedKnownSpellDetails])
-        );
+
+        const fetchedSpellDetails = await fetchSpellDetails(uniqueAvailableSpells);
 
         setAvailableSpells(sortedAvailableSpells);
         setInitialAvailableSpell(fetchedAvailableSpells);
-        setAvailableSpellDetails(combinedSpellDetails);
+        setAvailableSpellDetails(fetchedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
         setAllSpells(uniqueAllSpells);

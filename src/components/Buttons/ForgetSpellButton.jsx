@@ -34,13 +34,13 @@ export default function ForgetSpellButton({ spell }) {
     spell.known = false;
     spell.prepared = false;
     const removeForgottenSpell = (spellArray) =>
-      spellArray.filter((forgottenSpell) => spell.name !== forgottenSpell.name);
+      spellArray.filter((forgottenSpell) => forgottenSpell.name !== spell.name);
 
-    const filteredAvailableSpells = availableSpells.filter((spell) =>
-      initialAvailableSpells.includes(spell)
-    );
-
-    setAvailableSpells(filteredAvailableSpells);
+    // const filteredAvailableSpells = availableSpells.filter((spell) =>
+    //   initialAvailableSpells.includes(spell)
+    // );
+    // console.log({ filteredAvailableSpells });
+    // setAvailableSpells(filteredAvailableSpells);
     setKnownSpells(removeForgottenSpell(knownSpells));
     setPreparedSpells(removeForgottenSpell(preparedSpells));
 
