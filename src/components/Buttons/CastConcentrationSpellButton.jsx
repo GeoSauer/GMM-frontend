@@ -21,8 +21,8 @@ export default function CastConcentrationSpellButton({ spell, spellDetails }) {
         <PopoverContent>
           <PopoverArrow />
           <PopoverHeader>
-            Warning! Casting {spell.name} will end the effects of any spell you are already
-            concentrating on!
+            Warning! {spell.name} is a concentration spell and casting it will end the effects of
+            any spell you are already concentrating on!
           </PopoverHeader>
           <PopoverCloseButton />
           <PopoverBody>

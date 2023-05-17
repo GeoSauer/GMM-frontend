@@ -61,9 +61,7 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/prepared-spells' &&
             spellDetails.concentration &&
             spell.level > 0 && (
-              // eslint-disable-next-line
               <CastConcentrationSpellButton spell={spell} spellDetails={spellDetails} />
-              // eslint-disable-next-line
             )}
           {location.pathname === '/prepared-spells' &&
             !spellDetails.concentration &&

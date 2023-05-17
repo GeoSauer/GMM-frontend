@@ -59,10 +59,10 @@ export default function AllSpellCard({ spell }) {
           )}
         </Button>
         <HStack>
-          {!spell.known && spell.level <= characterInfo.charLvl && (
+          {!spell.known && spell.level <= characterInfo.casterLvl && (
             <LearnSpellButton spell={spell} />
           )}
-          {spell.level > characterInfo.charLvl && <Button isDisabled={true}> Learn</Button>}
+          {spell.level > characterInfo.casterLvl && <Button isDisabled={true}> Learn</Button>}
         </HStack>
       </VStack>
 

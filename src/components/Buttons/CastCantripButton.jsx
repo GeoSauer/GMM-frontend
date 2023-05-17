@@ -15,6 +15,7 @@ import { useRef } from 'react';
 export default function CastCantripButton({ spellDetails, spell }) {
   const toast = useToast();
   const initRef = useRef();
+
   const handleCantrip = (onClose) => {
     onClose();
     toast({
@@ -37,8 +38,9 @@ export default function CastCantripButton({ spellDetails, spell }) {
               <PopoverArrow />
               <PopoverHeader>
                 {spellDetails.concentration
-                  ? `Warning! Casting ${spell.name} will end the effects of any spell you are already
-            concentrating on!`
+                  ? `Warning! {spell.name} is a concentration spell 
+									and casting it will end the effects of any spell 
+									you are already concentrating on!`
                   : `Are you sure you want to cast ${spell.name}?`}
               </PopoverHeader>
               <PopoverCloseButton />

@@ -23,14 +23,7 @@
     "no-debugger": "warn",
     "eqeqeq": ["error", "always"],
     "no-console": ["warn", { "allow": ["info", "error"] }],
-    "indent": [
-      "warn",
-      2,
-      {
-        "SwitchCase": 1,
-        "ignoreComments": true
-      }
-    ],
+    "indent": "off",
     "quotes": [
       "error",
       "single",

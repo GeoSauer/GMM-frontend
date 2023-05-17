@@ -42,7 +42,6 @@ export default function SpellProvider({ children }) {
               spells.find((spell) => spell.name === spellName);
             return uniqueSpell;
           });
-          console.log({ uniqueSpells });
           return uniqueSpells;
         };
 
@@ -57,7 +56,6 @@ export default function SpellProvider({ children }) {
         });
 
         const fetchedSpellDetails = await fetchSpellDetails(uniqueAvailableSpells);
-
         setAvailableSpells(sortedAvailableSpells);
         setInitialAvailableSpell(fetchedAvailableSpells);
         setAvailableSpellDetails(fetchedSpellDetails);

@@ -16,6 +16,7 @@ import { useRef } from 'react';
 export default function CastRitualSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
+
   const handleRitual = (onClose) => {
     onClose();
     toast({
