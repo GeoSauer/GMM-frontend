@@ -22,16 +22,18 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { getSuffix } from '../../utils/utils';
 
 export default function SpellLevelModal({ spell, spellDetails }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { characterInfo, setCharacterInfo } = useCharacter();
+  const { characterInfo, setCharacterInfo, rewardId, setRewardId } = useCharacter();
   const [slotLevel, setSlotLevel] = useState('');
   const toast = useToast();
   const { cast } = useSpell();
+  const damageAtSlotLevel = spellDetails.damage.damageAtSlotLevel
+    ? Object.keys(spellDetails.damage.damageAtSlotLevel)
+    : [];
 
   const handleCast = async (charId, slotLevel) => {
     if (slotLevel) {
@@ -102,9 +104,17 @@ export default function SpellLevelModal({ spell, spellDetails }) {
               </Box>
             )}
 
-            {/* //TODO */}
-            {/*//! this is printing 0 on Arcane Sword, and  */}
-            {spellDetails?.higherLevel.length && (
+            {spellDetails?.damage?.damageType?.name && (
+              <Text pt="2" fontSize="sm">
+                Deals{' '}
+                {damageAtSlotLevel.length === 1 && (
+                  <span>{Object.values(spellDetails.damage.damageAtSlotLevel)} </span>
+                )}
+                {spellDetails?.damage.damageType.name.toLowerCase()} damage.
+              </Text>
+            )}
+
+            {spellDetails?.higherLevel.length > 1 && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Higher Level
@@ -115,9 +125,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
               </Box>
             )}
 
-            {/* //TODO */}
-            {/*//! make this not print if there's only one damage level */}
-            {spellDetails?.damage.damageAtSlotLevel && (
+            {damageAtSlotLevel.length > 1 && (
               <Box>
                 <TableContainer>
                   <Table>
@@ -125,7 +133,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                     <Thead>
                       <Tr>
                         <Th>Level</Th>
-                        <Th>{spellDetails.damage.damageType.name} Damage</Th>
+                        <Th>Damage</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
