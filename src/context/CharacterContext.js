@@ -27,34 +27,31 @@ export default function CharacterProvider({ children }) {
           );
           const activeCharacter = characters.splice(currentCharacterIndex, 1)[0];
           characters.unshift(activeCharacter);
+          const character = await Character.getById(currentCharacter);
+          if (
+            character.charClass === 'Cleric' ||
+            character.charClass === 'Druid' ||
+            character.charClass === 'Paladin'
+          ) {
+            setDivineCaster(true);
+          } else {
+            setDivineCaster(false);
+          }
+          setCharacterInfo(character);
           setCharacterList(characters);
         }
         setLoading(false);
       };
       fetchCharacters();
     }
-  }, [userInfo, user, currentCharacter]);
-
-  useEffect(() => {
-    if (currentCharacter) {
-      setLoading(true);
-      const fetchCharacter = async () => {
-        const character = await Character.getById(currentCharacter);
-        if (
-          character.charClass === 'Cleric' ||
-          character.charClass === 'Druid' ||
-          character.charClass === 'Paladin'
-        ) {
-          setDivineCaster(true);
-        } else {
-          setDivineCaster(false);
-        }
-        setCharacterInfo(character);
-        setLoading(false);
-      };
-      fetchCharacter();
-    }
-  }, [characterList, currentCharacter, characterInfo.charLvl]);
+  }, [
+    userInfo,
+    user,
+    currentCharacter,
+    characterInfo.charLvl,
+    characterInfo.charName,
+    characterInfo.charMod,
+  ]);
 
   const setCharacterState = (charId) => {
     storeLocalCharacter(charId);

@@ -26,8 +26,8 @@ import { truncateCharacterName } from '../../utils/utils';
 import DeleteCharacterButton from '../Buttons/DeleteCharacterButton';
 
 export default function CharacterCard(character) {
-  const localCharacter = getLocalCharacter();
-  const { setCharacterState, characterList } = useCharacter();
+  const { setCharacterState, currentCharacter, characterInfo } = useCharacter();
+  console.log({ characterInfo, character });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { firstField } = useRef();
   const location = useLocation();
@@ -36,9 +36,6 @@ export default function CharacterCard(character) {
 
   const handleCharacterChange = () => {
     setCharacterState(character.id);
-    const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
-    const currentCharacter = characterList.splice(currentCharacterIndex, 1)[0];
-    characterList.unshift(currentCharacter);
     if (location.pathname === '/choose-character') navigate('/prepared-spells');
   };
 
@@ -83,7 +80,7 @@ export default function CharacterCard(character) {
           <Text color={'gray.500'}>Attack Bonus: {character.attackBonus}</Text>
         </Stack>
 
-        {character.id !== localCharacter && (
+        {character.id !== currentCharacter && (
           <VStack>
             <Button
               w={'fit'}
@@ -97,13 +94,13 @@ export default function CharacterCard(character) {
               }}
               onClick={handleCharacterChange}
             >
-              Select
+              {location.pathname === '/characters' ? 'Set Active' : 'Select'}
             </Button>
             {location.pathname === '/characters' && <DeleteCharacterButton character={character} />}
           </VStack>
         )}
 
-        {character.id === localCharacter || location.pathname === '/choose-character' ? (
+        {character.id === currentCharacter || location.pathname === '/choose-character' ? (
           <VStack>
             <Button
               w={'fit'}
