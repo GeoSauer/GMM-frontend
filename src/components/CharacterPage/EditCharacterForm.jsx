@@ -56,7 +56,7 @@ export default function EditCharacterForm({ close }) {
                       isClosable: true,
                     });
                   }
-                  setTimeout(() => setLevelUp(false), 5000);
+                  setTimeout(() => setLevelUp(false), 8000);
                   actions.setSubmitting(false);
                 }}
               >

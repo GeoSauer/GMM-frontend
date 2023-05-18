@@ -17,7 +17,7 @@ import {
   ModalContent,
   ModalHeader,
 } from '@chakra-ui/react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
 import { getLocalCharacter } from '../../services/auth';
 import { useRef } from 'react';
@@ -30,7 +30,8 @@ export default function CharacterCard(character) {
   const { setCharacterState, characterList } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { firstField } = useRef();
-
+  const location = useLocation();
+  const navigate = useNavigate();
   const truncatedCharacterName = truncateCharacterName(character);
 
   const handleCharacterChange = () => {
@@ -38,6 +39,7 @@ export default function CharacterCard(character) {
     const currentCharacterIndex = characterList.findIndex((char) => char.id === character.id);
     const currentCharacter = characterList.splice(currentCharacterIndex, 1)[0];
     characterList.unshift(currentCharacter);
+    if (location.pathname === '/choose-character') navigate('/prepared-spells');
   };
 
   return (
@@ -95,13 +97,13 @@ export default function CharacterCard(character) {
               }}
               onClick={handleCharacterChange}
             >
-              Set Active
+              Select
             </Button>
-            <DeleteCharacterButton character={character} />
+            {location.pathname === '/characters' && <DeleteCharacterButton character={character} />}
           </VStack>
         )}
 
-        {character.id === localCharacter && (
+        {character.id === localCharacter || location.pathname === '/choose-character' ? (
           <VStack>
             <Button
               w={'fit'}
@@ -128,7 +130,7 @@ export default function CharacterCard(character) {
               </ModalContent>
             </Modal>
           </VStack>
-        )}
+        ) : null}
         <Outlet />
       </Box>
     </Box>
