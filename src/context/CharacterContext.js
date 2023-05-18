@@ -54,7 +54,7 @@ export default function CharacterProvider({ children }) {
       };
       fetchCharacter();
     }
-  }, [characterList, currentCharacter]);
+  }, [characterList, currentCharacter, characterInfo.charLvl]);
 
   const setCharacterState = (charId) => {
     storeLocalCharacter(charId);
