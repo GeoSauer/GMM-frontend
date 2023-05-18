@@ -14,24 +14,24 @@ export default function CharacterPage() {
 
   return (
     <Flex direction={'column'} alignItems={'center'} mb={'30'}>
+      {location.pathname === '/choose-character' && (
+        <>
+          <Heading>
+            Welcome back,{' '}
+            {userInfo.username?.length > 20
+              ? userInfo.username.slice(0, 20) + '...'
+              : userInfo.username}
+            !
+          </Heading>
+          <Heading>Which Character Are You Playing Today?</Heading>
+        </>
+      )}
+
       <CreateCharacterButton />
       {loading ? (
         <Loading />
       ) : (
         <>
-          {location.pathname === '/choose-character' && (
-            <>
-              <Heading>
-                Welcome back,{' '}
-                {userInfo.username?.length > 20
-                  ? userInfo.username.slice(0, 20) + '...'
-                  : userInfo.username}
-                !
-              </Heading>
-              <Heading>Which Character Are You Playing Today?</Heading>
-            </>
-          )}
-
           {characterList.map((character) => {
             return <CharacterCard key={character.id} {...character} />;
           })}

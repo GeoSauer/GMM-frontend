@@ -19,15 +19,13 @@ import {
 } from '@chakra-ui/react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
-import { getLocalCharacter } from '../../services/auth';
 import { useRef } from 'react';
 import EditCharacterForm from './EditCharacterForm';
 import { truncateCharacterName } from '../../utils/utils';
 import DeleteCharacterButton from '../Buttons/DeleteCharacterButton';
 
 export default function CharacterCard(character) {
-  const { setCharacterState, currentCharacter, characterInfo } = useCharacter();
-  console.log({ characterInfo, character });
+  const { setCharacterState, currentCharacter } = useCharacter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { firstField } = useRef();
   const location = useLocation();
