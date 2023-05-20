@@ -26,21 +26,16 @@ export default function ForgetSpellButton({ spell }) {
     setPreparedSpells,
     availableSpells,
     setAvailableSpells,
-    initialAvailableSpells,
   } = useSpellDetails();
 
-  const handleForget = async (charId, spellId, onClose) => {
-    await forget(charId, spellId);
+  const handleForget = async (charId, onClose) => {
+    await forget(charId, spell.id);
     spell.known = false;
     spell.prepared = false;
     const removeForgottenSpell = (spellArray) =>
       spellArray.filter((forgottenSpell) => forgottenSpell.name !== spell.name);
 
-    // const filteredAvailableSpells = availableSpells.filter((spell) =>
-    //   initialAvailableSpells.includes(spell)
-    // );
-    // console.log({ filteredAvailableSpells });
-    // setAvailableSpells(filteredAvailableSpells);
+    if (spell.fromAll) setAvailableSpells(removeForgottenSpell(availableSpells));
     setKnownSpells(removeForgottenSpell(knownSpells));
     setPreparedSpells(removeForgottenSpell(preparedSpells));
 
@@ -66,7 +61,7 @@ export default function ForgetSpellButton({ spell }) {
               <PopoverHeader>Are you sure you want to forget {spell.name}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button onClick={() => handleForget(characterInfo.id, spell.id, onClose)}>
+                <Button onClick={() => handleForget(characterInfo.id, onClose)}>
                   What&apos;s {spell.name}?
                 </Button>
               </PopoverBody>

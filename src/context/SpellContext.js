@@ -6,7 +6,6 @@ const SpellContext = createContext();
 
 export default function SpellProvider({ children }) {
   const [allSpells, setAllSpells] = useState([]);
-  const [initialAvailableSpells, setInitialAvailableSpell] = useState([]);
   const [availableSpells, setAvailableSpells] = useState([]);
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
@@ -57,7 +56,6 @@ export default function SpellProvider({ children }) {
 
         const fetchedSpellDetails = await fetchSpellDetails(uniqueAvailableSpells);
         setAvailableSpells(sortedAvailableSpells);
-        setInitialAvailableSpell(fetchedAvailableSpells);
         setAvailableSpellDetails(fetchedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
@@ -73,8 +71,6 @@ export default function SpellProvider({ children }) {
     setAllSpells,
     availableSpells,
     setAvailableSpells,
-    initialAvailableSpells,
-    setInitialAvailableSpell,
     knownSpells,
     setKnownSpells,
     preparedSpells,

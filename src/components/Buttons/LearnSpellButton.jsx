@@ -57,6 +57,7 @@ export default function LearnSpellButton({ spell }) {
       availableSpells.find((otherSpell) => otherSpell.name !== spell.name)
     ) {
       setLoading(true);
+      spell.fromAll = true;
       const fetchedSpellDetails = await Spells.getDetails(spell.id);
       setAvailableSpellDetails([...availableSpellDetails, fetchedSpellDetails]);
       setLoading(false);

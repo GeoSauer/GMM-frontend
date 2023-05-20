@@ -32,11 +32,9 @@ export default function CharacterProvider({ children }) {
             character.charClass === 'Cleric' ||
             character.charClass === 'Druid' ||
             character.charClass === 'Paladin'
-          ) {
+          )
             setDivineCaster(true);
-          } else {
-            setDivineCaster(false);
-          }
+
           setCharacterInfo(character);
           setCharacterList(characters);
         }

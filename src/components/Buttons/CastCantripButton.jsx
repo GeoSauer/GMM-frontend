@@ -38,7 +38,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
               <PopoverArrow />
               <PopoverHeader>
                 {spellDetails.concentration
-                  ? `Warning! {spell.name} is a concentration spell 
+                  ? `Warning! ${spell.name} is a concentration spell 
 									and casting it will end the effects of any spell 
 									you are already concentrating on!`
                   : `Are you sure you want to cast ${spell.name}?`}
