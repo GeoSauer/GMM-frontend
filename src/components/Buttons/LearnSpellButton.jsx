@@ -48,8 +48,8 @@ export default function LearnSpellButton({ spell }) {
     return sortedSpellList;
   };
 
-  const handleLearn = async (charId, spellId, onClose) => {
-    await learn(charId, spellId);
+  const handleLearn = async (charId, onClose) => {
+    await learn(charId, spell.id);
     spell.known = true;
 
     if (
@@ -103,10 +103,7 @@ export default function LearnSpellButton({ spell }) {
               <PopoverHeader>Are you sure you want to learn {spell.name}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button
-                  ref={initRef}
-                  onClick={() => handleLearn(characterInfo.id, spell.id, onClose)}
-                >
+                <Button ref={initRef} onClick={() => handleLearn(characterInfo.id, onClose)}>
                   Let&apos;s go!
                 </Button>
               </PopoverBody>
