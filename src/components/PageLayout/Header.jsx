@@ -17,20 +17,21 @@ import {
   Tab,
   Text,
   MenuGroup,
-  IconButton,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import UserInfo from './UserInfo';
 import SignOutButton from '../Buttons/SignOutButton';
 import LongRestButton from '../Buttons/LongRestButton';
 import { useCharacter } from '../../context/CharacterContext';
+import SpellSlots from './SpellSlots';
 
 export default function Header() {
   const { characterInfo } = useCharacter();
   const { isOpen, onClose, onOpen } = useDisclosure();
+  const location = useLocation();
   return (
-    <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
+    <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position="sticky" top={0} zIndex={5}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
         {/* //* mobile nav ------------------------------ */}
         <Stack display={{ base: 'sm', md: 'none' }}>
@@ -157,6 +158,7 @@ export default function Header() {
         </Flex>
         {/* //* character/settings menu +++++++++++++++++++++++++++ */}
       </Flex>
+      {location.pathname !== '/settings' && location.pathname !== '/characters' && <SpellSlots />}
     </Box>
   );
 }

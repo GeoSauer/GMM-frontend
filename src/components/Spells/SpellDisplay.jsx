@@ -1,6 +1,5 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 import Loading from '../PageLayout/Loading';
-import SpellSlots from '../PageLayout/SpellSlots';
 import { useSpellDetails } from '../../context/SpellContext';
 import SpellCard from './SpellCard';
 import { useLocation } from 'react-router-dom';
@@ -56,7 +55,6 @@ export default function SpellDisplay() {
 
   return (
     <>
-      <SpellSlots />
       {loading ? (
         <Loading />
       ) : (
