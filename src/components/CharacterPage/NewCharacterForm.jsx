@@ -13,7 +13,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-import { Character } from '../../services/Characters';
+import { Character } from '../../services/Character';
 import { useCharacter } from '../../context/CharacterContext';
 import { useNavigate } from 'react-router-dom';
 

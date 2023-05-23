@@ -13,7 +13,7 @@ export default function SpellSlots() {
             const number = i + 1;
             const suffix = getSuffix(number);
             const spellsAvailableAtSlotLevel = characterInfo[`level${number}SpellSlots`];
-            //* if I change my mind and go back to only showing slots with > 1 available
+            //* if I change my mind and go back to only showing slots with   > 0 available
             // return spellsAvailableAtSlotLevel ? (
             //   <Flex key={`key-${i}`} pos="relative" justifyContent={'center'}>
             //     <Text>

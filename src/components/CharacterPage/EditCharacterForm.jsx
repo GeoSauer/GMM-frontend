@@ -15,7 +15,7 @@ import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
 import { useCharacter } from '../../context/CharacterContext';
-import { Character } from '../../services/Characters';
+import { Character } from '../../services/Character';
 
 export default function EditCharacterForm({ close }) {
   const { characterInfo, setCharacterInfo, setLevelUp, loading } = useCharacter();

@@ -1,16 +1,7 @@
 import { useState, useContext, createContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import {
-  signInUser,
-  signUpUser,
-  signOutUser,
-  getLocalUser,
-  storeLocalUser,
-  verifyUser,
-} from '../services/auth.js';
-
-import { getUserById } from '../services/users';
+import { getLocalUser, storeLocalUser } from '../services/localStorage';
+import { User } from '../services/User.js';
 import { useCharacter } from './CharacterContext';
 
 const UserContext = createContext();
@@ -23,14 +14,14 @@ export default function UserProvider({ children }) {
 
   //TODO decide if I even wanna keep this
   //? so this is in fact working because at /welcome it sets user to null, but I'm not sure I see the point based on my other safeguards?
-  const verify = async () => {
-    const response = await verifyUser();
-    setUser(response.user || null);
-  };
+  // const verify = async () => {
+  //   const response = await User.verify();
+  //   setUser(response.user || null);
+  // };
 
-  useEffect(() => {
-    verify();
-  }, []);
+  // useEffect(() => {
+  //   verify();
+  // }, []);
 
   const setUserState = (user) => {
     storeLocalUser(user);
@@ -41,7 +32,7 @@ export default function UserProvider({ children }) {
     if (user) {
       setLoading(true);
       const fetchUserInfo = async () => {
-        const results = await getUserById();
+        const results = await User.getById();
         setUserInfo(results);
         setLoading(false);
       };
@@ -83,16 +74,17 @@ export function useAuth() {
   };
 
   const signUp = async (info) => {
-    const response = await signUpUser(info);
+    const response = await User.signUp(info);
     handleResponse(response);
   };
+
   const signIn = async (credentials) => {
-    const response = await signInUser(credentials);
+    const response = await User.signIn(credentials);
     handleResponse(response);
   };
 
   const signOut = async () => {
-    const response = await signOutUser();
+    const response = await User.signOut();
     setUserState(null);
     setCharacterState(null);
     handleResponse(response);

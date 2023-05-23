@@ -12,7 +12,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useCharacter } from '../../context/CharacterContext';
-import { Character } from '../../services/Characters';
+import { Character } from '../../services/Character';
 import { useRef } from 'react';
 
 export default function LongRestButton() {

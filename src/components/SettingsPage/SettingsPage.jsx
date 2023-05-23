@@ -14,7 +14,7 @@ import {
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
 import { useUser } from '../../context/UserContext';
-import { updateUserInfo } from '../../services/users';
+import { User } from '../../services/User';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function SettingsPage() {
                 initialValues={userInfo}
                 validationSchema={ProfileSchema}
                 onSubmit={async (values, actions) => {
-                  await updateUserInfo(values);
+                  await User.updateInfo(values);
                   setUserInfo((prevState) => {
                     return { ...prevState, ...values };
                   });

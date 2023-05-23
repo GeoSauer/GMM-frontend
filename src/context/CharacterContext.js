@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { Character } from '../services/Characters';
-import { getLocalCharacter, storeLocalCharacter } from '../services/auth';
+import { Character } from '../services/Character';
 import { useUser } from '../context/UserContext';
+import { getLocalCharacter, storeLocalCharacter } from '../services/localStorage';
 
 const CharacterContext = createContext();
 

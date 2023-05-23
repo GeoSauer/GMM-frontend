@@ -11,7 +11,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import React, { useRef } from 'react';
-import { Character } from '../../services/Characters';
+import { Character } from '../../services/Character';
 import { truncateCharacterName } from '../../utils/utils';
 import { useCharacter } from '../../context/CharacterContext';
 

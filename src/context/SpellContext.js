@@ -11,13 +11,18 @@ export default function SpellProvider({ children }) {
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [availableSpellDetails, setAvailableSpellDetails] = useState([]);
   const [loading, setLoading] = useState(true);
+  // const [page, setPage] = useState(1);
 
   const { characterInfo } = useCharacter();
+  // const limit = 20;
 
   useEffect(() => {
     if (characterInfo.id) {
       setLoading(true);
       const fetchData = async () => {
+        // const offset = (page - 1) * limit;
+        // const fetchedAllSpells = await Spells.getAll(limit, offset);
+        // const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id, limit, offset);
         const fetchedAllSpells = await Spells.getAll();
         const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
@@ -65,6 +70,23 @@ export default function SpellProvider({ children }) {
       fetchData();
     }
   }, [characterInfo.charLvl, characterInfo.id]);
+  // }, [characterInfo.charLvl, characterInfo.id, page]);
+
+  // const handleScroll = () => {
+  //   if (
+  //     window.innerHeight + document.documentElement.scrollTop ===
+  //     document.documentElement.offsetHeight
+  //   ) {
+  //     setPage((prevPage) => prevPage + 1);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => {
+  //     window.removeEventListener('scroll', handleScroll);
+  //   };
+  // }, []);
 
   const value = {
     allSpells,
