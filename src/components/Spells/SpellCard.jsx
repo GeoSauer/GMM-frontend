@@ -45,8 +45,14 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/available-spells' && !spell.known && (
             <LearnSpellButton spell={spell} />
           )}
+          {location.pathname === '/available-spells' && spell.known && (
+            <Button isDisabled={true}>Known</Button>
+          )}
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
+          )}
+          {location.pathname === '/known-spells' && spell.prepared && (
+            <Button isDisabled={true}>Prepared</Button>
           )}
           {location.pathname === '/known-spells' && !divineCaster && (
             <ForgetSpellButton spell={spell} />
