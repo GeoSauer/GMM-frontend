@@ -18,7 +18,7 @@ import { useCharacter } from '../../context/CharacterContext';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewCharacterForm({ onClose }) {
-  const { setCharacterState } = useCharacter();
+  const { setCharacterState, divineCaster } = useCharacter();
   const navigate = useNavigate();
 
   const CharacterSchema = Yup.object().shape({
@@ -48,8 +48,9 @@ export default function NewCharacterForm({ onClose }) {
               validationSchema={CharacterSchema}
               onSubmit={async (values, actions) => {
                 const character = await Character.create(values);
+                console.log({ character });
                 setCharacterState(character.id);
-                navigate('/available-spells');
+                divineCaster ? navigate('/known-spells') : navigate('/available-spells');
                 onClose();
                 actions.setSubmitting(false);
               }}
