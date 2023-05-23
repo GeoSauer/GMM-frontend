@@ -98,7 +98,7 @@ export default function CharacterCard(character) {
           </VStack>
         )}
 
-        {character.id === currentCharacter || location.pathname === '/choose-character' ? (
+        {character.id === currentCharacter ? (
           <VStack>
             <Button
               w={'fit'}
