@@ -24,7 +24,13 @@ export default function PrepareSpellButton({ spell }) {
   const handlePrepare = async (charId, spellId, prepared, onClose) => {
     await prepare({ charId, spellId, prepared });
     spell.prepared = true;
-    const sortedPreparedSpells = [...preparedSpells, spell].sort((a, b) => a.level - b.level);
+    const sortedPreparedSpells = [...preparedSpells, spell].sort((a, b) => {
+      if (a.level === b.level) {
+        return a.name.localeCompare(b.name);
+      } else {
+        return a.level - b.level;
+      }
+    });
     setPreparedSpells(sortedPreparedSpells);
     onClose();
     toast({
