@@ -10,7 +10,7 @@ import {
   Portal,
   useToast,
 } from '@chakra-ui/react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
@@ -20,6 +20,7 @@ export default function LearnSpellButton({ spell }) {
   const initRef = useRef();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
+  const [loading, setLoading] = useState();
   const {
     allSpells,
     setAllSpells,
@@ -31,7 +32,6 @@ export default function LearnSpellButton({ spell }) {
     setKnownSpells,
     preparedSpells,
     setPreparedSpells,
-    setLoading,
   } = useSpellDetails();
 
   const handleLearn = async (charId, onClose) => {

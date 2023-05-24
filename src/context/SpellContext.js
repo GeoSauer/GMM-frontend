@@ -9,7 +9,6 @@ export default function SpellProvider({ children }) {
   const [availableSpells, setAvailableSpells] = useState([]);
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
-  // const [availableSpellDetails, setAvailableSpellDetails] = useState([]);
   const [spellDetailsList, setSpellDetailsList] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [page, setPage] = useState(1);
@@ -28,7 +27,7 @@ export default function SpellProvider({ children }) {
         const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
         const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
-        //TODO
+
         const fetchSpellDetails = async (spells) => {
           const spellDetails = [];
           for (const spell of spells) {
@@ -60,10 +59,8 @@ export default function SpellProvider({ children }) {
           }
         });
 
-        // const fetchedSpellDetails = await fetchSpellDetails(uniqueAvailableSpells);
         const fetchedSpellDetails = await fetchSpellDetails(fetchedPreparedSpells);
         setAvailableSpells(sortedAvailableSpells);
-        // setAvailableSpellDetails(fetchedSpellDetails);
         setSpellDetailsList(fetchedSpellDetails);
         setKnownSpells(fetchedKnownSpells);
         setPreparedSpells(fetchedPreparedSpells);
@@ -100,8 +97,6 @@ export default function SpellProvider({ children }) {
     setKnownSpells,
     preparedSpells,
     setPreparedSpells,
-    // availableSpellDetails,
-    // setAvailableSpellDetails,
     spellDetailsList,
     setSpellDetailsList,
     loading,
