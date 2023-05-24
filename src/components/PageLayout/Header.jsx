@@ -30,6 +30,7 @@ export default function Header() {
   const { characterInfo } = useCharacter();
   const { isOpen, onClose, onOpen } = useDisclosure();
   const location = useLocation();
+
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position="sticky" top={0} zIndex={5}>
       <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
@@ -84,14 +85,14 @@ export default function Header() {
         <HStack spacing={8} alignItems={'center'} justifyContent={'center'}>
           <Text as="span">Grimoire for the Modern Mage</Text>
           <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-            <Tabs>
+            <Tabs variant="soft-rounded">
               <TabList>
-                <Tab>
+                <Tab bg={location.pathname === '/prepared-spells' ? 'blue.500' : 'none'}>
                   <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
                     Prepared Spells
                   </NavLink>
                 </Tab>
-                <Tab>
+                <Tab bg={location.pathname === '/known-spells' ? 'blue.500' : 'none'}>
                   <NavLink to="known-spells" alt="known" title="Known Spells">
                     Known Spells
                   </NavLink>
@@ -99,13 +100,13 @@ export default function Header() {
                 {characterInfo.charClass === 'Cleric' ||
                 characterInfo.charClass === 'Druid' ||
                 characterInfo.charClass === 'Paladin' ? null : (
-                  <Tab>
+                  <Tab bg={location.pathname === '/available-spells' ? 'blue.500' : 'none'}>
                     <NavLink to="available-spells" alt="available" title="Available Spells">
                       Available Spells
                     </NavLink>
                   </Tab>
                 )}
-                <Tab>
+                <Tab bg={location.pathname === '/all-spells' ? 'blue.500' : 'none'}>
                   <NavLink to="all-spells" alt="all" title="All Spells">
                     All Spells
                   </NavLink>

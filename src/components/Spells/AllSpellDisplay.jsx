@@ -39,7 +39,7 @@ export default function AllSpellDisplay() {
                       </Text>
                     )}
                   </Flex>
-                  <AllSpellCard key={spell.name} spell={spell} />
+                  <AllSpellCard spell={spell} />
                 </Box>
               );
             }

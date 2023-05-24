@@ -48,7 +48,6 @@ export default function NewCharacterForm({ onClose }) {
               validationSchema={CharacterSchema}
               onSubmit={async (values, actions) => {
                 const character = await Character.create(values);
-                console.log({ character });
                 setCharacterState(character.id);
                 divineCaster ? navigate('/known-spells') : navigate('/available-spells');
                 onClose();

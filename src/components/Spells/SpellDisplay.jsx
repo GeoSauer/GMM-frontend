@@ -6,11 +6,15 @@ import { useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
 
 export default function SpellDisplay() {
-  const { availableSpells, availableSpellDetails, knownSpells, preparedSpells, loading } =
+  // const { availableSpells, availableSpellDetails, knownSpells, preparedSpells, loading } =
+  //   useSpellDetails();
+  const { allSpells, availableSpells, knownSpells, preparedSpells, spellDetailsList, loading } =
     useSpellDetails();
   const location = useLocation();
+  // const findSpellDetails = (spellName) =>
+  //   availableSpellDetails.find((spell) => spell.name === spellName);
   const findSpellDetails = (spellName) =>
-    availableSpellDetails.find((spell) => spell.name === spellName);
+    spellDetailsList.find((spell) => spell.name === spellName);
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
@@ -20,7 +24,6 @@ export default function SpellDisplay() {
         return (
           <Box key={spell.id}>
             <Flex
-              key={index}
               align="center"
               justify="start"
               py={2}
@@ -39,16 +42,29 @@ export default function SpellDisplay() {
                 </Text>
               )}
             </Flex>
-            <SpellCard key={spell.name} spellDetails={findSpellDetails(spell.name)} spell={spell} />
+            {location.pathname === '/prepared-spells' ? (
+              <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+            ) : (
+              <SpellCard spell={spell} />
+            )}
           </Box>
         );
       }
       return (
-        <SpellCard key={spell.name} spellDetails={findSpellDetails(spell.name)} spell={spell} />
+        <Box key={spell.name}>
+          {location.pathname === '/prepared-spells' ? (
+            <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
+          ) : (
+            <SpellCard spell={spell} />
+          )}
+        </Box>
+        // <SpellCard key={spell.name} spellDetails={findSpellDetails(spell.name)} spell={spell} />
+        // <SpellCard key={spell.name} spell={spell} />
       );
     });
   };
 
+  const allSpellCards = generateSpellCards(allSpells);
   const availableSpellCards = generateSpellCards(availableSpells);
   const knownSpellCards = generateSpellCards(knownSpells);
   const preparedSpellCards = generateSpellCards(preparedSpells);
@@ -59,6 +75,7 @@ export default function SpellDisplay() {
         <Loading />
       ) : (
         <Flex direction={'column'} alignItems={'center'}>
+          {location.pathname === '/all-spells' && allSpellCards}
           {location.pathname === '/available-spells' && availableSpellCards}
           {location.pathname === '/known-spells' && knownSpellCards}
           {location.pathname === '/known-spells' && !knownSpells.length && (

@@ -22,16 +22,58 @@ import UnprepareSpellButton from '../Buttons/UnprepareSpellButton';
 import { useLocation } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
 
+import { useState } from 'react';
+import { Spells } from '../../services/Spells';
+import Loading from '../PageLayout/Loading';
+import { useSpellDetails } from '../../context/SpellContext';
+
 export default function SpellCard({ spellDetails, spell }) {
+  // export default function SpellCard({ spell }) {
   const { isOpen, onToggle } = useDisclosure();
   const location = useLocation();
-  const { divineCaster } = useCharacter();
+  const { divineCaster, characterInfo } = useCharacter();
+  //--------------
+  const { spellDetailsList, setSpellDetailsList, loading, setLoading } = useSpellDetails();
+  // const [loading, setLoading] = useState(false);
+  // const [spellDetails, setSpellDetails] = useState([]);
+  // const [currentSpellDetails, setCurrentSpellDetails] = useState([]);
+  const classes = spell.classes?.toString().replace(/,/g, ', ');
+  const findSpellDetails = (spellName) =>
+    spellDetailsList.find((spell) => spell.name === spellName);
+
+  console.log({ spellDetailsList });
+
+  const handleClick = () => {
+    if (spell.id && !isOpen) {
+      setLoading(true);
+      const spellExists = spellDetailsList.some((spellDetail) => spellDetail.name === spell.name);
+
+      if (spellExists) {
+        setLoading(false);
+        onToggle();
+      } else {
+        const fetchSpellDetails = async () => {
+          const newSpellDetails = await Spells.getDetails(spell.id);
+          setSpellDetailsList([...spellDetailsList, newSpellDetails]);
+          // setCurrentSpellDetails(newSpellDetails);
+          setLoading(false);
+          onToggle();
+        };
+
+        fetchSpellDetails();
+      }
+    } else {
+      onToggle();
+    }
+  };
+  //----------------
 
   return (
     <>
       <VStack>
         <Button
-          onClick={onToggle}
+          // onClick={onToggle}
+          onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}
           w={{ base: '90vw', md: '600px' }}
           h={'20'}
@@ -40,8 +82,19 @@ export default function SpellCard({ spellDetails, spell }) {
         >
           <Heading size="md">{spell.name}</Heading>
           <Text>{spell.school}</Text>
+          {location.pathname === '/all-spells' ? <Text>{classes} </Text> : null}
         </Button>
+
         <HStack>
+          {location.pathname === '/all-spells' &&
+            !spell.known &&
+            spell.level <= characterInfo.casterLvl && <LearnSpellButton spell={spell} />}
+          {location.pathname === '/all-spells' && spell.known && (
+            <Button isDisabled={true}>Known</Button>
+          )}
+          {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
+            <Button isDisabled={true}> Learn</Button>
+          )}
           {location.pathname === '/available-spells' && !spell.known && (
             <LearnSpellButton spell={spell} />
           )}
@@ -51,7 +104,7 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
           )}
-          {location.pathname === '/known-spells' && spell.prepared && (
+          {location.pathname === '/known-spells' && spell.prepared && spell.level > 0 && (
             <Button isDisabled={true}>Prepared</Button>
           )}
           {location.pathname === '/known-spells' && !divineCaster && (
@@ -91,7 +144,19 @@ export default function SpellCard({ spellDetails, spell }) {
             shadow="md"
             // onClick={onToggle}
           >
-            <SpellDetail spellDetails={spellDetails} />
+            {/* <SpellDetail spellDetails={spellDetails} /> */}
+            {!loading ? (
+              <SpellDetail
+                spellDetails={
+                  location.pathname === '/prepared-spells'
+                    ? spellDetails
+                    : findSpellDetails(spell.name)
+                  //  : currentSpellDetails
+                }
+              />
+            ) : (
+              <Loading />
+            )}
           </Box>
         </Collapse>
       </Container>

@@ -35,6 +35,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
   const damageAtSlotLevel = spellDetails?.damage.damageAtSlotLevel
     ? Object.keys(spellDetails.damage.damageAtSlotLevel)
     : [];
+  // const damageAtSlotLevel = [];
 
   const handleCast = async (charId, slotLevel) => {
     if (slotLevel) {
@@ -209,6 +210,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </TableContainer>
               </Box>
             )}
+
             {spellDetails?.saveDc.type && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
