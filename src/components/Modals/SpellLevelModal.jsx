@@ -27,7 +27,6 @@ import { getSuffix } from '../../utils/utils';
 
 export default function SpellLevelModal({ spell, spellDetails }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const { characterInfo, setCharacterInfo, rewardId, setRewardId } = useCharacter();
   const { characterInfo, setCharacterInfo } = useCharacter();
   const [slotLevel, setSlotLevel] = useState('');
   const toast = useToast();
@@ -35,7 +34,6 @@ export default function SpellLevelModal({ spell, spellDetails }) {
   const damageAtSlotLevel = spellDetails?.damage.damageAtSlotLevel
     ? Object.keys(spellDetails.damage.damageAtSlotLevel)
     : [];
-  // const damageAtSlotLevel = [];
 
   const handleCast = async (charId, slotLevel) => {
     if (slotLevel) {

@@ -17,7 +17,7 @@ import { useSpellDetails } from '../../context/SpellContext';
 export default function ForgetSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
-  const { forget } = useSpell();
+  const { forget, error } = useSpell();
   const { characterInfo } = useCharacter();
   const {
     knownSpells,
@@ -40,12 +40,12 @@ export default function ForgetSpellButton({ spell }) {
     setPreparedSpells(removeForgottenSpell(preparedSpells));
 
     onClose();
-    toast({
-      title: `${spell.name} forgotten!`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
+
+    const toastProps = error
+      ? { title: { error }, status: 'error' }
+      : { title: `${spell.name} forgotten!`, status: 'success' };
+
+    toast({ ...toastProps, duration: 3000, isClosable: true });
   };
 
   return (

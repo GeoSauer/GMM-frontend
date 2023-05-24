@@ -28,21 +28,16 @@ import Loading from '../PageLayout/Loading';
 import { useSpellDetails } from '../../context/SpellContext';
 
 export default function SpellCard({ spellDetails, spell }) {
-  // export default function SpellCard({ spell }) {
   const { isOpen, onToggle } = useDisclosure();
   const location = useLocation();
   const { divineCaster, characterInfo } = useCharacter();
-  //--------------
-  // const { spellDetailsList, setSpellDetailsList, loading, setLoading } = useSpellDetails();
   const { spellDetailsList, setSpellDetailsList } = useSpellDetails();
   const [loading, setLoading] = useState(false);
-  // const [spellDetails, setSpellDetails] = useState([]);
-  // const [currentSpellDetails, setCurrentSpellDetails] = useState([]);
+
   const classes = spell.classes?.toString().replace(/,/g, ', ');
+
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
-
-  console.log({ spellDetailsList });
 
   const handleClick = () => {
     if (spell.id && !isOpen) {
@@ -56,7 +51,6 @@ export default function SpellCard({ spellDetails, spell }) {
         const fetchSpellDetails = async () => {
           const newSpellDetails = await Spells.getDetails(spell.id);
           setSpellDetailsList([...spellDetailsList, newSpellDetails]);
-          // setCurrentSpellDetails(newSpellDetails);
           setLoading(false);
           onToggle();
         };
@@ -67,13 +61,11 @@ export default function SpellCard({ spellDetails, spell }) {
       onToggle();
     }
   };
-  //----------------
 
   return (
     <>
       <VStack>
         <Button
-          // onClick={onToggle}
           onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}
           w={{ base: '90vw', md: '600px' }}
@@ -145,14 +137,12 @@ export default function SpellCard({ spellDetails, spell }) {
             shadow="md"
             // onClick={onToggle}
           >
-            {/* <SpellDetail spellDetails={spellDetails} /> */}
             {!loading ? (
               <SpellDetail
                 spellDetails={
                   location.pathname === '/prepared-spells'
                     ? spellDetails
                     : findSpellDetails(spell.name)
-                  //  : currentSpellDetails
                 }
               />
             ) : (

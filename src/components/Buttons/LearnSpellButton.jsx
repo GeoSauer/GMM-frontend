@@ -14,21 +14,17 @@ import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
-import { useLocation } from 'react-router-dom';
 
 export default function LearnSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
-  const location = useLocation();
   const {
     allSpells,
     setAllSpells,
     availableSpells,
     setAvailableSpells,
-    // availableSpellDetails,
-    // setAvailableSpellDetails,
     spellDetailsList,
     setSpellDetailsList,
     knownSpells,
@@ -37,18 +33,6 @@ export default function LearnSpellButton({ spell }) {
     setPreparedSpells,
     setLoading,
   } = useSpellDetails();
-
-  // const updateSpellList = (spellArray, currentSpell) => {
-  //   const filteredSpellList = spellArray.filter((otherSpell) => otherSpell.name !== spell.name);
-  //   const sortedSpellList = [...filteredSpellList, currentSpell].sort((a, b) => {
-  //     if (a.level === b.level) {
-  //       return a.name.localeCompare(b.name);
-  //     } else {
-  //       return a.level - b.level;
-  //     }
-  //   });
-  //   return sortedSpellList;
-  // };
 
   const handleLearn = async (charId, onClose) => {
     await learn(charId, spell.id);

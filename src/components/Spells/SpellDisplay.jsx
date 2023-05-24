@@ -6,13 +6,9 @@ import { useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
 
 export default function SpellDisplay() {
-  // const { availableSpells, availableSpellDetails, knownSpells, preparedSpells, loading } =
-  //   useSpellDetails();
   const { allSpells, availableSpells, knownSpells, preparedSpells, spellDetailsList, loading } =
     useSpellDetails();
   const location = useLocation();
-  // const findSpellDetails = (spellName) =>
-  //   availableSpellDetails.find((spell) => spell.name === spellName);
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
 
@@ -58,8 +54,6 @@ export default function SpellDisplay() {
             <SpellCard spell={spell} />
           )}
         </Box>
-        // <SpellCard key={spell.name} spellDetails={findSpellDetails(spell.name)} spell={spell} />
-        // <SpellCard key={spell.name} spell={spell} />
       );
     });
   };
