@@ -17,7 +17,7 @@ import { useSpellDetails } from '../../context/SpellContext';
 export default function UnprepareSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
-  const { unprepare } = useSpell();
+  const { unprepare, error } = useSpell();
   const { characterInfo } = useCharacter();
   const { preparedSpells, setPreparedSpells } = useSpellDetails();
 
@@ -28,12 +28,11 @@ export default function UnprepareSpellButton({ spell }) {
     const updatedPreparedSpells = preparedSpells.filter(removeUnpreparedSpell);
     setPreparedSpells(updatedPreparedSpells);
     onClose();
-    toast({
-      title: `${spell.name} un-prepared!`,
-      status: 'success',
-      duration: 3000,
-      isClosable: true,
-    });
+    const toastProps = error
+      ? { title: { error }, status: 'error' }
+      : { title: `${spell.name} unprepared!`, status: 'success' };
+
+    toast({ ...toastProps, duration: 3000, isClosable: true });
   };
 
   return (

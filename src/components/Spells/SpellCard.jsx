@@ -33,8 +33,9 @@ export default function SpellCard({ spellDetails, spell }) {
   const location = useLocation();
   const { divineCaster, characterInfo } = useCharacter();
   //--------------
-  const { spellDetailsList, setSpellDetailsList, loading, setLoading } = useSpellDetails();
-  // const [loading, setLoading] = useState(false);
+  // const { spellDetailsList, setSpellDetailsList, loading, setLoading } = useSpellDetails();
+  const { spellDetailsList, setSpellDetailsList } = useSpellDetails();
+  const [loading, setLoading] = useState(false);
   // const [spellDetails, setSpellDetails] = useState([]);
   // const [currentSpellDetails, setCurrentSpellDetails] = useState([]);
   const classes = spell.classes?.toString().replace(/,/g, ', ');
