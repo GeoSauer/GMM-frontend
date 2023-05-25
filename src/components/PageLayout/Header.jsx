@@ -24,6 +24,7 @@ import UserNav from '../Navigation/UserNav';
 import MobileNav from '../Navigation/MobileNav';
 import DesktopNav from '../Navigation/DesktopNav';
 import { useLocation } from 'react-router-dom';
+import Subheader from './Subheader';
 import LongRestButton from '../Buttons/LongRestButton';
 import SearchBar from '../Navigation/SearchBar';
 
@@ -34,14 +35,17 @@ export default function Header() {
 
   return (
     <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4} position="sticky" top={0} zIndex={5}>
-      <Flex h={{ base: 10, md: 16 }} alignItems={'center'} justifyContent={'space-between'}>
+      <Flex alignItems={'center'} justifyContent={'space-between'}>
         <MobileNav />
         <DesktopNav />
-        <SearchBar />
-        <LongRestButton display={{ base: 'none', md: 'flex' }} />
+        <HStack hideBelow={'750px'}>
+          <LongRestButton />
+          <SearchBar />
+        </HStack>
         <UserNav />
       </Flex>
       {location.pathname !== '/settings' && location.pathname !== '/characters' && <SpellSlots />}
+      <Subheader />
     </Box>
   );
 }

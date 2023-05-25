@@ -6,7 +6,9 @@ export default function SpellSlots() {
   const { characterInfo } = useCharacter();
   return (
     <>
-      <Heading align={'center'}>Spell Slots Available Per Level</Heading>
+      <Heading align={'center'} size={{ base: 10, md: 20 }}>
+        Spell Slots Available Per Level
+      </Heading>
       <Box p="15px" color="white" bg="teal.500" shadow="md" mb={4}>
         <Flex w="full" justifyContent="space-around" alignItems="center">
           {[...Array(9)].map((_, i) => {

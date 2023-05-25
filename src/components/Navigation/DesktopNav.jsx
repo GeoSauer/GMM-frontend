@@ -11,7 +11,7 @@ export default function DesktopNav() {
   return (
     <HStack spacing={8} alignItems={'center'} justifyContent={'center'}>
       <Text as="span">Grimoire for the Modern Mage</Text>
-      <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+      <HStack as={'nav'} spacing={4} hideBelow={'750px'}>
         <Tabs variant="soft-rounded">
           <TabList>
             <Tab bg={location.pathname === '/prepared-spells' ? 'blue.500' : 'none'}>

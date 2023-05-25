@@ -60,6 +60,7 @@ export default function SpellDisplay() {
   //     // setKnownSpells((prevSpells) => [...prevSpells, ...nextKnownBatch]);
   //   }
   // };
+  console.log(location.pathname);
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
