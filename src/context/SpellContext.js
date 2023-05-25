@@ -11,6 +11,7 @@ export default function SpellProvider({ children }) {
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [spellDetailsList, setSpellDetailsList] = useState([]);
+  const [filteredSpells, setFilteredSpells] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   //--------------------------------------------
   // const [previousAllSpells, setPreviousAllSpells] = useState([]);
@@ -171,6 +172,8 @@ export default function SpellProvider({ children }) {
   const value = {
     allSpells,
     setAllSpells,
+    filteredSpells,
+    setFilteredSpells,
     availableSpells,
     setAvailableSpells,
     knownSpells,

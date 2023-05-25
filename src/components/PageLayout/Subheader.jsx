@@ -1,7 +1,7 @@
 import { Box, Flex, HStack, Heading, Stack } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import LongRestButton from '../Buttons/LongRestButton';
-import SearchBar from '../Navigation/SearchBar';
+import SearchButton from '../Buttons/SearchButton';
 
 export default function Subheader() {
   const location = useLocation();
@@ -11,12 +11,12 @@ export default function Subheader() {
   );
   return (
     <Flex hideFrom={'751px'} justifyContent="space-between" alignItems="center">
-      <Heading textAlign="center" size={2}>
+      <Heading textAlign="center" h="10">
         {locationHeader}
       </Heading>
       <Box justifyContent={'end'} mt={'-8'} h="4">
         <LongRestButton marginRight="2" />
-        <SearchBar />
+        <SearchButton />
       </Box>
     </Flex>
   );

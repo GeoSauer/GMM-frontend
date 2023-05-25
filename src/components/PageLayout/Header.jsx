@@ -1,24 +1,4 @@
-import {
-  Box,
-  Flex,
-  Avatar,
-  HStack,
-  Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  useColorModeValue,
-  useDisclosure,
-  Stack,
-  Tabs,
-  TabList,
-  Tab,
-  Text,
-  MenuGroup,
-} from '@chakra-ui/react';
-import { useCharacter } from '../../context/CharacterContext';
+import { Box, Flex, HStack, useColorModeValue } from '@chakra-ui/react';
 import SpellSlots from './SpellSlots';
 import UserNav from '../Navigation/UserNav';
 import MobileNav from '../Navigation/MobileNav';
@@ -26,11 +6,9 @@ import DesktopNav from '../Navigation/DesktopNav';
 import { useLocation } from 'react-router-dom';
 import Subheader from './Subheader';
 import LongRestButton from '../Buttons/LongRestButton';
-import SearchBar from '../Navigation/SearchBar';
+import SearchButton from '../Buttons/SearchButton';
 
 export default function Header() {
-  const { characterInfo } = useCharacter();
-  const { isOpen, onClose, onOpen } = useDisclosure();
   const location = useLocation();
 
   return (
@@ -40,7 +18,7 @@ export default function Header() {
         <DesktopNav />
         <HStack hideBelow={'750px'}>
           <LongRestButton />
-          <SearchBar />
+          <SearchButton />
         </HStack>
         <UserNav />
       </Flex>

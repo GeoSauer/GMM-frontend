@@ -12,6 +12,8 @@ export default function SpellDisplay() {
     knownSpells,
     preparedSpells,
     spellDetailsList,
+    filteredSpells,
+    setFilteredSpells,
     isLoading,
     //TODO infinite scroll jazz
     // spellsInnerRef,
@@ -60,7 +62,6 @@ export default function SpellDisplay() {
   //     // setKnownSpells((prevSpells) => [...prevSpells, ...nextKnownBatch]);
   //   }
   // };
-  console.log(location.pathname);
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
