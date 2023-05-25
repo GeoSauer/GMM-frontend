@@ -32,7 +32,7 @@ export default function SpellCard({ spellDetails, spell }) {
   const location = useLocation();
   const { divineCaster, characterInfo } = useCharacter();
   const { spellDetailsList, setSpellDetailsList } = useSpellDetails();
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const classes = spell.classes?.toString().replace(/,/g, ', ');
 
@@ -41,17 +41,17 @@ export default function SpellCard({ spellDetails, spell }) {
 
   const handleClick = () => {
     if (spell.id && !isOpen) {
-      setLoading(true);
+      setIsLoading(true);
       const spellExists = spellDetailsList.some((spellDetail) => spellDetail.name === spell.name);
 
       if (spellExists) {
-        setLoading(false);
+        setIsLoading(false);
         onToggle();
       } else {
         const fetchSpellDetails = async () => {
           const newSpellDetails = await Spells.getDetails(spell.id);
           setSpellDetailsList([...spellDetailsList, newSpellDetails]);
-          setLoading(false);
+          setIsLoading(false);
           onToggle();
         };
 
@@ -137,7 +137,7 @@ export default function SpellCard({ spellDetails, spell }) {
             shadow="md"
             // onClick={onToggle}
           >
-            {!loading ? (
+            {!isLoading ? (
               <SpellDetail
                 spellDetails={
                   location.pathname === '/prepared-spells'

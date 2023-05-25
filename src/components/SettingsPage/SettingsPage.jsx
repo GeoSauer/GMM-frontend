@@ -18,7 +18,7 @@ import { User } from '../../services/User';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
-  const { loading, userInfo, setUserInfo } = useUser();
+  const { isLoading, userInfo, setUserInfo } = useUser();
 
   const ProfileSchema = Yup.object().shape({
     username: Yup.string().min(2, 'Too Short!'),
@@ -34,7 +34,7 @@ export default function SettingsPage() {
       <Stack spacing={8} mx={'auto'} maxWidth={'lg'} py={12} px={6}>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
-            {loading ? (
+            {isLoading ? (
               <Loading />
             ) : (
               <Formik

@@ -20,7 +20,7 @@ export default function LearnSpellButton({ spell }) {
   const initRef = useRef();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
-  const [loading, setLoading] = useState();
+  const [isLoading, setIsLoading] = useState();
   const {
     allSpells,
     setAllSpells,
@@ -39,10 +39,10 @@ export default function LearnSpellButton({ spell }) {
     spell.known = true;
 
     const fetchSpellDetails = async () => {
-      setLoading(true);
+      setIsLoading(true);
       const newSpellDetails = await Spells.getDetails(spell.id);
       setSpellDetailsList([...spellDetailsList, newSpellDetails]);
-      setLoading(false);
+      setIsLoading(false);
     };
     fetchSpellDetails();
 

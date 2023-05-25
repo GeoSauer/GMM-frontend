@@ -9,7 +9,7 @@ const UserContext = createContext();
 export default function UserProvider({ children }) {
   const localUser = getLocalUser();
   const [user, setUser] = useState(localUser);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
 
   //TODO decide if I even wanna keep this
@@ -30,11 +30,11 @@ export default function UserProvider({ children }) {
 
   useEffect(() => {
     if (user) {
-      setLoading(true);
+      setIsLoading(true);
       const fetchUserInfo = async () => {
         const results = await User.getById();
         setUserInfo(results);
-        setLoading(false);
+        setIsLoading(false);
       };
       fetchUserInfo();
     }
@@ -43,8 +43,8 @@ export default function UserProvider({ children }) {
   const value = {
     user,
     setUserState,
-    loading,
-    setLoading,
+    isLoading,
+    setIsLoading,
     userInfo,
     setUserInfo,
   };

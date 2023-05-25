@@ -18,7 +18,7 @@ import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Character';
 
 export default function EditCharacterForm({ close }) {
-  const { characterInfo, setCharacterInfo, setLevelUp, loading } = useCharacter();
+  const { characterInfo, setCharacterInfo, setLevelUp, isLoading } = useCharacter();
   const toast = useToast();
 
   const CharacterSchema = Yup.object().shape({
@@ -35,7 +35,7 @@ export default function EditCharacterForm({ close }) {
       <Stack spacing={8} mx={'auto'} maxWidth={'lg'} py={12} px={6}>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
           <Stack spacing={4}>
-            {loading ? (
+            {isLoading ? (
               <Loading />
             ) : (
               <Formik

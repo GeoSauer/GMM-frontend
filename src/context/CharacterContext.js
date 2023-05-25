@@ -11,13 +11,13 @@ export default function CharacterProvider({ children }) {
   const [characterList, setCharacterList] = useState([]);
   const [characterInfo, setCharacterInfo] = useState({});
   const [levelUp, setLevelUp] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [divineCaster, setDivineCaster] = useState(false);
   const { userInfo, user } = useUser();
 
   useEffect(() => {
     if (userInfo.id && user) {
-      setLoading(true);
+      setIsLoading(true);
       const fetchCharacters = async () => {
         const characters = await Character.getAll();
         setCharacterList(characters);
@@ -38,7 +38,7 @@ export default function CharacterProvider({ children }) {
           setCharacterInfo(character);
           setCharacterList(characters);
         }
-        setLoading(false);
+        setIsLoading(false);
       };
       fetchCharacters();
     }
@@ -64,8 +64,8 @@ export default function CharacterProvider({ children }) {
     characterInfo,
     setCharacterInfo,
     setCharacterState,
-    loading,
-    setLoading,
+    isLoading,
+    setIsLoading,
     levelUp,
     setLevelUp,
     divineCaster,

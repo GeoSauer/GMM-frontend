@@ -4,11 +4,11 @@ import { useUser } from '../../context/UserContext';
 
 export default function UserInfo() {
   const { userInfo } = useUser();
-  const { characterInfo, loading } = useCharacter();
+  const { characterInfo, isLoading } = useCharacter();
 
   return (
     <>
-      {!loading && userInfo.username && characterInfo.charName && (
+      {!isLoading && userInfo.username && characterInfo.charName && (
         <>
           <Text>
             {userInfo.username.length > 20

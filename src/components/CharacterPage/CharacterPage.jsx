@@ -8,7 +8,7 @@ import Confetti from 'react-confetti';
 import CreateCharacterButton from '../Buttons/CreateCharacterButton';
 
 export default function CharacterPage() {
-  const { characterList, levelUp, loading } = useCharacter();
+  const { characterList, levelUp, isLoading } = useCharacter();
   const { userInfo } = useUser();
   const location = useLocation();
 
@@ -28,7 +28,7 @@ export default function CharacterPage() {
       )}
 
       <CreateCharacterButton />
-      {loading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <>

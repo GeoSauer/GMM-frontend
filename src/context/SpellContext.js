@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { Spells } from '../services/Spells';
 import { useCharacter } from './CharacterContext';
 
@@ -10,22 +10,40 @@ export default function SpellProvider({ children }) {
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [spellDetailsList, setSpellDetailsList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  // const [page, setPage] = useState(1);
-
+  const [isLoading, setIsLoading] = useState(true);
+  //--------------------------------------------
+  // const [previousAllSpells, setPreviousAllSpells] = useState([]);
+  // const [previousAvailableSpells, setPreviousAvailableSpells] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [previousPage, setPreviousPage] = useState(0);
+  // const [isLastPage, setIsLastPage] = useState(false);
+  // const batchSize = 30;
+  // const offset = (currentPage - 1) * batchSize;
+  // const spellsInnerRef = useRef();
+  //--------------------------------------------
   const { characterInfo } = useCharacter();
-  // const limit = 20;
 
   useEffect(() => {
     if (characterInfo.id) {
-      setLoading(true);
       const fetchData = async () => {
-        // const offset = (page - 1) * limit;
-        // const fetchedAllSpells = await Spells.getAll(limit, offset);
-        // const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id, limit, offset);
+        setIsLoading(true);
         const fetchedAllSpells = await Spells.getAll();
         const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
+        //--------------------------------------------
+        // const fetchedAllSpells = await Spells.getAll(offset, batchSize);
+        // if (!fetchedAllSpells.length) {
+        //   setIsLastPage(true);
+        //   setIsLoading(false);
+        //   return;
+        // }
+        // const fetchedAvailableSpells = await Spells.getAvailable(
+        //   characterInfo.id,
+        //   offset,
+        //   batchSize
+        // );
+        // const fetchedKnownSpells = await Spells.getKnown(characterInfo.id, offset, batchSize);
+        //--------------------------------------------
         const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
 
         const fetchSpellDetails = async (spells) => {
@@ -37,46 +55,107 @@ export default function SpellProvider({ children }) {
           return spellDetails;
         };
 
-        const findUniqueSpells = (spells, knownSpells) => {
-          const combinedSpells = [...spells, ...knownSpells];
+        const findUniqueSpells = (currentSpells, knownSpells) => {
+          const combinedSpells = [...currentSpells, ...knownSpells];
           const uniqueSpellNames = Array.from(new Set(combinedSpells.map((spell) => spell.name)));
           const uniqueSpells = uniqueSpellNames.map((spellName) => {
             const uniqueSpell =
               knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
-              spells.find((spell) => spell.name === spellName);
+              currentSpells.find((spell) => spell.name === spellName);
             return uniqueSpell;
           });
           return uniqueSpells;
         };
 
-        const uniqueAllSpells = findUniqueSpells(fetchedAllSpells, fetchedKnownSpells);
-        const uniqueAvailableSpells = findUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells);
-        const sortedAvailableSpells = uniqueAvailableSpells.sort((a, b) => {
-          if (a.level === b.level) {
-            return a.name.localeCompare(b.name);
-          } else {
-            return a.level - b.level;
-          }
-        });
+        // const findUniqueSpells = (previousSpells, currentSpells, knownSpells) => {
+        //   const combinedSpells = [...previousSpells, ...currentSpells, ...knownSpells];
+        //   const uniqueSpellNames = Array.from(new Set(combinedSpells.map((spell) => spell.name)));
+        //   const uniqueSpells = uniqueSpellNames.map((spellName) => {
+        //     const uniqueSpell =
+        //       knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
+        //       currentSpells.find((spell) => spell.name === spellName) ||
+        //       previousSpells.find((spell) => spell.name === spellName);
+        //     return uniqueSpell;
+        //   });
+        //   return uniqueSpells;
+        // };
+
+        const uniqueAllSpells = findUniqueSpells(
+          // previousAllSpells,
+          fetchedAllSpells,
+          fetchedKnownSpells
+        );
+        const uniqueAvailableSpells = findUniqueSpells(
+          // previousAvailableSpells,
+          fetchedAvailableSpells,
+          fetchedKnownSpells
+        );
+        // const sortedAvailableSpells = uniqueAvailableSpells.sort((a, b) => {
+        //   if (a.level === b.level) {
+        //     return a.name.localeCompare(b.name);
+        //   } else {
+        //     return a.level - b.level;
+        //   }
+        // });
 
         const fetchedSpellDetails = await fetchSpellDetails(fetchedPreparedSpells);
-        setAvailableSpells(sortedAvailableSpells);
-        setSpellDetailsList(fetchedSpellDetails);
-        setKnownSpells(fetchedKnownSpells);
-        setPreparedSpells(fetchedPreparedSpells);
+
         setAllSpells(uniqueAllSpells);
-        setLoading(false);
+        //-----------------------
+        // setPreviousPage(currentPage);
+        // setAllSpells([...allSpells, ...fetchedAllSpells]);
+        //-----------------------
+        // setAllSpells((prevSpells) => [...prevSpells, ...fetchedAllSpells]);
+        // setAvailableSpells(sortedAvailableSpells);
+        setAvailableSpells(uniqueAvailableSpells);
+        setKnownSpells(fetchedKnownSpells);
+        // setKnownSpells((prevSpells) => [...prevSpells, ...fetchedKnownSpells]);
+        setPreparedSpells(fetchedPreparedSpells);
+        setSpellDetailsList(fetchedSpellDetails);
+        //----------------
+        // setPreviousAllSpells(allSpells);
+        // setPreviousAvailableSpells(availableSpells);
+        //----------------
+        setIsLoading(false);
       };
       fetchData();
+      // if (!isLastPage && previousPage !== currentPage) fetchData();
     }
   }, [characterInfo.charLvl, characterInfo.id]);
-  // }, [characterInfo.charLvl, characterInfo.id, page]);
+  // }, [characterInfo.charLvl, characterInfo.id, currentPage, isLastPage, previousPage, allSpells]);
 
   // const handleScroll = () => {
-  //   if (
-  //     window.innerHeight + document.documentElement.scrollTop ===
-  //     document.documentElement.offsetHeight
-  //   ) {
+  //   const display = document.getElementById('display');
+  //   if (!display) return;
+  //   const displayHeight = display.offsetHeight;
+  //   const scrollHeight = display.scrollHeight;
+  //   const scrollTop = display.scrollTop;
+
+  //   if (scrollHeight - scrollTop <= displayHeight) {
+  //     setPage((prevPage) => prevPage + 1);
+  //     const nextAllBatchStartIndex = allSpells.length;
+  //     const nextAvailableBatchStartIndex = availableSpells.length;
+  //     const nextKnownBatchStartIndex = knownSpells.length;
+  //     const nextAllBatchEndIndex = nextAllBatchStartIndex + batchSize;
+  //     const nextAvailableBatchEndIndex = nextAvailableBatchStartIndex + batchSize;
+  //     const nextKnownBatchEndIndex = nextKnownBatchStartIndex + batchSize;
+  //     const nextAllBatch = allSpells.slice(nextAllBatchStartIndex, nextAllBatchEndIndex);
+  //     const nextAvailableBatch = allSpells.slice(
+  //       nextAvailableBatchStartIndex,
+  //       nextAvailableBatchEndIndex
+  //     );
+  //     const nextKnownBatch = allSpells.slice(nextKnownBatchStartIndex, nextKnownBatchEndIndex);
+
+  //     setAllSpells((prevSpells) => [...prevSpells, ...nextAllBatch]);
+  //     setAvailableSpells((prevSpells) => [...prevSpells, ...nextAvailableBatch]);
+  //     setKnownSpells((prevSpells) => [...prevSpells, ...nextKnownBatch]);
+  //   }
+  // };
+
+  // const handleScroll = () => {
+  //   const thresholdElement = document.getElementById('item-30'); // Adjust this based on your item structure
+  //   const rect = thresholdElement.getBoundingClientRect();
+  //   if (rect.top <= window.innerHeight) {
   //     setPage((prevPage) => prevPage + 1);
   //   }
   // };
@@ -99,8 +178,14 @@ export default function SpellProvider({ children }) {
     setPreparedSpells,
     spellDetailsList,
     setSpellDetailsList,
-    loading,
-    setLoading,
+    isLoading,
+    setIsLoading,
+    //_________
+    // spellsInnerRef,
+    // onScroll,
+    // currentPage,
+    // setCurrentPage,
+    //__________
   };
 
   return <SpellContext.Provider value={value}>{children}</SpellContext.Provider>;
@@ -109,3 +194,22 @@ export default function SpellProvider({ children }) {
 export function useSpellDetails() {
   return useContext(SpellContext);
 }
+
+//TODO this infinite scroll sorta works, it just flickers and resets to the top of the list but it does fetch in batches
+// useEffect(() => {
+//   if (characterInfo.id) {
+//     const fetchData = async () => {
+//       setIsLoading(true);
+//       const fetchedAllSpells = await Spells.getAll(offset, batchSize);
+//       if (!fetchedAllSpells.length) {
+//         setIsLastPage(true);
+//         setIsLoading(false);
+//         return;
+//       }
+//       setPreviousPage(currentPage);
+//       setAllSpells([...allSpells, ...fetchedAllSpells]);
+//       setIsLoading(false);
+//     };
+//     if (!isLastPage && previousPage !== currentPage) fetchData();
+//   }
+// }, [characterInfo.charLvl, characterInfo.id, currentPage, isLastPage, previousPage, allSpells]);

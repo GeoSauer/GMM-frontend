@@ -4,15 +4,20 @@ import agent from './customAgent';
 const SPELLS = 'http://localhost:7890/api/v1/spells';
 
 export class Spells {
-  // static async getAll(limit, offset) {
-  //   const response = await agent.get(`${SPELLS}/all`).query({ limit, offset });
+  // static async getAll(offset, batchSize) {
+  //   const response = await agent.get(`${SPELLS}/all`).query({ offset, batchSize });
   //   return response.body;
   // }
 
-  // static async getAvailable(charId, limit, offset) {
-  //   const response = await agent.get(`${SPELLS}/${charId}/available`).query({ limit, offset });
+  // static async getAvailable(charId, offset, batchSize) {
+  //   const response = await agent.get(`${SPELLS}/${charId}/available`).query({ offset, batchSize });
   //   return response.body;
   // }
+  // static async getKnown(charId, offset, batchSize) {
+  //   const response = await agent.get(`${SPELLS}/${charId}/known`).query({ offset, batchSize });
+  //   return response.body;
+  // }
+
   static async getAll() {
     const response = await agent.get(`${SPELLS}/all`);
     return response.body;

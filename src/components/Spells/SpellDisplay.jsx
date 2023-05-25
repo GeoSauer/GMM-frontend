@@ -6,19 +6,70 @@ import { useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
 
 export default function SpellDisplay() {
-  const { allSpells, availableSpells, knownSpells, preparedSpells, spellDetailsList, loading } =
-    useSpellDetails();
+  const {
+    allSpells,
+    availableSpells,
+    knownSpells,
+    preparedSpells,
+    spellDetailsList,
+    isLoading,
+    //TODO infinite scroll jazz
+    // spellsInnerRef,
+    // currentPage,
+    // setCurrentPage,
+  } = useSpellDetails();
   const location = useLocation();
+
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
+
+  //TODO infinite scroll jazz
+  // const onScroll = () => {
+  //   if (spellsInnerRef.current) {
+  //     const { scrollTop, scrollHeight, clientHeight } = spellsInnerRef.current;
+  //     if (scrollTop + clientHeight === scrollHeight) {
+  //       setCurrentPage(currentPage + 1);
+  //     }
+  //   }
+  // };
+
+  // const handleScroll = () => {
+  //   const display = document.getElementById('display');
+  //   if (!display) return;
+  //   const displayHeight = display.offsetHeight;
+  //   const scrollHeight = display.scrollHeight;
+  //   const scrollTop = display.scrollTop;
+
+  //   if (scrollHeight - scrollTop <= displayHeight) {
+  //     setPage((prevPage) => prevPage + 1);
+  //     const nextAllBatchStartIndex = allSpells.length;
+  //     // const nextAvailableBatchStartIndex = availableSpells.length;
+  //     // const nextKnownBatchStartIndex = knownSpells.length;
+  //     const nextAllBatchEndIndex = nextAllBatchStartIndex + batchSize;
+  //     // const nextAvailableBatchEndIndex = nextAvailableBatchStartIndex + batchSize;
+  //     // const nextKnownBatchEndIndex = nextKnownBatchStartIndex + batchSize;
+  //     const nextAllBatch = allSpells.slice(nextAllBatchStartIndex, nextAllBatchEndIndex);
+  //     // const nextAvailableBatch = allSpells.slice(
+  //     //   nextAvailableBatchStartIndex,
+  //     //   nextAvailableBatchEndIndex
+  //     // );
+  //     // const nextKnownBatch = allSpells.slice(nextKnownBatchStartIndex, nextKnownBatchEndIndex);
+
+  //     setAllSpells((prevSpells) => [...prevSpells, ...nextAllBatch]);
+  //     // setAvailableSpells((prevSpells) => [...prevSpells, ...nextAvailableBatch]);
+  //     // setKnownSpells((prevSpells) => [...prevSpells, ...nextKnownBatch]);
+  //   }
+  // };
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
       const suffix = getSuffix(spell.level);
+      // const number = index + 1;
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          <Box key={spell.id}>
+          // <Box id={`spell-${number}`} key={spell.name}>
+          <Box id={'display'} key={spell.name}>
             <Flex
               align="center"
               justify="start"
@@ -47,7 +98,8 @@ export default function SpellDisplay() {
         );
       }
       return (
-        <Box key={spell.name}>
+        // <Box id={`spell-${number}`} key={spell.name}>
+        <Box id={'display'} key={spell.name}>
           {location.pathname === '/prepared-spells' ? (
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           ) : (
@@ -64,21 +116,66 @@ export default function SpellDisplay() {
   const preparedSpellCards = generateSpellCards(preparedSpells);
 
   return (
+    //TODO infinite scroll jazz
+    // <div onScroll={onScroll} ref={spellsInnerRef} style={{ height: '100vh', overflowY: 'auto' }}>
     <>
-      {loading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <Flex direction={'column'} alignItems={'center'}>
-          {location.pathname === '/all-spells' && allSpellCards}
+          {location.pathname === '/all-spells' ? (
+            allSpells.length ? (
+              allSpellCards
+            ) : (
+              <Text>
+                Looks like the server is acting up. Try refreshing the page or come back later,
+                sorry!
+              </Text>
+            )
+          ) : location.pathname === '/available-spells' ? (
+            availableSpells.length ? (
+              availableSpellCards
+            ) : (
+              <Text>
+                Looks like the server is acting up. Try refreshing the page or come back later,
+                sorry!
+              </Text>
+            )
+          ) : location.pathname === '/known-spells' ? (
+            knownSpells.length ? (
+              knownSpellCards
+            ) : (
+              <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
+            )
+          ) : location.pathname === '/prepared-spells' ? (
+            preparedSpells.length ? (
+              preparedSpellCards
+            ) : (
+              <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
+            )
+          ) : null}
+
+          {/* //TODO circle back on the readability of these options */}
+          {/* {location.pathname === '/all-spells' && allSpellCards}
           {location.pathname === '/available-spells' && availableSpellCards}
           {location.pathname === '/known-spells' && knownSpellCards}
+          {location.pathname === '/prepared-spells' && preparedSpellCards}
+          {location.pathname === '/all-spells' && !allSpells.length && (
+            <Text>
+              Looks like the server is acting up. Try refreshing the page or come back later, sorry!
+            </Text>
+          )}
+          {location.pathname === '/available-spells' && !availableSpells.length && (
+            <Text>
+              Looks like the server is acting up. Try refreshing the page or come back later, sorry!
+            </Text>
+          )}
           {location.pathname === '/known-spells' && !knownSpells.length && (
             <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
           )}
-          {location.pathname === '/prepared-spells' && preparedSpellCards}
           {location.pathname === '/prepared-spells' && !preparedSpells.length && (
             <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
-          )}
+          )} */}
         </Flex>
       )}
     </>
