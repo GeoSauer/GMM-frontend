@@ -12,8 +12,8 @@ export default function SpellDisplay() {
     knownSpells,
     preparedSpells,
     spellDetailsList,
-    filteredSpells,
-    setFilteredSpells,
+    // filteredSpells,
+    // setFilteredSpells,
     isLoading,
     //TODO infinite scroll jazz
     // spellsInnerRef,
@@ -70,8 +70,7 @@ export default function SpellDisplay() {
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          // <Box id={`spell-${number}`} key={spell.name}>
-          <Box id={'display'} key={spell.name}>
+          <Box id={index} key={spell.name}>
             <Flex
               align="center"
               justify="start"
@@ -100,8 +99,7 @@ export default function SpellDisplay() {
         );
       }
       return (
-        // <Box id={`spell-${number}`} key={spell.name}>
-        <Box id={'display'} key={spell.name}>
+        <Box key={spell.name}>
           {location.pathname === '/prepared-spells' ? (
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           ) : (
@@ -117,69 +115,31 @@ export default function SpellDisplay() {
   const knownSpellCards = generateSpellCards(knownSpells);
   const preparedSpellCards = generateSpellCards(preparedSpells);
 
-  return (
-    //TODO infinite scroll jazz
-    // <div onScroll={onScroll} ref={spellsInnerRef} style={{ height: '100vh', overflowY: 'auto' }}>
-    <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <Flex direction={'column'} alignItems={'center'}>
-          {location.pathname === '/all-spells' ? (
-            allSpells.length ? (
-              allSpellCards
-            ) : (
-              <Text>
-                Looks like the server is acting up. Try refreshing the page or come back later,
-                sorry!
-              </Text>
-            )
-          ) : location.pathname === '/available-spells' ? (
-            availableSpells.length ? (
-              availableSpellCards
-            ) : (
-              <Text>
-                Looks like the server is acting up. Try refreshing the page or come back later,
-                sorry!
-              </Text>
-            )
-          ) : location.pathname === '/known-spells' ? (
-            knownSpells.length ? (
-              knownSpellCards
-            ) : (
-              <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
-            )
-          ) : location.pathname === '/prepared-spells' ? (
-            preparedSpells.length ? (
-              preparedSpellCards
-            ) : (
-              <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
-            )
-          ) : null}
+  if (isLoading) return <Loading />;
 
-          {/* //TODO circle back on the readability of these options */}
-          {/* {location.pathname === '/all-spells' && allSpellCards}
-          {location.pathname === '/available-spells' && availableSpellCards}
-          {location.pathname === '/known-spells' && knownSpellCards}
-          {location.pathname === '/prepared-spells' && preparedSpellCards}
-          {location.pathname === '/all-spells' && !allSpells.length && (
-            <Text>
-              Looks like the server is acting up. Try refreshing the page or come back later, sorry!
-            </Text>
-          )}
-          {location.pathname === '/available-spells' && !availableSpells.length && (
-            <Text>
-              Looks like the server is acting up. Try refreshing the page or come back later, sorry!
-            </Text>
-          )}
-          {location.pathname === '/known-spells' && !knownSpells.length && (
-            <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
-          )}
-          {location.pathname === '/prepared-spells' && !preparedSpells.length && (
-            <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
-          )} */}
-        </Flex>
+  return (
+    <Flex direction={'column'} alignItems={'center'}>
+      {location.pathname === '/all-spells' && allSpellCards}
+      {location.pathname === '/available-spells' && availableSpellCards}
+      {location.pathname === '/known-spells' && knownSpellCards}
+      {location.pathname === '/prepared-spells' && preparedSpellCards}
+
+      {location.pathname === '/all-spells' && !allSpells.length && (
+        <Text>
+          Looks like the server is acting up. Try refreshing the page or come back later, sorry!
+        </Text>
       )}
-    </>
+      {location.pathname === '/available-spells' && !availableSpells.length && (
+        <Text>
+          Looks like the server is acting up. Try refreshing the page or come back later, sorry!
+        </Text>
+      )}
+      {location.pathname === '/known-spells' && !knownSpells.length && (
+        <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
+      )}
+      {location.pathname === '/prepared-spells' && !preparedSpells.length && (
+        <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
+      )}
+    </Flex>
   );
 }

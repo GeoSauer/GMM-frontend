@@ -81,9 +81,9 @@ export function useCharacter() {
 export function useSpell() {
   const [error, setError] = useState(null);
 
-  const learn = async (charId, spellId) => {
+  const learn = async (spellInfo) => {
     try {
-      await Character.learnSpell(charId, spellId);
+      await Character.learnSpell(spellInfo);
       setError(null);
     } catch (error) {
       setError(error);

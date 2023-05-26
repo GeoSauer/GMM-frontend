@@ -14,10 +14,13 @@ import { useRef, useState } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
+import { useLocation } from 'react-router-dom';
+import Loading from '../PageLayout/Loading';
 
 export default function LearnSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
+  const location = useLocation();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
   const [isLoading, setIsLoading] = useState();
@@ -35,7 +38,11 @@ export default function LearnSpellButton({ spell }) {
   } = useSpellDetails();
 
   const handleLearn = async (charId, onClose) => {
-    await learn(charId, spell.id);
+    if (location.pathname === '/all-spells') {
+      spell.fromAll = true;
+    }
+
+    await learn({ charId, spellId: spell.id, fromAll: spell.fromAll });
     spell.known = true;
 
     const fetchSpellDetails = async () => {
@@ -75,6 +82,8 @@ export default function LearnSpellButton({ spell }) {
 
     toast({ ...toastProps, duration: 3000, isClosable: true });
   };
+
+  if (isLoading) return <Loading />;
 
   return (
     <Popover initialFocusRef={initRef}>

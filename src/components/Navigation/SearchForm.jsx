@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Grid, GridItem, Input, Stack, Text } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
+import { Box, Button, Flex, Grid, GridItem, Input, Text } from '@chakra-ui/react';
+import { useCallback, useEffect, useState } from 'react';
 import { getSuffix } from '../../utils/utils';
 
 export default function SearchForm({ spellArray, onFilter }) {
@@ -17,7 +17,6 @@ export default function SearchForm({ spellArray, onFilter }) {
       }
     });
   };
-  console.log({ spellArray });
   const handleClassClick = (selectedClass) => {
     setSelectedClasses((prevSelectedClasses) => {
       if (prevSelectedClasses.includes(selectedClass)) {
@@ -28,24 +27,37 @@ export default function SearchForm({ spellArray, onFilter }) {
     });
   };
 
-  const filteredSpells = spellArray.filter((spell) => {
-    // Filter by name
-    const isNameMatch = spell.name.toLowerCase().includes(searchTerm.toLowerCase());
-
-    // Filter by level
-    const isLevelMatch = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
-
-    // Filter by class
-    const isClassMatch =
-      selectedClasses.length === 0 ||
-      spell.classes.some((clazz) => selectedClasses.includes(clazz));
-
-    return isNameMatch && isLevelMatch && isClassMatch;
-  });
+  const memoizedOnFilter = useCallback(
+    (filteredSpells) => {
+      onFilter(filteredSpells);
+    },
+    [onFilter]
+  );
 
   useEffect(() => {
-    onFilter(filteredSpells);
-  }, []);
+    const filteredSpells = spellArray.filter((spell) => {
+      // Filter by name
+      const isNameMatch = spell.name.toLowerCase().includes(searchTerm.toLowerCase());
+
+      // Filter by level
+      const isLevelMatch = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
+
+      // Filter by class
+      const isClassMatch =
+        selectedClasses.length === 0 || spell.classes.some((cls) => selectedClasses.includes(cls));
+
+      return isNameMatch && isLevelMatch && isClassMatch;
+    });
+
+    memoizedOnFilter(filteredSpells);
+  }, [
+    spellArray.map((spell) => spell.id).join(','),
+    searchTerm,
+    selectedLevels,
+    selectedClasses,
+    memoizedOnFilter,
+    spellArray,
+  ]);
 
   return (
     <Box>

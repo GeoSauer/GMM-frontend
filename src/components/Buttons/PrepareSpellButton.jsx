@@ -21,8 +21,8 @@ export default function PrepareSpellButton({ spell }) {
   const { characterInfo } = useCharacter();
   const { preparedSpells, setPreparedSpells } = useSpellDetails();
 
-  const handlePrepare = async (charId, spellId, prepared, onClose) => {
-    await prepare({ charId, spellId, prepared });
+  const handlePrepare = async (charId, prepared, onClose) => {
+    await prepare({ charId, spellId: spell.id, prepared });
     spell.prepared = true;
     const sortedPreparedSpells = [...preparedSpells, spell].sort((a, b) => {
       if (a.level === b.level) {
@@ -54,7 +54,7 @@ export default function PrepareSpellButton({ spell }) {
               <PopoverHeader>Are you sure you want to prepare {spell.name}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button onClick={() => handlePrepare(characterInfo.id, spell.id, true, onClose)}>
+                <Button onClick={() => handlePrepare(characterInfo.id, true, onClose)}>
                   Do it!
                 </Button>
               </PopoverBody>

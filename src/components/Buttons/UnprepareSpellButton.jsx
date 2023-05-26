@@ -21,8 +21,8 @@ export default function UnprepareSpellButton({ spell }) {
   const { characterInfo } = useCharacter();
   const { preparedSpells, setPreparedSpells } = useSpellDetails();
 
-  const handleUnprepare = async (charId, spellId, prepared, onClose) => {
-    await unprepare({ charId, spellId, prepared });
+  const handleUnprepare = async (charId, prepared, onClose) => {
+    await unprepare({ charId, spellId: spell.id, prepared });
     spell.prepared = false;
     const removeUnpreparedSpell = (unpreparedSpell) => spell.name !== unpreparedSpell.name;
     const updatedPreparedSpells = preparedSpells.filter(removeUnpreparedSpell);
@@ -48,7 +48,7 @@ export default function UnprepareSpellButton({ spell }) {
               <PopoverHeader>Are you sure you want to un-prepare {spell.name}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button onClick={() => handleUnprepare(characterInfo.id, spell.id, false, onClose)}>
+                <Button onClick={() => handleUnprepare(characterInfo.id, false, onClose)}>
                   Goodbye, for now...
                 </Button>
               </PopoverBody>

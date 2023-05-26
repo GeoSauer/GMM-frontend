@@ -31,11 +31,11 @@ export default function ForgetSpellButton({ spell }) {
   const handleForget = async (charId, onClose) => {
     await forget(charId, spell.id);
     spell.known = false;
-    spell.prepared = false;
+
     const removeForgottenSpell = (spellArray) =>
       spellArray.filter((forgottenSpell) => forgottenSpell.name !== spell.name);
 
-    if (spell.fromAll) setAvailableSpells(removeForgottenSpell(availableSpells));
+    setAvailableSpells(removeForgottenSpell(availableSpells));
     setKnownSpells(removeForgottenSpell(knownSpells));
     setPreparedSpells(removeForgottenSpell(preparedSpells));
 

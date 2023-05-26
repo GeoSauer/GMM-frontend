@@ -40,6 +40,7 @@ export default function SearchButton() {
       : location.pathname === '/prepared-spells'
       ? preparedSpells
       : [];
+
   return (
     <>
       <Button ref={buttonRef} colorScheme="gray" onClick={onOpen}>

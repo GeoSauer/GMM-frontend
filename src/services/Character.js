@@ -30,8 +30,8 @@ export class Character {
     return body;
   }
 
-  static async learnSpell(charId, spellId) {
-    const { body } = await agent.post(`${CHARACTERS}/learn`).send({ charId, spellId });
+  static async learnSpell(spellInfo) {
+    const { body } = await agent.post(`${CHARACTERS}/learn`).send(spellInfo);
     return body;
   }
 
