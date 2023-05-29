@@ -23,6 +23,22 @@ import { useRef } from 'react';
 import EditCharacterForm from './EditCharacterForm';
 import { truncateCharacterName } from '../../utils/utils';
 import DeleteCharacterButton from '../Buttons/DeleteCharacterButton';
+import BardAvatar from '../../assets/Bard.png';
+import ClericAvatar from '../../assets/Cleric.png';
+import DruidAvatar from '../../assets/Druid.png';
+import PaladinAvatar from '../../assets/Paladin.png';
+import RangerAvatar from '../../assets/Ranger.png';
+import SorcererAvatar from '../../assets/Sorcerer.png';
+import WarlockAvatar from '../../assets/Warlock.png';
+import WizardAvatar from '../../assets/Wizard.png';
+import BardCard from '../../assets/BardCard.jpeg';
+import ClericCard from '../../assets/ClericCard.jpeg';
+import DruidCard from '../../assets/DruidCard.jpeg';
+import PaladinCard from '../../assets/PaladinCard.jpeg';
+import RangerCard from '../../assets/RangerCard.jpeg';
+import SorcererCard from '../../assets/SorcererCard.jpeg';
+import WarlockCard from '../../assets/WarlockCard.jpeg';
+import WizardCard from '../../assets/WizardCard.jpeg';
 
 export default function CharacterCard(character) {
   const { setCharacterState, currentCharacter } = useCharacter();
@@ -31,6 +47,44 @@ export default function CharacterCard(character) {
   const location = useLocation();
   const navigate = useNavigate();
   const truncatedCharacterName = truncateCharacterName(character);
+
+  let avatarImage;
+  let cardImage;
+
+  switch (character.charClass) {
+    case 'Bard':
+      avatarImage = BardAvatar;
+      cardImage = BardCard;
+      break;
+    case 'Cleric':
+      avatarImage = ClericAvatar;
+      cardImage = ClericCard;
+      break;
+    case 'Druid':
+      avatarImage = DruidAvatar;
+      cardImage = DruidCard;
+      break;
+    case 'Paladin':
+      avatarImage = PaladinAvatar;
+      cardImage = PaladinCard;
+      break;
+    case 'Ranger':
+      avatarImage = RangerAvatar;
+      cardImage = RangerCard;
+      break;
+    case 'Sorcerer':
+      avatarImage = SorcererAvatar;
+      cardImage = SorcererCard;
+      break;
+    case 'Warlock':
+      avatarImage = WarlockAvatar;
+      cardImage = WarlockCard;
+      break;
+    case 'Wizard':
+      avatarImage = WizardAvatar;
+      cardImage = WizardCard;
+      break;
+  }
 
   const handleCharacterChange = () => {
     setCharacterState(character.id);
@@ -51,14 +105,16 @@ export default function CharacterCard(character) {
         w={'full'}
         //TODO make this image dynamic, based on charClass
         src={
-          'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+          cardImage
+            ? cardImage
+            : 'https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
         }
         objectFit={'cover'}
       />
       <Flex justify={'center'} mt={-12}>
         <Avatar
           size={'xl'}
-          src={character.avatarUrl ? character.avatarUrl : null}
+          src={avatarImage}
           alt={'Avatar'}
           css={{
             border: '2px solid white',

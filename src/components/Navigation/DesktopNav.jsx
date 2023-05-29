@@ -1,7 +1,6 @@
 import { HStack, Tab, TabList, Tabs, Text } from '@chakra-ui/react';
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import LongRestButton from '../Buttons/LongRestButton';
 import { useCharacter } from '../../context/CharacterContext';
 
 export default function DesktopNav() {
@@ -40,9 +39,6 @@ export default function DesktopNav() {
             </Tab>
           </TabList>
         </Tabs>
-        {/* {location.pathname !== '/settings' && location.pathname !== '/characters' && (
-          <LongRestButton />
-        )} */}
       </HStack>
     </HStack>
   );

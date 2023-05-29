@@ -1,7 +1,8 @@
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import { useLocation } from 'react-router-dom';
 import LongRestButton from '../Buttons/LongRestButton';
-import SearchButton from '../Buttons/SearchButton';
+//TODO
+// import SearchButton from '../Buttons/SearchButton';
 
 export default function Subheader() {
   const location = useLocation();

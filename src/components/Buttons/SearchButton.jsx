@@ -18,7 +18,7 @@ export default function SearchButton() {
   const buttonRef = React.useRef();
   const location = useLocation();
   const {
-    filteredSpells,
+    // filteredSpells,
     setFilteredSpells,
     allSpells,
     availableSpells,

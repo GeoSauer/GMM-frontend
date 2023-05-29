@@ -11,21 +11,53 @@ import {
 import UserInfo from '../PageLayout/UserInfo';
 import { NavLink } from 'react-router-dom';
 import SignOutButton from '../Buttons/SignOutButton';
+import { useCharacter } from '../../context/CharacterContext';
+import BardAvatar from '../../assets/Bard.png';
+import ClericAvatar from '../../assets/Cleric.png';
+import DruidAvatar from '../../assets/Druid.png';
+import PaladinAvatar from '../../assets/Paladin.png';
+import RangerAvatar from '../../assets/Ranger.png';
+import SorcererAvatar from '../../assets/Sorcerer.png';
+import WarlockAvatar from '../../assets/Warlock.png';
+import WizardAvatar from '../../assets/Wizard.png';
 
 export default function UserNav() {
+  const { characterInfo } = useCharacter();
+
+  let avatarImage;
+
+  switch (characterInfo.charClass) {
+    case 'Bard':
+      avatarImage = BardAvatar;
+      break;
+    case 'Cleric':
+      avatarImage = ClericAvatar;
+      break;
+    case 'Druid':
+      avatarImage = DruidAvatar;
+      break;
+    case 'Paladin':
+      avatarImage = PaladinAvatar;
+      break;
+    case 'Ranger':
+      avatarImage = RangerAvatar;
+      break;
+    case 'Sorcerer':
+      avatarImage = SorcererAvatar;
+      break;
+    case 'Warlock':
+      avatarImage = WarlockAvatar;
+      break;
+    case 'Wizard':
+      avatarImage = WizardAvatar;
+      break;
+  }
+
   return (
     <Flex alignItems={'center'}>
       <Menu>
         <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-          <Avatar
-            size={{ base: 'sm', md: 'md' }}
-            src={
-              'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-              // characterInfo.avatarUrl
-              //   ? characterInfo.avatarUrl
-              //   : 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-            }
-          />
+          <Avatar size={{ base: 'sm', md: 'md' }} src={avatarImage} />
         </MenuButton>
         <MenuList alignContent={'center'}>
           <UserInfo />

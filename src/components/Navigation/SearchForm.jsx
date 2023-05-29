@@ -1,68 +1,69 @@
-import { Box, Button, Flex, Grid, GridItem, Input, Text } from '@chakra-ui/react';
-import { useCallback, useEffect, useState } from 'react';
-import { getSuffix } from '../../utils/utils';
-import { NavLink } from 'react-router-dom';
+// // import { Box, Button, Flex, Grid, GridItem, Input, Text } from '@chakra-ui/react';
+// import { useCallback, useEffect, useState } from 'react';
+// import { getSuffix } from '../../utils/utils';
+// import { NavLink } from 'react-router-dom';
 
-export default function SearchForm({ spellArray, onFilter }) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedLevels, setSelectedLevels] = useState([]);
-  const [selectedClasses, setSelectedClasses] = useState([]);
-  const classes = ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard'];
+// export default function SearchForm({ spellArray, onFilter }) {
+// const [searchTerm, setSearchTerm] = useState('');
+// const [selectedLevels, setSelectedLevels] = useState([]);
+// const [selectedClasses, setSelectedClasses] = useState([]);
+// const classes = ['Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Sorcerer', 'Warlock', 'Wizard'];
 
-  const handleLevelClick = (level) => {
-    setSelectedLevels((prevSelectedLevels) => {
-      if (prevSelectedLevels.includes(level)) {
-        return prevSelectedLevels.filter((selectedLevel) => selectedLevel !== level);
-      } else {
-        return [...prevSelectedLevels, level];
-      }
-    });
-  };
-  const handleClassClick = (selectedClass) => {
-    setSelectedClasses((prevSelectedClasses) => {
-      if (prevSelectedClasses.includes(selectedClass)) {
-        return prevSelectedClasses.filter((selectedCls) => selectedCls !== selectedClass);
-      } else {
-        return [...prevSelectedClasses, selectedClass];
-      }
-    });
-  };
+// const handleLevelClick = (level) => {
+//   setSelectedLevels((prevSelectedLevels) => {
+//     if (prevSelectedLevels.includes(level)) {
+//       return prevSelectedLevels.filter((selectedLevel) => selectedLevel !== level);
+//     } else {
+//       return [...prevSelectedLevels, level];
+//     }
+//   });
+// };
+// const handleClassClick = (selectedClass) => {
+//   setSelectedClasses((prevSelectedClasses) => {
+//     if (prevSelectedClasses.includes(selectedClass)) {
+//       return prevSelectedClasses.filter((selectedCls) => selectedCls !== selectedClass);
+//     } else {
+//       return [...prevSelectedClasses, selectedClass];
+//     }
+//   });
+// };
 
-  const memoizedOnFilter = useCallback(
-    (filteredSpells) => {
-      onFilter(filteredSpells);
-    },
-    [onFilter]
-  );
+// const memoizedOnFilter = useCallback(
+//   (filteredSpells) => {
+//     onFilter(filteredSpells);
+//   },
+//   [onFilter]
+// );
 
-  useEffect(() => {
-    const filteredSpells = spellArray.filter((spell) => {
-      // Filter by name
-      const isNameMatch = spell.name.toLowerCase().includes(searchTerm.toLowerCase());
+// useEffect(() => {
+//   const filteredSpells = spellArray.filter((spell) => {
+//     // Filter by name
+//     const isNameMatch = spell.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-      // Filter by level
-      const isLevelMatch = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
+//     // Filter by level
+//     const isLevelMatch = selectedLevels.length === 0 || selectedLevels.includes(spell.level);
 
-      // Filter by class
-      const isClassMatch =
-        selectedClasses.length === 0 || spell.classes.some((cls) => selectedClasses.includes(cls));
+//     // Filter by class
+//     const isClassMatch =
+//       selectedClasses.length === 0 || spell.classes.some((cls) => selectedClasses.includes(cls));
 
-      return isNameMatch && isLevelMatch && isClassMatch;
-    });
+//     return isNameMatch && isLevelMatch && isClassMatch;
+//   });
 
-    memoizedOnFilter(filteredSpells);
-  }, [
-    spellArray.map((spell) => spell.id).join(','),
-    searchTerm,
-    selectedLevels,
-    selectedClasses,
-    memoizedOnFilter,
-    spellArray,
-  ]);
+//   memoizedOnFilter(filteredSpells);
+// }, [
+//   spellArray.map((spell) => spell.id).join(','),
+//   searchTerm,
+//   selectedLevels,
+//   selectedClasses,
+//   memoizedOnFilter,
+//   spellArray,
+// ]);
 
-  return (
-    <Box>
-      <Flex mb={4}>
+// return (
+//   <Box>
+{
+  /* <Flex mb={4}>
         <Input
           placeholder="Search by name"
           value={searchTerm}
@@ -104,8 +105,10 @@ export default function SearchForm({ spellArray, onFilter }) {
             {selectedClass}
           </GridItem>
         ))}
-      </Grid>
-      {/* <Box>
+      </Grid> */
+}
+{
+  /* <Box>
         {filteredSpells.map((spell) => (
           <Box key={spell.id} p={2} borderWidth="1px" borderRadius="md">
             <Text>{spell.name}</Text>
@@ -113,7 +116,8 @@ export default function SearchForm({ spellArray, onFilter }) {
             <Text>Classes: {spell.classes.join(', ')}</Text>
           </Box>
         ))}
-      </Box> */}
-    </Box>
-  );
+      </Box> */
 }
+//     </Box>
+//   );
+// }
