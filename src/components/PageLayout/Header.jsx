@@ -6,7 +6,7 @@ import DesktopNav from '../Navigation/DesktopNav';
 import { useLocation } from 'react-router-dom';
 import Subheader from './Subheader';
 import LongRestButton from '../Buttons/LongRestButton';
-import SearchButton from '../Buttons/SearchButton';
+// import SearchButton from '../Buttons/SearchButton';
 
 export default function Header() {
   const location = useLocation();
@@ -18,7 +18,7 @@ export default function Header() {
         <DesktopNav />
         <HStack hideBelow={'750px'}>
           <LongRestButton />
-          <SearchButton />
+          {/* <SearchButton /> */}
         </HStack>
         <UserNav />
       </Flex>

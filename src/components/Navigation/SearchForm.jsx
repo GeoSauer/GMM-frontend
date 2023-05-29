@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Grid, GridItem, Input, Text } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 import { getSuffix } from '../../utils/utils';
+import { NavLink } from 'react-router-dom';
 
 export default function SearchForm({ spellArray, onFilter }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -79,10 +80,12 @@ export default function SearchForm({ spellArray, onFilter }) {
               as={Button}
               key={index}
               colorScheme={selectedLevels.includes(index) ? 'blue' : 'gray'}
-              onClick={() => handleLevelClick(index)}
+              // onClick={() => handleLevelClick(index)}
             >
-              {index}
-              {index > 0 ? suffix : null}
+              <NavLink to={`#${index}`}>
+                {index}
+                {index > 0 ? suffix : null}
+              </NavLink>
             </GridItem>
           );
         })}

@@ -70,7 +70,7 @@ export default function SpellDisplay() {
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          <Box id={index} key={spell.name}>
+          <Box id={index} href={index} key={spell.name}>
             <Flex
               align="center"
               justify="start"

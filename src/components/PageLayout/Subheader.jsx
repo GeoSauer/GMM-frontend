@@ -14,7 +14,7 @@ export default function Subheader() {
       <Heading h="10">{locationHeader}</Heading>
       <Box justifyContent={'end'} mt={'-8'} h="4">
         <LongRestButton marginRight="2" />
-        <SearchButton />
+        {/* <SearchButton /> */}
       </Box>
     </Flex>
   );
