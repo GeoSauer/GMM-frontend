@@ -8,6 +8,7 @@ const SpellContext = createContext();
 export default function SpellProvider({ children }) {
   const [allSpells, setAllSpells] = useState([]);
   const [availableSpells, setAvailableSpells] = useState([]);
+  const [cantrips, setCantrips] = useState([]);
   const [knownSpells, setKnownSpells] = useState([]);
   const [preparedSpells, setPreparedSpells] = useState([]);
   const [spellDetailsList, setSpellDetailsList] = useState([]);
@@ -92,13 +93,8 @@ export default function SpellProvider({ children }) {
           fetchedAvailableSpells,
           fetchedKnownSpells
         );
-        // const sortedAvailableSpells = uniqueAvailableSpells.sort((a, b) => {
-        //   if (a.level === b.level) {
-        //     return a.name.localeCompare(b.name);
-        //   } else {
-        //     return a.level - b.level;
-        //   }
-        // });
+
+        const justCantrips = uniqueAvailableSpells.filter((spell) => spell.level === 0);
 
         const fetchedSpellDetails = await fetchSpellDetails(fetchedPreparedSpells);
 
@@ -110,6 +106,7 @@ export default function SpellProvider({ children }) {
         // setAllSpells((prevSpells) => [...prevSpells, ...fetchedAllSpells]);
         // setAvailableSpells(sortedAvailableSpells);
         setAvailableSpells(uniqueAvailableSpells);
+        setCantrips(justCantrips);
         setKnownSpells(fetchedKnownSpells);
         // setKnownSpells((prevSpells) => [...prevSpells, ...fetchedKnownSpells]);
         setPreparedSpells(fetchedPreparedSpells);
@@ -176,6 +173,8 @@ export default function SpellProvider({ children }) {
     setFilteredSpells,
     availableSpells,
     setAvailableSpells,
+    cantrips,
+    setCantrips,
     knownSpells,
     setKnownSpells,
     preparedSpells,

@@ -9,6 +9,7 @@ export default function SpellDisplay() {
   const {
     allSpells,
     availableSpells,
+    cantrips,
     knownSpells,
     preparedSpells,
     spellDetailsList,
@@ -112,6 +113,7 @@ export default function SpellDisplay() {
 
   const allSpellCards = generateSpellCards(allSpells);
   const availableSpellCards = generateSpellCards(availableSpells);
+  const cantripCards = generateSpellCards(cantrips);
   const knownSpellCards = generateSpellCards(knownSpells);
   const preparedSpellCards = generateSpellCards(preparedSpells);
 
@@ -121,6 +123,7 @@ export default function SpellDisplay() {
     <Flex direction={'column'} alignItems={'center'}>
       {location.pathname === '/all-spells' && allSpellCards}
       {location.pathname === '/available-spells' && availableSpellCards}
+      {location.pathname === '/cantrips' && cantripCards}
       {location.pathname === '/known-spells' && knownSpellCards}
       {location.pathname === '/prepared-spells' && preparedSpellCards}
 
@@ -130,6 +133,11 @@ export default function SpellDisplay() {
         </Text>
       )}
       {location.pathname === '/available-spells' && !availableSpells.length && (
+        <Text>
+          Looks like the server is acting up. Try refreshing the page or come back later, sorry!
+        </Text>
+      )}
+      {location.pathname === '/cantrips' && !cantrips.length && (
         <Text>
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>

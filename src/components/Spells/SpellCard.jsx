@@ -86,7 +86,7 @@ export default function SpellCard({ spellDetails, spell }) {
             <Button isDisabled={true}>Known</Button>
           )}
           {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
-            <Button isDisabled={true}> Learn</Button>
+            <Button isDisabled={true}>Learn</Button>
           )}
           {location.pathname === '/available-spells' && !spell.known && (
             <LearnSpellButton spell={spell} />
@@ -94,6 +94,10 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/available-spells' && spell.known && (
             <Button isDisabled={true}>Known</Button>
           )}
+          {location.pathname === '/cantrips' && spell.known && (
+            <Button isDisabled={true}>Known</Button>
+          )}
+          {location.pathname === '/cantrips' && !spell.known && <LearnSpellButton spell={spell} />}
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
           )}
@@ -104,6 +108,9 @@ export default function SpellCard({ spellDetails, spell }) {
             <ForgetSpellButton spell={spell} />
           )}
           {location.pathname === '/known-spells' && divineCaster && spell.fromAll && (
+            <ForgetSpellButton spell={spell} />
+          )}
+          {location.pathname === '/known-spells' && divineCaster && spell.level === 0 && (
             <ForgetSpellButton spell={spell} />
           )}
           {location.pathname === '/prepared-spells' && spell.level === 0 && (

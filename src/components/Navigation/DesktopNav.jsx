@@ -4,7 +4,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
 
 export default function DesktopNav() {
-  const { characterInfo } = useCharacter();
+  const { characterInfo, divineCaster } = useCharacter();
   const location = useLocation();
 
   return (
@@ -23,15 +23,20 @@ export default function DesktopNav() {
                 Known Spells
               </NavLink>
             </Tab>
-            {characterInfo.charClass === 'Cleric' ||
-            characterInfo.charClass === 'Druid' ||
-            characterInfo.charClass === 'Paladin' ? null : (
+            {characterInfo.charClass === 'Cleric' || characterInfo.charClass === 'Druid' ? (
+              <Tab bg={location.pathname === '/cantrips' ? 'blue.500' : 'none'}>
+                <NavLink to="cantrips" alt="cantrips" title="Cantrips">
+                  Cantrips
+                </NavLink>
+              </Tab>
+            ) : null}
+            {!divineCaster ? (
               <Tab bg={location.pathname === '/available-spells' ? 'blue.500' : 'none'}>
                 <NavLink to="available-spells" alt="available" title="Available Spells">
                   Available Spells
                 </NavLink>
               </Tab>
-            )}
+            ) : null}
             <Tab bg={location.pathname === '/all-spells' ? 'blue.500' : 'none'}>
               <NavLink to="all-spells" alt="all" title="All Spells">
                 All Spells

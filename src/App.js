@@ -19,6 +19,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="all-spells" element={<SpellDisplay />} />
           <Route path="available-spells" element={<SpellDisplay />} />
+          <Route path="cantrips" element={<SpellDisplay />} />
           <Route path="known-spells" element={<SpellDisplay />} />
           <Route path="prepared-spells" element={<SpellDisplay />} />
           <Route path="characters" element={<CharacterPage />} />

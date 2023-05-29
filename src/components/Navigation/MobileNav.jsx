@@ -20,7 +20,7 @@ import { NavLink } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
 
 export default function MobileNav() {
-  const { characterInfo } = useCharacter();
+  const { characterInfo, divineCaster } = useCharacter();
   const { isOpen, onClose, onToggle } = useDisclosure();
 
   return (
@@ -41,15 +41,20 @@ export default function MobileNav() {
                 Known
               </NavLink>
             </MenuItem>
-            {characterInfo.charClass === 'Cleric' ||
-            characterInfo.charClass === 'Druid' ||
-            characterInfo.charClass === 'Paladin' ? null : (
+            {characterInfo.charClass === 'Cleric' || characterInfo.charClass === 'Druid' ? (
+              <MenuItem bg={location.pathname === '/cantrips' ? 'blue.500' : 'none'}>
+                <NavLink to="cantrips" alt="cantrips" title="Cantrips">
+                  Cantrips
+                </NavLink>
+              </MenuItem>
+            ) : null}
+            {!divineCaster ? (
               <MenuItem value="available">
                 <NavLink to="available-spells" alt="all" title="Available Spells">
                   Available
                 </NavLink>
               </MenuItem>
-            )}
+            ) : null}
             <MenuItem value="all">
               <NavLink to="all-spells" alt="all" title="All Spells">
                 All
