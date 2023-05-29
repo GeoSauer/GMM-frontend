@@ -35,7 +35,7 @@ export default function ForgetSpellButton({ spell }) {
     const removeForgottenSpell = (spellArray) =>
       spellArray.filter((forgottenSpell) => forgottenSpell.name !== spell.name);
 
-    setAvailableSpells(removeForgottenSpell(availableSpells));
+    setAvailableSpells(spell.fromAll ? removeForgottenSpell(availableSpells) : availableSpells);
     setKnownSpells(removeForgottenSpell(knownSpells));
     setPreparedSpells(removeForgottenSpell(preparedSpells));
 
