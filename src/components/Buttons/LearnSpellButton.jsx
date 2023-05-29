@@ -45,13 +45,17 @@ export default function LearnSpellButton({ spell }) {
     await learn({ charId, spellId: spell.id, fromAll: spell.fromAll });
     spell.known = true;
 
-    const fetchSpellDetails = async () => {
-      setIsLoading(true);
-      const newSpellDetails = await Spells.getDetails(spell.id);
-      setSpellDetailsList([...spellDetailsList, newSpellDetails]);
-      setIsLoading(false);
-    };
-    fetchSpellDetails();
+    const detailsExist = spellDetailsList.some((spellDetail) => spellDetail.name === spell.name);
+
+    if (!detailsExist) {
+      const fetchSpellDetails = async () => {
+        setIsLoading(true);
+        const newSpellDetails = await Spells.getDetails(spell.id);
+        setSpellDetailsList([...spellDetailsList, newSpellDetails]);
+        setIsLoading(false);
+      };
+      fetchSpellDetails();
+    }
 
     const updateSpellList = (spellArray) => {
       const filteredSpellList = spellArray.filter((otherSpell) => otherSpell.name !== spell.name);

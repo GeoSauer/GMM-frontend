@@ -42,9 +42,9 @@ export default function SpellCard({ spellDetails, spell }) {
   const handleClick = () => {
     if (spell.id && !isOpen) {
       setIsLoading(true);
-      const spellExists = spellDetailsList.some((spellDetail) => spellDetail.name === spell.name);
+      const detailsExist = spellDetailsList.some((spellDetail) => spellDetail.name === spell.name);
 
-      if (spellExists) {
+      if (detailsExist) {
         setIsLoading(false);
         onToggle();
       } else {
@@ -75,7 +75,7 @@ export default function SpellCard({ spellDetails, spell }) {
         >
           <Heading size="md">{spell.name}</Heading>
           <Text>{spell.school}</Text>
-          {location.pathname === '/all-spells' ? <Text>{classes} </Text> : null}
+          {location.pathname === '/all-spells' ? <Text>{classes}</Text> : null}
         </Button>
 
         <HStack>
@@ -88,16 +88,19 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
             <Button isDisabled={true}>Learn</Button>
           )}
+
           {location.pathname === '/available-spells' && !spell.known && (
             <LearnSpellButton spell={spell} />
           )}
           {location.pathname === '/available-spells' && spell.known && (
             <Button isDisabled={true}>Known</Button>
           )}
+
           {location.pathname === '/cantrips' && spell.known && (
             <Button isDisabled={true}>Known</Button>
           )}
           {location.pathname === '/cantrips' && !spell.known && <LearnSpellButton spell={spell} />}
+
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
           )}
@@ -107,12 +110,10 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/known-spells' && !divineCaster && (
             <ForgetSpellButton spell={spell} />
           )}
-          {location.pathname === '/known-spells' && divineCaster && spell.fromAll && (
-            <ForgetSpellButton spell={spell} />
-          )}
-          {location.pathname === '/known-spells' && divineCaster && spell.level === 0 && (
-            <ForgetSpellButton spell={spell} />
-          )}
+          {location.pathname === '/known-spells' &&
+            divineCaster &&
+            (spell.fromAll || spell.level === 0) && <ForgetSpellButton spell={spell} />}
+
           {location.pathname === '/prepared-spells' && spell.level === 0 && (
             <CastCantripButton spell={spell} spellDetails={spellDetails} />
           )}

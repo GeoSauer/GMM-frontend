@@ -63,6 +63,7 @@ export default function SpellDisplay() {
   //     // setKnownSpells((prevSpells) => [...prevSpells, ...nextKnownBatch]);
   //   }
   // };
+  console.log({ knownSpells });
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
@@ -71,7 +72,7 @@ export default function SpellDisplay() {
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          <Box id={index} href={index} key={spell.name}>
+          <Box id={index} href={index} key={index}>
             <Flex
               align="center"
               justify="start"
@@ -100,7 +101,7 @@ export default function SpellDisplay() {
         );
       }
       return (
-        <Box key={spell.name}>
+        <Box key={index}>
           {location.pathname === '/prepared-spells' ? (
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           ) : (

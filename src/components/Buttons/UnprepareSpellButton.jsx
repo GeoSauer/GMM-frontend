@@ -19,15 +19,32 @@ export default function UnprepareSpellButton({ spell }) {
   const initRef = useRef();
   const { unprepare, error } = useSpell();
   const { characterInfo } = useCharacter();
-  const { preparedSpells, setPreparedSpells } = useSpellDetails();
+  const { preparedSpells, setPreparedSpells, knownSpells, setKnownSpells } = useSpellDetails();
 
   const handleUnprepare = async (charId, prepared, onClose) => {
     await unprepare({ charId, spellId: spell.id, prepared });
     spell.prepared = false;
-    const removeUnpreparedSpell = (unpreparedSpell) => spell.name !== unpreparedSpell.name;
-    const updatedPreparedSpells = preparedSpells.filter(removeUnpreparedSpell);
-    setPreparedSpells(updatedPreparedSpells);
+
+    const removeUnpreparedSpell = (spellArray) =>
+      spellArray.filter((unpreparedSpell) => unpreparedSpell.name !== spell.name);
+
+    const updateSpellList = (spellArray) => {
+      const filteredSpellList = spellArray.filter((otherSpell) => otherSpell.name !== spell.name);
+      const sortedSpellList = [...filteredSpellList, spell].sort((a, b) => {
+        if (a.level === b.level) {
+          return a.name.localeCompare(b.name);
+        } else {
+          return a.level - b.level;
+        }
+      });
+      return sortedSpellList;
+    };
+
+    setPreparedSpells(removeUnpreparedSpell(preparedSpells));
+    setKnownSpells(updateSpellList(knownSpells));
+
     onClose();
+
     const toastProps = error
       ? { title: { error }, status: 'error' }
       : { title: `${spell.name} unprepared!`, status: 'success' };
