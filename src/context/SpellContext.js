@@ -120,7 +120,7 @@ export default function SpellProvider({ children }) {
       fetchData();
       // if (!isLastPage && previousPage !== currentPage) fetchData();
     }
-  }, [characterInfo.charLvl, characterInfo.id]);
+  }, [characterInfo]);
   // }, [characterInfo.charLvl, characterInfo.id, currentPage, isLastPage, previousPage, allSpells]);
 
   // const handleScroll = () => {

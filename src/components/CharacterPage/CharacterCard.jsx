@@ -47,7 +47,6 @@ export default function CharacterCard(character) {
   const location = useLocation();
   const navigate = useNavigate();
   const truncatedCharacterName = truncateCharacterName(character);
-
   let avatarImage;
   let cardImage;
 

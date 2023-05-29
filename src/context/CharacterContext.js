@@ -32,8 +32,9 @@ export default function CharacterProvider({ children }) {
             character.charClass === 'Cleric' ||
             character.charClass === 'Druid' ||
             character.charClass === 'Paladin'
-          )
+          ) {
             setDivineCaster(true);
+          } else setDivineCaster(false);
 
           setCharacterInfo(character);
           setCharacterList(characters);
@@ -52,8 +53,10 @@ export default function CharacterProvider({ children }) {
   ]);
 
   const setCharacterState = (charId) => {
+    setIsLoading(true);
     storeLocalCharacter(charId);
     setCurrentCharacter(charId);
+    setIsLoading(false);
   };
 
   const value = {
