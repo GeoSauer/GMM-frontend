@@ -107,7 +107,7 @@ export default function SpellProvider({ children }) {
         // setAvailableSpells(sortedAvailableSpells);
         setAvailableSpells(uniqueAvailableSpells);
         setCantrips(justCantrips);
-        setKnownSpells(fetchedKnownSpells);
+        setKnownSpells([...knownSpells, ...fetchedKnownSpells]);
         // setKnownSpells((prevSpells) => [...prevSpells, ...fetchedKnownSpells]);
         setPreparedSpells(fetchedPreparedSpells);
         setSpellDetailsList(fetchedSpellDetails);
