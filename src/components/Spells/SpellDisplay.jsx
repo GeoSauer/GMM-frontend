@@ -71,7 +71,7 @@ export default function SpellDisplay() {
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          <Box id={index} href={index} key={spell.id}>
+          <Box id={index} href={index} key={spell.name}>
             <Flex
               align="center"
               justify="start"
@@ -100,7 +100,7 @@ export default function SpellDisplay() {
         );
       }
       return (
-        <Box key={spell.id}>
+        <Box key={spell.name}>
           {location.pathname === '/prepared-spells' ? (
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           ) : (

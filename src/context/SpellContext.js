@@ -24,15 +24,17 @@ export default function SpellProvider({ children }) {
   // const offset = (currentPage - 1) * batchSize;
   // const spellsInnerRef = useRef();
   //--------------------------------------------
-  const { characterInfo } = useCharacter();
+  const { characterInfo, divineCaster } = useCharacter();
 
   useEffect(() => {
     if (characterInfo.id) {
       const fetchData = async () => {
         setIsLoading(true);
+
         const fetchedAllSpells = await Spells.getAll();
         const fetchedAvailableSpells = await Spells.getAvailable(characterInfo.id);
         const fetchedKnownSpells = await Spells.getKnown(characterInfo.id);
+        const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
         //--------------------------------------------
         // const fetchedAllSpells = await Spells.getAll(offset, batchSize);
         // if (!fetchedAllSpells.length) {
@@ -47,7 +49,6 @@ export default function SpellProvider({ children }) {
         // );
         // const fetchedKnownSpells = await Spells.getKnown(characterInfo.id, offset, batchSize);
         //--------------------------------------------
-        const fetchedPreparedSpells = await Spells.getPrepared(characterInfo.id);
 
         const fetchSpellDetails = async (spells) => {
           const spellDetails = [];
@@ -58,13 +59,13 @@ export default function SpellProvider({ children }) {
           return spellDetails;
         };
 
-        const findUniqueSpells = (currentSpells, knownSpells) => {
-          const combinedSpells = [...currentSpells, ...knownSpells];
+        const findUniqueSpells = (firstSpellArray, secondSpellArray) => {
+          const combinedSpells = [...firstSpellArray, ...secondSpellArray];
           const uniqueSpellNames = Array.from(new Set(combinedSpells.map((spell) => spell.name)));
           const uniqueSpells = uniqueSpellNames.map((spellName) => {
             const uniqueSpell =
-              knownSpells.find((knownSpell) => knownSpell.name === spellName) ||
-              currentSpells.find((spell) => spell.name === spellName);
+              secondSpellArray.find((secondSpell) => secondSpell.name === spellName) ||
+              firstSpellArray.find((firstSpell) => firstSpell.name === spellName);
             return uniqueSpell;
           });
           return uniqueSpells;
@@ -83,34 +84,44 @@ export default function SpellProvider({ children }) {
         //   return uniqueSpells;
         // };
 
-        const uniqueAllSpells = findUniqueSpells(
-          // previousAllSpells,
-          fetchedAllSpells,
-          fetchedKnownSpells
-        );
-        const uniqueAvailableSpells = findUniqueSpells(
-          // previousAvailableSpells,
-          fetchedAvailableSpells,
-          fetchedKnownSpells
-        );
+        // const uniqueAllSpells = findUniqueSpells(
+        //   // previousAllSpells,
+        //   fetchedAllSpells,
+        //   fetchedKnownSpells
+        // );
+        // const uniqueAvailableSpells = findUniqueSpells(
+        //   // previousAvailableSpells,
+        //   fetchedAvailableSpells,
+        //   fetchedKnownSpells
+        // );
 
-        const justCantrips = uniqueAvailableSpells.filter((spell) => spell.level === 0);
+        // const justCantrips = uniqueAvailableSpells.filter((spell) => spell.level === 0);
 
-        const fetchedSpellDetails = await fetchSpellDetails(fetchedPreparedSpells);
+        // const fetchedSpellDetails = await fetchSpellDetails(fetchedPreparedSpells);
 
-        setAllSpells(uniqueAllSpells);
+        setAllSpells(findUniqueSpells(fetchedAllSpells, fetchedKnownSpells));
         //-----------------------
         // setPreviousPage(currentPage);
         // setAllSpells([...allSpells, ...fetchedAllSpells]);
         //-----------------------
         // setAllSpells((prevSpells) => [...prevSpells, ...fetchedAllSpells]);
         // setAvailableSpells(sortedAvailableSpells);
-        setAvailableSpells(uniqueAvailableSpells);
-        setCantrips(justCantrips);
-        setKnownSpells([...knownSpells, ...fetchedKnownSpells]);
+        setAvailableSpells(findUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells));
+        setCantrips(
+          findUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells).filter(
+            (spell) => spell.level === 0
+          )
+        );
+        setKnownSpells(
+          divineCaster
+            ? findUniqueSpells(fetchedAvailableSpells, fetchedKnownSpells).filter(
+                (spell) => spell.level !== 0 || spell.known === true
+              )
+            : fetchedKnownSpells
+        );
         // setKnownSpells((prevSpells) => [...prevSpells, ...fetchedKnownSpells]);
         setPreparedSpells(fetchedPreparedSpells);
-        setSpellDetailsList(fetchedSpellDetails);
+        setSpellDetailsList(await fetchSpellDetails(fetchedPreparedSpells));
         //----------------
         // setPreviousAllSpells(allSpells);
         // setPreviousAvailableSpells(availableSpells);
@@ -120,7 +131,7 @@ export default function SpellProvider({ children }) {
       fetchData();
       // if (!isLastPage && previousPage !== currentPage) fetchData();
     }
-  }, [characterInfo]);
+  }, [characterInfo, divineCaster]);
   // }, [characterInfo.charLvl, characterInfo.id, currentPage, isLastPage, previousPage, allSpells]);
 
   // const handleScroll = () => {
