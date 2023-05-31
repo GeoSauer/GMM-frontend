@@ -66,7 +66,7 @@ export default function UnprepareSpellButton({ spell }) {
               <PopoverCloseButton />
               <PopoverBody>
                 <Button onClick={() => handleUnprepare(characterInfo.id, false, onClose)}>
-                  Goodbye, for now...
+                  Yes
                 </Button>
               </PopoverBody>
             </PopoverContent>

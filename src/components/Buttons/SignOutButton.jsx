@@ -24,10 +24,10 @@ export default function SignOutButton() {
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
-          <ModalHeader>For real for real???</ModalHeader>
+          <ModalHeader>Really Sign Out?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Button onClick={handleSignOut}>Yes fam :(</Button>
+            <Button onClick={handleSignOut}>Confirm</Button>
           </ModalBody>
         </ModalContent>
       </Modal>

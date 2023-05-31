@@ -62,6 +62,7 @@ export default function ForgetSpellButton({ spell }) {
               <PopoverCloseButton />
               <PopoverBody>
                 <Button onClick={() => handleForget(characterInfo.id, onClose)}>
+                  {/* //TODO I do still like this one... */}
                   What&apos;s {spell.name}?
                 </Button>
               </PopoverBody>

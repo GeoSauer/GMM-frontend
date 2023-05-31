@@ -103,7 +103,7 @@ export default function LearnSpellButton({ spell }) {
               <PopoverCloseButton />
               <PopoverBody>
                 <Button ref={initRef} onClick={() => handleLearn(characterInfo.id, onClose)}>
-                  Let&apos;s go!
+                  Yes!
                 </Button>
               </PopoverBody>
             </PopoverContent>

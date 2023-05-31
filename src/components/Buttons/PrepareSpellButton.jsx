@@ -80,9 +80,7 @@ export default function PrepareSpellButton({ spell }) {
               <PopoverHeader>Are you sure you want to prepare {spell.name}?</PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button onClick={() => handlePrepare(characterInfo.id, true, onClose)}>
-                  Do it!
-                </Button>
+                <Button onClick={() => handlePrepare(characterInfo.id, true, onClose)}>Yup!</Button>
               </PopoverBody>
             </PopoverContent>
           </Portal>

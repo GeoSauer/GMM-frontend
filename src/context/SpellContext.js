@@ -131,7 +131,7 @@ export default function SpellProvider({ children }) {
       fetchData();
       // if (!isLastPage && previousPage !== currentPage) fetchData();
     }
-  }, [characterInfo, divineCaster]);
+  }, [characterInfo.id, divineCaster]);
   // }, [characterInfo.charLvl, characterInfo.id, currentPage, isLastPage, previousPage, allSpells]);
 
   // const handleScroll = () => {

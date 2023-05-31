@@ -72,7 +72,7 @@ export default function DeleteCharacterButton({ character }) {
                   }}
                   onClick={() => handleDelete(onClose)}
                 >
-                  Confirm
+                  Yes, they will be missed...
                 </Button>
               </PopoverBody>
             </PopoverContent>
