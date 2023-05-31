@@ -31,6 +31,32 @@ export default function SpellLevelModal({ spell, spellDetails }) {
   const [slotLevel, setSlotLevel] = useState('');
   const toast = useToast();
   const { cast } = useSpell();
+
+  const fullModifier = (modifier) => {
+    let value;
+    switch (modifier) {
+      case 'STR':
+        value = 'Strength';
+        break;
+      case 'DEX':
+        value = 'Dexterity';
+        break;
+      case 'CON':
+        value = 'Constitution';
+        break;
+      case 'INT':
+        value = 'Intelligence';
+        break;
+      case 'WIS':
+        value = 'Wisdom';
+        break;
+      case 'CHA':
+        value = 'Charisma';
+        break;
+    }
+    return value;
+  };
+
   const damageAtSlotLevel = spellDetails?.damage.damageAtSlotLevel
     ? Object.keys(spellDetails.damage.damageAtSlotLevel)
     : [];
@@ -199,7 +225,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                         return (
                           <Tr key={i}>
                             <Td key={key}>{key}</Td>
-                            <Td key={value}>{value}</Td>
+                            <Td key={value}>{value.replace('MOD', characterInfo.charMod)}</Td>
                           </Tr>
                         );
                       })}
@@ -215,14 +241,13 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                   Save DC
                 </Heading>
                 <Text pt="2" fontSize="sm">
-                  DC {characterInfo.saveDC}
-                  {spellDetails.saveDc.type.name} save
+                  DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
+                  throw.
                 </Text>
-                {spellDetails.saveDc.success !== 'none' && (
-                  <Text pt="2" fontSize="sm">
-                    {spellDetails.saveDc.success}
-                  </Text>
-                )}
+                <Text pt="2" fontSize="sm">
+                  On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
+                  {spellDetails.saveDc.success}.
+                </Text>
               </Box>
             )}
           </ModalBody>

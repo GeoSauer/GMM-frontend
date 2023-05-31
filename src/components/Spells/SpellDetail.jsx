@@ -21,6 +21,30 @@ import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellDetail({ spellDetails }) {
   const { characterInfo } = useCharacter();
+  const fullModifier = (modifier) => {
+    let value;
+    switch (modifier) {
+      case 'STR':
+        value = 'Strength';
+        break;
+      case 'DEX':
+        value = 'Dexterity';
+        break;
+      case 'CON':
+        value = 'Constitution';
+        break;
+      case 'INT':
+        value = 'Intelligence';
+        break;
+      case 'WIS':
+        value = 'Wisdom';
+        break;
+      case 'CHA':
+        value = 'Charisma';
+        break;
+    }
+    return value;
+  };
 
   return (
     <>
@@ -39,6 +63,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.range && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -49,6 +74,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.areaOfEffect && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -59,6 +85,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.components && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -87,6 +114,7 @@ export default function SpellDetail({ spellDetails }) {
                   })}
                 </Box>
               )}
+
               {spellDetails.material && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -97,6 +125,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.duration && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -108,6 +137,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.attackType && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -118,6 +148,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.damage?.damageType && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -134,6 +165,7 @@ export default function SpellDetail({ spellDetails }) {
                   </Text>
                 </Box>
               )}
+
               {spellDetails.damage?.damageAtCharacterLevel && (
                 <Box>
                   <TableContainer>
@@ -160,7 +192,8 @@ export default function SpellDetail({ spellDetails }) {
                   </TableContainer>
                 </Box>
               )}
-              {spellDetails.damage?.damageAtSlotLevel && (
+
+              {spellDetails.damage?.damageAtSlotLevel > 1 && (
                 <Box>
                   <TableContainer>
                     <Table>
@@ -186,6 +219,7 @@ export default function SpellDetail({ spellDetails }) {
                   </TableContainer>
                 </Box>
               )}
+
               {spellDetails.healAtSlotLevel && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
@@ -206,7 +240,7 @@ export default function SpellDetail({ spellDetails }) {
                           return (
                             <Tr key={i}>
                               <Td key={key}>{key}</Td>
-                              <Td key={value}>{value}</Td>
+                              <Td key={value}>{value.replace('MOD', characterInfo.charMod)}</Td>
                             </Tr>
                           );
                         })}
@@ -215,19 +249,23 @@ export default function SpellDetail({ spellDetails }) {
                   </TableContainer>
                 </Box>
               )}
+
               {spellDetails.saveDc?.type && (
                 <Box>
                   <Heading size="xs" textTransform="uppercase">
                     Save DC
                   </Heading>
                   <Text pt="2" fontSize="sm">
-                    DC {characterInfo.saveDC} {spellDetails.saveDc.type.name.toLowerCase()} save.
+                    DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
+                    throw.
                   </Text>
                   <Text pt="2" fontSize="sm">
-                    On success damage taken is {spellDetails.saveDc.success}.
+                    On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
+                    {spellDetails.saveDc.success}.
                   </Text>
                 </Box>
               )}
+
               <Box>
                 <Heading size="xs" textTransform="uppercase">
                   Description
