@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, useColorModeValue } from '@chakra-ui/react';
+import { Box, Flex, HStack, Spacer, useColorModeValue } from '@chakra-ui/react';
 import SpellSlots from './SpellSlots';
 import UserNav from '../Navigation/UserNav';
 import MobileNav from '../Navigation/MobileNav';
@@ -20,9 +20,11 @@ export default function Header() {
       top={0}
       zIndex={50}
     >
-      <Flex alignItems={'center'} justifyContent={'space-between'}>
+      <Flex justifyContent={'space-between'}>
         <MobileNav />
+        <Spacer />
         <DesktopNav />
+        <Spacer />
         <HStack hideBelow={'750px'}>
           <LongRestButton />
           {/* <SearchButton /> */}
