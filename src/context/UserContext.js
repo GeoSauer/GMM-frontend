@@ -14,14 +14,14 @@ export default function UserProvider({ children }) {
 
   //TODO decide if I even wanna keep this
   //? so this is in fact working because at /welcome it sets user to null, but I'm not sure I see the point based on my other safeguards?
-  // const verify = async () => {
-  //   const response = await User.verify();
-  //   setUser(response.user || null);
-  // };
+  const verify = async () => {
+    const response = await User.verify();
+    setUser(response.user || null);
+  };
 
-  // useEffect(() => {
-  //   verify();
-  // }, []);
+  useEffect(() => {
+    verify();
+  }, []);
 
   const setUserState = (user) => {
     storeLocalUser(user);

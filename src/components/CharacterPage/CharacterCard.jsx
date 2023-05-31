@@ -31,6 +31,7 @@ export default function CharacterCard(character) {
   const location = useLocation();
   const navigate = useNavigate();
   const truncatedCharacterName = truncateCharacterName(character);
+
   const handleCharacterChange = () => {
     setCharacterState(character.id);
     if (location.pathname === '/choose-character') navigate('/prepared-spells');

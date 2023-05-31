@@ -14,6 +14,15 @@ import {
 import React from 'react';
 import { useRef } from 'react';
 
+function HelpTopic({ title, desc, ...rest }) {
+  return (
+    <Box p={5} shadow="md" borderWidth="1px" {...rest}>
+      <Heading fontSize="xl">{title}</Heading>
+      <Text mt={4}>{desc}</Text>
+    </Box>
+  );
+}
+
 export default function HelpButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
@@ -79,14 +88,5 @@ export default function HelpButton() {
         </ModalContent>
       </Modal>
     </>
-  );
-}
-
-function HelpTopic({ title, desc, ...rest }) {
-  return (
-    <Box p={5} shadow="md" borderWidth="1px" {...rest}>
-      <Heading fontSize="xl">{title}</Heading>
-      <Text mt={4}>{desc}</Text>
-    </Box>
   );
 }

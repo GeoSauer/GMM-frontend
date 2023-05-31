@@ -15,10 +15,15 @@ import {
   FormHelperText,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
+import { useSpellDetails } from '../../context/SpellContext';
+import { useCharacter } from '../../context/CharacterContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignInForm() {
   const { signIn, error } = useAuth();
-
+  const { preparedSpells, knownSpells, availableSpells } = useSpellDetails();
+  const { divineCaster } = useCharacter();
+  const navigate = useNavigate();
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);

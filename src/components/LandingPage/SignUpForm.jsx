@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/UserContext';
+import { useAuth, useUser } from '../../context/UserContext';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import {
@@ -26,6 +26,7 @@ export default function SignInForm() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
   const { setCharacterState } = useCharacter();
+  const { user } = useUser();
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -76,7 +77,7 @@ export default function SignInForm() {
                 await signUp(values);
                 const character = await Character.create(values);
                 setCharacterState(character.id);
-                navigate('/available-spells');
+                // if (user) navigate('/settings');
                 actions.setSubmitting(false);
               }}
             >
@@ -169,10 +170,10 @@ export default function SignInForm() {
                           Character Level
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
-                          {[...Array(20)].map((_, i) => {
+                          {[...Array(20)].map((_, index) => {
                             return (
-                              <option key={`key-${i}`} value={i + 1}>
-                                {i + 1}
+                              <option key={`key-${index}`} value={index + 1}>
+                                {index + 1}
                               </option>
                             );
                           })}
@@ -189,10 +190,10 @@ export default function SignInForm() {
                           Spellcasting Ability Modifier
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
-                          {[...Array(10)].map((_, i) => {
+                          {[...Array(10)].map((_, index) => {
                             return (
-                              <option key={`key-${i}`} value={i + 1}>
-                                {i + 1}
+                              <option key={`key-${index}`} value={index + 1}>
+                                {index + 1}
                               </option>
                             );
                           })}
@@ -209,7 +210,7 @@ export default function SignInForm() {
                       _hover={{
                         bg: 'blue.500',
                       }}
-                      isLoading={props.isSubmitting}
+                      loading={props.isSubmitting}
                       type="submit"
                     >
                       Sign up
