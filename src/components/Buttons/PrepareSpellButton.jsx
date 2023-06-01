@@ -10,11 +10,10 @@ import {
   Portal,
   useToast,
 } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
-import Loading from '../PageLayout/Loading';
 
 export default function PrepareSpellButton({ spell }) {
   const toast = useToast();
@@ -23,7 +22,6 @@ export default function PrepareSpellButton({ spell }) {
   const { characterInfo } = useCharacter();
   const { preparedSpells, setPreparedSpells, spellDetailsList, setSpellDetailsList } =
     useSpellDetails();
-  const [isLoading, setIsLoading] = useState();
 
   const handlePrepare = async (charId, prepared, onClose) => {
     await prepare({ charId, spellId: spell.id, prepared });
@@ -33,10 +31,8 @@ export default function PrepareSpellButton({ spell }) {
 
     if (!detailsExist) {
       const fetchSpellDetails = async () => {
-        setIsLoading(true);
         const newSpellDetails = await Spells.getDetails(spell.id);
         setSpellDetailsList([...spellDetailsList, newSpellDetails]);
-        setIsLoading(false);
       };
       fetchSpellDetails();
     }
@@ -64,8 +60,6 @@ export default function PrepareSpellButton({ spell }) {
       isClosable: true,
     });
   };
-
-  if (isLoading) return <Loading />;
 
   return (
     <Popover initialFocusRef={initRef}>

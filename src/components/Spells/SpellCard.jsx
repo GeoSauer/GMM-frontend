@@ -72,10 +72,18 @@ export default function SpellCard({ spellDetails, spell }) {
           h={'20'}
           p={'2'}
           mt={'2'}
+          // isLoading={isLoading}
         >
-          <Heading size="md">{spell.name}</Heading>
-          <Text>{spell.school}</Text>
-          {location.pathname === '/all-spells' ? <Text>{classes}</Text> : null}
+          {isLoading ? (
+            <Loading />
+          ) : (
+            <>
+              <Heading size="md">{spell.name}</Heading>
+              <Text>{spell.school}</Text>
+
+              {location.pathname === '/all-spells' ? <Text>{classes}</Text> : null}
+            </>
+          )}
         </Button>
 
         <HStack>

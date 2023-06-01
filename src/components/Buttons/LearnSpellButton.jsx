@@ -10,12 +10,11 @@ import {
   Portal,
   useToast,
 } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
 import { useLocation } from 'react-router-dom';
-import Loading from '../PageLayout/Loading';
 
 export default function LearnSpellButton({ spell }) {
   const toast = useToast();
@@ -23,7 +22,6 @@ export default function LearnSpellButton({ spell }) {
   const location = useLocation();
   const { learn, error } = useSpell();
   const { characterInfo } = useCharacter();
-  const [isLoading, setIsLoading] = useState();
   const {
     allSpells,
     setAllSpells,
@@ -49,10 +47,8 @@ export default function LearnSpellButton({ spell }) {
 
     if (!detailsExist) {
       const fetchSpellDetails = async () => {
-        setIsLoading(true);
         const newSpellDetails = await Spells.getDetails(spell.id);
         setSpellDetailsList([...spellDetailsList, newSpellDetails]);
-        setIsLoading(false);
       };
       fetchSpellDetails();
     }
@@ -86,8 +82,6 @@ export default function LearnSpellButton({ spell }) {
 
     toast({ ...toastProps, duration: 3000, isClosable: true });
   };
-
-  if (isLoading) return <Loading />;
 
   return (
     <Popover initialFocusRef={initRef}>

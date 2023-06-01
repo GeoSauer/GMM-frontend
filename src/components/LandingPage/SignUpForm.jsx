@@ -26,7 +26,7 @@ export default function SignInForm() {
   const navigate = useNavigate();
   const { signUp } = useAuth();
   const { setCharacterState } = useCharacter();
-  const { user } = useUser();
+  const { user, setUserState } = useUser();
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -74,8 +74,10 @@ export default function SignInForm() {
               }}
               validationSchema={SignupSchema}
               onSubmit={async (values, actions) => {
-                await signUp(values);
+                actions.setSubmitting(true);
+                const user = await signUp(values);
                 const character = await Character.create(values);
+                setUserState(user);
                 setCharacterState(character.id);
                 // if (user) navigate('/settings');
                 actions.setSubmitting(false);
@@ -210,7 +212,7 @@ export default function SignInForm() {
                       _hover={{
                         bg: 'blue.500',
                       }}
-                      loading={props.isSubmitting}
+                      isLoading={props.isSubmitting}
                       type="submit"
                     >
                       Sign up
