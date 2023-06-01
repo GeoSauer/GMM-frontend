@@ -21,12 +21,13 @@ export default function Auth() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
   const [option, setOption] = useState('');
+  const options = ['up', 'in'];
 
   const handleClick = (newOption) => {
     setOption(newOption);
     onOpen();
   };
-  const options = ['up', 'in'];
+
   return (
     <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <Flex
