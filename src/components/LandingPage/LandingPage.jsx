@@ -11,12 +11,14 @@ import {
   ModalContent,
   ModalCloseButton,
   ModalBody,
+  Box,
 } from '@chakra-ui/react';
 import { useRef, useState } from 'react';
 import SignUpForm from './SignUpForm';
 import SignInForm from './SignInForm';
 import { Navigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
+import PillPity from 'pill-pity';
 
 export default function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,104 +34,117 @@ export default function LandingPage() {
   };
 
   return (
-    <Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
-      <Heading
-        fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
+    <>
+      {/* <Box
         position={'fixed'}
-        top={0}
-        backdropFilter="blur(5px)"
-        width={'full'}
+        background={'white'}
+        bgGradient="linear-gradient(to bottom, blue.200, transparent)"
+        maxHeight={'80px'}
+        padding={'2'}
         zIndex={100}
+        width={'full'}
         align={'center'}
       >
-        Grimoire for the Modern Mage
-      </Heading>
+        <Heading fontFamily={'le-Grand-Saut'} fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}>
+          Grimoire for the Modern Mage
+        </Heading>
+      </Box> */}
 
-      <Flex
-        p={8}
-        flex={1}
-        align={'center'}
-        justify={'center'}
-        w={'full'}
-        h={'100vh'}
-        backgroundSize={'cover'}
-        backgroundPosition={'center center'}
-      >
-        <Stack spacing={6} w={'full'} maxW={'lg'}>
-          <Heading fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
-            <Text
-              as={'span'}
-              position={'relative'}
-              _after={{
-                content: `''`,
-                width: 'full',
-                height: '30%',
-                // height: useBreakpointValue({
-                //   base: '20%',
-                //   md: '30%',
-                // }),
-                position: 'absolute',
-                bottom: 1,
-                left: 0,
-                bg: 'blue.400',
-                zIndex: -1,
-              }}
-            >
-              Spellcasting
-            </Text>
-            <br />{' '}
-            <Text color={'blue.400'} as={'span'}>
-              Simplified
-            </Text>{' '}
-          </Heading>
-          <Text
-            p={2}
-            fontSize={{ base: 'md', lg: 'lg' }}
-            color={'gray.500'}
-            bg={'gray.50'}
-            rounded={'lg'}
+      <Stack minHeight={'100vh'} direction={{ base: 'column', md: 'row' }}>
+        <PillPity
+          as={Flex}
+          pattern="topography"
+          p={8}
+          flex={1}
+          align={'center'}
+          justify={'center'}
+          width={'full'}
+          height={'100vh'}
+          // bg="black"
+        >
+          <Box
+            top={0}
+            position={'fixed'}
+            // background={'white'}
+            // bgGradient="linear-gradient(to bottom, blue.200, transparent)"
+            maxHeight={'80px'}
+            padding={'2'}
+            zIndex={100}
+            align={'center'}
           >
-            <strong>The Grimoire for the Modern Mage</strong> is specifically for those exhausted by
-            constant erasing and re-writing, dealing with illegible shorthand, and sifting through
-            spells irrelevant to their character. Adding just a few pieces of information to your
-            profile will leave you with a personalized list of available spells to learn, prepare,
-            and cast, regardless of where you are in your adventure. So, what are you waiting for?
-          </Text>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
-            {options.map((option) => (
-              <Button
-                rounded={'full'}
-                bg={option === 'up' ? 'cyan.800' : 'gray.400'}
-                color={option === 'up' ? 'white' : ''}
-                _hover={{
-                  bg: option === 'up' ? 'teal.500' : 'gray.300',
-                }}
-                onClick={() => handleClick(option)}
-                key={option}
+            <Heading fontFamily={'le-Grand-Saut'} fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}>
+              Grimoire for the Modern Mage
+            </Heading>
+          </Box>
+
+          <Stack spacing={6} width={'full'} maxWidth={'lg'}>
+            <Heading marginTop={'35'} fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
+              <Text
+                fontFamily={'le-Grand-Saut'}
+                bgGradient="linear-gradient(to top, blue.200, transparent)"
+                as={'span'}
+                position={'relative'}
               >
-                {option === 'up' ? "Let's Get Started!" : 'I Already Have An Account'}
-              </Button>
-            ))}
-            <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-              <ModalOverlay backdropFilter="blur(5px)" />
-              <ModalContent>
-                <ModalCloseButton />
-                <ModalBody>
-                  {option === 'up' && <SignUpForm />}
-                  {option === 'in' && <SignInForm />}
-                </ModalBody>
-              </ModalContent>
-            </Modal>
+                Spellcasting
+              </Text>
+              <br />
+              <Text color={'blue.400'} fontFamily={'le-Grand-Saut'}>
+                Simplified
+              </Text>
+            </Heading>
+            <Text
+              padding={2}
+              fontSize={{ base: 'md', lg: 'lg' }}
+              color={'gray.900'}
+              bg={'gray.50'}
+              rounded={'lg'}
+              bgGradient="linear-gradient(to top, blue.200, transparent)"
+            >
+              <strong>The Grimoire for the Modern Mage</strong> is specifically for those exhausted
+              by constant erasing and re-writing, dealing with illegible shorthand, and sifting
+              through spells irrelevant to their character. Adding just a few pieces of information
+              to your profile will leave you with a personalized list of available spells to learn,
+              prepare, and cast, regardless of where you are in your adventure. So, what are you
+              waiting for?
+            </Text>
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+              {options.map((option) => (
+                <Button
+                  fontFamily={'le-Grand-Saut'}
+                  fontSize={{ base: '2xl', lg: '3xl' }}
+                  rounded={'full'}
+                  bg={option === 'up' ? 'cyan.800' : 'gray.400'}
+                  color={option === 'up' ? 'white' : 'black'}
+                  _hover={{
+                    bg: option === 'up' ? 'teal.500' : 'gray.300',
+                  }}
+                  onClick={() => handleClick(option)}
+                  key={option}
+                >
+                  {option === 'up' ? "Let's Get Started!" : 'I Already Have An Account'}
+                </Button>
+              ))}
+              <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
+                <ModalOverlay backdropFilter="blur(5px)" />
+                <ModalContent>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    {option === 'up' && <SignUpForm />}
+                    {option === 'in' && <SignInForm />}
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+            </Stack>
           </Stack>
-        </Stack>
-      </Flex>
-      <Flex flex={1}>
-        <Image
-          alt={'Login Image'}
-          objectFit={'cover'}
-          src={'https://www.publicdomainpictures.net/pictures/30000/velka/old-book.jpg'}
-        />
-      </Flex>
-    </Stack>
+        </PillPity>
+        <Flex flex={0.9}>
+          <Image
+            alt={'Login Image'}
+            objectFit={'cover'}
+            src={'https://www.publicdomainpictures.net/pictures/30000/velka/old-book.jpg'}
+          />
+        </Flex>
+      </Stack>
+    </>
   );
 }
