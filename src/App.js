@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage/LandingPage';
-import Auth from './components/LandingPage/Auth';
 import ProtectedRoute from './components/LandingPage/ProtectedRoutes';
 import Layout from './components/PageLayout/Layout';
 import AboutPage from './components/AboutPage/AboutPage';
@@ -11,9 +10,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 function App() {
   return (
     <Routes>
-      <Route path="welcome" element={<LandingPage />}>
-        <Route index element={<Auth />} />
-      </Route>
+      <Route path="welcome" element={<LandingPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="choose-character" element={<CharacterPage />} />
         <Route element={<Layout />}>
