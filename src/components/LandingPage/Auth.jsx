@@ -111,7 +111,7 @@ export default function Auth() {
         <Image
           alt={'Login Image'}
           objectFit={'cover'}
-          src={'https://wiki.alexissmolensk.com/images/f/f9/Spellbook.jpg'}
+          src={'https://www.publicdomainpictures.net/pictures/30000/velka/old-book.jpg'}
         />
       </Flex>
     </Stack>

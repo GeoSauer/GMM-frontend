@@ -27,6 +27,7 @@ export default function Header() {
         <Spacer />
         <HStack hideBelow={'750px'}>
           <LongRestButton />
+          <Spacer />
           {/* <SearchButton /> */}
         </HStack>
         <UserNav />
