@@ -68,7 +68,7 @@ export function useAuth() {
       console.log(error);
       setError(error.message);
     } else {
-      setUserState(user);
+      setUserState(user.data);
       setError(null);
     }
   };
@@ -84,16 +84,19 @@ export function useAuth() {
   };
 
   const signOut = async () => {
-    const response = await User.signOut();
+    // const response = await User.signOut();
+    await User.signOut();
     setUserState(null);
     setCharacterState(null);
-    handleResponse(response);
-  };
-
-  const handleSignOut = async () => {
-    await signOut();
     navigate('welcome', { replace: true });
+    // handleResponse(response);
   };
 
-  return { signUp, signIn, signOut, error, handleSignOut };
+  // const handleSignOut = async () => {
+  //   await signOut();
+  //   navigate('welcome', { replace: true });
+  // };
+
+  // return { signUp, signIn, signOut, error, handleSignOut };
+  return { signUp, signIn, signOut, error };
 }

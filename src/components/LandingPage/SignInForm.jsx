@@ -1,4 +1,4 @@
-import { useAuth } from '../../context/UserContext';
+import { useAuth, useUser } from '../../context/UserContext';
 import { useState } from 'react';
 import {
   Flex,
@@ -15,15 +15,11 @@ import {
   FormHelperText,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
-// import { useSpellDetails } from '../../context/SpellContext';
-// import { useCharacter } from '../../context/CharacterContext';
-// import { useNavigate } from 'react-router-dom';
+import { User } from '../../services/User';
 
 export default function SignInForm() {
-  const { signIn, error } = useAuth();
-  // const { preparedSpells, knownSpells, availableSpells } = useSpellDetails();
-  // const { divineCaster } = useCharacter();
-  // const navigate = useNavigate();
+  const { error } = useAuth();
+  const { setUserState } = useUser();
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -51,7 +47,8 @@ export default function SignInForm() {
               }}
               onSubmit={async (values, actions) => {
                 actions.setSubmitting(true);
-                await signIn(values);
+                const user = await User.signIn(values);
+                setUserState(user.body);
                 actions.setSubmitting(false);
               }}
             >

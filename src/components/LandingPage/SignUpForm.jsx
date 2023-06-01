@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useAuth, useUser } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useState } from 'react';
 import * as Yup from 'yup';
 import {
@@ -21,12 +21,12 @@ import {
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Character';
 import { useCharacter } from '../../context/CharacterContext';
+import { User } from '../../services/User';
 
 export default function SignInForm() {
   const navigate = useNavigate();
-  const { signUp } = useAuth();
   const { setCharacterState } = useCharacter();
-  const { user, setUserState } = useUser();
+  const { setUserState } = useUser();
   // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
@@ -75,11 +75,11 @@ export default function SignInForm() {
               validationSchema={SignupSchema}
               onSubmit={async (values, actions) => {
                 actions.setSubmitting(true);
-                const user = await signUp(values);
+                const user = await User.signUp(values);
+                setUserState(user.body);
                 const character = await Character.create(values);
-                setUserState(user);
                 setCharacterState(character.id);
-                // if (user) navigate('/settings');
+                navigate('/known-spells');
                 actions.setSubmitting(false);
               }}
             >

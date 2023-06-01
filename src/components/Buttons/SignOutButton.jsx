@@ -14,7 +14,7 @@ import { useAuth } from '../../context/UserContext';
 import { useRef } from 'react';
 
 export default function SignOutButton() {
-  const { handleSignOut } = useAuth();
+  const { signOut } = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
 
@@ -27,7 +27,7 @@ export default function SignOutButton() {
           <ModalHeader>Really Sign Out?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Button onClick={handleSignOut}>Confirm</Button>
+            <Button onClick={signOut}>Confirm</Button>
           </ModalBody>
         </ModalContent>
       </Modal>
