@@ -41,15 +41,17 @@ export default function DeleteCharacterButton({ character }) {
         <>
           <PopoverTrigger>
             <Button
-              w={'fit'}
-              mt={8}
-              bg={'gray.900'}
+              fontFamily={'Button'}
+              fontSize={{ base: '2xl', lg: '3xl' }}
+              bg={'red.400'}
               color={'white'}
-              rounded={'md'}
               _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
+                bg: 'red.500',
+                transform: 'translateY(-3px)',
+                boxShadow: 'xl',
               }}
+              rounded={'full'}
+              width={'100px'}
             >
               Delete
             </Button>
@@ -61,15 +63,17 @@ export default function DeleteCharacterButton({ character }) {
               <PopoverCloseButton />
               <PopoverBody alignSelf={'center'}>
                 <Button
-                  w={'fit'}
-                  mt={8}
-                  bg={'gray.900'}
+                  fontFamily={'Button'}
+                  fontSize={{ base: '2xl', lg: '3xl' }}
+                  bg={'red.400'}
                   color={'white'}
-                  rounded={'md'}
                   _hover={{
-                    transform: 'translateY(-2px)',
-                    boxShadow: 'lg',
+                    bg: 'red.500',
+                    transform: 'translateY(-3px)',
+                    boxShadow: 'xl',
                   }}
+                  rounded={'full'}
+                  width={'210px'}
                   onClick={() => handleDelete(onClose)}
                 >
                   Yes, they will be missed...

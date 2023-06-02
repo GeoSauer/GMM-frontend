@@ -28,6 +28,7 @@ export default function CreateCharacterButton() {
         }}
         rounded={'full'}
         width={'200px'}
+        marginTop={5}
         onClick={onOpen}
       >
         Create New Character

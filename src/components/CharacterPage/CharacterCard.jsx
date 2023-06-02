@@ -43,6 +43,8 @@ export default function CharacterCard(character) {
       boxShadow={'2xl'}
       rounded={'3xl'}
       overflow={'hidden'}
+      height={'420px'}
+      margin={2}
     >
       <Image
         height={'120px'}
@@ -50,7 +52,7 @@ export default function CharacterCard(character) {
         src={`/${character.charClass}Card.jpeg`}
         objectFit={'cover'}
       />
-      <Flex justify={'center'} mt={-12}>
+      <Flex justify={'center'} marginTop={-12}>
         <Avatar
           size={'xl'}
           src={`/${character.charClass}.png`}
@@ -61,16 +63,16 @@ export default function CharacterCard(character) {
         />
       </Flex>
 
-      <Box p={6}>
-        <Stack spacing={0} align={'center'} mb={5}>
-          <Heading fontSize={'xl'} fontWeight={500} fontFamily={'body'}>
+      <Box padding={6}>
+        <Stack spacing={0} align={'center'} marginBottom={5}>
+          <Heading fontSize={'xl'} fontWeight={500} fontFamily={'Title'} marginBottom={2}>
             {truncatedCharacterName}
           </Heading>
-          <Text color={'gray.500'}>
+          <Text fontFamily={'Text'}>
             Level {character.charLvl} {character.charClass}
           </Text>
-          <Text color={'gray.500'}>Save DC: {character.saveDC}</Text>
-          <Text color={'gray.500'}>Attack Bonus: {character.attackBonus}</Text>
+          <Text fontFamily={'Text'}>Save DC: {character.saveDC}</Text>
+          <Text fontFamily={'Text'}>Attack Bonus: {character.attackBonus}</Text>
         </Stack>
 
         {character.id !== currentCharacter && (
@@ -86,7 +88,7 @@ export default function CharacterCard(character) {
                 boxShadow: 'xl',
               }}
               rounded={'full'}
-              width={'150px'}
+              width={'100px'}
               onClick={handleCharacterChange}
             >
               {location.pathname === '/characters' ? 'Set Active' : 'Select'}
@@ -98,15 +100,17 @@ export default function CharacterCard(character) {
         {character.id === currentCharacter ? (
           <VStack>
             <Button
-              w={'fit'}
-              mt={8}
-              bg={'gray.900'}
+              fontFamily={'Button'}
+              fontSize={{ base: '2xl', lg: '3xl' }}
+              bg={'blue.400'}
               color={'white'}
-              rounded={'md'}
               _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
+                bg: 'blue.500',
+                transform: 'translateY(-3px)',
+                boxShadow: 'xl',
               }}
+              rounded={'full'}
+              width={'80px'}
               onClick={onOpen}
             >
               Edit
