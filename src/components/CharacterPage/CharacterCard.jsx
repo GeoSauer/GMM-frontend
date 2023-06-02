@@ -15,7 +15,6 @@ import {
   ModalCloseButton,
   ModalBody,
   ModalContent,
-  ModalHeader,
 } from '@chakra-ui/react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
@@ -109,10 +108,12 @@ export default function CharacterCard(character) {
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
               <ModalOverlay backdropFilter="blur(5px)" />
               <ModalContent>
-                <ModalHeader>Editing {truncatedCharacterName}</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <EditCharacterForm close={onClose} />
+                  <EditCharacterForm
+                    close={onClose}
+                    truncatedCharacterName={truncatedCharacterName}
+                  />
                 </ModalBody>
               </ModalContent>
             </Modal>

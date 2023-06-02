@@ -5,7 +5,6 @@ import {
   ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalHeader,
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -24,7 +23,6 @@ export default function CreateCharacterButton() {
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
-          <ModalHeader>New Character</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <NewCharacterForm onClose={onClose} />

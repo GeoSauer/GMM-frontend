@@ -76,7 +76,6 @@ export default function SpellDisplay() {
               align="center"
               justify="start"
               py={2}
-              // bg="gray.200"
               borderBottom="1px solid"
               borderColor="gray.300"
               fontSize="xl"
