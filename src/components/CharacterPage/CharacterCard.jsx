@@ -8,7 +8,6 @@ import {
   Stack,
   Text,
   VStack,
-  useColorModeValue,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -38,14 +37,19 @@ export default function CharacterCard(character) {
 
   return (
     <Box
-      maxW={'270px'}
-      w={'full'}
-      bg={useColorModeValue('white', 'gray.800')}
+      maxWidth={'270px'}
+      width={'full'}
+      background={'white'}
       boxShadow={'2xl'}
-      rounded={'md'}
+      rounded={'3xl'}
       overflow={'hidden'}
     >
-      <Image h={'120px'} w={'full'} src={`/${character.charClass}Card.jpeg`} objectFit={'cover'} />
+      <Image
+        height={'120px'}
+        width={'full'}
+        src={`/${character.charClass}Card.jpeg`}
+        objectFit={'cover'}
+      />
       <Flex justify={'center'} mt={-12}>
         <Avatar
           size={'xl'}
@@ -72,15 +76,17 @@ export default function CharacterCard(character) {
         {character.id !== currentCharacter && (
           <VStack>
             <Button
-              w={'fit'}
-              mt={8}
-              bg={'gray.900'}
+              fontFamily={'Button'}
+              fontSize={{ base: '2xl', lg: '3xl' }}
+              bg={'gray.400'}
               color={'white'}
-              rounded={'md'}
               _hover={{
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
+                bg: 'gray.500',
+                transform: 'translateY(-3px)',
+                boxShadow: 'xl',
               }}
+              rounded={'full'}
+              width={'150px'}
               onClick={handleCharacterChange}
             >
               {location.pathname === '/characters' ? 'Set Active' : 'Select'}

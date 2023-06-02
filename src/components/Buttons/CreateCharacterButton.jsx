@@ -1,4 +1,3 @@
-import { AddIcon } from '@chakra-ui/icons';
 import {
   Button,
   Modal,
@@ -17,8 +16,21 @@ export default function CreateCharacterButton() {
 
   return (
     <>
-      <Button leftIcon={<AddIcon />} colorScheme="teal" onClick={onOpen}>
-        Create Character
+      <Button
+        fontFamily={'Button'}
+        fontSize={{ base: '2xl', lg: '3xl' }}
+        bg={'blue.400'}
+        color={'white'}
+        _hover={{
+          bg: 'blue.500',
+          transform: 'translateY(-3px)',
+          boxShadow: 'xl',
+        }}
+        rounded={'full'}
+        width={'200px'}
+        onClick={onOpen}
+      >
+        Create New Character
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(5px)" />
