@@ -1,4 +1,12 @@
 @font-face {
-  font-family: 'le-Grand-Saut';
+  font-family: 'Button';
   src: url('/public/fonts/le_Grand_Saut_TEXTUAL.ttf');
+}
+@font-face {
+  font-family: 'Title';
+  src: url('/public/fonts/Bitcheese.ttf');
+}
+@font-face {
+  font-family: 'Text';
+  src: url('/public/fonts/IndieFlower-Regular.ttf');
 }

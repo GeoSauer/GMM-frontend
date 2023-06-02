@@ -49,15 +49,23 @@ export default function SignInForm() {
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}
+      // bg={useColorModeValue('gray.50', 'gray.800')}
     >
       <Stack spacing={8} mx={'auto'} maxWidth={'lg'} py={12} px={6}>
         <Stack align={'center'}>
-          <Heading fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }} marginTop={5}>
+          <Heading
+            fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
+            fontFamily={'Button'}
+            marginTop={5}
+          >
             Create an Account
           </Heading>
-          <Heading fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}>
-            (Don&apos;t worry you can add/edit more characters later)
+          <Heading
+            fontSize={{ base: '3xl', md: '4xl', lg: '4xl' }}
+            fontFamily={'Button'}
+            textAlign={'center'}
+          >
+            (Don&apos;t worry you can add or edit more characters later)
           </Heading>
         </Stack>
         <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
@@ -88,7 +96,7 @@ export default function SignInForm() {
                   <Field name="email">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.email && form.touched.email}>
-                        <FormLabel htmlFor="email" fontWeight={'normal'}>
+                        <FormLabel htmlFor="email" fontWeight={'bold'} fontFamily={'Text'}>
                           Email<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <Input {...field} placeholder="Email" />
@@ -100,7 +108,7 @@ export default function SignInForm() {
                   <Field name="password">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.password && form.touched.password}>
-                        <FormLabel htmlFor="password" fontWeight={'normal'}>
+                        <FormLabel htmlFor="password" fontWeight={'bold'} fontFamily={'Text'}>
                           Password<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <InputGroup size="md">
@@ -123,7 +131,7 @@ export default function SignInForm() {
                   <Field name="username">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.username && form.touched.username}>
-                        <FormLabel htmlFor="username" fontWeight={'normal'}>
+                        <FormLabel htmlFor="username" fontWeight={'bold'} fontFamily={'Text'}>
                           Username
                         </FormLabel>
                         <Input {...field} placeholder="Username" />
@@ -135,7 +143,7 @@ export default function SignInForm() {
                   <Field name="charName">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charName && form.touched.charName}>
-                        <FormLabel htmlFor="charName" fontWeight={'normal'}>
+                        <FormLabel htmlFor="charName" fontWeight={'bold'} fontFamily={'Text'}>
                           Character Name
                         </FormLabel>
                         <Input {...field} placeholder="Character Name" />
@@ -147,7 +155,7 @@ export default function SignInForm() {
                   <Field name="charClass">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
-                        <FormLabel htmlFor="charClass" fontWeight={'normal'}>
+                        <FormLabel htmlFor="charClass" fontWeight={'bold'} fontFamily={'Text'}>
                           Character Class<span style={{ color: 'red' }}>*</span>
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
@@ -168,7 +176,7 @@ export default function SignInForm() {
                   <Field name="charLvl">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charLvl && form.touched.charLvl}>
-                        <FormLabel htmlFor="charLvl" fontWeight={'normal'}>
+                        <FormLabel htmlFor="charLvl" fontWeight={'bold'} fontFamily={'Text'}>
                           Character Level
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
@@ -188,7 +196,7 @@ export default function SignInForm() {
                   <Field name="charMod">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charMod && form.touched.charMod}>
-                        <FormLabel htmlFor="charMod" fontWeight={'normal'}>
+                        <FormLabel htmlFor="charMod" fontWeight={'bold'} fontFamily={'Text'}>
                           Spellcasting Ability Modifier
                         </FormLabel>
                         <Select {...field} placeholder="Choose One">
@@ -207,6 +215,8 @@ export default function SignInForm() {
 
                   <Stack spacing={5}>
                     <Button
+                      fontFamily={'Button'}
+                      fontSize={{ base: '2xl', lg: '3xl' }}
                       bg={'blue.400'}
                       color={'white'}
                       _hover={{
@@ -217,7 +227,7 @@ export default function SignInForm() {
                     >
                       Sign up
                     </Button>
-                    <Text>
+                    <Text fontWeight={'bold'} fontFamily={'Text'}>
                       <span style={{ color: 'red' }}>*</span> cannot be changed later
                     </Text>
                   </Stack>
