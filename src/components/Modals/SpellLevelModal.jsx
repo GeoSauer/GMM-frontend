@@ -92,7 +92,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
     <>
       <Button onClick={onOpen}>Cast with a spell slot</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
           <ModalHeader>What level would you like to cast {spell.name} at?</ModalHeader>
           <ModalCloseButton />

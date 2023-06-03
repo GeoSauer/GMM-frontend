@@ -34,7 +34,7 @@ export default function CreateCharacterButton() {
         Create New Character
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody>

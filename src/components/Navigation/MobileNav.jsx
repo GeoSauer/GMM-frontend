@@ -1,17 +1,10 @@
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
-  // Button,
   Menu,
   MenuButton,
-  // MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
-  // Popover,
-  // PopoverArrow,
-  // PopoverBody,
-  // PopoverContent,
-  // PopoverTrigger,
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
@@ -30,32 +23,37 @@ export default function MobileNav() {
           <HamburgerIcon />
         </MenuButton>
         <MenuList alignContent={'center'}>
-          <MenuGroup title="Spell Pages">
-            <MenuItem value="prepared">
+          <MenuGroup title="Spell Pages" fontFamily={'Title'} fontSize={'1.5em'}>
+            <MenuItem value="prepared" fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
               <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
                 Prepared
               </NavLink>
             </MenuItem>
-            <MenuItem value="known">
+            <MenuItem value="known" fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
               <NavLink to="known-spells" alt="known" title="Known Spells">
                 Known
               </NavLink>
             </MenuItem>
             {characterInfo.charClass === 'Cleric' || characterInfo.charClass === 'Druid' ? (
-              <MenuItem bg={location.pathname === '/cantrips' ? 'blue.500' : 'none'}>
+              <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
                 <NavLink to="cantrips" alt="cantrips" title="Cantrips">
                   Cantrips
                 </NavLink>
               </MenuItem>
             ) : null}
             {!divineCaster ? (
-              <MenuItem value="available">
+              <MenuItem
+                value="available"
+                fontFamily={'Button'}
+                fontSize={'1.5em'}
+                fontWeight={'bold'}
+              >
                 <NavLink to="available-spells" alt="all" title="Available Spells">
                   Available
                 </NavLink>
               </MenuItem>
             ) : null}
-            <MenuItem value="all">
+            <MenuItem value="all" fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
               <NavLink to="all-spells" alt="all" title="All Spells">
                 All
               </NavLink>
@@ -64,52 +62,5 @@ export default function MobileNav() {
         </MenuList>
       </Menu>
     </Stack>
-    // <Stack hideFrom={'751px'}>
-    //   <Popover
-    //     isOpen={isOpen}
-    //     onClose={onClose}
-    //     placement="bottom-start"
-    //     modifiers={[
-    //       { name: 'offset', options: { offset: [0, 8] } },
-    //       { name: 'preventOverflow', options: { padding: 8 } },
-    //       { name: 'flip', options: { padding: 8 } },
-    //     ]}
-    //   >
-    //     <PopoverTrigger>
-    //       <Button
-    //         leftIcon={<HamburgerIcon />}
-    //         variant="outline"
-    //         aria-label="Open Menu"
-    //         // display={{ md: 'none' }}
-    //         onClick={onToggle}
-    //       >
-    //         Menu
-    //       </Button>
-    //     </PopoverTrigger>
-    //     <PopoverContent>
-    //       <PopoverArrow />
-    //       <PopoverBody>
-    //         <Stack>
-    //           <NavLink to="/prepared-spells" alt="prepared" title="Prepared Spells">
-    //             Prepared
-    //           </NavLink>
-    //           <NavLink to="/known-spells" alt="known" title="Known Spells">
-    //             Known
-    //           </NavLink>
-    //           {characterInfo.charClass === 'Cleric' ||
-    //           characterInfo.charClass === 'Druid' ||
-    //           characterInfo.charClass === 'Paladin' ? null : (
-    //             <NavLink to="/available-spells" alt="available" title="Available Spells">
-    //               Available
-    //             </NavLink>
-    //           )}
-    //           <NavLink to="/all-spells" alt="all" title="All Spells">
-    //             All
-    //           </NavLink>
-    //         </Stack>
-    //       </PopoverBody>
-    //     </PopoverContent>
-    //   </Popover>
-    // </Stack>
   );
 }

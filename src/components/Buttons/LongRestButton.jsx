@@ -15,8 +15,6 @@ import { useRef } from 'react';
 
 export default function LongRestButton() {
   const toast = useToast();
-  // const initRef = useRef();
-  // const { onOpen } = useDisclosure();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { firstField } = useRef();
   const { characterInfo, setCharacterInfo } = useCharacter();
@@ -36,50 +34,44 @@ export default function LongRestButton() {
   return (
     <>
       <Button
-        // w={'fit'}
-        // mt={8}
-        // bg={'gray.900'}
-        // color={'white'}
-        // rounded={'md'}
-        // _hover={{
-        //   transform: 'translateY(-2px)',
-        //   boxShadow: 'lg',
-        // }}
+        fontFamily={'Button'}
+        fontSize={{ base: '2xl', lg: '3xl' }}
+        color={'gray.600'}
+        rounded={'full'}
+        height={'40px'}
+        _hover={{
+          bg: 'gray.300',
+          transform: 'translateY(-3px)',
+          boxShadow: 'xl',
+        }}
         onClick={onOpen}
       >
         Long Rest
       </Button>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
-          <ModalHeader>Are you sure you want to take a long rest?</ModalHeader>
+          <ModalHeader fontFamily={'Title'}>Are you sure you want to take a long rest?</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Button onClick={() => handleLongRest(onClose)}>Yes please! So tired!</Button>
+          <ModalBody align={'center'} margin={4}>
+            <Button
+              fontFamily={'Button'}
+              fontSize={{ base: '2xl', lg: '3xl' }}
+              color={'gray.600'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                bg: 'gray.300',
+                transform: 'translateY(-3px)',
+                boxShadow: 'xl',
+              }}
+              onClick={() => handleLongRest(onClose)}
+            >
+              Yes please! So tired!
+            </Button>
           </ModalBody>
         </ModalContent>
       </Modal>
     </>
-    // <Popover initialFocusRef={initRef}>
-    //   {({ onClose }) => (
-    //     <>
-    //       <PopoverTrigger>
-    //         <Button onClick={onOpen}>Long Rest</Button>
-    //       </PopoverTrigger>
-    //       <Portal>
-    //         <PopoverContent>
-    //           <PopoverArrow />
-    //           <PopoverHeader>Are you sure you want to take a long rest?</PopoverHeader>
-    //           <PopoverCloseButton />
-    //           <PopoverBody zIndex={5000}>
-    //             <Button ref={initRef} onClick={() => handleLongRest(onClose)}>
-    //               Yes please! So tired!
-    //             </Button>
-    //           </PopoverBody>
-    //         </PopoverContent>
-    //       </Portal>
-    //     </>
-    //   )}
-    // </Popover>
   );
 }

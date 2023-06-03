@@ -21,26 +21,26 @@ export default function UserNav() {
   return (
     <Flex alignItems={'center'}>
       <Menu>
-        <MenuButton
-          as={Button}
-          rounded={'full'}
-          variant={'link'}
-          cursor={'pointer'}
-          minW={0}
-          alignSelf={'center'}
-        >
-          <Avatar size={{ base: 'sm', md: 'md' }} src={`/${characterInfo.charClass}.png`} />
-          <TriangleDownIcon boxSize={'6'} mt={3.5} />
+        <MenuButton as={Button} variant={'link'}>
+          <Avatar
+            size={{ base: 'sm', md: 'md', lg: 'lg' }}
+            src={`/${characterInfo.charClass}.png`}
+            marginTop={'2'}
+          />
+          <TriangleDownIcon
+            boxSize={{ base: '4', md: '4', lg: '6' }}
+            marginTop={{ base: '4', md: '6', lg: '7' }}
+          />
         </MenuButton>
-        <MenuList alignContent={'center'}>
+        <MenuList paddingLeft={'2'}>
           <UserInfo />
           <MenuDivider />
-          <MenuItem>
+          <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
             <NavLink to="characters" alt="characters" title="characters">
               Characters
             </NavLink>
           </MenuItem>
-          <MenuItem>
+          <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
             <NavLink to="settings" alt="settings" title="settings">
               Settings
             </NavLink>

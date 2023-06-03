@@ -20,14 +20,32 @@ export default function SignOutButton() {
 
   return (
     <>
-      <MenuItem onClick={onOpen}>Sign Out</MenuItem>
+      <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'} onClick={onOpen}>
+        Sign Out
+      </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
-          <ModalHeader>Really Sign Out?</ModalHeader>
+          <ModalHeader fontFamily={'Title'} textAlign={'center'}>
+            Really Sign Out?
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            <Button onClick={signOut}>Confirm</Button>
+          <ModalBody align={'center'} margin={4}>
+            <Button
+              fontFamily={'Button'}
+              fontSize={{ base: '2xl', lg: '3xl' }}
+              color={'gray.600'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                bg: 'gray.300',
+                transform: 'translateY(-3px)',
+                boxShadow: 'xl',
+              }}
+              onClick={signOut}
+            >
+              Confirm
+            </Button>
           </ModalBody>
         </ModalContent>
       </Modal>

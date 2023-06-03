@@ -16,9 +16,13 @@ import { useRef } from 'react';
 
 function HelpTopic({ title, desc, ...rest }) {
   return (
-    <Box p={5} shadow="md" borderWidth="1px" {...rest}>
-      <Heading fontSize="xl">{title}</Heading>
-      <Text mt={4}>{desc}</Text>
+    <Box padding={5} shadow="md" borderWidth="1px" {...rest}>
+      <Heading fontFamily={'Title'} fontSize="xl">
+        {title}
+      </Heading>
+      <Text fontFamily={'Text'} marginTop={4}>
+        {desc}
+      </Text>
     </Box>
   );
 }
@@ -29,9 +33,11 @@ export default function HelpButton() {
 
   return (
     <>
-      <MenuItem onClick={onOpen}>Help</MenuItem>
+      <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'} onClick={onOpen}>
+        Help
+      </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
           <ModalCloseButton />
           <ModalBody padding={10}>

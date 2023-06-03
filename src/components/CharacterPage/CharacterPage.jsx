@@ -1,4 +1,4 @@
-import { Heading, Stack, Box, Flex } from '@chakra-ui/react';
+import { Heading, Box, Flex } from '@chakra-ui/react';
 import { useUser } from '../../context/UserContext';
 import { useCharacter } from '../../context/CharacterContext';
 import CharacterCard from './CharacterCard';

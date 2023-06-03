@@ -116,7 +116,7 @@ export default function CharacterCard(character) {
               Edit
             </Button>
             <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
-              <ModalOverlay backdropFilter="blur(5px)" />
+              <ModalOverlay backdropFilter="blur(2px)" />
               <ModalContent>
                 <ModalCloseButton />
                 <ModalBody>

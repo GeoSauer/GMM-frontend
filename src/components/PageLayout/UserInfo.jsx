@@ -10,24 +10,24 @@ export default function UserInfo() {
     <>
       {!isLoading && userInfo.username && characterInfo.charName && (
         <>
-          <MenuGroup title="Signed in as:">
-            <Text>
+          <MenuGroup title="Signed in as:" fontFamily={'Button'} fontSize={'1.5em'}>
+            <Text fontFamily={'Text'}>
               {userInfo.username.length > 20
                 ? userInfo.username.slice(0, 20) + '...'
                 : userInfo.username}
             </Text>
           </MenuGroup>
           <MenuDivider />
-          <MenuGroup title="Current Character:">
-            <Text>
+          <MenuGroup title="Current Character:" fontFamily={'Button'} fontSize={'1.5em'}>
+            <Text fontFamily={'Text'}>
               {characterInfo.charName.length > 20
                 ? characterInfo.charName.slice(0, 20) + '...'
                 : characterInfo.charName}
             </Text>
-            <Text>{characterInfo.charClass}</Text>
-            <Text>Level: {characterInfo.charLvl}</Text>
-            <Text>Save DC: {characterInfo.saveDC}</Text>
-            <Text>Attack Bonus: {characterInfo.attackBonus}</Text>
+            <Text fontFamily={'Text'}>{characterInfo.charClass}</Text>
+            <Text fontFamily={'Text'}>Level: {characterInfo.charLvl}</Text>
+            <Text fontFamily={'Text'}>Save DC: {characterInfo.saveDC}</Text>
+            <Text fontFamily={'Text'}>Attack Bonus: {characterInfo.attackBonus}</Text>
           </MenuGroup>
         </>
       )}
