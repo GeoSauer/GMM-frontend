@@ -12,7 +12,13 @@ export default function Subheader() {
   );
 
   return (
-    <Flex hideFrom={'751px'} justifyContent="space-between" alignItems="center">
+    <Flex
+      hideFrom={'751px'}
+      justifyContent="space-between"
+      alignItems="center"
+      borderBottom="1px solid"
+      borderColor="gray.300"
+    >
       <Heading height="10" fontFamily={'Button'}>
         {locationHeader}
       </Heading>

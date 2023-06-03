@@ -15,10 +15,11 @@ export default function SpellSlots() {
     <>
       <Box
         padding="15px"
+        marginLeft="-16px"
+        marginRight="-16px"
         bg="blue.200"
         shadow="lg"
         marginBottom={4}
-        marginTop={4}
         rounded={'full'}
         sx={{
           backgroundImage: 'radial-gradient(circle at 65% 15%, teal 3%, lightblue 60%, teal 100%)',

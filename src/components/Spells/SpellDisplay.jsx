@@ -4,6 +4,7 @@ import { useSpellDetails } from '../../context/SpellContext';
 import SpellCard from './SpellCard';
 import { useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
+import PillPity from 'pill-pity';
 
 export default function SpellDisplay() {
   const {
@@ -75,16 +76,17 @@ export default function SpellDisplay() {
             <Flex
               align="center"
               justify="start"
-              py={2}
-              borderBottom="1px solid"
-              borderColor="gray.300"
+              paddingY={2}
+              paddingX={-4}
+              borderBottom="2px solid"
               fontSize="xl"
               fontWeight="bold"
+              display={location.pathname === '/cantrips' ? 'none' : 'full'}
             >
               {spell.level === 0 ? (
-                <Text>Cantrips</Text>
+                <Text fontFamily={'Title'}>Cantrips</Text>
               ) : (
-                <Text>
+                <Text fontFamily={'Title'}>
                   {spell.level}
                   {suffix} Level
                 </Text>
@@ -119,7 +121,15 @@ export default function SpellDisplay() {
   if (isLoading) return <Loading />;
 
   return (
-    <Flex direction={'column'} alignItems={'center'}>
+    <PillPity
+      as={Flex}
+      direction={'column'}
+      alignItems={'center'}
+      minHeight={'100vh'}
+      paddingTop={{ md: '50px', lg: '70px' }}
+      paddingBottom={'10'}
+      pattern="endless-clouds"
+    >
       {location.pathname === '/all-spells' && allSpellCards}
       {location.pathname === '/available-spells' && availableSpellCards}
       {location.pathname === '/cantrips' && cantripCards}
@@ -127,26 +137,72 @@ export default function SpellDisplay() {
       {location.pathname === '/prepared-spells' && preparedSpellCards}
 
       {location.pathname === '/all-spells' && !allSpells.length && (
-        <Text>
+        <Text
+          fontSize={'4xl'}
+          fontFamily={'Button'}
+          textAlign={'center'}
+          background={'gray.100'}
+          padding={'4'}
+          borderRadius={'20'}
+          marginTop={'10'}
+        >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
       )}
       {location.pathname === '/available-spells' && !availableSpells.length && (
-        <Text>
+        <Text
+          fontSize={'4xl'}
+          fontFamily={'Button'}
+          textAlign={'center'}
+          background={'gray.100'}
+          padding={'4'}
+          borderRadius={'20'}
+          marginTop={'10'}
+        >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
       )}
       {location.pathname === '/cantrips' && !cantrips.length && (
-        <Text>
+        <Text
+          fontSize={'4xl'}
+          fontFamily={'Button'}
+          textAlign={'center'}
+          background={'gray.100'}
+          padding={'4'}
+          borderRadius={'20'}
+          marginTop={'10'}
+        >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
       )}
       {location.pathname === '/known-spells' && !knownSpells.length && (
-        <Text>Looks like you haven&apos;t learned any spells, better get studying!</Text>
+        <Text
+          fontSize={'4xl'}
+          fontFamily={'Button'}
+          textAlign={'center'}
+          background={'gray.100'}
+          padding={'4'}
+          borderRadius={'20'}
+          marginTop={'10'}
+        >
+          Looks like you haven&apos;t learned any spells, better head to Available Spells and get
+          studying!
+        </Text>
       )}
       {location.pathname === '/prepared-spells' && !preparedSpells.length && (
-        <Text>Looks like you don&apos;t have any spells prepared, better remedy that!</Text>
+        <Text
+          fontSize={'4xl'}
+          fontFamily={'Button'}
+          textAlign={'center'}
+          background={'gray.100'}
+          padding={'4'}
+          borderRadius={'20'}
+          marginTop={'10'}
+        >
+          Looks like you don&apos;t have any spells prepared, better head over to Known Spells and
+          remedy that!
+        </Text>
       )}
-    </Flex>
+    </PillPity>
   );
 }
