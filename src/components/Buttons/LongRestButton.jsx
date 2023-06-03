@@ -34,6 +34,7 @@ export default function LongRestButton() {
   return (
     <>
       <Button
+        background={'transparent'}
         fontFamily={'Button'}
         fontSize={{ base: '2xl', lg: '3xl' }}
         color={'gray.600'}

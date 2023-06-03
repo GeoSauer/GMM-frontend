@@ -13,54 +13,51 @@ export default function SpellSlots() {
 
   return (
     <>
-      <Heading align={'center'} size={{ base: 10, md: 20 }}>
-        Spell Slots Available Per Level
-      </Heading>
-      <Box p="15px" color="white" bg="teal.500" shadow="md" mb={4}>
-        <Flex w="full" justifyContent="space-around" alignItems="center">
+      <Box
+        padding="15px"
+        bg="blue.200"
+        shadow="lg"
+        marginBottom={4}
+        marginTop={4}
+        rounded={'full'}
+        sx={{
+          backgroundImage: 'radial-gradient(circle at 65% 15%, teal 3%, lightblue 60%, teal 100%)',
+          boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+        }}
+      >
+        <Heading
+          align={'center'}
+          fontSize={{ base: '5vw', md: '2vw', lg: '2.5vw' }}
+          fontFamily={'Button'}
+        >
+          Spell Slots Available Per Level
+        </Heading>
+        <Flex justifyContent="space-evenly" alignItems="center">
           {spellSlots.map((_, index) => {
             const number = index + 1;
             const suffix = getSuffix(number);
             const spellsAvailableAtSlotLevel = characterInfo[`level${number}SpellSlots`];
-            //* if I change my mind and go back to only showing slots with > 0 available
-            // return spellsAvailableAtSlotLevel ? (
-            //   <Flex key={`key-${i}`} pos="relative" justifyContent={'center'}>
-            //     <Text>
-            //       {number}
-            //       {suffix} Level:
-            //     </Text>
-            //     <Text
-            //       pos="absolute"
-            //       mt={6}
-            //       px={2}
-            //       py={1}
-            //       fontSize="xs"
-            //       fontWeight="bold"
-            //       color="red.100"
-            //       bg="red.600"
-            //       rounded="full"
-            //     >
-            //       {spellsAvailableAtSlotLevel}
-            //     </Text>
-            //   </Flex>
-            // ) : null;
-            //* -----------------------------------------------------------------------------
+
             return (
-              <Flex key={`key-${index}`} pos="relative" justifyContent={'center'}>
-                <Text>
+              <Flex key={`key-${index}`} position="relative" justify={'center'}>
+                <Text fontFamily={'Title'}>
                   {number}
                   {suffix}:
                 </Text>
                 <Text
-                  pos="absolute"
-                  mt={6}
+                  fontFamily={'Title'}
+                  position="absolute"
+                  marginTop={6}
                   px={2}
                   py={1}
                   fontSize="xs"
                   fontWeight="bold"
-                  color="red.100"
-                  bg="red.600"
                   rounded="full"
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 65% 15%, white 1px, teal 3%, aqua 60%, teal 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
                 >
                   {spellsAvailableAtSlotLevel}
                 </Text>

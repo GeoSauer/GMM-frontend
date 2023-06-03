@@ -10,10 +10,13 @@ export default function Subheader() {
   const locationHeader = locationName.replace(/\/([\w-]+)/g, (_, match) =>
     match.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
   );
+
   return (
     <Flex hideFrom={'751px'} justifyContent="space-between" alignItems="center">
-      <Heading h="10">{locationHeader}</Heading>
-      <Box justifyContent={'end'} mt={'-8'} h="4">
+      <Heading height="10" fontFamily={'Button'}>
+        {locationHeader}
+      </Heading>
+      <Box justifyContent={'end'} marginTop={'-8'} height="4">
         <LongRestButton marginRight="2" />
         {/* <SearchButton /> */}
       </Box>

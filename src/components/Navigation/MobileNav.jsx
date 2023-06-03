@@ -20,7 +20,7 @@ export default function MobileNav() {
     <Stack hideFrom={'751px'}>
       <Menu isOpen={isOpen} onClose={onClose} onToggle={onToggle}>
         <MenuButton aria-label={'Open Menu'} onClick={onToggle}>
-          <HamburgerIcon />
+          <HamburgerIcon marginTop={'4'} />
         </MenuButton>
         <MenuList alignContent={'center'}>
           <MenuGroup title="Spell Pages" fontFamily={'Title'} fontSize={'1.5em'}>
