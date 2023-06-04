@@ -69,14 +69,25 @@ export default function SpellCard({ spellDetails, spell }) {
           onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}
           width={{ base: '90vw', md: '60vw', lg: '50vw' }}
-          height={'20'}
-          marginTop={'2'}
+          height={'90px'}
+          marginTop={'10'}
+          rounded={'3xl'}
+          bgGradient="linear(gray.100 10%, blue.100 50%, yellow.100 90%)"
+          sx={{
+            boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+          }}
+          _hover={{
+            transform: 'translateY(-3px)',
+            boxShadow: '4xl',
+          }}
         >
           {isLoading ? (
             <Loading />
           ) : (
             <>
-              <Heading fontFamily={'Button'}>{spell.name}</Heading>
+              <Heading fontFamily={'Button'} fontSize={{ base: '2em', lg: '2.5em' }}>
+                {spell.name}
+              </Heading>
               <Text fontFamily={'Text'}>{spell.school}</Text>
 
               {location.pathname === '/all-spells' ? (
@@ -111,6 +122,7 @@ export default function SpellCard({ spellDetails, spell }) {
               Known
             </Button>
           )}
+
           {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
             <Button
               isDisabled={true}
@@ -179,11 +191,13 @@ export default function SpellCard({ spellDetails, spell }) {
               Known
             </Button>
           )}
+
           {location.pathname === '/cantrips' && !spell.known && <LearnSpellButton spell={spell} />}
 
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
           )}
+
           {location.pathname === '/known-spells' && spell.prepared && spell.level > 0 && (
             <Button
               isDisabled={true}
@@ -205,9 +219,11 @@ export default function SpellCard({ spellDetails, spell }) {
               Prepared
             </Button>
           )}
+
           {location.pathname === '/known-spells' && !divineCaster && (
             <ForgetSpellButton spell={spell} />
           )}
+
           {location.pathname === '/known-spells' &&
             divineCaster &&
             (spell.fromAll || spell.level === 0) && <ForgetSpellButton spell={spell} />}
@@ -215,14 +231,17 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/prepared-spells' && spell.level === 0 && (
             <CastCantripButton spell={spell} spellDetails={spellDetails} />
           )}
+
           {location.pathname === '/prepared-spells' && spellDetails.ritual && (
             <CastRitualSpellButton spell={spell} />
           )}
+
           {location.pathname === '/prepared-spells' &&
             spellDetails.concentration &&
             spell.level > 0 && (
               <CastConcentrationSpellButton spell={spell} spellDetails={spellDetails} />
             )}
+
           {location.pathname === '/prepared-spells' &&
             !spellDetails.concentration &&
             !spellDetails.ritual &&
@@ -235,7 +254,18 @@ export default function SpellCard({ spellDetails, spell }) {
 
       <Container width={{ base: '90vw', md: '60vw', lg: '50vw' }} centerContent>
         <Collapse in={isOpen} animateOpacity>
-          <Box p="10px" color="white" bg="teal.500" rounded="md" shadow="md">
+          <Box
+            p="10px"
+            color="white"
+            bg="teal.500"
+            rounded="md"
+            shadow="md"
+            sx={{
+              backgroundImage:
+                'radial-gradient(circle at 75% 15%, white 1px, pink 6%, lightblue 60%, yellow 100%)',
+              boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+            }}
+          >
             {!isLoading ? (
               <SpellDetail
                 spellDetails={
