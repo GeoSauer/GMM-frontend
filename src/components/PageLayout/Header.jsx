@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Spacer } from '@chakra-ui/react';
+import { Box, Flex, HStack } from '@chakra-ui/react';
 import SpellSlots from './SpellSlots';
 import UserNav from '../Navigation/UserNav';
 import MobileNav from '../Navigation/MobileNav';

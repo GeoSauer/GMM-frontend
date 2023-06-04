@@ -6,15 +6,14 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Stack,
   Button,
-  useColorModeValue,
   FormErrorMessage,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import Loading from '../PageLayout/Loading';
 import { useUser } from '../../context/UserContext';
 import { User } from '../../services/User';
+import PillPity from 'pill-pity';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
@@ -25,75 +24,72 @@ export default function SettingsPage() {
   });
 
   return (
-    <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}
-    >
-      <Stack spacing={8} mx={'auto'} maxWidth={'lg'} py={12} px={6}>
-        <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
-          <Stack spacing={4}>
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <Formik
-                initialValues={userInfo}
-                validationSchema={ProfileSchema}
-                onSubmit={async (values, actions) => {
-                  await User.updateInfo(values);
-                  setUserInfo((prevState) => {
-                    return { ...prevState, ...values };
-                  });
-                  navigate('/settings');
-                  actions.setSubmitting(false);
-                }}
-              >
-                {(props) => (
-                  <Form>
-                    <Field name="username">
-                      {({ field, form }) => (
-                        <FormControl isInvalid={form.errors.username && form.touched.username}>
-                          <FormLabel htmlFor="username" fontWeight={'normal'}>
-                            Edit Username
-                          </FormLabel>
-                          <Input {...field} placeholder={userInfo.username} />
-                          <FormErrorMessage>{form.errors.username}</FormErrorMessage>
-                        </FormControl>
-                      )}
-                    </Field>
+    <PillPity pattern="church-on-sunday" as={Flex} minHeight={'100vh'} justify={'center'}>
+      <Box
+        rounded={'lg'}
+        background={'white'}
+        boxShadow={'lg'}
+        padding={8}
+        margin={10}
+        align={'center'}
+        height={'200px'}
+      >
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Formik
+            initialValues={userInfo}
+            validationSchema={ProfileSchema}
+            onSubmit={async (values, actions) => {
+              actions.setSubmitting(true);
+              await User.updateInfo(values);
+              setUserInfo((prevState) => {
+                return { ...prevState, ...values };
+              });
+              navigate('/settings');
+              actions.setSubmitting(false);
+            }}
+          >
+            {(props) => (
+              <Form>
+                <Field name="username">
+                  {({ field, form }) => (
+                    <FormControl isInvalid={form.errors.username && form.touched.username}>
+                      <FormLabel htmlFor="username" fontFamily={'Text'}>
+                        Edit Username
+                      </FormLabel>
+                      <Input {...field} placeholder={userInfo.username} />
+                      <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                    </FormControl>
+                  )}
+                </Field>
 
-                    <Button
-                      bg={'blue.400'}
-                      color={'white'}
-                      _hover={{
-                        bg: 'blue.500',
-                      }}
-                      isLoading={props.isSubmitting}
-                      type="submit"
-                    >
-                      Submit
-                    </Button>
-
-                    {/* <Button
-                      bg={'blue.400'}
-                      color={'white'}
-                      _hover={{
-                        bg: 'blue.500',
-                      }}
-                      onClick={() => {
-                        navigate('/settings');
-                      }}
-                    >
-                      Back
-                    </Button> */}
-                  </Form>
-                )}
-              </Formik>
+                <Button
+                  marginTop={'3'}
+                  fontFamily={'Button'}
+                  fontSize={'3xl'}
+                  color={'white'}
+                  rounded={'full'}
+                  height={'40px'}
+                  _hover={{
+                    transform: 'translateY(-3px)',
+                    boxShadow: '4xl',
+                  }}
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
+                  isLoading={props.isSubmitting}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              </Form>
             )}
-          </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+          </Formik>
+        )}
+      </Box>
+    </PillPity>
   );
 }
