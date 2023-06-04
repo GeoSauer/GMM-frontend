@@ -34,16 +34,19 @@ export default function LongRestButton() {
   return (
     <>
       <Button
-        background={'transparent'}
         fontFamily={'Button'}
         fontSize={{ base: '2xl', lg: '3xl' }}
         color={'gray.600'}
         rounded={'full'}
-        height={'40px'}
+        height={{ base: '30px', md: '50px' }}
         _hover={{
-          bg: 'gray.300',
           transform: 'translateY(-3px)',
-          boxShadow: 'xl',
+          boxShadow: '3xl',
+        }}
+        sx={{
+          backgroundImage:
+            'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)',
+          boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
         }}
         onClick={onOpen}
       >
@@ -58,13 +61,16 @@ export default function LongRestButton() {
             <Button
               fontFamily={'Button'}
               fontSize={{ base: '2xl', lg: '3xl' }}
-              color={'gray.600'}
+              color={'white'}
               rounded={'full'}
-              height={'40px'}
               _hover={{
-                bg: 'gray.300',
                 transform: 'translateY(-3px)',
                 boxShadow: 'xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
               onClick={() => handleLongRest(onClose)}
             >

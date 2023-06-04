@@ -90,15 +90,36 @@ export default function SpellLevelModal({ spell, spellDetails }) {
 
   return (
     <>
-      <Button onClick={onOpen}>Cast with a spell slot</Button>
+      <Button
+        fontFamily={'Button'}
+        fontSize={'3xl'}
+        color={'white'}
+        rounded={'full'}
+        height={'40px'}
+        _hover={{
+          transform: 'translateY(-3px)',
+          boxShadow: '4xl',
+        }}
+        sx={{
+          backgroundImage:
+            'radial-gradient(circle at 75% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
+          boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+        }}
+        onClick={onOpen}
+      >
+        Cast with a spell slot
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay backdropFilter="blur(2px)" />
-        <ModalContent>
-          <ModalHeader>What level would you like to cast {spell.name} at?</ModalHeader>
+        <ModalContent align={'center'}>
+          <ModalHeader fontFamily={'Title'} paddingTop={'5'}>
+            What level would you like to cast {spell.name} at?
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Select
               value={slotLevel}
+              fontFamily={'Text'}
               placeholder="Choose One"
               onChange={(e) => setSlotLevel(e.target.value)}
             >
@@ -117,13 +138,34 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 }
               })}
             </Select>
-            <Button onClick={() => handleCast(characterInfo.id, slotLevel)}>Cast</Button>
+
+            <Button
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              margin={'2'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+              onClick={() => handleCast(characterInfo.id, slotLevel)}
+            >
+              Cast
+            </Button>
+
             {spellDetails?.attackType && (
               <Box>
-                <Heading size="xs" textTransform="uppercase">
+                <Heading fontFamily={'Title'} size="xs" textTransform="uppercase" paddingTop={'2'}>
                   Attack Type
                 </Heading>
-                <Text pt="2" fontSize="sm">
+                <Text pt="2" fontFamily={'Text'}>
                   {spellDetails?.attackType} spell attack, roll 1d20 + {characterInfo.attackBonus}{' '}
                   to hit.
                 </Text>
@@ -131,7 +173,7 @@ export default function SpellLevelModal({ spell, spellDetails }) {
             )}
 
             {spellDetails?.damage?.damageType?.name && (
-              <Text pt="2" fontSize="sm">
+              <Text pt="2" fontFamily={'Text'}>
                 Deals{' '}
                 {damageAtSlotLevel.length === 1 && (
                   <span>{Object.values(spellDetails.damage.damageAtSlotLevel)} </span>
@@ -142,10 +184,10 @@ export default function SpellLevelModal({ spell, spellDetails }) {
 
             {spellDetails?.higherLevel.length > 1 && (
               <Box>
-                <Heading size="xs" textTransform="uppercase">
+                <Heading fontFamily={'Title'} size="xs" textTransform="uppercase" paddingTop={'2'}>
                   Higher Level
                 </Heading>
-                <Text pt="2" fontSize="sm">
+                <Text pt="2" fontSize="sm" fontFamily={'Text'}>
                   {spellDetails.higherLevel}
                 </Text>
               </Box>
@@ -155,11 +197,20 @@ export default function SpellLevelModal({ spell, spellDetails }) {
               <Box>
                 <TableContainer>
                   <Table>
-                    <TableCaption placement="top">Damage At Spell Slot Level</TableCaption>
+                    <TableCaption
+                      placement="top"
+                      fontFamily={'Title'}
+                      size="xs"
+                      textTransform="uppercase"
+                      paddingTop={'2'}
+                      color={'black'}
+                    >
+                      Damage At Spell Slot Level
+                    </TableCaption>
                     <Thead>
                       <Tr>
-                        <Th>Level</Th>
-                        <Th>Damage</Th>
+                        <Th fontFamily={'Title'}>Level</Th>
+                        <Th fontFamily={'Title'}>Damage</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
@@ -167,8 +218,12 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                         const value = spellDetails.damage.damageAtSlotLevel[key];
                         return (
                           <Tr key={i}>
-                            <Td key={key}>{key}</Td>
-                            <Td key={value}>{value}</Td>
+                            <Td key={key} fontFamily={'Text'}>
+                              {key}
+                            </Td>
+                            <Td key={value} fontFamily={'Text'}>
+                              {value}
+                            </Td>
                           </Tr>
                         );
                       })}
@@ -177,34 +232,6 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </TableContainer>
               </Box>
             )}
-            {/* //TODO */}
-            {/* //! I believe this only applies to cantrips, need to investigate */}
-            {/* {spellDetails?.damage.damageAtCharacterLevel && (
-              <Box>
-                <TableContainer>
-                  <Table>
-                    <TableCaption placement="top">Damage At Character Level</TableCaption>
-                    <Thead>
-                      <Tr>
-                        <Th>Level</Th>
-                        <Th>Roll</Th>
-                      </Tr>
-                    </Thead>
-                    <Tbody>
-                      {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key, i) => {
-                        const value = spellDetails.damage.damageAtCharacterLevel[key];
-                        return (
-                          <Tr key={i}>
-                            <Td key={key}>{key}</Td>
-                            <Td key={value}>{value}</Td>
-                          </Tr>
-                        );
-                      })}
-                    </Tbody>
-                  </Table>
-                </TableContainer>
-              </Box>
-            )} */}
             {spellDetails?.healAtSlotLevel && (
               <Box>
                 <Heading size="xs" textTransform="uppercase">
@@ -237,14 +264,14 @@ export default function SpellLevelModal({ spell, spellDetails }) {
 
             {spellDetails?.saveDc.type && (
               <Box>
-                <Heading size="xs" textTransform="uppercase">
+                <Heading fontFamily={'Title'} size="xs" textTransform="uppercase" paddingTop={'2'}>
                   Save DC
                 </Heading>
-                <Text pt="2" fontSize="sm">
+                <Text fontFamily={'Text'}>
                   DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
                   throw.
                 </Text>
-                <Text pt="2" fontSize="sm">
+                <Text fontFamily={'Text'}>
                   On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
                   {spellDetails.saveDc.success}.
                 </Text>

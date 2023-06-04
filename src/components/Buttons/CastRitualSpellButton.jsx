@@ -32,15 +32,52 @@ export default function CastRitualSpellButton({ spell }) {
       {({ onClose }) => (
         <>
           <PopoverTrigger>
-            <Button>Cast</Button>
+            <Button
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Cast
+            </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent>
+            <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader>How would you like to cast {spell.name}?</PopoverHeader>
+              <PopoverHeader fontFamily={'Title'} paddingTop={'5'}>
+                How would you like to cast {spell.name}?
+              </PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button ref={initRef} onClick={() => handleRitual(onClose)}>
+                <Button
+                  fontFamily={'Button'}
+                  fontSize={'3xl'}
+                  color={'white'}
+                  margin={'2'}
+                  rounded={'full'}
+                  height={'40px'}
+                  _hover={{
+                    transform: 'translateY(-3px)',
+                    boxShadow: '4xl',
+                  }}
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 75% 15%, white 1px, darkgrey 6%, black 60%, darkgrey 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
+                  ref={initRef}
+                  onClick={() => handleRitual(onClose)}
+                >
                   As a ritual
                 </Button>
                 <SpellLevelModal spell={spell} />

@@ -20,9 +20,11 @@ export default function SpellSlots() {
         bg="blue.200"
         shadow="lg"
         marginBottom={4}
+        marginTop={'1'}
         rounded={'full'}
         sx={{
-          backgroundImage: 'radial-gradient(circle at 65% 15%, teal 3%, lightblue 60%, teal 100%)',
+          backgroundImage:
+            'radial-gradient(circle at 65% 15%, lightgray 3%, gray 60%, lightgray 100%)',
           boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
         }}
       >
@@ -49,8 +51,8 @@ export default function SpellSlots() {
                   fontFamily={'Title'}
                   position="absolute"
                   marginTop={6}
-                  px={2}
-                  py={1}
+                  px={3}
+                  py={1.5}
                   fontSize="xs"
                   fontWeight="bold"
                   rounded="full"

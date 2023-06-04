@@ -42,37 +42,47 @@ export default function DeleteCharacterButton({ character }) {
           <PopoverTrigger>
             <Button
               fontFamily={'Button'}
-              fontSize={{ base: '2xl', lg: '3xl' }}
-              bg={'red.400'}
+              fontSize={'3xl'}
               color={'white'}
-              _hover={{
-                bg: 'red.500',
-                transform: 'translateY(-3px)',
-                boxShadow: 'xl',
-              }}
               rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, red 6%, darkred 60%, red 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
               width={'100px'}
             >
               Delete
             </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent>
+            <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader>Sure you wanna delete {truncatedCharacterName}?</PopoverHeader>
+              <PopoverHeader fontFamily={'Title'}>
+                Sure you wanna delete {truncatedCharacterName}?
+              </PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody alignSelf={'center'}>
                 <Button
                   fontFamily={'Button'}
-                  fontSize={{ base: '2xl', lg: '3xl' }}
-                  bg={'red.400'}
+                  fontSize={'3xl'}
                   color={'white'}
-                  _hover={{
-                    bg: 'red.500',
-                    transform: 'translateY(-3px)',
-                    boxShadow: 'xl',
-                  }}
                   rounded={'full'}
+                  height={'40px'}
+                  _hover={{
+                    transform: 'translateY(-3px)',
+                    boxShadow: '4xl',
+                  }}
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
                   width={'210px'}
                   onClick={() => handleDelete(onClose)}
                 >

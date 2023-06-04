@@ -53,16 +53,50 @@ export default function ForgetSpellButton({ spell }) {
       {({ onClose }) => (
         <>
           <PopoverTrigger>
-            <Button>Forget</Button>
+            <Button
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, red 6%, darkred 60%, red 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Forget
+            </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent>
+            <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader>Are you sure you want to forget {spell.name}?</PopoverHeader>
+              <PopoverHeader fontFamily={'Title'}>
+                Are you sure you want to forget {spell.name}?
+              </PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button onClick={() => handleForget(characterInfo.id, onClose)}>
-                  {/* //TODO I do still like this one... */}
+                <Button
+                  fontFamily={'Button'}
+                  fontSize={'3xl'}
+                  color={'white'}
+                  rounded={'full'}
+                  height={'40px'}
+                  _hover={{
+                    transform: 'translateY(-3px)',
+                    boxShadow: '4xl',
+                  }}
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
+                  onClick={() => handleForget(characterInfo.id, onClose)}
+                >
                   Yup!
                 </Button>
               </PopoverBody>

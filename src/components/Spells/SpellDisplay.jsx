@@ -79,7 +79,7 @@ export default function SpellDisplay() {
               paddingY={2}
               paddingX={-4}
               borderBottom="2px solid"
-              fontSize="xl"
+              fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
               fontWeight="bold"
               display={location.pathname === '/cantrips' ? 'none' : 'full'}
             >
@@ -125,7 +125,7 @@ export default function SpellDisplay() {
       as={Flex}
       direction={'column'}
       alignItems={'center'}
-      minHeight={'100vh'}
+      minHeight={'120vh'}
       paddingTop={{ md: '50px', lg: '70px' }}
       paddingBottom={'10'}
       pattern="endless-clouds"

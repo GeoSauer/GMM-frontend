@@ -88,15 +88,51 @@ export default function LearnSpellButton({ spell }) {
       {({ onClose }) => (
         <>
           <PopoverTrigger>
-            <Button>Learn</Button>
+            <Button
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Learn
+            </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent>
+            <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader>Are you sure you want to learn {spell.name}?</PopoverHeader>
+              <PopoverHeader fontFamily={'Title'} paddingTop={'5'}>
+                Are you sure you want to learn {spell.name}?
+              </PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button ref={initRef} onClick={() => handleLearn(characterInfo.id, onClose)}>
+                <Button
+                  fontFamily={'Button'}
+                  fontSize={'3xl'}
+                  color={'white'}
+                  rounded={'full'}
+                  height={'40px'}
+                  _hover={{
+                    transform: 'translateY(-3px)',
+                    boxShadow: '4xl',
+                  }}
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
+                  ref={initRef}
+                  onClick={() => handleLearn(characterInfo.id, onClose)}
+                >
                   Yes!
                 </Button>
               </PopoverBody>

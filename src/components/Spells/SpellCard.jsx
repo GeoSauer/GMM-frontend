@@ -68,20 +68,20 @@ export default function SpellCard({ spellDetails, spell }) {
         <Button
           onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}
-          w={{ base: '90vw', md: '600px' }}
-          h={'20'}
-          p={'2'}
-          mt={'2'}
-          // isLoading={isLoading}
+          width={{ base: '90vw', md: '60vw', lg: '50vw' }}
+          height={'20'}
+          marginTop={'2'}
         >
           {isLoading ? (
             <Loading />
           ) : (
             <>
-              <Heading size="md">{spell.name}</Heading>
-              <Text>{spell.school}</Text>
+              <Heading fontFamily={'Button'}>{spell.name}</Heading>
+              <Text fontFamily={'Text'}>{spell.school}</Text>
 
-              {location.pathname === '/all-spells' ? <Text>{classes}</Text> : null}
+              {location.pathname === '/all-spells' ? (
+                <Text fontFamily={'Text'}>{classes}</Text>
+              ) : null}
             </>
           )}
         </Button>
@@ -91,21 +91,93 @@ export default function SpellCard({ spellDetails, spell }) {
             !spell.known &&
             spell.level <= characterInfo.casterLvl && <LearnSpellButton spell={spell} />}
           {location.pathname === '/all-spells' && spell.known && (
-            <Button isDisabled={true}>Known</Button>
+            <Button
+              isDisabled={true}
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Known
+            </Button>
           )}
           {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
-            <Button isDisabled={true}>Learn</Button>
+            <Button
+              isDisabled={true}
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Learn
+            </Button>
           )}
 
           {location.pathname === '/available-spells' && !spell.known && (
             <LearnSpellButton spell={spell} />
           )}
           {location.pathname === '/available-spells' && spell.known && (
-            <Button isDisabled={true}>Known</Button>
+            <Button
+              isDisabled={true}
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Known
+            </Button>
           )}
 
           {location.pathname === '/cantrips' && spell.known && (
-            <Button isDisabled={true}>Known</Button>
+            <Button
+              isDisabled={true}
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Known
+            </Button>
           )}
           {location.pathname === '/cantrips' && !spell.known && <LearnSpellButton spell={spell} />}
 
@@ -113,7 +185,25 @@ export default function SpellCard({ spellDetails, spell }) {
             <PrepareSpellButton spell={spell} />
           )}
           {location.pathname === '/known-spells' && spell.prepared && spell.level > 0 && (
-            <Button isDisabled={true}>Prepared</Button>
+            <Button
+              isDisabled={true}
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, blueviolet 60%, lightblue 100%)',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Prepared
+            </Button>
           )}
           {location.pathname === '/known-spells' && !divineCaster && (
             <ForgetSpellButton spell={spell} />
@@ -143,16 +233,9 @@ export default function SpellCard({ spellDetails, spell }) {
         </HStack>
       </VStack>
 
-      <Container maxW={'600px'} centerContent>
+      <Container width={{ base: '90vw', md: '60vw', lg: '50vw' }} centerContent>
         <Collapse in={isOpen} animateOpacity>
-          <Box
-            p="10px"
-            color="white"
-            bg="teal.500"
-            rounded="md"
-            shadow="md"
-            // onClick={onToggle}
-          >
+          <Box p="10px" color="white" bg="teal.500" rounded="md" shadow="md">
             {!isLoading ? (
               <SpellDetail
                 spellDetails={

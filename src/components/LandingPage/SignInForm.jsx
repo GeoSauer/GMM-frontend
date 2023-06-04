@@ -111,16 +111,19 @@ export default function SignInForm() {
                   <Button
                     marginTop={'3'}
                     fontFamily={'Button'}
-                    fontSize={{ base: '2xl', lg: '3xl' }}
-                    bg={'gray.400'}
+                    fontSize={'3xl'}
                     color={'white'}
-                    _hover={{
-                      bg: 'gray.500',
-                      transform: 'translateY(-3px)',
-                      boxShadow: 'xl',
-                    }}
                     rounded={'full'}
-                    width={'150px'}
+                    height={'40px'}
+                    _hover={{
+                      transform: 'translateY(-3px)',
+                      boxShadow: '4xl',
+                    }}
+                    sx={{
+                      backgroundImage:
+                        'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                      boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                    }}
                     isLoading={props.isSubmitting}
                     type="submit"
                   >

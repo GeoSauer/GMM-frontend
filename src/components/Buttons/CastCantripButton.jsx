@@ -69,12 +69,29 @@ export default function CastCantripButton({ spellDetails, spell }) {
       {({ onClose }) => (
         <>
           <PopoverTrigger>
-            <Button>Cast</Button>
+            <Button
+              fontFamily={'Button'}
+              fontSize={'3xl'}
+              color={'white'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Cast
+            </Button>
           </PopoverTrigger>
           <Portal>
-            <PopoverContent>
+            <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader>
+              <PopoverHeader fontFamily={'Title'} paddingTop={'5'}>
                 {spellDetails.concentration
                   ? `Warning! ${spell.name} is a concentration spell 
 									and casting it will end the effects of any spell 
@@ -83,16 +100,39 @@ export default function CastCantripButton({ spellDetails, spell }) {
               </PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
-                <Button ref={initRef} onClick={() => handleCantrip(onClose)}>
+                <Button
+                  fontFamily={'Button'}
+                  fontSize={'3xl'}
+                  color={'white'}
+                  marginBottom={'2'}
+                  rounded={'full'}
+                  height={'40px'}
+                  _hover={{
+                    transform: 'translateY(-3px)',
+                    boxShadow: '4xl',
+                  }}
+                  sx={{
+                    backgroundImage:
+                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                    boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                  }}
+                  ref={initRef}
+                  onClick={() => handleCantrip(onClose)}
+                >
                   Yup!
                 </Button>
 
                 {spellDetails?.attackType && (
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading
+                      fontFamily={'Title'}
+                      size="xs"
+                      textTransform="uppercase"
+                      paddingTop={'2'}
+                    >
                       Attack Type
                     </Heading>
-                    <Text pt="2" fontSize="sm">
+                    <Text paddingTop="2" fontFamily={'Text'}>
                       {spellDetails?.attackType} spell attack, roll 1d20 +{' '}
                       {characterInfo.attackBonus} to hit.
                     </Text>
@@ -100,7 +140,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
                 )}
 
                 {spellDetails?.damage?.damageType?.name && (
-                  <Text pt="2" fontSize="sm">
+                  <Text fontFamily={'Text'}>
                     Deals {spellDetails?.damage.damageType.name.toLowerCase()} damage.
                   </Text>
                 )}
@@ -109,11 +149,19 @@ export default function CastCantripButton({ spellDetails, spell }) {
                   <Box>
                     <TableContainer>
                       <Table>
-                        <TableCaption placement="top">Damage At Character Level</TableCaption>
+                        <TableCaption
+                          placement="top"
+                          fontFamily={'Title'}
+                          size="xs"
+                          textTransform="uppercase"
+                          color={'black'}
+                        >
+                          Damage At Character Level
+                        </TableCaption>
                         <Thead>
                           <Tr>
-                            <Th>Level</Th>
-                            <Th>Roll</Th>
+                            <Th fontFamily={'Title'}>Level</Th>
+                            <Th fontFamily={'Title'}>Roll</Th>
                           </Tr>
                         </Thead>
                         <Tbody>
@@ -121,8 +169,12 @@ export default function CastCantripButton({ spellDetails, spell }) {
                             const value = spellDetails.damage.damageAtCharacterLevel[key];
                             return (
                               <Tr key={i}>
-                                <Td key={key}>{key}</Td>
-                                <Td key={value}>{value}</Td>
+                                <Td key={key} fontFamily={'Text'}>
+                                  {key}
+                                </Td>
+                                <Td key={value} fontFamily={'Text'}>
+                                  {value}
+                                </Td>
                               </Tr>
                             );
                           })}
@@ -134,14 +186,19 @@ export default function CastCantripButton({ spellDetails, spell }) {
 
                 {spellDetails?.saveDc.type && (
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading
+                      size="xs"
+                      fontFamily={'Title'}
+                      textTransform="uppercase"
+                      paddingTop={'4'}
+                    >
                       Save DC
                     </Heading>
-                    <Text pt="2" fontSize="sm">
+                    <Text fontFamily={'Text'}>
                       DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
                       throw.
                     </Text>
-                    <Text pt="2" fontSize="sm">
+                    <Text fontFamily={'Text'}>
                       On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
                       {spellDetails.saveDc.success}.
                     </Text>

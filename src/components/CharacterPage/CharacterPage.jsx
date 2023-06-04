@@ -63,7 +63,7 @@ export default function CharacterPage() {
               width={window.innerWidth}
               numberOfPieces={800}
               recycle={false}
-              tweenDuration={20000}
+              tweenDuration={5000}
             />
           )}
         </Flex>

@@ -80,14 +80,18 @@ export default function CharacterCard(character) {
             <Button
               fontFamily={'Button'}
               fontSize={{ base: '2xl', lg: '3xl' }}
-              bg={'gray.400'}
-              color={'white'}
-              _hover={{
-                bg: 'gray.500',
-                transform: 'translateY(-3px)',
-                boxShadow: 'xl',
-              }}
+              color={'gray.600'}
               rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '3xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
               width={'100px'}
               onClick={handleCharacterChange}
             >
@@ -102,14 +106,18 @@ export default function CharacterCard(character) {
             <Button
               fontFamily={'Button'}
               fontSize={{ base: '2xl', lg: '3xl' }}
-              bg={'blue.400'}
               color={'white'}
-              _hover={{
-                bg: 'blue.500',
-                transform: 'translateY(-3px)',
-                boxShadow: 'xl',
-              }}
               rounded={'full'}
+              height={'40px'}
+              _hover={{
+                transform: 'translateY(-3px)',
+                boxShadow: '3xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, blue 60%, lightgray 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
               width={'80px'}
               onClick={onOpen}
             >

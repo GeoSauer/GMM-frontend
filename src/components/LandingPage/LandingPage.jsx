@@ -96,12 +96,19 @@ export default function LandingPage() {
                 fontFamily={'Button'}
                 fontSize={{ base: '2xl', lg: '3xl' }}
                 rounded={'full'}
-                bg={option === 'up' ? 'blue.300' : 'gray.300'}
-                color={option === 'up' ? 'white' : 'black'}
+                // bg={option === 'up' ? 'blue.300' : 'gray.300'}
+                sx={{
+                  backgroundImage:
+                    option === 'up'
+                      ? 'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)'
+                      : 'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+
+                  boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                }}
+                color={'white'}
                 _hover={{
-                  bg: option === 'up' ? 'blue.400' : 'gray.400',
                   transform: 'translateY(-3px)',
-                  boxShadow: 'xl',
+                  boxShadow: '3xl',
                 }}
                 onClick={() => handleClick(option)}
                 key={option}

@@ -33,14 +33,18 @@ export default function SignOutButton() {
           <ModalBody align={'center'} margin={4}>
             <Button
               fontFamily={'Button'}
-              fontSize={{ base: '2xl', lg: '3xl' }}
-              color={'gray.600'}
+              fontSize={'3xl'}
+              color={'white'}
               rounded={'full'}
               height={'40px'}
               _hover={{
-                bg: 'gray.300',
                 transform: 'translateY(-3px)',
-                boxShadow: 'xl',
+                boxShadow: '4xl',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
               onClick={signOut}
             >

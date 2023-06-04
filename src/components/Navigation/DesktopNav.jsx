@@ -11,7 +11,7 @@ export default function DesktopNav() {
     <HStack margin={2}>
       <Text
         fontFamily={'Title'}
-        fontSize={{ base: '5vw', md: '2vw', lg: '2.5vw' }}
+        fontSize={{ base: '5vw', md: '2vw', lg: '2vw' }}
         whiteSpace={'nowrap'}
       >
         Grimoire for the Modern Mage
