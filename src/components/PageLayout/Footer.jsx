@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Flex,
   Text,
   Link,
@@ -9,9 +8,7 @@ import {
   PopoverContent,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverBody,
 } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
   return (
