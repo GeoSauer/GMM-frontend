@@ -24,7 +24,13 @@ export default function SettingsPage() {
   });
 
   return (
-    <PillPity pattern="church-on-sunday" as={Flex} minHeight={'100vh'} justify={'center'}>
+    <PillPity
+      pattern="church-on-sunday"
+      patternFill={'blue.200'}
+      as={Flex}
+      minHeight={'100vh'}
+      justify={'center'}
+    >
       <Box
         rounded={'lg'}
         background={'white'}

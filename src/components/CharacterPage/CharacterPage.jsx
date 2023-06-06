@@ -14,7 +14,7 @@ export default function CharacterPage() {
   const location = useLocation();
 
   return (
-    <PillPity minHeight={'100vh'} pattern="temple">
+    <PillPity minHeight={'100vh'} pattern="temple" patternFill={'blue.200'}>
       <Box top={0} width={'full'} zIndex={100} align={'center'} paddingBottom={1}>
         {location.pathname === '/choose-character' && (
           <>

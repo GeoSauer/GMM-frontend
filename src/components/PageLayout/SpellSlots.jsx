@@ -43,7 +43,7 @@ export default function SpellSlots() {
 
             return (
               <Flex key={`key-${index}`} position="relative" justify={'center'}>
-                <Text fontFamily={'Title'}>
+                <Text fontFamily={'Title'} fontSize={{ base: 'xs', lg: 'sm' }}>
                   {number}
                   {suffix}:
                 </Text>
@@ -51,9 +51,9 @@ export default function SpellSlots() {
                   fontFamily={'Title'}
                   position="absolute"
                   marginTop={6}
-                  px={3}
-                  py={1.5}
-                  fontSize="xs"
+                  px={{ base: 3, lg: 4 }}
+                  py={{ base: 1.5, lg: 2 }}
+                  fontSize={{ base: 'xs', lg: 's' }}
                   fontWeight="bold"
                   rounded="full"
                   sx={{

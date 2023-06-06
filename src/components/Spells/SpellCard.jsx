@@ -208,7 +208,7 @@ export default function SpellCard({ spellDetails, spell }) {
               height={'40px'}
               _hover={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, blueviolet 60%, lightblue 100%)',
+                  'radial-gradient(circle at 75% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
               }}
               sx={{
                 backgroundImage:

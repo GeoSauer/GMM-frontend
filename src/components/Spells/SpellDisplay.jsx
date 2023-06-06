@@ -72,7 +72,7 @@ export default function SpellDisplay() {
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
-          <Box id={index} href={index} key={spell.name}>
+          <Box id={index} href={index} key={spell.id}>
             <Flex
               align="center"
               justify="start"
@@ -101,7 +101,7 @@ export default function SpellDisplay() {
         );
       }
       return (
-        <Box key={spell.name}>
+        <Box key={spell.id}>
           {location.pathname === '/prepared-spells' ? (
             <SpellCard spellDetails={findSpellDetails(spell.name)} spell={spell} />
           ) : (
@@ -128,7 +128,8 @@ export default function SpellDisplay() {
       minHeight={'120vh'}
       paddingTop={{ md: '50px', lg: '70px' }}
       paddingBottom={'10'}
-      pattern="endless-clouds"
+      pattern="topography"
+      patternFill={'blue.200'}
     >
       {location.pathname === '/all-spells' && allSpellCards}
       {location.pathname === '/available-spells' && availableSpellCards}
@@ -145,6 +146,8 @@ export default function SpellDisplay() {
           padding={'4'}
           borderRadius={'20'}
           marginTop={'10'}
+          border={'2px solid'}
+          borderColor={'gray.500'}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
@@ -158,6 +161,8 @@ export default function SpellDisplay() {
           padding={'4'}
           borderRadius={'20'}
           marginTop={'10'}
+          border={'2px solid'}
+          borderColor={'gray.500'}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
@@ -171,6 +176,8 @@ export default function SpellDisplay() {
           padding={'4'}
           borderRadius={'20'}
           marginTop={'10'}
+          border={'2px solid'}
+          borderColor={'gray.500'}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
@@ -184,6 +191,8 @@ export default function SpellDisplay() {
           padding={'4'}
           borderRadius={'20'}
           marginTop={'10'}
+          border={'2px solid'}
+          borderColor={'gray.500'}
         >
           Looks like you haven&apos;t learned any spells, better head to Available Spells and get
           studying!
@@ -198,6 +207,8 @@ export default function SpellDisplay() {
           padding={'4'}
           borderRadius={'20'}
           marginTop={'10'}
+          border={'2px solid'}
+          borderColor={'gray.500'}
         >
           Looks like you don&apos;t have any spells prepared, better head over to Known Spells and
           remedy that!

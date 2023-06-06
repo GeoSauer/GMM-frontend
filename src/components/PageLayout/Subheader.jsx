@@ -16,7 +16,7 @@ export default function Subheader() {
       <Heading height="10" fontFamily={'Button'}>
         {locationHeader}
       </Heading>
-      <Box justifyContent={'end'} marginTop={'-8'} height="0">
+      <Box justifyContent={'end'} marginTop={'-6'} height="0">
         <LongRestButton marginRight="2" />
         {/* <SearchButton /> */}
       </Box>

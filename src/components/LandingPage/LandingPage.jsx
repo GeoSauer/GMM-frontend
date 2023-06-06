@@ -37,7 +37,8 @@ export default function LandingPage() {
     <Stack minHeight={'100vh'} direction={{ base: 'column', md: 'row' }}>
       <PillPity
         as={Flex}
-        pattern="topography"
+        pattern="endless-clouds"
+        patternFill={'blue.200'}
         padding={8}
         flex={1}
         align={'center'}
@@ -96,7 +97,6 @@ export default function LandingPage() {
                 fontFamily={'Button'}
                 fontSize={{ base: '2xl', lg: '3xl' }}
                 rounded={'full'}
-                // bg={option === 'up' ? 'blue.300' : 'gray.300'}
                 sx={{
                   backgroundImage:
                     option === 'up'
