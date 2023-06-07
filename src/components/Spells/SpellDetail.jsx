@@ -175,6 +175,8 @@ export default function SpellDetail({ spellDetails }) {
                         size="xs"
                         textTransform="uppercase"
                         fontFamily={'Title'}
+                        paddingTop={'2'}
+                        color={'black'}
                       >
                         Damage At Character Level
                       </TableCaption>
@@ -213,6 +215,8 @@ export default function SpellDetail({ spellDetails }) {
                         size="xs"
                         textTransform="uppercase"
                         fontFamily={'Title'}
+                        paddingTop={'2'}
+                        color={'black'}
                       >
                         Damage At Spell Slot Level
                       </TableCaption>
@@ -244,7 +248,12 @@ export default function SpellDetail({ spellDetails }) {
 
               {spellDetails.healAtSlotLevel && (
                 <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                  <Heading
+                    size="xs"
+                    textTransform="uppercase"
+                    fontFamily={'Title'}
+                    paddingTop={'2'}
+                  >
                     Heal At Spell Slot Level
                   </Heading>
 
@@ -278,7 +287,12 @@ export default function SpellDetail({ spellDetails }) {
 
               {spellDetails.saveDc?.type && (
                 <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                  <Heading
+                    size="xs"
+                    textTransform="uppercase"
+                    fontFamily={'Title'}
+                    paddingTop={'2'}
+                  >
                     Save DC
                   </Heading>
                   <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
@@ -306,10 +320,17 @@ export default function SpellDetail({ spellDetails }) {
                             thead: (props) => <Thead {...props} />,
                             tbody: (props) => <Tbody {...props} />,
                             tr: ({ node, children }) => {
-                              return <Tr {...{ node, children }} />;
+                              return <Tr {...{ node, children }} fontFamily={'Title'} />;
                             },
                             td: ({ node, children }) => {
-                              return <Td {...{ node, children }} />;
+                              return (
+                                <Td
+                                  {...{ node, children }}
+                                  paddingTop="2"
+                                  fontSize="md"
+                                  fontFamily={'Text'}
+                                />
+                              );
                             },
                           }}
                           key={paragraph}
@@ -328,7 +349,15 @@ export default function SpellDetail({ spellDetails }) {
                       >
                         <ReactMarkdown
                           components={{
-                            h5: 'strong',
+                            h5: (props) => (
+                              <Text
+                                {...props}
+                                fontFamily={'Title'}
+                                size="xs"
+                                textTransform="uppercase"
+                                paddingTop={'2'}
+                              />
+                            ),
                           }}
                           key={paragraph}
                         >

@@ -218,10 +218,10 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                         const value = spellDetails.damage.damageAtSlotLevel[key];
                         return (
                           <Tr key={i}>
-                            <Td key={key} fontFamily={'Text'}>
+                            <Td key={key} paddingTop="2" fontSize="md" fontFamily={'Text'}>
                               {key}
                             </Td>
-                            <Td key={value} fontFamily={'Text'}>
+                            <Td key={value} paddingTop="2" fontSize="md" fontFamily={'Text'}>
                               {value}
                             </Td>
                           </Tr>
@@ -248,14 +248,14 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                       </Tr>
                     </Thead>
                     <Tbody>
-                      {Object.keys(spellDetails.healAtSlotLevel).map((key, i) => {
+                      {Object.keys(spellDetails.healAtSlotLevel).map((key, index) => {
                         const value = spellDetails.healAtSlotLevel[key];
                         return (
-                          <Tr key={i}>
-                            <Td key={key} fontFamily={'Text'}>
+                          <Tr key={index}>
+                            <Td key={key} paddingTop="2" fontSize="md" fontFamily={'Text'}>
                               {key}
                             </Td>
-                            <Td key={value} fontFamily={'Text'}>
+                            <Td key={value} paddingTop="2" fontSize="md" fontFamily={'Text'}>
                               {value.replace('MOD', characterInfo.charMod)}
                             </Td>
                           </Tr>
@@ -272,11 +272,11 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 <Heading fontFamily={'Title'} size="xs" textTransform="uppercase" paddingTop={'2'}>
                   Save DC
                 </Heading>
-                <Text fontFamily={'Text'}>
+                <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
                   DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
                   throw.
                 </Text>
-                <Text fontFamily={'Text'}>
+                <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
                   On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
                   {spellDetails.saveDc.success}.
                 </Text>

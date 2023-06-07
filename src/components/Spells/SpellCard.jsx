@@ -252,7 +252,7 @@ export default function SpellCard({ spellDetails, spell }) {
         </HStack>
       </VStack>
 
-      <Container width={{ base: '90vw', md: '60vw', lg: '50vw' }} centerContent>
+      <Container maxWidth={{ base: '90vw', md: '60vw', lg: '50vw' }} centerContent>
         <Collapse in={isOpen} animateOpacity>
           <Box
             p="10px"
