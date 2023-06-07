@@ -79,7 +79,6 @@ export default function LandingPage() {
             padding={2}
             fontSize={{ base: 'md', lg: 'xl' }}
             fontFamily={'Text'}
-            // fontWeight={}
             color={'gray.900'}
             bg={'gray.50'}
             rounded={'lg'}

@@ -232,9 +232,10 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                 </TableContainer>
               </Box>
             )}
+
             {spellDetails?.healAtSlotLevel && (
               <Box>
-                <Heading size="xs" textTransform="uppercase">
+                <Heading fontFamily={'Title'} size="xs" textTransform="uppercase" paddingTop={'2'}>
                   Heal At Spell Slot Level
                 </Heading>
 
@@ -242,8 +243,8 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                   <Table>
                     <Thead>
                       <Tr>
-                        <Th>Level</Th>
-                        <Th>Max/Current HP Raised By</Th>
+                        <Th fontFamily={'Title'}>Level</Th>
+                        <Th fontFamily={'Title'}>Max And Current HP Raised By</Th>
                       </Tr>
                     </Thead>
                     <Tbody>
@@ -251,8 +252,12 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                         const value = spellDetails.healAtSlotLevel[key];
                         return (
                           <Tr key={i}>
-                            <Td key={key}>{key}</Td>
-                            <Td key={value}>{value.replace('MOD', characterInfo.charMod)}</Td>
+                            <Td key={key} fontFamily={'Text'}>
+                              {key}
+                            </Td>
+                            <Td key={value} fontFamily={'Text'}>
+                              {value.replace('MOD', characterInfo.charMod)}
+                            </Td>
                           </Tr>
                         );
                       })}
