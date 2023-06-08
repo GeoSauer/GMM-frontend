@@ -167,7 +167,7 @@ export default function SpellDetail({ spellDetails }) {
               )}
 
               {spellDetails.damage?.damageAtCharacterLevel && (
-                <Box>
+                <Box width={{ base: '90vw', md: '60vw', lg: '50vw' }}>
                   <TableContainer>
                     <Table>
                       <TableCaption
@@ -207,7 +207,7 @@ export default function SpellDetail({ spellDetails }) {
               )}
 
               {spellDetails.damage?.damageAtSlotLevel > 1 && (
-                <Box>
+                <Box width={{ base: '90vw', md: '60vw', lg: '50vw' }}>
                   <TableContainer>
                     <Table>
                       <TableCaption
@@ -247,7 +247,7 @@ export default function SpellDetail({ spellDetails }) {
               )}
 
               {spellDetails.healAtSlotLevel && (
-                <Box>
+                <Box width={{ base: '90vw', md: '60vw', lg: '50vw' }}>
                   <Heading
                     size="xs"
                     textTransform="uppercase"
@@ -310,7 +310,7 @@ export default function SpellDetail({ spellDetails }) {
                 <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
                   Description
                 </Heading>
-                <Box>
+                <Box width={{ base: '90vw', md: '60vw', lg: '50vw' }}>
                   {spellDetails.desc?.map((paragraph, index) => {
                     return paragraph.includes('|') ? (
                       <TableContainer key={index}>
