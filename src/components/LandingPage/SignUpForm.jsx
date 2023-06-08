@@ -26,7 +26,6 @@ export default function SignInForm() {
   const navigate = useNavigate();
   const { setCharacterState } = useCharacter();
   const { setUserState } = useUser();
-  // * for showing/hiding the password value
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
@@ -47,21 +46,23 @@ export default function SignInForm() {
     <Flex align={'center'} justify={'center'}>
       <Stack spacing={2} align={'center'}>
         <Heading
-          fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-          fontFamily={'Button'}
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          fontFamily={'Title'}
           marginTop={5}
           borderBottom="2px solid"
           borderColor="gray.300"
         >
           Create an Account
         </Heading>
-        <Heading
-          fontSize={{ base: '3xl', md: '4xl', lg: '4xl' }}
-          fontFamily={'Button'}
+
+        <Text
+          fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
+          fontFamily={'Kalam-Regular'}
           textAlign={'center'}
         >
           (Don&apos;t worry you can add or edit more characters later)
-        </Heading>
+        </Text>
+
         <Box rounded={'lg'} boxShadow={'lg'} padding={4} width={'full'}>
           <Formik
             initialValues={{
@@ -89,11 +90,13 @@ export default function SignInForm() {
                 <Field name="email">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.email && form.touched.email}>
-                      <FormLabel htmlFor="email" fontWeight={'bold'} fontFamily={'Text'}>
+                      <FormLabel htmlFor="email" fontFamily={'Kalam-Bold'}>
                         Email<span style={{ color: 'red' }}>*</span>
                       </FormLabel>
-                      <Input {...field} placeholder="Email" />
-                      <FormErrorMessage>{form.errors.email}</FormErrorMessage>
+                      <Input {...field} placeholder="Email" fontFamily={'Kalam-Light'} />
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.email}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -101,12 +104,7 @@ export default function SignInForm() {
                 <Field name="password">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.password && form.touched.password}>
-                      <FormLabel
-                        htmlFor="password"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="password" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Password<span style={{ color: 'red' }}>*</span>
                       </FormLabel>
                       <InputGroup size="md">
@@ -114,6 +112,7 @@ export default function SignInForm() {
                           {...field}
                           type={show ? 'text' : 'password'}
                           placeholder="Password"
+                          fontFamily={'Kalam-Light'}
                         />
                         <InputRightElement width="4.5rem">
                           <Button h="2rem" size="sm" rounded={'full'} onClick={handleClick}>
@@ -121,7 +120,9 @@ export default function SignInForm() {
                           </Button>
                         </InputRightElement>
                       </InputGroup>
-                      <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.password}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -129,16 +130,13 @@ export default function SignInForm() {
                 <Field name="username">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.username && form.touched.username}>
-                      <FormLabel
-                        htmlFor="username"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="username" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Username
                       </FormLabel>
-                      <Input {...field} placeholder="Username" />
-                      <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+                      <Input {...field} placeholder="Username" fontFamily={'Kalam-Light'} />
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.username}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -146,16 +144,13 @@ export default function SignInForm() {
                 <Field name="charName">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charName && form.touched.charName}>
-                      <FormLabel
-                        htmlFor="charName"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charName" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Character Name
                       </FormLabel>
-                      <Input {...field} placeholder="Character Name" />
-                      <FormErrorMessage>{form.errors.charName}</FormErrorMessage>
+                      <Input {...field} placeholder="Character Name" fontFamily={'Kalam-Light'} />
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charName}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -163,15 +158,10 @@ export default function SignInForm() {
                 <Field name="charClass">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
-                      <FormLabel
-                        htmlFor="charClass"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charClass" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Character Class<span style={{ color: 'red' }}>*</span>
                       </FormLabel>
-                      <Select {...field} placeholder="Choose One">
+                      <Select {...field} placeholder="Choose One" fontFamily={'Kalam-Light'}>
                         <option value="Bard">Bard</option>
                         <option value="Cleric">Cleric</option>
                         <option value="Druid">Druid</option>
@@ -181,7 +171,9 @@ export default function SignInForm() {
                         <option value="Warlock">Warlock</option>
                         <option value="Wizard">Wizard</option>
                       </Select>
-                      <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charClass}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -189,15 +181,10 @@ export default function SignInForm() {
                 <Field name="charLvl">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charLvl && form.touched.charLvl}>
-                      <FormLabel
-                        htmlFor="charLvl"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charLvl" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Character Level
                       </FormLabel>
-                      <Select {...field} placeholder="Choose One">
+                      <Select {...field} placeholder="Choose One" fontFamily={'Kalam-Light'}>
                         {[...Array(20)].map((_, index) => {
                           return (
                             <option key={`key-${index}`} value={index + 1}>
@@ -206,7 +193,9 @@ export default function SignInForm() {
                           );
                         })}
                       </Select>
-                      <FormErrorMessage>{form.errors.charLvl}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charLvl}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -214,15 +203,10 @@ export default function SignInForm() {
                 <Field name="charMod">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charMod && form.touched.charMod}>
-                      <FormLabel
-                        htmlFor="charMod"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charMod" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Spellcasting Ability Modifier
                       </FormLabel>
-                      <Select {...field} placeholder="Choose One">
+                      <Select {...field} placeholder="Choose One" fontFamily={'Kalam-Light'}>
                         {[...Array(10)].map((_, index) => {
                           return (
                             <option key={`key-${index}`} value={index + 1}>
@@ -231,7 +215,9 @@ export default function SignInForm() {
                           );
                         })}
                       </Select>
-                      <FormErrorMessage>{form.errors.charMod}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charMod}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -239,9 +225,9 @@ export default function SignInForm() {
                 <Stack spacing={4} align={'center'}>
                   <Button
                     marginTop={'3'}
-                    fontFamily={'Button'}
+                    fontFamily={'Kalam-Bold'}
                     fontSize={'3xl'}
-                    color={'white'}
+                    color={'gray.700'}
                     rounded={'full'}
                     height={'40px'}
                     _hover={{
@@ -250,7 +236,7 @@ export default function SignInForm() {
                     }}
                     sx={{
                       backgroundImage:
-                        'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                        'radial-gradient(circle at 85% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                       boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                     }}
                     isLoading={props.isSubmitting}
@@ -258,7 +244,7 @@ export default function SignInForm() {
                   >
                     Sign up
                   </Button>
-                  <Text fontWeight={'bold'} fontFamily={'Text'}>
+                  <Text fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} fontFamily={'Kalam-Regular'}>
                     <span style={{ color: 'red' }}>*</span> cannot be changed later
                   </Text>
                 </Stack>
