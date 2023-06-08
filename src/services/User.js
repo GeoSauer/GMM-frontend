@@ -1,8 +1,8 @@
 import agent from './customAgent';
 
 //TODO switch this over after deploy
-// const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
-const USERS = 'http://localhost:7890/api/v1/users';
+const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
+// const USERS = 'http://localhost:7890/api/v1/users';
 const USER_KEY = 'USER';
 
 export class User {
