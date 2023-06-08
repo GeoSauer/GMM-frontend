@@ -12,17 +12,6 @@ export default function UserProvider({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [userInfo, setUserInfo] = useState({});
 
-  //TODO decide if I even wanna keep this
-  //? so this is in fact working because at /welcome it sets user to null, but I'm not sure I see the point based on my other safeguards?
-  // const verify = async () => {
-  //   const response = await User.verify();
-  //   setUser(response.user || null);
-  // };
-
-  // useEffect(() => {
-  //   verify();
-  // }, []);
-
   const setUserState = (user) => {
     storeLocalUser(user);
     setUser(user);
@@ -84,19 +73,11 @@ export function useAuth() {
   };
 
   const signOut = async () => {
-    // const response = await User.signOut();
     await User.signOut();
     setUserState(null);
     setCharacterState(null);
     navigate('welcome', { replace: true });
-    // handleResponse(response);
   };
 
-  // const handleSignOut = async () => {
-  //   await signOut();
-  //   navigate('welcome', { replace: true });
-  // };
-
-  // return { signUp, signIn, signOut, error, handleSignOut };
   return { signUp, signIn, signOut, error };
 }

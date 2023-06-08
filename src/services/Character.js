@@ -1,7 +1,7 @@
 import agent from './customAgent';
 
 //TODO switch this over after deploy
-// const CHARACTERS = 'https://gmm.herokuapp.com/api/v1/characters';
+// const CHARACTERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/characters';
 const CHARACTERS = 'http://localhost:7890/api/v1/characters';
 
 export class Character {
