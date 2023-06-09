@@ -39,7 +39,7 @@ export default function CharacterCard(character) {
     <Box
       maxWidth={'270px'}
       width={'full'}
-      background={'white'}
+      background={'gray.200'}
       boxShadow={'2xl'}
       rounded={'3xl'}
       overflow={'hidden'}
@@ -63,24 +63,25 @@ export default function CharacterCard(character) {
         />
       </Flex>
 
-      <Box padding={6}>
+      <>
         <Stack spacing={0} align={'center'} marginBottom={5}>
-          <Heading fontSize={'xl'} fontWeight={500} fontFamily={'Title'} marginBottom={2}>
+          <Heading fontSize={'3xl'} fontFamily={'Kalam-Bold'} marginBottom={2}>
             {truncatedCharacterName}
           </Heading>
-          <Text fontFamily={'Text'}>
+          <Text fontFamily={'Kalam-Regular'}>
             Level {character.charLvl} {character.charClass}
           </Text>
-          <Text fontFamily={'Text'}>Save DC: {character.saveDC}</Text>
-          <Text fontFamily={'Text'}>Attack Bonus: {character.attackBonus}</Text>
+          <Text fontFamily={'Kalam-Regular'}>Save DC: {character.saveDC}</Text>
+          <Text fontFamily={'Kalam-Regular'}>Attack Bonus: {character.attackBonus}</Text>
         </Stack>
 
         {character.id !== currentCharacter && (
           <VStack>
             <Button
-              fontFamily={'Button'}
-              fontSize={{ base: '2xl', lg: '3xl' }}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'xl', lg: '2xl' }}
               color={'gray.600'}
+              textShadow={'1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'}
               rounded={'full'}
               height={'40px'}
               _hover={{
@@ -89,14 +90,14 @@ export default function CharacterCard(character) {
               }}
               sx={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)',
+                  'radial-gradient(circle at 90% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
-              width={'100px'}
               onClick={handleCharacterChange}
             >
               {location.pathname === '/characters' ? 'Set Active' : 'Select'}
             </Button>
+
             {location.pathname === '/characters' && <DeleteCharacterButton character={character} />}
           </VStack>
         )}
@@ -104,9 +105,10 @@ export default function CharacterCard(character) {
         {character.id === currentCharacter ? (
           <VStack>
             <Button
-              fontFamily={'Button'}
-              fontSize={{ base: '2xl', lg: '3xl' }}
-              color={'white'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'xl', lg: '2xl' }}
+              color={'blue.300'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
               height={'40px'}
               _hover={{
@@ -115,7 +117,7 @@ export default function CharacterCard(character) {
               }}
               sx={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, blue 60%, lightgray 100%)',
+                  'radial-gradient(circle at 85% 15%, white 1px, lightgray 6%, blue 60%, lightgray 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
               width={'80px'}
@@ -138,7 +140,7 @@ export default function CharacterCard(character) {
           </VStack>
         ) : null}
         <Outlet />
-      </Box>
+      </>
     </Box>
   );
 }

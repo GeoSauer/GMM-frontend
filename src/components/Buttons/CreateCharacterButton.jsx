@@ -17,9 +17,10 @@ export default function CreateCharacterButton() {
   return (
     <>
       <Button
-        fontFamily={'Button'}
-        fontSize={'3xl'}
-        color={'white'}
+        fontFamily={'Kalam-Bold'}
+        fontSize={{ base: '2xl', lg: '3xl' }}
+        color={'teal.50'}
+        textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
         rounded={'full'}
         height={'40px'}
         _hover={{
@@ -28,7 +29,7 @@ export default function CreateCharacterButton() {
         }}
         sx={{
           backgroundImage:
-            'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, teal 60%, lightblue 100%)',
+            'radial-gradient(circle at 95% 15%, white 1px, lightblue 6%, teal 60%, lightblue 100%)',
           boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
         }}
         marginTop={5}

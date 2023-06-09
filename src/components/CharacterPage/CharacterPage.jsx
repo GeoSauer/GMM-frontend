@@ -17,27 +17,18 @@ export default function CharacterPage() {
     <PillPity minHeight={'100vh'} pattern="temple" patternFill={'blue.200'}>
       <Box top={0} width={'full'} zIndex={100} align={'center'} paddingBottom={1}>
         {location.pathname === '/choose-character' && (
-          <>
-            <Heading
-              fontFamily={'Button'}
-              fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-              backdropFilter="blur(2px)"
-            >
+          <Box paddingTop={'3'} backdropFilter="blur(2px)">
+            <Heading fontFamily={'Title'} fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}>
               Welcome back,{' '}
               {userInfo.username?.length > 20
                 ? userInfo.username.slice(0, 20) + '...'
                 : userInfo.username}
               !
             </Heading>
-            <Heading
-              fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-              fontFamily={'Button'}
-              marginBottom={2}
-              backdropFilter="blur(2px)"
-            >
+            <Heading fontSize={{ base: 'xl', md: '3xl', lg: '4xl' }} fontFamily={'Title'}>
               Which Character Are You Playing Today?
             </Heading>
-          </>
+          </Box>
         )}
         <CreateCharacterButton />
       </Box>

@@ -110,8 +110,11 @@ export default function SignInForm() {
                   <Button
                     marginTop={'3'}
                     fontFamily={'Kalam-Bold'}
-                    fontSize={'3xl'}
-                    color={'gray.700'}
+                    fontSize={{ base: '2xl', lg: '3xl' }}
+                    color={'green.600'}
+                    textShadow={
+                      '1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'
+                    }
                     rounded={'full'}
                     height={'40px'}
                     _hover={{

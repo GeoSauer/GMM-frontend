@@ -89,9 +89,14 @@ export default function LandingPage() {
             {options.map((option) => (
               <Button
                 fontFamily={'Kalam-Bold'}
-                fontSize={'xl'}
+                fontSize={{ base: '2xl', lg: '3xl' }}
                 fontWeight={'800'}
-                color={option === 'up' ? 'gray.800' : 'gray.200'}
+                color={option === 'up' ? 'gray.600' : 'blue.200'}
+                textShadow={
+                  option === 'up'
+                    ? '1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'
+                    : '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                }
                 rounded={'full'}
                 sx={{
                   backgroundImage:

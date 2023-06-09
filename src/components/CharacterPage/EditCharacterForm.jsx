@@ -29,8 +29,8 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
     <Flex align={'center'} justify={'center'}>
       <Stack spacing={2} align={'center'}>
         <Heading
-          fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-          fontFamily={'Button'}
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          fontFamily={'Title'}
           marginTop={5}
           borderBottom="2px solid"
           borderColor="gray.300"
@@ -69,11 +69,17 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
                   <Field name="charName">
                     {({ field, form }) => (
                       <FormControl isInvalid={form.errors.charName && form.touched.charName}>
-                        <FormLabel htmlFor="charName" fontWeight={'bold'} fontFamily={'Text'}>
+                        <FormLabel htmlFor="charName" fontFamily={'Kalam-Bold'}>
                           Character Name
                         </FormLabel>
-                        <Input {...field} placeholder={characterInfo.charName} />
-                        <FormErrorMessage>{form.errors.charName}</FormErrorMessage>
+                        <Input
+                          {...field}
+                          placeholder={characterInfo.charName}
+                          fontFamily={'Kalam-Light'}
+                        />
+                        <FormErrorMessage fontFamily={'Kalam-Light'}>
+                          {form.errors.charName}
+                        </FormErrorMessage>
                       </FormControl>
                     )}
                   </Field>
@@ -81,15 +87,14 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
                   <Field name="charLvl">
                     {({ field }) => (
                       <FormControl>
-                        <FormLabel
-                          htmlFor="charLvl"
-                          fontWeight={'bold'}
-                          fontFamily={'Text'}
-                          marginTop={3}
-                        >
+                        <FormLabel htmlFor="charLvl" fontFamily={'Kalam-Bold'} marginTop={3}>
                           Character Level
                         </FormLabel>
-                        <Select {...field} placeholder={characterInfo.charLvl}>
+                        <Select
+                          {...field}
+                          placeholder={characterInfo.charLvl}
+                          fontFamily={'Kalam-Light'}
+                        >
                           {[...Array(20)].map((_, i) => {
                             const number = i + 1;
                             if (characterInfo.charLvl <= number)
@@ -107,15 +112,14 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
                   <Field name="charMod">
                     {({ field }) => (
                       <FormControl>
-                        <FormLabel
-                          htmlFor="charMod"
-                          fontWeight={'bold'}
-                          fontFamily={'Text'}
-                          marginTop={3}
-                        >
+                        <FormLabel htmlFor="charMod" fontFamily={'Kalam-Bold'} marginTop={3}>
                           Spellcasting Ability Modifier
                         </FormLabel>
-                        <Select {...field} placeholder={characterInfo.charMod}>
+                        <Select
+                          {...field}
+                          placeholder={characterInfo.charMod}
+                          fontFamily={'Kalam-Light'}
+                        >
                           {[...Array(10)].map((_, i) => {
                             return (
                               <option key={`key-${i}`} value={i + 1}>
@@ -131,9 +135,12 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
                   <Stack spacing={4} align={'center'}>
                     <Button
                       marginTop={'3'}
-                      fontFamily={'Button'}
-                      fontSize={'3xl'}
-                      color={'white'}
+                      fontFamily={'Kalam-Bold'}
+                      fontSize={{ base: '2xl', lg: '3xl' }}
+                      color={'green.600'}
+                      textShadow={
+                        '1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'
+                      }
                       rounded={'full'}
                       height={'40px'}
                       _hover={{
