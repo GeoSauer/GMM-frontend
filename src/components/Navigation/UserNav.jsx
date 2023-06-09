@@ -14,9 +14,11 @@ import SignOutButton from '../Buttons/SignOutButton';
 import { useCharacter } from '../../context/CharacterContext';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
+import { useUser } from '../../context/UserContext';
 
 export default function UserNav() {
   const { characterInfo } = useCharacter();
+  const { userInfo } = useUser();
 
   return (
     <Flex alignItems={'center'}>
@@ -40,11 +42,13 @@ export default function UserNav() {
               Characters
             </NavLink>
           </MenuItem>
-          <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
-            <NavLink to="settings" alt="settings" title="settings">
-              Settings
-            </NavLink>
-          </MenuItem>
+          {userInfo.username !== 'Demo' && (
+            <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
+              <NavLink to="settings" alt="settings" title="settings">
+                Settings
+              </NavLink>
+            </MenuItem>
+          )}
           <HelpButton />
           <MenuDivider />
           <SignOutButton />

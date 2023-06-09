@@ -19,6 +19,7 @@ import SignInForm from './SignInForm';
 import { Navigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import PillPity from 'pill-pity';
+import DemoButton from '../Buttons/DemoButton';
 
 export default function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,20 +48,13 @@ export default function LandingPage() {
         marginBottom={-2}
         height={'100vh'}
       >
-        <Box
-          top={0}
-          position={'fixed'}
-          maxHeight={'80px'}
-          padding={'2'}
-          zIndex={100}
-          align={'center'}
-        >
+        <Box top={0} position={'absolute'} maxHeight={'80px'} padding={'2'} align={'center'}>
           <Heading fontFamily={'Title'} fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}>
             Grimoire for the Modern Mage
           </Heading>
         </Box>
 
-        <Stack spacing={6} width={'full'} maxWidth={'lg'}>
+        <Stack spacing={6} width={'full'} maxWidth={'lg'} alignItems="center">
           <Heading
             marginTop={'65'}
             fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}
@@ -85,7 +79,7 @@ export default function LandingPage() {
             profile will leave you with a personalized list of available spells to learn, prepare,
             and cast, regardless of where you are in your adventure. So, what are you waiting for?
           </Text>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+          <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-evenly">
             {options.map((option) => (
               <Button
                 fontFamily={'Kalam-Bold'}
@@ -124,6 +118,7 @@ export default function LandingPage() {
               </ModalContent>
             </Modal>
           </Stack>
+          <DemoButton />
         </Stack>
       </PillPity>
       <Flex flex={0.9}>
