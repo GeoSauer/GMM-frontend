@@ -7,9 +7,10 @@ export default function DemoButton() {
   const { setUserState } = useUser();
 
   const demoUser = {
-    email: 'demo@test.com',
+    email: `demo${Math.floor(Math.random() * 9000) + 100}@test.com`,
     password: '123123123',
-    username: 'Demo',
+    username: 'Demo' + (Math.floor(Math.random() * 9000) + 100),
+    demo: true,
   };
 
   const characters = [
