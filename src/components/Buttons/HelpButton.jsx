@@ -17,10 +17,10 @@ import { useRef } from 'react';
 function HelpTopic({ title, desc, ...rest }) {
   return (
     <Box padding={5} shadow="md" borderWidth="1px" {...rest}>
-      <Heading fontFamily={'Title'} fontSize="xl">
+      <Heading fontFamily={'Kalam-Bold'} fontSize="xl">
         {title}
       </Heading>
-      <Text fontFamily={'Text'} marginTop={4}>
+      <Text fontFamily={'Kalam-Light'} marginTop={4}>
         {desc}
       </Text>
     </Box>
@@ -33,7 +33,7 @@ export default function HelpButton() {
 
   return (
     <>
-      <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'} onClick={onOpen}>
+      <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'} onClick={onOpen}>
         Help
       </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>

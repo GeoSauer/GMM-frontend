@@ -2,6 +2,7 @@ import { HamburgerIcon } from '@chakra-ui/icons';
 import {
   Menu,
   MenuButton,
+  MenuDivider,
   MenuGroup,
   MenuItem,
   MenuList,
@@ -23,19 +24,30 @@ export default function MobileNav() {
           <HamburgerIcon marginTop={'4'} />
         </MenuButton>
         <MenuList alignContent={'center'}>
-          <MenuGroup title="Spell Pages" fontFamily={'Title'} fontSize={'1.5em'}>
-            <MenuItem value="prepared" fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
+          <MenuGroup title="Spell Pages" fontFamily={'Title'} fontSize={'md'}>
+            <MenuDivider />
+            <MenuItem
+              value="prepared"
+              fontFamily={'Kalam-Regular'}
+              fontSize={'md'}
+              fontWeight={'bold'}
+            >
               <NavLink to="prepared-spells" alt="prepared" title="Prepared Spells">
                 Prepared
               </NavLink>
             </MenuItem>
-            <MenuItem value="known" fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
+            <MenuItem
+              value="known"
+              fontFamily={'Kalam-Regular'}
+              fontSize={'md'}
+              fontWeight={'bold'}
+            >
               <NavLink to="known-spells" alt="known" title="Known Spells">
                 Known
               </NavLink>
             </MenuItem>
             {characterInfo.charClass === 'Cleric' || characterInfo.charClass === 'Druid' ? (
-              <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
+              <MenuItem fontFamily={'Kalam-Regular'} fontSize={'md'} fontWeight={'bold'}>
                 <NavLink to="cantrips" alt="cantrips" title="Cantrips">
                   Cantrips
                 </NavLink>
@@ -44,8 +56,8 @@ export default function MobileNav() {
             {!divineCaster ? (
               <MenuItem
                 value="available"
-                fontFamily={'Button'}
-                fontSize={'1.5em'}
+                fontFamily={'Kalam-Regular'}
+                fontSize={'md'}
                 fontWeight={'bold'}
               >
                 <NavLink to="available-spells" alt="all" title="Available Spells">
@@ -53,7 +65,7 @@ export default function MobileNav() {
                 </NavLink>
               </MenuItem>
             ) : null}
-            <MenuItem value="all" fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
+            <MenuItem value="all" fontFamily={'Kalam-Regular'} fontSize={'md'} fontWeight={'bold'}>
               <NavLink to="all-spells" alt="all" title="All Spells">
                 All
               </NavLink>

@@ -20,21 +20,26 @@ export default function SignOutButton() {
 
   return (
     <>
-      <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'} onClick={onOpen}>
+      <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'} onClick={onOpen}>
         Sign Out
       </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(2px)" />
-        <ModalContent>
-          <ModalHeader fontFamily={'Title'} textAlign={'center'}>
+        <ModalContent width={'250px'}>
+          <ModalHeader
+            fontFamily={'Kalam-Bold'}
+            fontSize={{ base: 'lg', lg: 'xl' }}
+            textAlign={'center'}
+          >
             Really Sign Out?
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody align={'center'} margin={4}>
             <Button
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'lg', lg: 'xl' }}
+              color={'green.600'}
+              textShadow={'1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'}
               rounded={'full'}
               height={'40px'}
               _hover={{

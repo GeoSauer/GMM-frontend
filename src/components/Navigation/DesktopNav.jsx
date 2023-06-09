@@ -21,8 +21,8 @@ export default function DesktopNav() {
           <TabList>
             <Tab
               bg={location.pathname === '/prepared-spells' ? 'blue.500' : 'none'}
-              fontFamily={'Button'}
-              fontSize={'2.5vw'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={'xl'}
               whiteSpace={'nowrap'}
               height={'40px'}
               _hover={{
@@ -37,8 +37,8 @@ export default function DesktopNav() {
             </Tab>
             <Tab
               bg={location.pathname === '/known-spells' ? 'blue.500' : 'none'}
-              fontFamily={'Button'}
-              fontSize={'2.5vw'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={'xl'}
               whiteSpace={'nowrap'}
               height={'40px'}
               _hover={{
@@ -54,8 +54,8 @@ export default function DesktopNav() {
             {characterInfo.charClass === 'Cleric' || characterInfo.charClass === 'Druid' ? (
               <Tab
                 bg={location.pathname === '/cantrips' ? 'blue.500' : 'none'}
-                fontFamily={'Button'}
-                fontSize={'2.5vw'}
+                fontFamily={'Kalam-Bold'}
+                fontSize={'xl'}
                 whiteSpace={'nowrap'}
                 height={'40px'}
                 _hover={{
@@ -72,8 +72,8 @@ export default function DesktopNav() {
             {!divineCaster ? (
               <Tab
                 bg={location.pathname === '/available-spells' ? 'blue.500' : 'none'}
-                fontFamily={'Button'}
-                fontSize={'2.5vw'}
+                fontFamily={'Kalam-Bold'}
+                fontSize={'xl'}
                 whiteSpace={'nowrap'}
                 height={'40px'}
                 _hover={{
@@ -89,8 +89,8 @@ export default function DesktopNav() {
             ) : null}
             <Tab
               bg={location.pathname === '/all-spells' ? 'blue.500' : 'none'}
-              fontFamily={'Button'}
-              fontSize={'2.5vw'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={'xl'}
               whiteSpace={'nowrap'}
               height={'40px'}
               _hover={{

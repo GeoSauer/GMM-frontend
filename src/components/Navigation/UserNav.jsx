@@ -35,12 +35,12 @@ export default function UserNav() {
         <MenuList paddingLeft={'2'}>
           <UserInfo />
           <MenuDivider />
-          <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
+          <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
             <NavLink to="characters" alt="characters" title="characters">
               Characters
             </NavLink>
           </MenuItem>
-          <MenuItem fontFamily={'Button'} fontSize={'1.5em'} fontWeight={'bold'}>
+          <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
             <NavLink to="settings" alt="settings" title="settings">
               Settings
             </NavLink>
