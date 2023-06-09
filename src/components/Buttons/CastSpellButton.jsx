@@ -17,18 +17,18 @@ export default function CastSpellButton({ spell, spellDetails }) {
       <Popover>
         <PopoverTrigger>
           <Button
-            fontFamily={'Button'}
-            fontSize={'3xl'}
-            color={'white'}
+            fontFamily={'Kalam-Bold'}
+            fontSize={{ base: 'xl', lg: '2xl' }}
+            color={'yellow.100'}
+            textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
             rounded={'full'}
-            height={'40px'}
             _hover={{
               transform: 'translateY(-3px)',
               boxShadow: '4xl',
             }}
             sx={{
               backgroundImage:
-                'radial-gradient(circle at 75% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
+                'radial-gradient(circle at 80% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
               boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
             }}
           >
@@ -38,7 +38,11 @@ export default function CastSpellButton({ spell, spellDetails }) {
         <Portal>
           <PopoverContent align={'center'}>
             <PopoverArrow />
-            <PopoverHeader fontFamily={'Title'} paddingTop={'5'}>
+            <PopoverHeader
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'lg', lg: 'xl' }}
+              paddingTop={'6'}
+            >
               Are you sure you want to cast {spell.name}?
             </PopoverHeader>
             <PopoverCloseButton />

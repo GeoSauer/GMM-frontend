@@ -16,11 +16,11 @@ export default function CastConcentrationSpellButton({ spell, spellDetails }) {
     <Popover>
       <PopoverTrigger>
         <Button
-          fontFamily={'Button'}
-          fontSize={'3xl'}
-          color={'white'}
+          fontFamily={'Kalam-Bold'}
+          fontSize={{ base: 'xl', lg: '2xl' }}
+          color={'yellow.100'}
+          textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
           rounded={'full'}
-          height={'40px'}
           _hover={{
             transform: 'translateY(-3px)',
             boxShadow: '4xl',
@@ -37,7 +37,11 @@ export default function CastConcentrationSpellButton({ spell, spellDetails }) {
       <Portal>
         <PopoverContent align={'center'}>
           <PopoverArrow />
-          <PopoverHeader fontFamily={'Title'} paddingTop={'5'}>
+          <PopoverHeader
+            fontFamily={'Kalam-Bold'}
+            fontSize={{ base: 'lg', lg: 'xl' }}
+            paddingTop={'6'}
+          >
             Warning! {spell.name} is a concentration spell and casting it will end the effects of
             any spell you are already concentrating on!
           </PopoverHeader>

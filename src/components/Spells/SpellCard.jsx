@@ -69,10 +69,10 @@ export default function SpellCard({ spellDetails, spell }) {
           onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}
           width={{ base: '90vw', md: '60vw', lg: '50vw' }}
-          height={'90px'}
-          marginTop={'10'}
+          height={{ base: '60px', md: '75vw', lg: '90px' }}
+          marginTop={'5'}
           rounded={'3xl'}
-          bgGradient="linear(gray.100 10%, blue.100 50%, yellow.100 90%)"
+          bgGradient="linear(gray.100 10%, blue.50 50%, yellow.100 90%)"
           sx={{
             boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
           }}
@@ -85,13 +85,17 @@ export default function SpellCard({ spellDetails, spell }) {
             <Loading />
           ) : (
             <>
-              <Heading fontFamily={'Button'} fontSize={{ base: '2em', lg: '2.5em' }}>
+              <Heading fontFamily={'Kalam-Regular'} fontSize={{ base: 'xl', lg: '3xl' }}>
                 {spell.name}
               </Heading>
-              <Text fontFamily={'Text'}>{spell.school}</Text>
+              <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'sm', lg: 'lg' }}>
+                {spell.school}
+              </Text>
 
               {location.pathname === '/all-spells' ? (
-                <Text fontFamily={'Text'}>{classes}</Text>
+                <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'sm', lg: 'lg' }}>
+                  {classes}
+                </Text>
               ) : null}
             </>
           )}
@@ -101,43 +105,50 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/all-spells' &&
             !spell.known &&
             spell.level <= characterInfo.casterLvl && <LearnSpellButton spell={spell} />}
-          {location.pathname === '/all-spells' && spell.known && (
-            <Button
-              isDisabled={true}
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
-              rounded={'full'}
-              height={'40px'}
-              _hover={{
-                backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-              }}
-              sx={{
-                backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-              }}
-            >
-              Known
-            </Button>
-          )}
+
+          {(location.pathname === '/all-spells' ||
+            location.pathname === '/available-spells' ||
+            location.pathname === '/cantrips') &&
+            spell.known && (
+              <Button
+                isDisabled={true}
+                fontFamily={'Kalam-Bold'}
+                fontSize={{ base: 'lg', lg: 'xl' }}
+                color={'blue.200'}
+                textShadow={
+                  '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                }
+                rounded={'full'}
+                height={'40px'}
+                _hover={{
+                  backgroundImage:
+                    'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                }}
+                sx={{
+                  backgroundImage:
+                    'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                  boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+                }}
+              >
+                Known
+              </Button>
+            )}
 
           {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
             <Button
               isDisabled={true}
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'lg', lg: 'xl' }}
+              color={'blue.50'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
-              height={'40px'}
               _hover={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                  'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
               }}
               sx={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                  'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
             >
@@ -145,54 +156,8 @@ export default function SpellCard({ spellDetails, spell }) {
             </Button>
           )}
 
-          {location.pathname === '/available-spells' && !spell.known && (
-            <LearnSpellButton spell={spell} />
-          )}
-          {location.pathname === '/available-spells' && spell.known && (
-            <Button
-              isDisabled={true}
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
-              rounded={'full'}
-              height={'40px'}
-              _hover={{
-                backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-              }}
-              sx={{
-                backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-              }}
-            >
-              Known
-            </Button>
-          )}
-
-          {location.pathname === '/cantrips' && spell.known && (
-            <Button
-              isDisabled={true}
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
-              rounded={'full'}
-              height={'40px'}
-              _hover={{
-                backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-              }}
-              sx={{
-                backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-              }}
-            >
-              Known
-            </Button>
-          )}
-
-          {location.pathname === '/cantrips' && !spell.known && <LearnSpellButton spell={spell} />}
+          {(location.pathname === '/available-spells' || location.pathname === '/cantrips') &&
+            !spell.known && <LearnSpellButton spell={spell} />}
 
           {location.pathname === '/known-spells' && !spell.prepared && (
             <PrepareSpellButton spell={spell} />
@@ -201,18 +166,18 @@ export default function SpellCard({ spellDetails, spell }) {
           {location.pathname === '/known-spells' && spell.prepared && spell.level > 0 && (
             <Button
               isDisabled={true}
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'lg', lg: 'xl' }}
+              color={'blue.50'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
-              height={'40px'}
               _hover={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
+                  'radial-gradient(circle at 85% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
               }}
               sx={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
+                  'radial-gradient(circle at 85% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
             >

@@ -36,8 +36,8 @@ export default function LongRestButton() {
       <Button
         fontFamily={'Kalam-Bold'}
         fontSize={{ base: 'xl', lg: 'xl' }}
-        color={'gray.600'}
-        textShadow={'1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'}
+        color={'gray.200'}
+        textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
         rounded={'full'}
         height={{ base: '30px', md: '50px' }}
         _hover={{
@@ -68,8 +68,8 @@ export default function LongRestButton() {
             <Button
               fontFamily={'Kalam-Bold'}
               fontSize={{ base: 'lg', lg: 'xl' }}
-              color={'green.600'}
-              textShadow={'1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'}
+              color={'green.100'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
               _hover={{
                 transform: 'translateY(-3px)',

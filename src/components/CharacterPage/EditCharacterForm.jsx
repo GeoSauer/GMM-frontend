@@ -137,9 +137,9 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
                       marginTop={'3'}
                       fontFamily={'Kalam-Bold'}
                       fontSize={{ base: '2xl', lg: '3xl' }}
-                      color={'green.600'}
+                      color={'green.100'}
                       textShadow={
-                        '1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'
+                        '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
                       }
                       rounded={'full'}
                       height={'40px'}

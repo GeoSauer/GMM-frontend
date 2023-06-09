@@ -14,56 +14,12 @@ export default function SpellDisplay() {
     knownSpells,
     preparedSpells,
     spellDetailsList,
-    // filteredSpells,
-    // setFilteredSpells,
     isLoading,
-    //TODO infinite scroll jazz
-    // spellsInnerRef,
-    // currentPage,
-    // setCurrentPage,
   } = useSpellDetails();
   const location = useLocation();
 
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
-
-  //TODO infinite scroll jazz
-  // const onScroll = () => {
-  //   if (spellsInnerRef.current) {
-  //     const { scrollTop, scrollHeight, clientHeight } = spellsInnerRef.current;
-  //     if (scrollTop + clientHeight === scrollHeight) {
-  //       setCurrentPage(currentPage + 1);
-  //     }
-  //   }
-  // };
-
-  // const handleScroll = () => {
-  //   const display = document.getElementById('display');
-  //   if (!display) return;
-  //   const displayHeight = display.offsetHeight;
-  //   const scrollHeight = display.scrollHeight;
-  //   const scrollTop = display.scrollTop;
-
-  //   if (scrollHeight - scrollTop <= displayHeight) {
-  //     setPage((prevPage) => prevPage + 1);
-  //     const nextAllBatchStartIndex = allSpells.length;
-  //     // const nextAvailableBatchStartIndex = availableSpells.length;
-  //     // const nextKnownBatchStartIndex = knownSpells.length;
-  //     const nextAllBatchEndIndex = nextAllBatchStartIndex + batchSize;
-  //     // const nextAvailableBatchEndIndex = nextAvailableBatchStartIndex + batchSize;
-  //     // const nextKnownBatchEndIndex = nextKnownBatchStartIndex + batchSize;
-  //     const nextAllBatch = allSpells.slice(nextAllBatchStartIndex, nextAllBatchEndIndex);
-  //     // const nextAvailableBatch = allSpells.slice(
-  //     //   nextAvailableBatchStartIndex,
-  //     //   nextAvailableBatchEndIndex
-  //     // );
-  //     // const nextKnownBatch = allSpells.slice(nextKnownBatchStartIndex, nextKnownBatchEndIndex);
-
-  //     setAllSpells((prevSpells) => [...prevSpells, ...nextAllBatch]);
-  //     // setAvailableSpells((prevSpells) => [...prevSpells, ...nextAvailableBatch]);
-  //     // setKnownSpells((prevSpells) => [...prevSpells, ...nextKnownBatch]);
-  //   }
-  // };
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
@@ -79,8 +35,7 @@ export default function SpellDisplay() {
               paddingY={2}
               paddingX={-4}
               borderBottom="2px solid"
-              fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
-              fontWeight="bold"
+              fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
               display={location.pathname === '/cantrips' ? 'none' : 'full'}
             >
               {spell.level === 0 ? (
@@ -125,7 +80,7 @@ export default function SpellDisplay() {
       as={Flex}
       direction={'column'}
       alignItems={'center'}
-      minHeight={'120vh'}
+      minHeight={'200vh'}
       paddingTop={{ md: '50px', lg: '70px' }}
       paddingBottom={'10'}
       pattern="topography"
@@ -139,7 +94,7 @@ export default function SpellDisplay() {
 
       {location.pathname === '/all-spells' && !allSpells.length && (
         <Text
-          fontSize={'4xl'}
+          fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Button'}
           textAlign={'center'}
           background={'gray.100'}
@@ -154,7 +109,7 @@ export default function SpellDisplay() {
       )}
       {location.pathname === '/available-spells' && !availableSpells.length && (
         <Text
-          fontSize={'4xl'}
+          fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Button'}
           textAlign={'center'}
           background={'gray.100'}
@@ -169,7 +124,7 @@ export default function SpellDisplay() {
       )}
       {location.pathname === '/cantrips' && !cantrips.length && (
         <Text
-          fontSize={'4xl'}
+          fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Button'}
           textAlign={'center'}
           background={'gray.100'}
@@ -184,7 +139,7 @@ export default function SpellDisplay() {
       )}
       {location.pathname === '/known-spells' && !knownSpells.length && (
         <Text
-          fontSize={'4xl'}
+          fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Button'}
           textAlign={'center'}
           background={'gray.100'}
@@ -200,7 +155,7 @@ export default function SpellDisplay() {
       )}
       {location.pathname === '/prepared-spells' && !preparedSpells.length && (
         <Text
-          fontSize={'4xl'}
+          fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Button'}
           textAlign={'center'}
           background={'gray.100'}

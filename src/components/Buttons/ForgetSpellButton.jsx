@@ -54,9 +54,10 @@ export default function ForgetSpellButton({ spell }) {
         <>
           <PopoverTrigger>
             <Button
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'xl', lg: '2xl' }}
+              color={'red.100'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
               height={'40px'}
               _hover={{
@@ -65,7 +66,7 @@ export default function ForgetSpellButton({ spell }) {
               }}
               sx={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, red 6%, darkred 60%, red 100%)',
+                  'radial-gradient(circle at 85% 15%, white 1px, red 6%, darkred 60%, red 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
             >
@@ -75,15 +76,22 @@ export default function ForgetSpellButton({ spell }) {
           <Portal>
             <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader fontFamily={'Title'}>
+              <PopoverHeader
+                fontFamily={'Kalam-Bold'}
+                fontSize={{ base: 'lg', lg: 'xl' }}
+                paddingTop={'6'}
+              >
                 Are you sure you want to forget {spell.name}?
               </PopoverHeader>
               <PopoverCloseButton />
               <PopoverBody>
                 <Button
-                  fontFamily={'Button'}
-                  fontSize={'3xl'}
-                  color={'white'}
+                  fontFamily={'Kalam-Bold'}
+                  fontSize={{ base: 'lg', lg: 'xl' }}
+                  color={'green.100'}
+                  textShadow={
+                    '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                  }
                   rounded={'full'}
                   height={'40px'}
                   _hover={{
@@ -92,7 +100,7 @@ export default function ForgetSpellButton({ spell }) {
                   }}
                   sx={{
                     backgroundImage:
-                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                      'radial-gradient(circle at 80% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                     boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   }}
                   onClick={() => handleForget(characterInfo.id, onClose)}

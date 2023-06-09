@@ -70,18 +70,18 @@ export default function CastCantripButton({ spellDetails, spell }) {
         <>
           <PopoverTrigger>
             <Button
-              fontFamily={'Button'}
-              fontSize={'3xl'}
-              color={'white'}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'xl', lg: '2xl' }}
+              color={'yellow.100'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
-              height={'40px'}
               _hover={{
                 transform: 'translateY(-3px)',
                 boxShadow: '4xl',
               }}
               sx={{
                 backgroundImage:
-                  'radial-gradient(circle at 75% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
+                  'radial-gradient(circle at 80% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
             >
@@ -91,7 +91,11 @@ export default function CastCantripButton({ spellDetails, spell }) {
           <Portal>
             <PopoverContent align={'center'}>
               <PopoverArrow />
-              <PopoverHeader fontFamily={'Title'} paddingTop={'5'}>
+              <PopoverHeader
+                fontFamily={'Kalam-Bold'}
+                fontSize={{ base: 'lg', lg: 'xl' }}
+                paddingTop={'6'}
+              >
                 {spellDetails.concentration
                   ? `Warning! ${spell.name} is a concentration spell 
 									and casting it will end the effects of any spell 
@@ -101,19 +105,21 @@ export default function CastCantripButton({ spellDetails, spell }) {
               <PopoverCloseButton />
               <PopoverBody>
                 <Button
-                  fontFamily={'Button'}
-                  fontSize={'3xl'}
-                  color={'white'}
+                  fontFamily={'Kalam-Bold'}
+                  fontSize={{ base: 'lg', lg: 'xl' }}
+                  color={'green.100'}
+                  textShadow={
+                    '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                  }
                   marginBottom={'2'}
                   rounded={'full'}
-                  height={'40px'}
                   _hover={{
                     transform: 'translateY(-3px)',
                     boxShadow: '4xl',
                   }}
                   sx={{
                     backgroundImage:
-                      'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                      'radial-gradient(circle at 80% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                     boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   }}
                   ref={initRef}
@@ -125,14 +131,18 @@ export default function CastCantripButton({ spellDetails, spell }) {
                 {spellDetails?.attackType && (
                   <Box>
                     <Heading
-                      fontFamily={'Title'}
-                      size="xs"
+                      fontFamily={'Kalam-Bold'}
+                      fontSize={{ base: 'sm', lg: 'lg' }}
                       textTransform="uppercase"
                       paddingTop={'2'}
                     >
                       Attack Type
                     </Heading>
-                    <Text paddingTop="2" fontFamily={'Text'}>
+                    <Text
+                      paddingTop="2"
+                      fontFamily={'Kalam-Light'}
+                      fontSize={{ base: 'xs', lg: 'md' }}
+                    >
                       {spellDetails?.attackType} spell attack, roll 1d20 +{' '}
                       {characterInfo.attackBonus} to hit.
                     </Text>
@@ -140,7 +150,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
                 )}
 
                 {spellDetails?.damage?.damageType?.name && (
-                  <Text fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     Deals {spellDetails?.damage.damageType.name.toLowerCase()} damage.
                   </Text>
                 )}
@@ -151,8 +161,8 @@ export default function CastCantripButton({ spellDetails, spell }) {
                       <Table>
                         <TableCaption
                           placement="top"
-                          fontFamily={'Title'}
-                          size="xs"
+                          fontFamily={'Kalam-Bold'}
+                          fontSize={{ base: 'sm', lg: 'lg' }}
                           textTransform="uppercase"
                           color={'black'}
                         >
@@ -160,8 +170,12 @@ export default function CastCantripButton({ spellDetails, spell }) {
                         </TableCaption>
                         <Thead>
                           <Tr>
-                            <Th fontFamily={'Title'}>Level</Th>
-                            <Th fontFamily={'Title'}>Roll</Th>
+                            <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                              Level
+                            </Th>
+                            <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                              Roll
+                            </Th>
                           </Tr>
                         </Thead>
                         <Tbody>
@@ -169,10 +183,18 @@ export default function CastCantripButton({ spellDetails, spell }) {
                             const value = spellDetails.damage.damageAtCharacterLevel[key];
                             return (
                               <Tr key={i}>
-                                <Td key={key} fontFamily={'Text'}>
+                                <Td
+                                  key={key}
+                                  fontFamily={'Kalam-Light'}
+                                  fontSize={{ base: 'xs', lg: 'md' }}
+                                >
                                   {key}
                                 </Td>
-                                <Td key={value} fontFamily={'Text'}>
+                                <Td
+                                  key={value}
+                                  fontFamily={'Kalam-Light'}
+                                  fontSize={{ base: 'xs', lg: 'md' }}
+                                >
                                   {value}
                                 </Td>
                               </Tr>
@@ -187,18 +209,18 @@ export default function CastCantripButton({ spellDetails, spell }) {
                 {spellDetails?.saveDc.type && (
                   <Box>
                     <Heading
-                      size="xs"
-                      fontFamily={'Title'}
+                      fontFamily={'Kalam-Bold'}
+                      fontSize={{ base: 'sm', lg: 'lg' }}
                       textTransform="uppercase"
                       paddingTop={'4'}
                     >
                       Save DC
                     </Heading>
-                    <Text fontFamily={'Text'}>
+                    <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                       DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
                       throw.
                     </Text>
-                    <Text fontFamily={'Text'}>
+                    <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                       On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
                       {spellDetails.saveDc.success}.
                     </Text>
