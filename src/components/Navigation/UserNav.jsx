@@ -42,13 +42,11 @@ export default function UserNav() {
               Characters
             </NavLink>
           </MenuItem>
-          {userInfo.username !== 'Demo' && (
-            <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
-              <NavLink to="settings" alt="settings" title="settings">
-                Settings
-              </NavLink>
-            </MenuItem>
-          )}
+          <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
+            <NavLink to="settings" alt="settings" title="settings">
+              Settings
+            </NavLink>
+          </MenuItem>
           <HelpButton />
           <MenuDivider />
           <SignOutButton />
