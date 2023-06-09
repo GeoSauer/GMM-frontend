@@ -61,20 +61,27 @@ export default function SettingsPage() {
                 <Field name="username">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.username && form.touched.username}>
-                      <FormLabel htmlFor="username" fontFamily={'Text'}>
+                      <FormLabel htmlFor="username" fontFamily={'Kalam-Bold'}>
                         Edit Username
                       </FormLabel>
-                      <Input {...field} placeholder={userInfo.username} />
+                      <Input
+                        {...field}
+                        placeholder={userInfo.username}
+                        fontFamily={'Kalam-Light'}
+                      />
                       <FormErrorMessage>{form.errors.username}</FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
 
                 <Button
-                  marginTop={'3'}
-                  fontFamily={'Button'}
-                  fontSize={'3xl'}
-                  color={'white'}
+                  marginTop={'7'}
+                  fontFamily={'Kalam-Bold'}
+                  fontSize={{ base: '2xl', lg: '3xl' }}
+                  color={'green.100'}
+                  textShadow={
+                    '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                  }
                   rounded={'full'}
                   height={'40px'}
                   _hover={{

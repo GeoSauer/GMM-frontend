@@ -49,6 +49,7 @@ export function useAuth() {
   const [error, setError] = useState(null);
   const { setUserState } = useContext(UserContext);
   const { setCharacterState } = useCharacter();
+  const { userInfo } = useUser();
   const navigate = useNavigate();
 
   const handleResponse = ({ user, error }) => {
@@ -73,7 +74,7 @@ export function useAuth() {
   };
 
   const signOut = async () => {
-    await User.signOut();
+    userInfo.username === 'Demo' ? await User.delete() : await User.signOut();
     setUserState(null);
     setCharacterState(null);
     navigate('welcome', { replace: true });

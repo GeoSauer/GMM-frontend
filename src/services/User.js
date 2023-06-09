@@ -1,8 +1,8 @@
 import agent from './customAgent';
 
 //TODO switch this over after deploy
-const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
-// const USERS = 'http://localhost:7890/api/v1/users';
+// const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
+const USERS = 'http://localhost:7890/api/v1/users';
 const USER_KEY = 'USER';
 
 export class User {
@@ -22,6 +22,11 @@ export class User {
     const response = await agent.del(`${USERS}/sessions`);
     localStorage.removeItem(USER_KEY);
     return response;
+  }
+
+  static async delete() {
+    const { body } = await agent.del(`${USERS}/`);
+    return body;
   }
 
   static async getById() {

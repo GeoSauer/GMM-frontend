@@ -19,6 +19,7 @@ import SignInForm from './SignInForm';
 import { Navigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import PillPity from 'pill-pity';
+import DemoButton from '../Buttons/DemoButton';
 
 export default function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,38 +48,26 @@ export default function LandingPage() {
         marginBottom={-2}
         height={'100vh'}
       >
-        <Box
-          top={0}
-          position={'fixed'}
-          maxHeight={'80px'}
-          padding={'2'}
-          zIndex={100}
-          align={'center'}
-        >
+        <Box top={0} position={'absolute'} maxHeight={'80px'} padding={'2'} align={'center'}>
           <Heading fontFamily={'Title'} fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}>
             Grimoire for the Modern Mage
           </Heading>
         </Box>
 
-        <Stack spacing={6} width={'full'} maxWidth={'lg'}>
-          <Heading marginTop={'35'} fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}>
-            <Text
-              fontFamily={'Button'}
-              bgGradient="linear-gradient(to top, blue.100, transparent)"
-              as={'span'}
-              position={'relative'}
-            >
-              Spellcasting
-            </Text>
-            <br />
-            <Text color={'blue.400'} fontFamily={'Button'}>
-              Simplified
-            </Text>
+        <Stack spacing={6} width={'full'} maxWidth={'lg'} alignItems="center">
+          <Heading
+            marginTop={'65'}
+            fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}
+            fontFamily={'Kalam-Bold'}
+            color={'blue.300'}
+            align={'center'}
+          >
+            Spellcasting, Simplified.
           </Heading>
           <Text
             padding={2}
             fontSize={{ base: 'md', lg: 'xl' }}
-            fontFamily={'Text'}
+            fontFamily={'Kalam-Light'}
             color={'gray.900'}
             bg={'gray.50'}
             rounded={'lg'}
@@ -90,21 +79,24 @@ export default function LandingPage() {
             profile will leave you with a personalized list of available spells to learn, prepare,
             and cast, regardless of where you are in your adventure. So, what are you waiting for?
           </Text>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
+          <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-evenly">
             {options.map((option) => (
               <Button
-                fontFamily={'Button'}
-                fontSize={{ base: '2xl', lg: '3xl' }}
+                fontFamily={'Kalam-Bold'}
+                fontSize={{ base: '2xl', lg: 'xl' }}
+                color={option === 'up' ? 'gray.100' : 'blue.50'}
+                textShadow={
+                  '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                }
                 rounded={'full'}
                 sx={{
                   backgroundImage:
                     option === 'up'
-                      ? 'radial-gradient(circle at 75% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)'
-                      : 'radial-gradient(circle at 75% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                      ? 'radial-gradient(circle at 95% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)'
+                      : 'radial-gradient(circle at 95% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
 
                   boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                 }}
-                color={'white'}
                 _hover={{
                   transform: 'translateY(-3px)',
                   boxShadow: '3xl',
@@ -126,6 +118,7 @@ export default function LandingPage() {
               </ModalContent>
             </Modal>
           </Stack>
+          <DemoButton />
         </Stack>
       </PillPity>
       <Flex flex={0.9}>

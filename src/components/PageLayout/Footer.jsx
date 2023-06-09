@@ -12,12 +12,12 @@ import {
 
 export default function Footer() {
   return (
-    <Box background={'gray.300'} px={4} position={'fixed'} bottom={'0px'} width={'full'}>
+    <Box background={'gray.200'} position={'fixed'} bottom={'0px'} width={'full'}>
       <Flex height={10} alignItems={'center'} justifyContent={'center'}>
         <Text
           as={'span'}
           fontSize={{ base: 'sm', md: 'md' }}
-          fontFamily={'Title'}
+          fontFamily={'Kalam-Bold'}
           color={'blue.500'}
         >
           Lovingly made by{' '}
@@ -25,7 +25,7 @@ export default function Footer() {
             <PopoverTrigger>
               <Text
                 fontFamily={'Title'}
-                fontSize={{ base: 'xl', md: '2xl' }}
+                fontSize={{ base: 'lg', md: 'xl' }}
                 display={'inline'}
                 cursor={'pointer'}
                 color={'black'}
@@ -33,7 +33,7 @@ export default function Footer() {
                 Geo{' '}
               </Text>
             </PopoverTrigger>
-            <PopoverContent padding={3}>
+            <PopoverContent padding={3} width={'200'}>
               <PopoverArrow />
               <PopoverCloseButton />
               <Link href="https://github.com/GeoSauer" target={'blank'} marginBottom={2}>

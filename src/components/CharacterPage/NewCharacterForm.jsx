@@ -32,8 +32,8 @@ export default function NewCharacterForm({ onClose }) {
     <Flex align={'center'} justify={'center'}>
       <Stack spacing={2} align={'center'}>
         <Heading
-          fontSize={{ base: '4xl', md: '5xl', lg: '6xl' }}
-          fontFamily={'Button'}
+          fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }}
+          fontFamily={'Title'}
           marginTop={5}
           borderBottom="2px solid"
           borderColor="gray.300"
@@ -62,11 +62,13 @@ export default function NewCharacterForm({ onClose }) {
                 <Field name="charName">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charName && form.touched.charName}>
-                      <FormLabel htmlFor="charName" fontWeight={'bold'} fontFamily={'Text'}>
+                      <FormLabel htmlFor="charName" fontFamily={'Kalam-Bold'}>
                         Character Name
                       </FormLabel>
-                      <Input {...field} placeholder="Character Name" />
-                      <FormErrorMessage>{form.errors.charName}</FormErrorMessage>
+                      <Input {...field} placeholder="Character Name" fontFamily={'Kalam-Light'} />
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charName}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -74,15 +76,10 @@ export default function NewCharacterForm({ onClose }) {
                 <Field name="charClass">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charClass && form.touched.charClass}>
-                      <FormLabel
-                        htmlFor="charClass"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charClass" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Character Class<span style={{ color: 'red' }}>*</span>
                       </FormLabel>
-                      <Select {...field} placeholder="Choose One">
+                      <Select {...field} placeholder="Choose One" fontFamily={'Kalam-Light'}>
                         <option value="Bard">Bard</option>
                         <option value="Cleric">Cleric</option>
                         <option value="Druid">Druid</option>
@@ -92,7 +89,9 @@ export default function NewCharacterForm({ onClose }) {
                         <option value="Warlock">Warlock</option>
                         <option value="Wizard">Wizard</option>
                       </Select>
-                      <FormErrorMessage>{form.errors.charClass}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charClass}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -119,15 +118,10 @@ export default function NewCharacterForm({ onClose }) {
                 <Field name="charLvl">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charLvl && form.touched.charLvl}>
-                      <FormLabel
-                        htmlFor="charLvl"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charLvl" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Character Level
                       </FormLabel>
-                      <Select {...field} placeholder="Choose One">
+                      <Select {...field} placeholder="Choose One" fontFamily={'Kalam-Light'}>
                         {[...Array(20)].map((_, i) => {
                           return (
                             <option key={`key-${i}`} value={i + 1}>
@@ -136,7 +130,9 @@ export default function NewCharacterForm({ onClose }) {
                           );
                         })}
                       </Select>
-                      <FormErrorMessage>{form.errors.charLvl}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charLvl}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -144,15 +140,10 @@ export default function NewCharacterForm({ onClose }) {
                 <Field name="charMod">
                   {({ field, form }) => (
                     <FormControl isInvalid={form.errors.charMod && form.touched.charMod}>
-                      <FormLabel
-                        htmlFor="charMod"
-                        fontWeight={'bold'}
-                        fontFamily={'Text'}
-                        marginTop={3}
-                      >
+                      <FormLabel htmlFor="charMod" fontFamily={'Kalam-Bold'} marginTop={3}>
                         Spellcasting Ability Modifier
                       </FormLabel>
-                      <Select {...field} placeholder="Choose One">
+                      <Select {...field} placeholder="Choose One" fontFamily={'Kalam-Light'}>
                         {[...Array(10)].map((_, i) => {
                           return (
                             <option key={`key-${i}`} value={i + 1}>
@@ -161,7 +152,9 @@ export default function NewCharacterForm({ onClose }) {
                           );
                         })}
                       </Select>
-                      <FormErrorMessage>{form.errors.charMod}</FormErrorMessage>
+                      <FormErrorMessage fontFamily={'Kalam-Light'}>
+                        {form.errors.charMod}
+                      </FormErrorMessage>
                     </FormControl>
                   )}
                 </Field>
@@ -169,9 +162,12 @@ export default function NewCharacterForm({ onClose }) {
                 <Stack spacing={4} align={'center'}>
                   <Button
                     marginTop={'3'}
-                    fontFamily={'Button'}
-                    fontSize={'3xl'}
-                    color={'white'}
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: '2xl', lg: '3xl' }}
+                    color={'green.100'}
+                    textShadow={
+                      '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
+                    }
                     rounded={'full'}
                     height={'40px'}
                     _hover={{
@@ -188,7 +184,7 @@ export default function NewCharacterForm({ onClose }) {
                   >
                     Submit
                   </Button>
-                  <Text fontWeight={'bold'} fontFamily={'Text'}>
+                  <Text fontSize={{ base: 'sm', md: 'md', lg: 'lg' }} fontFamily={'Kalam-Regular'}>
                     <span style={{ color: 'red' }}>*</span> cannot be changed later
                   </Text>
                 </Stack>

@@ -10,24 +10,32 @@ export default function UserInfo() {
     <>
       {!isLoading && userInfo.username && characterInfo.charName && (
         <>
-          <MenuGroup title="Signed in as:" fontFamily={'Button'} fontSize={'1.5em'}>
-            <Text fontFamily={'Text'}>
+          <MenuGroup title="Signed in as:" fontFamily={'Kalam-Bold'} fontSize={'md'}>
+            <Text fontFamily={'Kalam-Light'} paddingLeft={'4'}>
               {userInfo.username.length > 20
                 ? userInfo.username.slice(0, 20) + '...'
                 : userInfo.username}
             </Text>
           </MenuGroup>
           <MenuDivider />
-          <MenuGroup title="Current Character:" fontFamily={'Button'} fontSize={'1.5em'}>
-            <Text fontFamily={'Text'}>
+          <MenuGroup title="Current Character:" fontFamily={'Kalam-Bold'} fontSize={'md'}>
+            <Text fontFamily={'Kalam-Light'} paddingLeft={'4'}>
               {characterInfo.charName.length > 20
                 ? characterInfo.charName.slice(0, 20) + '...'
                 : characterInfo.charName}
             </Text>
-            <Text fontFamily={'Text'}>{characterInfo.charClass}</Text>
-            <Text fontFamily={'Text'}>Level: {characterInfo.charLvl}</Text>
-            <Text fontFamily={'Text'}>Save DC: {characterInfo.saveDC}</Text>
-            <Text fontFamily={'Text'}>Attack Bonus: {characterInfo.attackBonus}</Text>
+            <Text fontFamily={'Kalam-Light'} paddingLeft={'4'}>
+              {characterInfo.charClass}
+            </Text>
+            <Text fontFamily={'Kalam-Light'} paddingLeft={'4'}>
+              Level: {characterInfo.charLvl}
+            </Text>
+            <Text fontFamily={'Kalam-Light'} paddingLeft={'4'}>
+              Save DC: {characterInfo.saveDC}
+            </Text>
+            <Text fontFamily={'Kalam-Light'} paddingLeft={'4'}>
+              Attack Bonus: {characterInfo.attackBonus}
+            </Text>
           </MenuGroup>
         </>
       )}

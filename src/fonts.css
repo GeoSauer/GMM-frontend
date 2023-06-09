@@ -7,6 +7,17 @@
   src: url('/public/fonts/Bitcheese.ttf');
 }
 @font-face {
-  font-family: 'Text';
-  src: url('/public/fonts/IndieFlower-Regular.ttf');
+  font-family: 'Kalam-Light';
+  /* src: url('/public/fonts/IndieFlower-Regular.ttf'); */
+  src: url('/public/fonts/Kalam-Light.ttf');
+}
+@font-face {
+  font-family: 'Kalam-Regular';
+  /* src: url('/public/fonts/IndieFlower-Regular.ttf'); */
+  src: url('/public/fonts/Kalam-Regular.ttf');
+}
+@font-face {
+  font-family: 'Kalam-Bold';
+  /* src: url('/public/fonts/IndieFlower-Regular.ttf'); */
+  src: url('/public/fonts/Kalam-Bold.ttf');
 }
