@@ -13,7 +13,7 @@ export default function Subheader() {
 
   return (
     <Flex hideFrom={'751px'} justifyContent="space-between" alignItems="center">
-      <Heading height="10" fontFamily={'Button'}>
+      <Heading height="60px" fontFamily={'Kalam-Bold'} fontSize={'xl'} paddingTop={'6'}>
         {locationHeader}
       </Heading>
       <Box justifyContent={'end'} marginTop={'-6'} height="0">

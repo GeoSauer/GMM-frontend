@@ -30,10 +30,11 @@ export default function SpellSlots() {
       >
         <Heading
           align={'center'}
-          fontSize={{ base: '5vw', md: '2vw', lg: '2.5vw' }}
-          fontFamily={'Button'}
+          fontSize={{ base: 'md', md: 'lg', lg: 'xl' }}
+          fontFamily={'Kalam-Bold'}
+          marginTop={'-3'}
         >
-          Spell Slots Available Per Level
+          ~ Spell Slots Available Per Level ~
         </Heading>
         <Flex justifyContent="space-evenly" alignItems="center">
           {spellSlots.map((_, index) => {
@@ -43,16 +44,16 @@ export default function SpellSlots() {
 
             return (
               <Flex key={`key-${index}`} position="relative" justify={'center'}>
-                <Text fontFamily={'Title'} fontSize={{ base: 'xs', lg: 'sm' }}>
+                <Text fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'sm' }}>
                   {number}
                   {suffix}:
                 </Text>
                 <Text
-                  fontFamily={'Title'}
+                  fontFamily={'Kalam-Bold'}
                   position="absolute"
                   marginTop={6}
-                  px={{ base: 3, lg: 4 }}
-                  py={{ base: 1.5, lg: 2 }}
+                  px={'3'}
+                  py={'1.5'}
                   fontSize={{ base: 'xs', lg: 's' }}
                   fontWeight="bold"
                   rounded="full"
