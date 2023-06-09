@@ -53,264 +53,339 @@ export default function SpellDetail({ spellDetails }) {
           <CardBody>
             <Stack divider={<StackDivider />} spacing="2">
               {spellDetails.castingTime && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Casting Time
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.castingTime}
                     {spellDetails.ritual && ', or ritual (+10 minutes)'}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.range && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Range
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.range}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.areaOfEffect && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Area of Effect
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.areaOfEffect.size} foot {spellDetails.areaOfEffect.type}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.components && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Components
                   </Heading>
                   {spellDetails.components.map((component, index) => {
                     if (component === 'V') {
                       return (
-                        <Text key={index} paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                        <Text
+                          key={index}
+                          fontFamily={'Kalam-Light'}
+                          fontSize={{ base: 'xs', lg: 'md' }}
+                        >
                           Verbal
                         </Text>
                       );
                     } else if (component === 'S') {
                       return (
-                        <Text key={index} paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                        <Text
+                          key={index}
+                          fontFamily={'Kalam-Light'}
+                          fontSize={{ base: 'xs', lg: 'md' }}
+                        >
                           Somatic
                         </Text>
                       );
                     } else if (component === 'M') {
                       return (
-                        <Text key={index} paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                        <Text
+                          key={index}
+                          fontFamily={'Kalam-Light'}
+                          fontSize={{ base: 'xs', lg: 'md' }}
+                        >
                           Material
                         </Text>
                       );
                     }
                   })}
-                </Box>
+                </>
               )}
 
               {spellDetails.material && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Material
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.material}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.duration && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Duration
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.duration}
                     {spellDetails.concentration && ', concentration'}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.attackType && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Attack Type
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.attackType}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.damage?.damageType && (
-                <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                <>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     {spellDetails.damage.damageAtCharacterLevel ||
                     spellDetails.damage.damageAtSlotLevel
                       ? 'Damage'
                       : 'Damage Type'}
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.damage.damageAtCharacterLevel ||
                     spellDetails.damage.damageAtSlotLevel
                       ? `Type: ${spellDetails.damage.damageType.name}`
                       : spellDetails.damage.damageType.name}
                   </Text>
-                </Box>
+                </>
               )}
 
               {spellDetails.damage?.damageAtCharacterLevel && (
-                <Box>
-                  <TableContainer>
-                    <Table>
-                      <TableCaption
-                        placement="top"
-                        size="xs"
-                        textTransform="uppercase"
-                        fontFamily={'Title'}
-                        paddingTop={'2'}
-                        color={'black'}
-                      >
-                        Damage At Character Level
-                      </TableCaption>
-                      <Thead>
-                        <Tr>
-                          <Th fontFamily={'Title'}>Level</Th>
-                          <Th fontFamily={'Title'}>Roll</Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key, i) => {
-                          const value = spellDetails.damage.damageAtCharacterLevel[key];
-                          return (
-                            <Tr key={i}>
-                              <Td key={key} paddingTop="2" fontSize="md" fontFamily={'Text'}>
-                                {key}
-                              </Td>
-                              <Td key={value} paddingTop="2" fontSize="md" fontFamily={'Text'}>
-                                {value}
-                              </Td>
-                            </Tr>
-                          );
-                        })}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </Box>
+                <TableContainer>
+                  <Table>
+                    <TableCaption
+                      placement="top"
+                      fontFamily={'Kalam-Bold'}
+                      fontSize={{ base: 'sm', lg: 'lg' }}
+                      textTransform="uppercase"
+                      color={'black'}
+                    >
+                      Damage At Character Level
+                    </TableCaption>
+                    <Thead>
+                      <Tr>
+                        <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                          Level
+                        </Th>
+                        <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                          Roll
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key, i) => {
+                        const value = spellDetails.damage.damageAtCharacterLevel[key];
+                        return (
+                          <Tr key={i}>
+                            <Td
+                              key={key}
+                              fontFamily={'Kalam-Light'}
+                              fontSize={{ base: 'xs', lg: 'md' }}
+                            >
+                              {key}
+                            </Td>
+                            <Td
+                              key={value}
+                              fontFamily={'Kalam-Light'}
+                              fontSize={{ base: 'xs', lg: 'md' }}
+                            >
+                              {value}
+                            </Td>
+                          </Tr>
+                        );
+                      })}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
               )}
 
               {spellDetails.damage?.damageAtSlotLevel > 1 && (
-                <Box>
-                  <TableContainer>
-                    <Table>
-                      <TableCaption
-                        placement="top"
-                        size="xs"
-                        textTransform="uppercase"
-                        fontFamily={'Title'}
-                        paddingTop={'2'}
-                        color={'black'}
-                      >
-                        Damage At Spell Slot Level
-                      </TableCaption>
-                      <Thead>
-                        <Tr>
-                          <Th fontFamily={'Title'}>Level</Th>
-                          <Th fontFamily={'Title'}>Damage</Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {Object.keys(spellDetails.damage.damageAtSlotLevel).map((key, i) => {
-                          const value = spellDetails.damage.damageAtSlotLevel[key];
-                          return (
-                            <Tr key={i}>
-                              <Td key={key} paddingTop="2" fontSize="md" fontFamily={'Text'}>
-                                {key}
-                              </Td>
-                              <Td key={value} paddingTop="2" fontSize="md" fontFamily={'Text'}>
-                                {value}
-                              </Td>
-                            </Tr>
-                          );
-                        })}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </Box>
+                <TableContainer>
+                  <Table>
+                    <TableCaption
+                      placement="top"
+                      fontFamily={'Kalam-Bold'}
+                      fontSize={{ base: 'sm', lg: 'lg' }}
+                      textTransform="uppercase"
+                      color={'black'}
+                    >
+                      Damage At Spell Slot Level
+                    </TableCaption>
+                    <Thead>
+                      <Tr>
+                        <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                          Level
+                        </Th>
+                        <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                          Damage
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {Object.keys(spellDetails.damage.damageAtSlotLevel).map((key, i) => {
+                        const value = spellDetails.damage.damageAtSlotLevel[key];
+                        return (
+                          <Tr key={i}>
+                            <Td
+                              key={key}
+                              fontFamily={'Kalam-Light'}
+                              fontSize={{ base: 'xs', lg: 'md' }}
+                            >
+                              {key}
+                            </Td>
+                            <Td
+                              key={value}
+                              fontFamily={'Kalam-Light'}
+                              fontSize={{ base: 'xs', lg: 'md' }}
+                            >
+                              {value}
+                            </Td>
+                          </Tr>
+                        );
+                      })}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
               )}
 
               {spellDetails.healAtSlotLevel && (
-                <Box>
-                  <Heading
-                    size="xs"
-                    textTransform="uppercase"
-                    fontFamily={'Title'}
-                    paddingTop={'2'}
-                  >
-                    Heal At Spell Slot Level
-                  </Heading>
-
-                  <TableContainer>
-                    <Table>
-                      <Thead>
-                        <Tr>
-                          <Th fontFamily={'Title'}>Level</Th>
-                          <Th fontFamily={'Title'}>Max/Current HP Raised By</Th>
-                        </Tr>
-                      </Thead>
-                      <Tbody>
-                        {Object.keys(spellDetails.healAtSlotLevel).map((key, i) => {
-                          const value = spellDetails.healAtSlotLevel[key];
-                          return (
-                            <Tr key={i}>
-                              <Td key={key} paddingTop="2" fontSize="md" fontFamily={'Text'}>
-                                {key}
-                              </Td>
-                              <Td key={value} paddingTop="2" fontSize="md" fontFamily={'Text'}>
-                                {value.replace('MOD', characterInfo.charMod)}
-                              </Td>
-                            </Tr>
-                          );
-                        })}
-                      </Tbody>
-                    </Table>
-                  </TableContainer>
-                </Box>
+                <TableContainer>
+                  <Table>
+                    <TableCaption
+                      placement="top"
+                      fontFamily={'Kalam-Bold'}
+                      fontSize={{ base: 'sm', lg: 'lg' }}
+                      textTransform="uppercase"
+                      color={'black'}
+                    >
+                      Heal At Spell Slot Level
+                    </TableCaption>
+                    <Thead>
+                      <Tr>
+                        <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                          Level
+                        </Th>
+                        <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                          Max/Current HP Raised By
+                        </Th>
+                      </Tr>
+                    </Thead>
+                    <Tbody>
+                      {Object.keys(spellDetails.healAtSlotLevel).map((key, i) => {
+                        const value = spellDetails.healAtSlotLevel[key];
+                        return (
+                          <Tr key={i}>
+                            <Td
+                              key={key}
+                              fontFamily={'Kalam-Light'}
+                              fontSize={{ base: 'xs', lg: 'md' }}
+                            >
+                              {key}
+                            </Td>
+                            <Td
+                              key={value}
+                              fontFamily={'Kalam-Light'}
+                              fontSize={{ base: 'xs', lg: 'md' }}
+                            >
+                              {value.replace('MOD', characterInfo.charMod)}
+                            </Td>
+                          </Tr>
+                        );
+                      })}
+                    </Tbody>
+                  </Table>
+                </TableContainer>
               )}
 
-              {spellDetails.saveDc?.type && (
-                <Box>
+              {spellDetails?.saveDc.type && (
+                <>
                   <Heading
-                    size="xs"
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
                     textTransform="uppercase"
-                    fontFamily={'Title'}
-                    paddingTop={'2'}
                   >
                     Save DC
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     DC {characterInfo.saveDC} {fullModifier(spellDetails.saveDc.type.name)} saving
                     throw.
                   </Text>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
                     {spellDetails.saveDc.success}.
                   </Text>
-                </Box>
+                </>
               )}
 
-              <Box>
-                <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+              <>
+                <Heading
+                  fontFamily={'Kalam-Bold'}
+                  fontSize={{ base: 'sm', lg: 'lg' }}
+                  textTransform="uppercase"
+                >
                   Description
                 </Heading>
-                <Box>
+                <Box width={{ base: '87vw', md: '60vw', lg: '50vw' }}>
                   {spellDetails.desc?.map((paragraph, index) => {
                     return paragraph.includes('|') ? (
                       <TableContainer key={index}>
@@ -320,15 +395,20 @@ export default function SpellDetail({ spellDetails }) {
                             thead: (props) => <Thead {...props} />,
                             tbody: (props) => <Tbody {...props} />,
                             tr: ({ node, children }) => {
-                              return <Tr {...{ node, children }} fontFamily={'Title'} />;
+                              return (
+                                <Tr
+                                  {...{ node, children }}
+                                  fontFamily={'Kalam-Bold'}
+                                  fontSize={{ base: 'xs', lg: 'md' }}
+                                />
+                              );
                             },
                             td: ({ node, children }) => {
                               return (
                                 <Td
                                   {...{ node, children }}
-                                  paddingTop="2"
-                                  fontSize="md"
-                                  fontFamily={'Text'}
+                                  fontFamily={'Kalam-Light'}
+                                  fontSize={{ base: 'xs', lg: 'md' }}
                                 />
                               );
                             },
@@ -343,19 +423,17 @@ export default function SpellDetail({ spellDetails }) {
                       <Text
                         key={index}
                         as={'span'}
-                        paddingTop="2"
-                        fontSize="md"
-                        fontFamily={'Text'}
+                        fontFamily={'Kalam-Light'}
+                        fontSize={{ base: 'xs', lg: 'md' }}
                       >
                         <ReactMarkdown
                           components={{
                             h5: (props) => (
                               <Text
                                 {...props}
-                                fontFamily={'Title'}
-                                size="xs"
+                                fontFamily={'Kalam-Bold'}
+                                fontSize={{ base: 'sm', lg: 'lg' }}
                                 textTransform="uppercase"
-                                paddingTop={'2'}
                               />
                             ),
                           }}
@@ -367,13 +445,18 @@ export default function SpellDetail({ spellDetails }) {
                     );
                   })}
                 </Box>
-              </Box>
+              </>
+
               {spellDetails.higherLevel?.length && (
                 <Box>
-                  <Heading size="xs" textTransform="uppercase" fontFamily={'Title'}>
+                  <Heading
+                    fontFamily={'Kalam-Bold'}
+                    fontSize={{ base: 'sm', lg: 'lg' }}
+                    textTransform="uppercase"
+                  >
                     Higher Level
                   </Heading>
-                  <Text paddingTop="2" fontSize="md" fontFamily={'Text'}>
+                  <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                     {spellDetails.higherLevel}
                   </Text>
                 </Box>

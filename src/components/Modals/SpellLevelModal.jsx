@@ -169,11 +169,10 @@ export default function SpellLevelModal({ spell, spellDetails }) {
                   fontFamily={'Kalam-Bold'}
                   fontSize={{ base: 'sm', lg: 'lg' }}
                   textTransform="uppercase"
-                  paddingTop={'2'}
                 >
                   Attack Type
                 </Heading>
-                <Text paddingTop="2" fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
+                <Text fontFamily={'Kalam-Light'} fontSize={{ base: 'xs', lg: 'md' }}>
                   {spellDetails?.attackType} spell attack, roll 1d20 + {characterInfo.attackBonus}{' '}
                   to hit.
                 </Text>

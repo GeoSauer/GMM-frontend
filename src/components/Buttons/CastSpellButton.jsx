@@ -73,9 +73,9 @@ export default function CastSpellButton({ spell, spellDetails }) {
                   <Button
                     fontFamily={'Kalam-Bold'}
                     fontSize={{ base: 'lg', lg: 'xl' }}
-                    color={'gray.600'}
+                    color={'gray.100'}
                     textShadow={
-                      '1px 1px 0 white, -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white'
+                      '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
                     }
                     margin={'2'}
                     rounded={'full'}

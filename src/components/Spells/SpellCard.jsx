@@ -67,7 +67,7 @@ export default function SpellCard({ spellDetails, spell }) {
           onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}
           width={{ base: '90vw', md: '60vw', lg: '50vw' }}
-          height={{ base: '60px', md: '75vw', lg: '90px' }}
+          height={{ base: '60px', md: '75px', lg: '90px' }}
           marginTop={'5'}
           rounded={'3xl'}
           bgGradient="linear(gray.100 10%, blue.50 50%, yellow.100 90%)"
