@@ -74,7 +74,7 @@ export function useAuth() {
   };
 
   const signOut = async () => {
-    userInfo.username === 'Demo' ? await User.delete() : await User.signOut();
+    userInfo.demo ? await User.delete() : await User.signOut();
     setUserState(null);
     setCharacterState(null);
     navigate('welcome', { replace: true });
