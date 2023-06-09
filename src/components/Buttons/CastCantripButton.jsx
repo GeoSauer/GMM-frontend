@@ -9,7 +9,6 @@ import {
   PopoverHeader,
   PopoverCloseButton,
   PopoverBody,
-  Box,
   TableContainer,
   Table,
   TableCaption,
@@ -129,7 +128,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
                 </Button>
 
                 {spellDetails?.attackType && (
-                  <Box>
+                  <>
                     <Heading
                       fontFamily={'Kalam-Bold'}
                       fontSize={{ base: 'sm', lg: 'lg' }}
@@ -146,7 +145,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
                       {spellDetails?.attackType} spell attack, roll 1d20 +{' '}
                       {characterInfo.attackBonus} to hit.
                     </Text>
-                  </Box>
+                  </>
                 )}
 
                 {spellDetails?.damage?.damageType?.name && (
@@ -156,58 +155,56 @@ export default function CastCantripButton({ spellDetails, spell }) {
                 )}
 
                 {spellDetails?.damage.damageAtCharacterLevel && (
-                  <Box>
-                    <TableContainer>
-                      <Table>
-                        <TableCaption
-                          placement="top"
-                          fontFamily={'Kalam-Bold'}
-                          fontSize={{ base: 'sm', lg: 'lg' }}
-                          textTransform="uppercase"
-                          color={'black'}
-                        >
-                          Damage At Character Level
-                        </TableCaption>
-                        <Thead>
-                          <Tr>
-                            <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
-                              Level
-                            </Th>
-                            <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
-                              Roll
-                            </Th>
-                          </Tr>
-                        </Thead>
-                        <Tbody>
-                          {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key, i) => {
-                            const value = spellDetails.damage.damageAtCharacterLevel[key];
-                            return (
-                              <Tr key={i}>
-                                <Td
-                                  key={key}
-                                  fontFamily={'Kalam-Light'}
-                                  fontSize={{ base: 'xs', lg: 'md' }}
-                                >
-                                  {key}
-                                </Td>
-                                <Td
-                                  key={value}
-                                  fontFamily={'Kalam-Light'}
-                                  fontSize={{ base: 'xs', lg: 'md' }}
-                                >
-                                  {value}
-                                </Td>
-                              </Tr>
-                            );
-                          })}
-                        </Tbody>
-                      </Table>
-                    </TableContainer>
-                  </Box>
+                  <TableContainer>
+                    <Table>
+                      <TableCaption
+                        placement="top"
+                        fontFamily={'Kalam-Bold'}
+                        fontSize={{ base: 'sm', lg: 'lg' }}
+                        textTransform="uppercase"
+                        color={'black'}
+                      >
+                        Damage At Character Level
+                      </TableCaption>
+                      <Thead>
+                        <Tr>
+                          <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                            Level
+                          </Th>
+                          <Th fontFamily={'Kalam-Bold'} fontSize={{ base: 'xs', lg: 'md' }}>
+                            Roll
+                          </Th>
+                        </Tr>
+                      </Thead>
+                      <Tbody>
+                        {Object.keys(spellDetails.damage.damageAtCharacterLevel).map((key, i) => {
+                          const value = spellDetails.damage.damageAtCharacterLevel[key];
+                          return (
+                            <Tr key={i}>
+                              <Td
+                                key={key}
+                                fontFamily={'Kalam-Light'}
+                                fontSize={{ base: 'xs', lg: 'md' }}
+                              >
+                                {key}
+                              </Td>
+                              <Td
+                                key={value}
+                                fontFamily={'Kalam-Light'}
+                                fontSize={{ base: 'xs', lg: 'md' }}
+                              >
+                                {value}
+                              </Td>
+                            </Tr>
+                          );
+                        })}
+                      </Tbody>
+                    </Table>
+                  </TableContainer>
                 )}
 
                 {spellDetails?.saveDc.type && (
-                  <Box>
+                  <>
                     <Heading
                       fontFamily={'Kalam-Bold'}
                       fontSize={{ base: 'sm', lg: 'lg' }}
@@ -224,7 +221,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
                       On success {spellDetails.damage.damageType ? 'damage taken' : 'effect'} is{' '}
                       {spellDetails.saveDc.success}.
                     </Text>
-                  </Box>
+                  </>
                 )}
               </PopoverBody>
             </PopoverContent>

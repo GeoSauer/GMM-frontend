@@ -13,10 +13,8 @@ import SpellDetail from './SpellDetail';
 import LearnSpellButton from '../Buttons/LearnSpellButton';
 import PrepareSpellButton from '../Buttons/PrepareSpellButton';
 import ForgetSpellButton from '../Buttons/ForgetSpellButton';
-import CastRitualSpellButton from '../Buttons/CastRitualSpellButton';
 import CastSpellButton from '../Buttons/CastSpellButton';
 import CastCantripButton from '../Buttons/CastCantripButton';
-import CastConcentrationSpellButton from '../Buttons/CastConcentrationSpellButton';
 import UnprepareSpellButton from '../Buttons/UnprepareSpellButton';
 
 import { useLocation } from 'react-router-dom';
@@ -114,7 +112,7 @@ export default function SpellCard({ spellDetails, spell }) {
                 isDisabled={true}
                 fontFamily={'Kalam-Bold'}
                 fontSize={{ base: 'lg', lg: 'xl' }}
-                color={'blue.200'}
+                color={'blue.100'}
                 textShadow={
                   '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
                 }
@@ -139,7 +137,7 @@ export default function SpellCard({ spellDetails, spell }) {
               isDisabled={true}
               fontFamily={'Kalam-Bold'}
               fontSize={{ base: 'lg', lg: 'xl' }}
-              color={'blue.50'}
+              color={'blue.100'}
               textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
               _hover={{
@@ -168,7 +166,7 @@ export default function SpellCard({ spellDetails, spell }) {
               isDisabled={true}
               fontFamily={'Kalam-Bold'}
               fontSize={{ base: 'lg', lg: 'xl' }}
-              color={'blue.50'}
+              color={'blue.100'}
               textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
               _hover={{
@@ -197,20 +195,10 @@ export default function SpellCard({ spellDetails, spell }) {
             <CastCantripButton spell={spell} spellDetails={spellDetails} />
           )}
 
-          {location.pathname === '/prepared-spells' && spellDetails.ritual && (
-            <CastRitualSpellButton spell={spell} />
+          {location.pathname === '/prepared-spells' && spell.level > 0 && (
+            <CastSpellButton spell={spell} spellDetails={spellDetails} />
           )}
 
-          {location.pathname === '/prepared-spells' &&
-            spellDetails.concentration &&
-            spell.level > 0 && (
-              <CastConcentrationSpellButton spell={spell} spellDetails={spellDetails} />
-            )}
-
-          {location.pathname === '/prepared-spells' &&
-            !spellDetails.concentration &&
-            !spellDetails.ritual &&
-            spell.level > 0 && <CastSpellButton spell={spell} spellDetails={spellDetails} />}
           {location.pathname === '/prepared-spells' && spell.level > 0 && (
             <UnprepareSpellButton spell={spell} />
           )}
@@ -220,9 +208,7 @@ export default function SpellCard({ spellDetails, spell }) {
       <Container maxWidth={{ base: '90vw', md: '60vw', lg: '50vw' }} centerContent>
         <Collapse in={isOpen} animateOpacity>
           <Box
-            p="10px"
-            color="white"
-            bg="teal.500"
+            padding="5px"
             rounded="md"
             shadow="md"
             sx={{
