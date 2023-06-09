@@ -14,11 +14,9 @@ import SignOutButton from '../Buttons/SignOutButton';
 import { useCharacter } from '../../context/CharacterContext';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
-import { useUser } from '../../context/UserContext';
 
 export default function UserNav() {
   const { characterInfo } = useCharacter();
-  const { userInfo } = useUser();
 
   return (
     <Flex alignItems={'center'}>
