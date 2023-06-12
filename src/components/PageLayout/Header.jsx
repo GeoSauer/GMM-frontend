@@ -57,7 +57,7 @@ export default function Header() {
       zIndex={50}
       height={{ base: '80px', md: '100px', lg: '110px' }}
     >
-      <HStack justifyContent={'space-between'}>
+      <HStack justifyContent={'space-evenly'}>
         <Image
           src={'/GMM-rectangle-logo.png'}
           alt={'Grimoire for the Modern Mage'}
