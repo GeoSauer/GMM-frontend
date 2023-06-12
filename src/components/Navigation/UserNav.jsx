@@ -2,6 +2,7 @@ import {
   Avatar,
   Button,
   Flex,
+  Link,
   Menu,
   MenuButton,
   MenuDivider,
@@ -15,7 +16,6 @@ import SignOutButton from '../Buttons/SignOutButton';
 import { useCharacter } from '../../context/CharacterContext';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
-import FeedbackButton from '../Buttons/FeedbackButton';
 import MobileNav from './MobileNav';
 
 export default function UserNav() {
@@ -58,7 +58,18 @@ export default function UserNav() {
                 Settings
               </NavLink>
             </MenuItem>
-            <FeedbackButton />
+            <MenuItem
+              fontFamily={'Kalam-Regular'}
+              fontSize={{ base: 'sm', lg: 'md' }}
+              paddingLeft={'4'}
+            >
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdMFOu6Y6diM2CZnwc1Fo9UIwCsxN28twFSV0SHUclR4QCV1g/viewform?usp=sf_link"
+                target="none"
+              >
+                Feedback
+              </Link>
+            </MenuItem>
             <HelpButton />
           </MenuGroup>
           <MenuDivider />
