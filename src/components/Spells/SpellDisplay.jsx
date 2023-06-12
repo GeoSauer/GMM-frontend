@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import Loading from '../PageLayout/Loading';
 import { useSpellDetails } from '../../context/SpellContext';
 import SpellCard from './SpellCard';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
 import PillPity from 'pill-pity';
 
@@ -81,7 +81,7 @@ export default function SpellDisplay() {
       direction={'column'}
       alignItems={'center'}
       minHeight={'200vh'}
-      paddingTop={{ md: '50px', lg: '70px' }}
+      paddingTop={{ base: '150px', md: '170px', lg: '190px' }}
       paddingBottom={'10'}
       pattern="topography"
       patternFill={'blue.200'}
@@ -95,12 +95,12 @@ export default function SpellDisplay() {
       {location.pathname === '/all-spells' && !allSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -110,12 +110,12 @@ export default function SpellDisplay() {
       {location.pathname === '/available-spells' && !availableSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -125,12 +125,12 @@ export default function SpellDisplay() {
       {location.pathname === '/cantrips' && !cantrips.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -140,33 +140,39 @@ export default function SpellDisplay() {
       {location.pathname === '/known-spells' && !knownSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
-          Looks like you haven&apos;t learned any spells, better head to Available Spells and get
-          studying!
+          Looks like you haven&apos;t learned any spells, better head to{' '}
+          <NavLink to="/available-spells" alt="available" title="Available Spells">
+            Available Spells
+          </NavLink>{' '}
+          and get studying!
         </Text>
       )}
       {location.pathname === '/prepared-spells' && !preparedSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
-          Looks like you don&apos;t have any spells prepared, better head over to Known Spells and
-          remedy that!
+          Looks like you don&apos;t have any spells prepared, better head over to{' '}
+          <NavLink to="/known-spells" alt="known" title="Known Spells">
+            Known Spells
+          </NavLink>{' '}
+          and remedy that!
         </Text>
       )}
     </PillPity>

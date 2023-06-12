@@ -33,7 +33,12 @@ export default function HelpButton() {
 
   return (
     <>
-      <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'} onClick={onOpen}>
+      <MenuItem
+        fontFamily={'Kalam-Regular'}
+        fontSize={{ base: 'sm', lg: 'md' }}
+        paddingLeft={'4'}
+        onClick={onOpen}
+      >
         Help
       </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
@@ -88,6 +93,10 @@ export default function HelpButton() {
               <HelpTopic
                 title="Settings"
                 desc="Settings allows you edit aspects of your user profile, such as your username."
+              />
+              <HelpTopic
+                title="Feedback"
+                desc="Feedback allows users to send app-related feedback straight to the developer.  I'm trying to make this as accessible, useful, and helpful as possible so any and all feedback is greatly appreciated!"
               />
             </VStack>
           </ModalBody>

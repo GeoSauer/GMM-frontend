@@ -48,28 +48,29 @@ export default function LandingPage() {
         marginBottom={-2}
         height={'100vh'}
       >
-        <Box top={0} position={'absolute'} maxHeight={'80px'} padding={'2'} align={'center'}>
-          <Heading fontFamily={'Title'} fontSize={{ base: '3xl', md: '5xl', lg: '6xl' }}>
-            Grimoire for the Modern Mage
-          </Heading>
-        </Box>
-
-        <Stack spacing={6} width={'full'} maxWidth={'lg'} alignItems="center">
+        <Box top={0} position={'absolute'} padding={'2'} align={'center'}>
+          <Image
+            src={'/GMM-rectangle-logo.png'}
+            alt={'Grimoire for the Modern Mage'}
+            paddingBottom={{ base: '20px', lg: '10px' }}
+          />
           <Heading
-            marginTop={'65'}
-            fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}
+            marginTop={'-5'}
+            fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}
             fontFamily={'Kalam-Bold'}
             color={'blue.300'}
             align={'center'}
           >
             Spellcasting, Simplified.
           </Heading>
+        </Box>
+
+        <Stack spacing={4} width={'full'} alignItems="center" marginTop={'40'}>
           <Text
             padding={2}
             fontSize={{ base: 'md', lg: 'xl' }}
             fontFamily={'Kalam-Light'}
             color={'gray.900'}
-            bg={'gray.50'}
             rounded={'lg'}
             bgGradient="linear-gradient(to top, blue.100, transparent)"
           >
@@ -79,11 +80,11 @@ export default function LandingPage() {
             profile will leave you with a personalized list of available spells to learn, prepare,
             and cast, regardless of where you are in your adventure. So, what are you waiting for?
           </Text>
-          <Stack direction={{ base: 'column', md: 'row' }} justifyContent="space-evenly">
+          <Stack justifyContent="space-evenly">
             {options.map((option) => (
               <Button
                 fontFamily={'Kalam-Bold'}
-                fontSize={{ base: '2xl', lg: 'xl' }}
+                fontSize={'xl'}
                 color={option === 'up' ? 'gray.100' : 'blue.50'}
                 textShadow={
                   '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
@@ -121,7 +122,7 @@ export default function LandingPage() {
           <DemoButton />
         </Stack>
       </PillPity>
-      <Flex flex={0.9}>
+      <Flex flex={1}>
         <Image
           alt={'Login Image'}
           objectFit={'cover'}

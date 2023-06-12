@@ -20,7 +20,12 @@ export default function SignOutButton() {
 
   return (
     <>
-      <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'} onClick={onOpen}>
+      <MenuItem
+        fontFamily={'Kalam-Regular'}
+        fontSize={{ base: 'sm', lg: 'md' }}
+        paddingLeft={'4'}
+        onClick={onOpen}
+      >
         Sign Out
       </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>

@@ -51,7 +51,7 @@ export default function SpellSlots() {
                 <Text
                   fontFamily={'Kalam-Bold'}
                   position="absolute"
-                  marginTop={6}
+                  marginTop={4}
                   px={'3'}
                   py={'1.5'}
                   fontSize={{ base: 'xs', lg: 's' }}

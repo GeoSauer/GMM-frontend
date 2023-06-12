@@ -35,24 +35,14 @@ export default function LongRestButton() {
     <>
       <Button
         fontFamily={'Kalam-Bold'}
-        fontSize={{ base: 'xl', lg: 'xl' }}
-        color={'gray.200'}
-        textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
+        fontSize={{ base: 'sm', lg: 'md' }}
+        paddingLeft={'4'}
         rounded={'full'}
-        height={{ base: '30px', md: '50px' }}
-        _hover={{
-          transform: 'translateY(-3px)',
-          boxShadow: '3xl',
-        }}
-        sx={{
-          backgroundImage:
-            'radial-gradient(circle at 85% 15%, white 1px, lightgray 6%, darkgray 60%, lightgray 100%)',
-          boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-        }}
         onClick={onOpen}
       >
-        Long Rest
+        Take A Long Rest
       </Button>
+
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
