@@ -10,11 +10,9 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import { useAuth } from '../../context/UserContext';
 import { useRef } from 'react';
 
-export default function SignOutButton() {
-  const { signOut } = useAuth();
+export default function FeedbackButton() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
 
@@ -26,17 +24,17 @@ export default function SignOutButton() {
         paddingLeft={'4'}
         onClick={onOpen}
       >
-        Sign Out
+        Feedback
       </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(2px)" />
-        <ModalContent width={'250px'}>
+        <ModalContent>
           <ModalHeader
             fontFamily={'Kalam-Bold'}
             fontSize={{ base: 'lg', lg: 'xl' }}
             textAlign={'center'}
           >
-            Really Sign Out?
+            Let&apos;s hear it!
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody align={'center'} margin={4}>
@@ -56,9 +54,9 @@ export default function SignOutButton() {
                   'radial-gradient(circle at 85% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
-              onClick={signOut}
+              // onClick={signOut}
             >
-              Confirm
+              Send
             </Button>
           </ModalBody>
         </ModalContent>

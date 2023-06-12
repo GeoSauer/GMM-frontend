@@ -5,6 +5,7 @@ import {
   Menu,
   MenuButton,
   MenuDivider,
+  MenuGroup,
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
@@ -14,6 +15,8 @@ import SignOutButton from '../Buttons/SignOutButton';
 import { useCharacter } from '../../context/CharacterContext';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
+import FeedbackButton from '../Buttons/FeedbackButton';
+import MobileNav from './MobileNav';
 
 export default function UserNav() {
   const { characterInfo } = useCharacter();
@@ -35,17 +38,29 @@ export default function UserNav() {
         <MenuList paddingLeft={'2'}>
           <UserInfo />
           <MenuDivider />
-          <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
-            <NavLink to="characters" alt="characters" title="characters">
-              Characters
-            </NavLink>
-          </MenuItem>
-          <MenuItem fontFamily={'Kalam-Regular'} fontSize={'lg'}>
-            <NavLink to="settings" alt="settings" title="settings">
-              Settings
-            </NavLink>
-          </MenuItem>
-          <HelpButton />
+          <MobileNav />
+          <MenuGroup title="Profile" fontFamily={'Kalam-Bold'} fontSize={{ base: 'sm', lg: 'md' }}>
+            <MenuItem
+              fontFamily={'Kalam-Regular'}
+              fontSize={{ base: 'sm', lg: 'md' }}
+              paddingLeft={'4'}
+            >
+              <NavLink to="characters" alt="characters" title="characters">
+                Characters
+              </NavLink>
+            </MenuItem>
+            <MenuItem
+              fontFamily={'Kalam-Regular'}
+              fontSize={{ base: 'sm', lg: 'md' }}
+              paddingLeft={'4'}
+            >
+              <NavLink to="settings" alt="settings" title="settings">
+                Settings
+              </NavLink>
+            </MenuItem>
+            <FeedbackButton />
+            <HelpButton />
+          </MenuGroup>
           <MenuDivider />
           <SignOutButton />
         </MenuList>

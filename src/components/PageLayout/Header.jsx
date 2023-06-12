@@ -1,7 +1,6 @@
 import { Box, Flex, HStack } from '@chakra-ui/react';
 import SpellSlots from './SpellSlots';
 import UserNav from '../Navigation/UserNav';
-import MobileNav from '../Navigation/MobileNav';
 import DesktopNav from '../Navigation/DesktopNav';
 import { useLocation } from 'react-router-dom';
 import Subheader from './Subheader';
@@ -22,7 +21,6 @@ export default function Header() {
       height={{ md: '100px', lg: '110px' }}
     >
       <Flex justifyContent={'space-between'}>
-        <MobileNav />
         <DesktopNav />
         <HStack hideBelow={'750px'}>
           <LongRestButton />
