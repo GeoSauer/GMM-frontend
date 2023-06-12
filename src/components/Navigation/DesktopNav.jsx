@@ -1,4 +1,4 @@
-import { Button, HStack } from '@chakra-ui/react';
+import { Button, Flex } from '@chakra-ui/react';
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useCharacter } from '../../context/CharacterContext';
@@ -8,7 +8,7 @@ export default function DesktopNav() {
   const location = useLocation();
 
   return (
-    <HStack as={'nav'} hideBelow={'750px'}>
+    <Flex as={'nav'} direction={'row'} hideBelow={'750px'} spacing={'evenly'}>
       <Button
         bg={location.pathname === '/prepared-spells' ? 'blue.100' : 'none'}
         color={'gray.600'}
@@ -25,6 +25,7 @@ export default function DesktopNav() {
           Prepared Spells
         </NavLink>
       </Button>
+
       <Button
         bg={location.pathname === '/known-spells' ? 'blue.100' : 'none'}
         color={'gray.600'}
@@ -41,6 +42,7 @@ export default function DesktopNav() {
           Known Spells
         </NavLink>
       </Button>
+
       {characterInfo.charClass === 'Cleric' || characterInfo.charClass === 'Druid' ? (
         <Button
           bg={location.pathname === '/cantrips' ? 'blue.100' : 'none'}
@@ -93,6 +95,6 @@ export default function DesktopNav() {
           All Spells
         </NavLink>
       </Button>
-    </HStack>
+    </Flex>
   );
 }

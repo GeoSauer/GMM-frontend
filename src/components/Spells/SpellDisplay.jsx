@@ -100,7 +100,7 @@ export default function SpellDisplay() {
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -115,7 +115,7 @@ export default function SpellDisplay() {
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -130,7 +130,7 @@ export default function SpellDisplay() {
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -145,7 +145,7 @@ export default function SpellDisplay() {
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >
@@ -164,7 +164,7 @@ export default function SpellDisplay() {
           background={'gray.100'}
           padding={'4'}
           borderRadius={'20'}
-          marginTop={'10'}
+          margin={'5'}
           border={'2px solid'}
           borderColor={'gray.500'}
         >

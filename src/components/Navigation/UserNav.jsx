@@ -18,13 +18,27 @@ import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
 import MobileNav from './MobileNav';
 import LongRestButton from '../Buttons/LongRestButton';
+import { useState } from 'react';
 
 export default function UserNav() {
   const { characterInfo } = useCharacter();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleMenuOpen = () => {
+    setIsMenuOpen(true);
+    document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+  };
+
+  const handleMenuClose = () => {
+    setIsMenuOpen(false);
+    document.body.style.overflow = 'auto';
+    document.body.style.position = 'static';
+  };
 
   return (
     <Flex alignItems={'center'}>
-      <Menu>
+      <Menu isOpen={isMenuOpen} onOpen={handleMenuOpen} onClose={handleMenuClose}>
         <MenuButton as={Button} variant={'link'}>
           <Avatar
             size={{ base: 'sm', md: 'md', lg: 'lg' }}
@@ -36,7 +50,7 @@ export default function UserNav() {
             marginTop={{ base: '4', md: '6', lg: '7' }}
           />
         </MenuButton>
-        <MenuList paddingLeft={'2'}>
+        <MenuList paddingLeft={'2'} style={{ maxHeight: 'calc(100vh - 60px)', overflowY: 'auto' }}>
           <UserInfo />
           <MenuDivider />
           <LongRestButton />
