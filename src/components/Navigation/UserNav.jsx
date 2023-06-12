@@ -17,6 +17,7 @@ import { useCharacter } from '../../context/CharacterContext';
 import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
 import MobileNav from './MobileNav';
+import LongRestButton from '../Buttons/LongRestButton';
 
 export default function UserNav() {
   const { characterInfo } = useCharacter();
@@ -37,6 +38,8 @@ export default function UserNav() {
         </MenuButton>
         <MenuList paddingLeft={'2'}>
           <UserInfo />
+          <MenuDivider />
+          <LongRestButton />
           <MenuDivider />
           <MobileNav />
           <MenuGroup title="Profile" fontFamily={'Kalam-Bold'} fontSize={{ base: 'sm', lg: 'md' }}>

@@ -1,9 +1,8 @@
-import { Box, Flex, HStack, Heading } from '@chakra-ui/react';
+import { Box, HStack, Heading, Image } from '@chakra-ui/react';
 import SpellSlots from './SpellSlots';
 import UserNav from '../Navigation/UserNav';
 import DesktopNav from '../Navigation/DesktopNav';
 import { useLocation } from 'react-router-dom';
-import LongRestButton from '../Buttons/LongRestButton';
 import { useState, useEffect } from 'react';
 //TODO
 // import SearchButton from '../Buttons/SearchButton';
@@ -52,29 +51,33 @@ export default function Header() {
       left={0}
       width="100%"
       transition="transform 0.3s"
-      transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-150%)'}
+      transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-200%)'}
       background={'gray.200'}
       paddingX={4}
       zIndex={50}
-      height={{ md: '100px', lg: '110px' }}
+      height={{ base: '80px', md: '100px', lg: '110px' }}
     >
-      <Flex justifyContent={'space-between'}>
+      <HStack justifyContent={'space-between'}>
+        <Image
+          src={'/GMM-rectangle-logo.png'}
+          alt={'Grimoire for the Modern Mage'}
+          height={{ base: '60px', md: '75px', lg: '90px' }}
+          marginRight={'-10px'}
+        />
         <DesktopNav />
-        <HStack hideBelow={'750px'}>
-          <LongRestButton />
-        </HStack>
-        <UserNav />
-      </Flex>
-      {location.pathname !== '/settings' && location.pathname !== '/characters' && <SpellSlots />}
-      <Flex hideFrom={'751px'} justifyContent="space-between" alignItems="center">
-        <Heading height="60px" fontFamily={'Kalam-Bold'} fontSize={'xl'} paddingTop={'6'}>
+        <Heading
+          hideFrom={'751px'}
+          fontFamily={'Kalam-Bold'}
+          fontSize={'lg'}
+          paddingTop={'2'}
+          color={'gray.600'}
+          textAlign={'center'}
+        >
           {locationHeader}
         </Heading>
-        <Box justifyContent={'end'} marginTop={'-6'} height="0">
-          <LongRestButton marginRight="2" />
-          {/* <SearchButton /> */}
-        </Box>
-      </Flex>
+        <UserNav />
+      </HStack>
+      {location.pathname !== '/settings' && location.pathname !== '/characters' && <SpellSlots />}
     </Box>
   );
 }

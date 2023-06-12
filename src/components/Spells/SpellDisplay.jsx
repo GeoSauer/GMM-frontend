@@ -81,7 +81,7 @@ export default function SpellDisplay() {
       direction={'column'}
       alignItems={'center'}
       minHeight={'200vh'}
-      paddingTop={{ md: '50px', lg: '70px' }}
+      paddingTop={{ base: '150px', md: '170px', lg: '190px' }}
       paddingBottom={'10'}
       pattern="topography"
       patternFill={'blue.200'}
