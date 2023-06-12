@@ -95,7 +95,7 @@ export default function SpellDisplay() {
       {location.pathname === '/all-spells' && !allSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
@@ -110,7 +110,7 @@ export default function SpellDisplay() {
       {location.pathname === '/available-spells' && !availableSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
@@ -125,7 +125,7 @@ export default function SpellDisplay() {
       {location.pathname === '/cantrips' && !cantrips.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
@@ -140,7 +140,7 @@ export default function SpellDisplay() {
       {location.pathname === '/known-spells' && !knownSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
@@ -159,7 +159,7 @@ export default function SpellDisplay() {
       {location.pathname === '/prepared-spells' && !preparedSpells.length && (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Button'}
+          fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
