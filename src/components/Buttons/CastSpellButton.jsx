@@ -10,7 +10,7 @@ import {
   PopoverCloseButton,
   PopoverBody,
 } from '@chakra-ui/react';
-import SpellLevelModal from '../Modals/SpellLevelModal';
+import SpellLevelButton from './SpellLevelButton';
 import { useRef } from 'react';
 
 export default function CastSpellButton({ spell, spellDetails }) {
@@ -94,7 +94,7 @@ export default function CastSpellButton({ spell, spellDetails }) {
                     As a ritual
                   </Button>
                 ) : null}
-                <SpellLevelModal spell={spell} spellDetails={spellDetails} />
+                <SpellLevelButton spell={spell} spellDetails={spellDetails} />
               </PopoverBody>
             </PopoverContent>
           </Portal>

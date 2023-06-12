@@ -24,7 +24,7 @@ import { useState } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { getSuffix } from '../../utils/utils';
 
-export default function SpellLevelModal({ spell, spellDetails }) {
+export default function SpellLevelButton({ spell, spellDetails }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { characterInfo, setCharacterInfo } = useCharacter();
   const [slotLevel, setSlotLevel] = useState('');
