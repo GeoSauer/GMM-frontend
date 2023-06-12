@@ -49,7 +49,11 @@ export default function LandingPage() {
         height={'100vh'}
       >
         <Box top={0} position={'absolute'} padding={'2'} align={'center'}>
-          <Image src={'/GMM-rectangle-logo.png'} paddingBottom={{ base: '20px', lg: '10px' }} />
+          <Image
+            src={'/GMM-rectangle-logo.png'}
+            alt={'Grimoire for the Modern Mage'}
+            paddingBottom={{ base: '20px', lg: '10px' }}
+          />
           <Heading
             marginTop={'-5'}
             fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}
