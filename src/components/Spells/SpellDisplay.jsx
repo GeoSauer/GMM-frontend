@@ -2,7 +2,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import Loading from '../PageLayout/Loading';
 import { useSpellDetails } from '../../context/SpellContext';
 import SpellCard from './SpellCard';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
 import PillPity from 'pill-pity';
 
@@ -149,8 +149,11 @@ export default function SpellDisplay() {
           border={'2px solid'}
           borderColor={'gray.500'}
         >
-          Looks like you haven&apos;t learned any spells, better head to Available Spells and get
-          studying!
+          Looks like you haven&apos;t learned any spells, better head to{' '}
+          <NavLink to="/available-spells" alt="available" title="Available Spells">
+            Available Spells
+          </NavLink>{' '}
+          and get studying!
         </Text>
       )}
       {location.pathname === '/prepared-spells' && !preparedSpells.length && (
@@ -165,8 +168,11 @@ export default function SpellDisplay() {
           border={'2px solid'}
           borderColor={'gray.500'}
         >
-          Looks like you don&apos;t have any spells prepared, better head over to Known Spells and
-          remedy that!
+          Looks like you don&apos;t have any spells prepared, better head over to{' '}
+          <NavLink to="/known-spells" alt="known" title="Known Spells">
+            Known Spells
+          </NavLink>{' '}
+          and remedy that!
         </Text>
       )}
     </PillPity>
