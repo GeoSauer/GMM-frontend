@@ -72,9 +72,10 @@ export default function SpellCard({ spellDetails, spell }) {
           height={{ base: '60px', md: '75px', lg: '90px' }}
           marginTop={'5'}
           marginBottom={'1'}
-          rounded={'3xl'}
+          // rounded={'3xl'}
           // bgGradient="linear(gray.100 10%, blue.50 50%, yellow.100 90%)"
           style={{ backgroundImage: `url(${randomImage}.png)` }}
+          // backgroundImage={'/banner.png'}
           sx={{
             boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
           }}

@@ -45,33 +45,11 @@ export function useUser() {
   return useContext(UserContext);
 }
 
-export function useAuth() {
-  // const [error, setError] = useState(null);
+export function useSignOut() {
   const { setUserState } = useContext(UserContext);
   const { setCharacterState } = useCharacter();
   const { userInfo } = useUser();
   const navigate = useNavigate();
-
-  // const handleResponse = ({ user, error }) => {
-  //   if (error) {
-  //     // eslint-disable-next-line no-console
-  //     console.log(error);
-  //     setError(error.message);
-  //   } else {
-  //     setUserState(user.data);
-  //     setError(null);
-  //   }
-  // };
-
-  // const signUp = async (info) => {
-  //   const response = await User.signUp(info);
-  //   handleResponse(response);
-  // };
-
-  // const signIn = async (credentials) => {
-  //   const response = await User.signIn(credentials);
-  //   handleResponse(response);
-  // };
 
   const signOut = async () => {
     userInfo.demo ? await User.delete() : await User.signOut();
@@ -80,6 +58,5 @@ export function useAuth() {
     navigate('welcome', { replace: true });
   };
 
-  // return { signUp, signIn, signOut, error };
   return { signOut };
 }

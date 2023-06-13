@@ -107,7 +107,7 @@ export default function CharacterCard(character) {
             <Button
               fontFamily={'Kalam-Bold'}
               fontSize={{ base: 'xl', lg: '2xl' }}
-              color={'blue.300'}
+              color={'blue.100'}
               textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
               height={'40px'}

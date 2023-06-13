@@ -13,16 +13,16 @@ import {
 export default function Footer() {
   return (
     <Box background={'gray.200'} position={'fixed'} bottom={'0px'} width={'full'}>
-      <Flex height={10} alignItems={'center'} justifyContent={'center'}>
+      <Flex height={'6'} alignItems={'center'} justifyContent={'center'}>
         <Text
           as={'span'}
           fontSize={{ base: 'sm', md: 'md' }}
           fontFamily={'Kalam-Bold'}
-          color={'blue.500'}
+          color={'gray.600'}
         >
           Lovingly made by{' '}
           <Popover>
-            <PopoverTrigger>
+            <PopoverTrigger aria-haspopup="true">
               <Text
                 fontFamily={'Title'}
                 fontSize={{ base: 'lg', md: 'xl' }}

@@ -1,4 +1,4 @@
-import { useAuth, useUser } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useState } from 'react';
 import {
   Flex,
@@ -11,7 +11,6 @@ import {
   Heading,
   InputGroup,
   InputRightElement,
-  FormHelperText,
   Text,
   useToast,
 } from '@chakra-ui/react';
@@ -19,7 +18,6 @@ import { Field, Form, Formik } from 'formik';
 import { User } from '../../services/User';
 
 export default function SignInForm() {
-  const { error } = useAuth();
   const { setUserState } = useUser();
   const [show, setShow] = useState(false);
   const toast = useToast();
@@ -113,7 +111,6 @@ export default function SignInForm() {
                           </Button>
                         </InputRightElement>
                       </InputGroup>
-                      <FormHelperText color={'red.500'}>{error}</FormHelperText>
                     </FormControl>
                   )}
                 </Field>

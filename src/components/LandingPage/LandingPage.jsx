@@ -20,6 +20,7 @@ import { Navigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import PillPity from 'pill-pity';
 import DemoButton from '../Buttons/DemoButton';
+import Footer from '../PageLayout/Footer';
 
 export default function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -44,19 +45,18 @@ export default function LandingPage() {
         flex={1}
         align={'center'}
         justify={'center'}
-        marginRight={-2}
-        marginBottom={-2}
+        marginRight={{ md: '-2' }}
+        marginBottom={{ base: '-2' }}
         height={'100vh'}
       >
         <Box top={0} position={'absolute'} padding={'2'} align={'center'}>
           <Image
             src={'/GMM-rectangle-logo.png'}
             alt={'Grimoire for the Modern Mage'}
-            paddingBottom={{ base: '20px', lg: '10px' }}
+            width={{ base: '90%', md: '70%' }}
           />
           <Heading
-            marginTop={'-5'}
-            fontSize={{ base: '2xl', md: '3xl', lg: '4xl' }}
+            fontSize={{ base: '1.25rem', md: '2rem', lg: '2.5rem' }}
             fontFamily={'Kalam-Bold'}
             color={'blue.300'}
             align={'center'}
@@ -65,13 +65,19 @@ export default function LandingPage() {
           </Heading>
         </Box>
 
-        <Stack spacing={4} width={'full'} alignItems="center" marginTop={'40'}>
+        <Stack
+          spacing={1}
+          width={{ lg: '85%' }}
+          alignItems="center"
+          marginTop={{ base: '40%', lg: '20%' }}
+        >
           <Text
             padding={2}
             fontSize={{ base: 'md', lg: 'xl' }}
             fontFamily={'Kalam-Light'}
             color={'gray.900'}
             rounded={'lg'}
+            marginX={'-25px'}
             bgGradient="linear-gradient(to top, blue.100, transparent)"
           >
             <strong>The Grimoire for the Modern Mage</strong> is specifically for those exhausted by
@@ -80,11 +86,16 @@ export default function LandingPage() {
             profile will leave you with a personalized list of available spells to learn, prepare,
             and cast, regardless of where you are in your adventure. So, what are you waiting for?
           </Text>
-          <Stack justifyContent="space-evenly">
+          <Stack
+            align="center"
+            paddingBottom={{ base: '10', lg: '-40px' }}
+            spacing={{ base: '1', lg: '4' }}
+          >
             {options.map((option) => (
               <Button
+                key={option}
                 fontFamily={'Kalam-Bold'}
-                fontSize={'xl'}
+                fontSize={{ base: 'sm', md: '', lg: 'xl' }}
                 color={option === 'up' ? 'gray.100' : 'blue.50'}
                 textShadow={
                   '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
@@ -103,7 +114,6 @@ export default function LandingPage() {
                   boxShadow: '3xl',
                 }}
                 onClick={() => handleClick(option)}
-                key={option}
               >
                 {option === 'up' ? "Let's Get Started!" : 'I Already Have An Account'}
               </Button>
@@ -118,15 +128,17 @@ export default function LandingPage() {
                 </ModalBody>
               </ModalContent>
             </Modal>
+            <DemoButton />
           </Stack>
-          <DemoButton />
         </Stack>
+        <Footer />
       </PillPity>
-      <Flex flex={1}>
+      <Flex flex={0.9}>
         <Image
           alt={'Login Image'}
           objectFit={'cover'}
           src={'https://www.publicdomainpictures.net/pictures/30000/velka/old-book.jpg'}
+          zIndex={{ md: '1' }}
         />
       </Flex>
     </Stack>
