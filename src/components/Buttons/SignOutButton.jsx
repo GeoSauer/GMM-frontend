@@ -10,11 +10,11 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import { useAuth } from '../../context/UserContext';
+import { useSignOut } from '../../context/UserContext';
 import { useRef } from 'react';
 
 export default function SignOutButton() {
-  const { signOut } = useAuth();
+  const { signOut } = useSignOut();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
 

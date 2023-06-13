@@ -7,6 +7,7 @@ import Loading from '../PageLayout/Loading';
 import Confetti from 'react-confetti';
 import CreateCharacterButton from '../Buttons/CreateCharacterButton';
 import PillPity from 'pill-pity';
+import Footer from '../PageLayout/Footer';
 
 export default function CharacterPage() {
   const { characterList, levelUp, isLoading } = useCharacter();
@@ -64,6 +65,7 @@ export default function CharacterPage() {
           )}
         </Flex>
       )}
+      <Footer />
     </PillPity>
   );
 }

@@ -41,10 +41,11 @@ export default function UserNav() {
     <Flex alignItems={'center'}>
       {/* <Menu isOpen={isMenuOpen} onOpen={handleMenuOpen} onClose={handleMenuClose}> */}
       <Menu>
-        <MenuButton as={Button} variant={'link'}>
+        <MenuButton as={Button} variant={'link'} aria-label="Menu">
           <Avatar
             size={{ base: 'sm', md: 'md', lg: 'lg' }}
             src={`/${characterInfo.charClass}.png`}
+            alt={`${characterInfo.charClass} avatar`}
             marginTop={'2'}
           />
           <TriangleDownIcon
