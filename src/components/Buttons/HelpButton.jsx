@@ -43,10 +43,10 @@ export default function HelpButton() {
       </MenuItem>
       <Modal isOpen={isOpen} onClose={onClose} initialFocusRef={firstField}>
         <ModalOverlay backdropFilter="blur(2px)" />
-        <ModalContent>
+        <ModalContent margin={2}>
           <ModalCloseButton />
-          <ModalBody padding={10}>
-            <VStack spacing={4}>
+          <ModalBody paddingX={2}>
+            <VStack spacing={2}>
               <HelpTopic
                 title="Prepared Spells"
                 desc="Prepared Spells holds every spell that a character currently has prepared. Here

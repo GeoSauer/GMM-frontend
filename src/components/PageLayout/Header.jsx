@@ -62,13 +62,13 @@ export default function Header() {
           src={'/GMM-rectangle-logo.png'}
           alt={'Grimoire for the Modern Mage'}
           height={{ base: '60px', md: '75px', lg: '90px' }}
-          marginLeft={'-20px'}
+          marginLeft={'-10px'}
         />
         <DesktopNav />
         <Heading
           hideFrom={'751px'}
           fontFamily={'Kalam-Bold'}
-          fontSize={'lg'}
+          fontSize={'.9em'}
           paddingTop={'2'}
           color={'gray.600'}
           textAlign={'center'}
