@@ -45,7 +45,7 @@ export default function SignInForm() {
           (You can sign in with either your Email or Username)
         </Text>
 
-        <Box rounded={'lg'} boxShadow={'lg'} padding={4} width={'full'}>
+        <Box width={'full'}>
           <Formik
             initialValues={{
               email: '',

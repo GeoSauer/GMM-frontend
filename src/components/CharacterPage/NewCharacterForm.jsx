@@ -40,7 +40,7 @@ export default function NewCharacterForm({ onClose }) {
         >
           New Character
         </Heading>
-        <Box rounded={'lg'} boxShadow={'lg'} padding={4} width={'380px'}>
+        <Box width={'full'}>
           <Formik
             initialValues={{
               charName: '',

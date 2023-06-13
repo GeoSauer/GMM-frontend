@@ -9,7 +9,7 @@ import SpellDisplay from './components/Spells/SpellDisplay';
 function App() {
   return (
     <Routes>
-      <Route path="welcome" element={<LandingPage />} />1{' '}
+      <Route path="welcome" element={<LandingPage />} />
       <Route element={<ProtectedRoute />}>
         <Route path="choose-character" element={<CharacterPage />} />
         <Route element={<Layout />}>

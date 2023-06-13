@@ -23,3 +23,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 notes
+
+# development
+/src/services/Character.js
+/src/services/User.js
+/src/services/Spells.js

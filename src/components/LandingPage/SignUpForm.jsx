@@ -66,7 +66,7 @@ export default function SignInForm() {
           (Don&apos;t worry you can add or edit more characters later)
         </Text>
 
-        <Box rounded={'lg'} boxShadow={'lg'} padding={4} width={'full'}>
+        <Box width={'full'}>
           <Formik
             initialValues={{
               email: '',

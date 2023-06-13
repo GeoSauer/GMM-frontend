@@ -38,7 +38,7 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
           Editing {truncatedCharacterName}
         </Heading>
 
-        <Box rounded={'lg'} boxShadow={'lg'} padding={4} width={'380px'}>
+        <Box width={'full'}>
           {isLoading ? (
             <Loading />
           ) : (
