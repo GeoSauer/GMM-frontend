@@ -32,6 +32,8 @@ export default function SpellCard({ spellDetails, spell }) {
   const { spellDetailsList, setSpellDetailsList } = useSpellDetails();
   const [isLoading, setIsLoading] = useState(false);
 
+  const randomImage = Math.floor(Math.random() * 10 + 1);
+
   const classes = spell.classes?.toString().replace(/,/g, ', ');
 
   const findSpellDetails = (spellName) =>
@@ -69,8 +71,10 @@ export default function SpellCard({ spellDetails, spell }) {
           width={{ base: '90vw', md: '60vw', lg: '50vw' }}
           height={{ base: '60px', md: '75px', lg: '90px' }}
           marginTop={'5'}
+          marginBottom={'1'}
           rounded={'3xl'}
-          bgGradient="linear(gray.100 10%, blue.50 50%, yellow.100 90%)"
+          // bgGradient="linear(gray.100 10%, blue.50 50%, yellow.100 90%)"
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
           sx={{
             boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
           }}
@@ -98,111 +102,6 @@ export default function SpellCard({ spellDetails, spell }) {
             </>
           )}
         </Button>
-
-        <HStack>
-          {location.pathname === '/all-spells' &&
-            !spell.known &&
-            spell.level <= characterInfo.casterLvl && <LearnSpellButton spell={spell} />}
-
-          {(location.pathname === '/all-spells' ||
-            location.pathname === '/available-spells' ||
-            location.pathname === '/cantrips') &&
-            spell.known && (
-              <Button
-                isDisabled={true}
-                fontFamily={'Kalam-Bold'}
-                fontSize={{ base: 'lg', lg: 'xl' }}
-                color={'blue.100'}
-                textShadow={
-                  '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
-                }
-                rounded={'full'}
-                height={'40px'}
-                _hover={{
-                  backgroundImage:
-                    'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-                }}
-                sx={{
-                  backgroundImage:
-                    'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-                  boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-                }}
-              >
-                Known
-              </Button>
-            )}
-
-          {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
-            <Button
-              isDisabled={true}
-              fontFamily={'Kalam-Bold'}
-              fontSize={{ base: 'lg', lg: 'xl' }}
-              color={'blue.100'}
-              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
-              rounded={'full'}
-              _hover={{
-                backgroundImage:
-                  'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-              }}
-              sx={{
-                backgroundImage:
-                  'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
-                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-              }}
-            >
-              Learn
-            </Button>
-          )}
-
-          {(location.pathname === '/available-spells' || location.pathname === '/cantrips') &&
-            !spell.known && <LearnSpellButton spell={spell} />}
-
-          {location.pathname === '/known-spells' && !spell.prepared && (
-            <PrepareSpellButton spell={spell} />
-          )}
-
-          {location.pathname === '/known-spells' && spell.prepared && spell.level > 0 && (
-            <Button
-              isDisabled={true}
-              fontFamily={'Kalam-Bold'}
-              fontSize={{ base: 'lg', lg: 'xl' }}
-              color={'blue.100'}
-              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
-              rounded={'full'}
-              _hover={{
-                backgroundImage:
-                  'radial-gradient(circle at 85% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
-              }}
-              sx={{
-                backgroundImage:
-                  'radial-gradient(circle at 85% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
-                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
-              }}
-            >
-              Prepared
-            </Button>
-          )}
-
-          {location.pathname === '/known-spells' && !divineCaster && (
-            <ForgetSpellButton spell={spell} />
-          )}
-
-          {location.pathname === '/known-spells' &&
-            divineCaster &&
-            (spell.fromAll || spell.level === 0) && <ForgetSpellButton spell={spell} />}
-
-          {location.pathname === '/prepared-spells' && spell.level === 0 && (
-            <CastCantripButton spell={spell} spellDetails={spellDetails} />
-          )}
-
-          {location.pathname === '/prepared-spells' && spell.level > 0 && (
-            <CastSpellButton spell={spell} spellDetails={spellDetails} />
-          )}
-
-          {location.pathname === '/prepared-spells' && spell.level > 0 && (
-            <UnprepareSpellButton spell={spell} />
-          )}
-        </HStack>
       </VStack>
 
       <Container maxWidth={{ base: '90vw', md: '60vw', lg: '50vw' }} centerContent>
@@ -231,6 +130,109 @@ export default function SpellCard({ spellDetails, spell }) {
           </Box>
         </Collapse>
       </Container>
+
+      <HStack justify={'center'}>
+        {location.pathname === '/all-spells' &&
+          !spell.known &&
+          spell.level <= characterInfo.casterLvl && <LearnSpellButton spell={spell} />}
+
+        {(location.pathname === '/all-spells' ||
+          location.pathname === '/available-spells' ||
+          location.pathname === '/cantrips') &&
+          spell.known && (
+            <Button
+              isDisabled={true}
+              fontFamily={'Kalam-Bold'}
+              fontSize={{ base: 'lg', lg: 'xl' }}
+              color={'blue.100'}
+              textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
+              rounded={'full'}
+              height={'40px'}
+              _hover={{
+                backgroundImage:
+                  'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+              }}
+              sx={{
+                backgroundImage:
+                  'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+                boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              }}
+            >
+              Known
+            </Button>
+          )}
+
+        {location.pathname === '/all-spells' && spell.level > characterInfo.casterLvl && (
+          <Button
+            isDisabled={true}
+            fontFamily={'Kalam-Bold'}
+            fontSize={{ base: 'lg', lg: 'xl' }}
+            color={'blue.100'}
+            textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
+            rounded={'full'}
+            _hover={{
+              backgroundImage:
+                'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+            }}
+            sx={{
+              backgroundImage:
+                'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
+              boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+            }}
+          >
+            Learn
+          </Button>
+        )}
+
+        {(location.pathname === '/available-spells' || location.pathname === '/cantrips') &&
+          !spell.known && <LearnSpellButton spell={spell} />}
+
+        {location.pathname === '/known-spells' && !spell.prepared && (
+          <PrepareSpellButton spell={spell} />
+        )}
+
+        {location.pathname === '/known-spells' && spell.prepared && spell.level > 0 && (
+          <Button
+            isDisabled={true}
+            fontFamily={'Kalam-Bold'}
+            fontSize={{ base: 'lg', lg: 'xl' }}
+            color={'blue.100'}
+            textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
+            rounded={'full'}
+            _hover={{
+              backgroundImage:
+                'radial-gradient(circle at 85% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
+            }}
+            sx={{
+              backgroundImage:
+                'radial-gradient(circle at 85% 15%, white 1px, aqua 6%, darkblue 60%, aqua 100%)',
+              boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+            }}
+          >
+            Prepared
+          </Button>
+        )}
+
+        {location.pathname === '/known-spells' && !divineCaster && (
+          <ForgetSpellButton spell={spell} />
+        )}
+
+        {location.pathname === '/known-spells' &&
+          divineCaster &&
+          (spell.fromAll || spell.level === 0) && <ForgetSpellButton spell={spell} />}
+
+        {location.pathname === '/prepared-spells' && spell.level === 0 && (
+          <CastCantripButton spell={spell} spellDetails={spellDetails} />
+        )}
+
+        {location.pathname === '/prepared-spells' && spell.level > 0 && (
+          <CastSpellButton spell={spell} spellDetails={spellDetails} />
+        )}
+
+        {location.pathname === '/prepared-spells' && spell.level > 0 && (
+          <UnprepareSpellButton spell={spell} />
+        )}
+      </HStack>
     </>
   );
 }

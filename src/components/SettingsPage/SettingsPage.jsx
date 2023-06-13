@@ -28,7 +28,7 @@ export default function SettingsPage() {
       pattern="church-on-sunday"
       patternFill={'blue.200'}
       as={Flex}
-      minHeight={'100vh'}
+      minHeight={'101vh'}
       justify={'center'}
     >
       <Box
@@ -39,6 +39,7 @@ export default function SettingsPage() {
         margin={10}
         align={'center'}
         height={'200px'}
+        marginTop={'150px'}
       >
         {isLoading ? (
           <Loading />
