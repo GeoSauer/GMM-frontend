@@ -1,6 +1,8 @@
 import agent from './customAgent';
-//TODO switch this over after deploy
+
+//* deployed url
 const SPELLS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/spells';
+//* local url
 // const SPELLS = 'http://localhost:7890/api/v1/spells';
 
 export class Spells {

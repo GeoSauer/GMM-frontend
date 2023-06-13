@@ -1,23 +1,20 @@
 @font-face {
   font-family: 'Message';
-  src: url('/public/fonts/le_Grand_Saut_TEXTUAL.ttf');
+  src: url('/public/fonts/Jellyka-leGrandSautTextual.woff');
 }
 @font-face {
   font-family: 'Title';
-  src: url('/public/fonts/Bitcheese.ttf');
+  src: url('/public/fonts/Bitcheese.woff');
 }
 @font-face {
   font-family: 'Kalam-Light';
-  /* src: url('/public/fonts/IndieFlower-Regular.ttf'); */
-  src: url('/public/fonts/Kalam-Light.ttf');
+  src: url('/public/fonts/Kalam-Light.woff');
 }
 @font-face {
   font-family: 'Kalam-Regular';
-  /* src: url('/public/fonts/IndieFlower-Regular.ttf'); */
-  src: url('/public/fonts/Kalam-Regular.ttf');
+  src: url('/public/fonts/Kalam-Regular.woff');
 }
 @font-face {
   font-family: 'Kalam-Bold';
-  /* src: url('/public/fonts/IndieFlower-Regular.ttf'); */
-  src: url('/public/fonts/Kalam-Bold.ttf');
+  src: url('/public/fonts/Kalam-Bold.woff');
 }

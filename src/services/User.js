@@ -1,14 +1,15 @@
 import agent from './customAgent';
 
-//TODO switch this over after deploy
+//* deployed url
 const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
+//* local url
 // const USERS = 'http://localhost:7890/api/v1/users';
 const USER_KEY = 'USER';
 
 export class User {
   static async signUp(info) {
     const response = await agent.post(`${USERS}/`).send(info);
-    response.user = response.data;
+    response.user = response.body;
     return response;
   }
 
