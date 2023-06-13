@@ -25,6 +25,6 @@ yarn-error.log*
 notes
 
 # development
-/src/services/Character.js
-/src/services/User.js
-/src/services/Spells.js
+../../services/Character.js
+../../services/User.js
+../../services/Spells.js
