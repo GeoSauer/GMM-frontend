@@ -13,6 +13,7 @@ import {
   InputRightElement,
   FormHelperText,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import { Field, Form, Formik } from 'formik';
 import { User } from '../../services/User';
@@ -21,6 +22,8 @@ export default function SignInForm() {
   const { error } = useAuth();
   const { setUserState } = useUser();
   const [show, setShow] = useState(false);
+  const toast = useToast();
+
   const handleClick = () => setShow(!show);
 
   return (
@@ -52,10 +55,19 @@ export default function SignInForm() {
               password: '',
             }}
             onSubmit={async (values, actions) => {
-              actions.setSubmitting(true);
-              const user = await User.signIn(values);
-              setUserState(user.body);
-              actions.setSubmitting(false);
+              try {
+                actions.setSubmitting(true);
+                const user = await User.signIn(values);
+                setUserState(user.body);
+                actions.setSubmitting(false);
+              } catch (error) {
+                toast({
+                  title: error.response.body.message,
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                });
+              }
             }}
           >
             {(props) => (

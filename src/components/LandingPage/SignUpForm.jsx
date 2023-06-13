@@ -1,7 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
-import { useState } from 'react';
-import * as Yup from 'yup';
 import {
   Flex,
   Box,
@@ -16,7 +12,12 @@ import {
   Select,
   FormErrorMessage,
   Text,
+  useToast,
 } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../context/UserContext';
+import { useState } from 'react';
+import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
 import { Character } from '../../services/Character';
 import { useCharacter } from '../../context/CharacterContext';
@@ -27,6 +28,8 @@ export default function SignInForm() {
   const { setCharacterState } = useCharacter();
   const { setUserState } = useUser();
   const [show, setShow] = useState(false);
+  const toast = useToast();
+
   const handleClick = () => setShow(!show);
 
   const SignupSchema = Yup.object().shape({
@@ -76,13 +79,22 @@ export default function SignInForm() {
             }}
             validationSchema={SignupSchema}
             onSubmit={async (values, actions) => {
-              actions.setSubmitting(true);
-              const user = await User.signUp(values);
-              setUserState(user.body);
-              const character = await Character.create(values);
-              setCharacterState(character.id);
-              navigate('/known-spells');
-              actions.setSubmitting(false);
+              try {
+                actions.setSubmitting(true);
+                const user = await User.signUp(values);
+                setUserState(user.body);
+                const character = await Character.create(values);
+                setCharacterState(character.id);
+                navigate('/known-spells');
+                actions.setSubmitting(false);
+              } catch (error) {
+                toast({
+                  title: error.response.body.message,
+                  status: 'error',
+                  duration: 3000,
+                  isClosable: true,
+                });
+              }
             }}
           >
             {(props) => (
