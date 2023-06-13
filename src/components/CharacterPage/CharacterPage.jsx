@@ -14,8 +14,13 @@ export default function CharacterPage() {
   const location = useLocation();
 
   return (
-    <PillPity minHeight={'100vh'} pattern="temple" patternFill={'blue.200'}>
-      <Box top={0} width={'full'} zIndex={100} align={'center'} paddingBottom={1}>
+    <PillPity minHeight={'101vh'} pattern="temple" patternFill={'blue.200'}>
+      <Box
+        width={'full'}
+        zIndex={100}
+        align={'center'}
+        paddingTop={location.pathname === '/characters' ? '100px' : '0'}
+      >
         {location.pathname === '/choose-character' && (
           <Box paddingTop={'3'} backdropFilter="blur(2px)">
             <Heading fontFamily={'Title'} fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}>

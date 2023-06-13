@@ -18,27 +18,29 @@ import { TriangleDownIcon } from '@chakra-ui/icons';
 import HelpButton from '../Buttons/HelpButton';
 import MobileNav from './MobileNav';
 import LongRestButton from '../Buttons/LongRestButton';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function UserNav() {
   const { characterInfo } = useCharacter();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  //TODO circle back to this.  If it's implemented the whole screen shifts on menu open
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const handleMenuOpen = () => {
-    setIsMenuOpen(true);
-    document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-  };
+  // const handleMenuOpen = () => {
+  //   setIsMenuOpen(true);
+  //   document.body.style.overflow = 'hidden';
+  //   document.body.style.position = 'fixed';
+  // };
 
-  const handleMenuClose = () => {
-    setIsMenuOpen(false);
-    document.body.style.overflow = 'auto';
-    document.body.style.position = 'static';
-  };
+  // const handleMenuClose = () => {
+  //   setIsMenuOpen(false);
+  //   document.body.style.overflow = 'auto';
+  //   document.body.style.position = 'static';
+  // };
 
   return (
     <Flex alignItems={'center'}>
-      <Menu isOpen={isMenuOpen} onOpen={handleMenuOpen} onClose={handleMenuClose}>
+      {/* <Menu isOpen={isMenuOpen} onOpen={handleMenuOpen} onClose={handleMenuClose}> */}
+      <Menu>
         <MenuButton as={Button} variant={'link'}>
           <Avatar
             size={{ base: 'sm', md: 'md', lg: 'lg' }}
