@@ -84,20 +84,6 @@ export default function SpellDisplay() {
       pattern="topography"
       patternFill={'blue.200'}
     >
-      {/* {isLoading ? (
-        <Loading />
-      ) : location.pathname === '/all-spells' ? (
-        allSpellCards
-      ) : location.pathname === '/available-spells' ? (
-        availableSpellCards
-      ) : location.pathname === '/cantrips' ? (
-        cantripCards
-      ) : location.pathname === '/known-spells' ? (
-        knownSpellCards
-      ) : location.pathname === '/prepared-spells' ? (
-        preparedSpellCards
-      ) : null}
- */}
       {isLoading ? (
         <Loading />
       ) : location.pathname === '/all-spells' ? (
