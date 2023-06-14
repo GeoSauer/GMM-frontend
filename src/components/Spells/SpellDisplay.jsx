@@ -18,6 +18,8 @@ export default function SpellDisplay() {
   } = useSpellDetails();
   const location = useLocation();
 
+  const randomImage = Math.floor(Math.random() * 10 + 1);
+
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
 
@@ -107,10 +109,9 @@ export default function SpellDisplay() {
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
@@ -121,10 +122,9 @@ export default function SpellDisplay() {
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
@@ -135,10 +135,9 @@ export default function SpellDisplay() {
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
@@ -149,10 +148,9 @@ export default function SpellDisplay() {
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like you haven&apos;t learned any spells, better head to{' '}
           <NavLink to="/available-spells" alt="available" title="Available Spells">
@@ -167,10 +165,9 @@ export default function SpellDisplay() {
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like you don&apos;t have any spells prepared, better head over to{' '}
           <NavLink to="/known-spells" alt="known" title="Known Spells">
