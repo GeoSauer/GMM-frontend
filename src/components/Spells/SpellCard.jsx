@@ -64,7 +64,7 @@ export default function SpellCard({ spellDetails, spell }) {
 
   return (
     <>
-      <VStack>
+      <VStack maxWidth={'90vw'}>
         <Button
           onClick={location.pathname === '/prepared-spells' ? onToggle : handleClick}
           display={'block'}

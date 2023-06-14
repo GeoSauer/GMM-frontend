@@ -14,11 +14,10 @@ export default function SpellSlots() {
   return (
     <>
       <Box
-        padding="15px"
+        paddingY={'15px'}
         marginLeft="-16px"
         marginRight="-16px"
-        bg="blue.200"
-        shadow="lg"
+        shadow={'lg'}
         marginBottom={4}
         marginTop={'1'}
         rounded={'full'}

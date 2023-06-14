@@ -73,8 +73,6 @@ export default function SpellDisplay() {
   const knownSpellCards = generateSpellCards(knownSpells);
   const preparedSpellCards = generateSpellCards(preparedSpells);
 
-  if (isLoading) return <Loading />;
-
   return (
     <PillPity
       as={Flex}
@@ -86,13 +84,37 @@ export default function SpellDisplay() {
       pattern="topography"
       patternFill={'blue.200'}
     >
-      {location.pathname === '/all-spells' && allSpellCards}
-      {location.pathname === '/available-spells' && availableSpellCards}
-      {location.pathname === '/cantrips' && cantripCards}
-      {location.pathname === '/known-spells' && knownSpellCards}
-      {location.pathname === '/prepared-spells' && preparedSpellCards}
+      {/* {isLoading ? (
+        <Loading />
+      ) : location.pathname === '/all-spells' ? (
+        allSpellCards
+      ) : location.pathname === '/available-spells' ? (
+        availableSpellCards
+      ) : location.pathname === '/cantrips' ? (
+        cantripCards
+      ) : location.pathname === '/known-spells' ? (
+        knownSpellCards
+      ) : location.pathname === '/prepared-spells' ? (
+        preparedSpellCards
+      ) : null}
+ */}
+      {isLoading ? (
+        <Loading />
+      ) : location.pathname === '/all-spells' ? (
+        allSpellCards
+      ) : location.pathname === '/available-spells' ? (
+        availableSpellCards
+      ) : location.pathname === '/cantrips' ? (
+        cantripCards
+      ) : location.pathname === '/known-spells' ? (
+        knownSpellCards
+      ) : location.pathname === '/prepared-spells' ? (
+        preparedSpellCards
+      ) : null}
 
-      {location.pathname === '/all-spells' && !allSpells.length && (
+      {isLoading ? (
+        <Loading />
+      ) : location.pathname === '/all-spells' && !allSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -106,8 +128,7 @@ export default function SpellDisplay() {
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      )}
-      {location.pathname === '/available-spells' && !availableSpells.length && (
+      ) : location.pathname === '/available-spells' && !availableSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -121,8 +142,7 @@ export default function SpellDisplay() {
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      )}
-      {location.pathname === '/cantrips' && !cantrips.length && (
+      ) : location.pathname === '/cantrips' && !cantrips.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -136,8 +156,7 @@ export default function SpellDisplay() {
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      )}
-      {location.pathname === '/known-spells' && !knownSpells.length && (
+      ) : location.pathname === '/known-spells' && !knownSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -155,8 +174,7 @@ export default function SpellDisplay() {
           </NavLink>{' '}
           and get studying!
         </Text>
-      )}
-      {location.pathname === '/prepared-spells' && !preparedSpells.length && (
+      ) : location.pathname === '/prepared-spells' && !preparedSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -174,7 +192,7 @@ export default function SpellDisplay() {
           </NavLink>{' '}
           and remedy that!
         </Text>
-      )}
+      ) : null}
     </PillPity>
   );
 }
