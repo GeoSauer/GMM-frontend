@@ -141,6 +141,9 @@ export default function UserNav() {
               <Link
                 href="https://docs.google.com/forms/d/e/1FAIpQLSdMFOu6Y6diM2CZnwc1Fo9UIwCsxN28twFSV0SHUclR4QCV1g/viewform?usp=sf_link"
                 target="none"
+                _hover={{
+                  textDecoration: 'none',
+                }}
               >
                 Feedback
               </Link>
