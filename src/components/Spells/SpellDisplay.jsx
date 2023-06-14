@@ -18,6 +18,8 @@ export default function SpellDisplay() {
   } = useSpellDetails();
   const location = useLocation();
 
+  const randomImage = Math.floor(Math.random() * 10 + 1);
+
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
 
@@ -73,8 +75,6 @@ export default function SpellDisplay() {
   const knownSpellCards = generateSpellCards(knownSpells);
   const preparedSpellCards = generateSpellCards(preparedSpells);
 
-  if (isLoading) return <Loading />;
-
   return (
     <PillPity
       as={Flex}
@@ -86,68 +86,71 @@ export default function SpellDisplay() {
       pattern="topography"
       patternFill={'blue.200'}
     >
-      {location.pathname === '/all-spells' && allSpellCards}
-      {location.pathname === '/available-spells' && availableSpellCards}
-      {location.pathname === '/cantrips' && cantripCards}
-      {location.pathname === '/known-spells' && knownSpellCards}
-      {location.pathname === '/prepared-spells' && preparedSpellCards}
+      {isLoading ? (
+        <Loading />
+      ) : location.pathname === '/all-spells' ? (
+        allSpellCards
+      ) : location.pathname === '/available-spells' ? (
+        availableSpellCards
+      ) : location.pathname === '/cantrips' ? (
+        cantripCards
+      ) : location.pathname === '/known-spells' ? (
+        knownSpellCards
+      ) : location.pathname === '/prepared-spells' ? (
+        preparedSpellCards
+      ) : null}
 
-      {location.pathname === '/all-spells' && !allSpells.length && (
+      {isLoading ? (
+        <Loading />
+      ) : location.pathname === '/all-spells' && !allSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      )}
-      {location.pathname === '/available-spells' && !availableSpells.length && (
+      ) : location.pathname === '/available-spells' && !availableSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      )}
-      {location.pathname === '/cantrips' && !cantrips.length && (
+      ) : location.pathname === '/cantrips' && !cantrips.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      )}
-      {location.pathname === '/known-spells' && !knownSpells.length && (
+      ) : location.pathname === '/known-spells' && !knownSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like you haven&apos;t learned any spells, better head to{' '}
           <NavLink to="/available-spells" alt="available" title="Available Spells">
@@ -155,18 +158,16 @@ export default function SpellDisplay() {
           </NavLink>{' '}
           and get studying!
         </Text>
-      )}
-      {location.pathname === '/prepared-spells' && !preparedSpells.length && (
+      ) : location.pathname === '/prepared-spells' && !preparedSpells.length ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
           textAlign={'center'}
           background={'gray.100'}
           padding={'4'}
-          borderRadius={'20'}
+          borderRadius={'5'}
           margin={'5'}
-          border={'2px solid'}
-          borderColor={'gray.500'}
+          style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
           Looks like you don&apos;t have any spells prepared, better head over to{' '}
           <NavLink to="/known-spells" alt="known" title="Known Spells">
@@ -174,7 +175,7 @@ export default function SpellDisplay() {
           </NavLink>{' '}
           and remedy that!
         </Text>
-      )}
+      ) : null}
     </PillPity>
   );
 }

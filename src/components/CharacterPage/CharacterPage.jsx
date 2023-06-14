@@ -31,7 +31,7 @@ export default function CharacterPage() {
                 : userInfo.username}
               !
             </Heading>
-            <Heading fontSize={{ base: 'xl', md: '3xl', lg: '4xl' }} fontFamily={'Title'}>
+            <Heading fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }} fontFamily={'Title'}>
               Which Character Are You Playing Today?
             </Heading>
           </Box>
@@ -49,6 +49,7 @@ export default function CharacterPage() {
           flexWrap={'wrap'}
           paddingTop={5}
           paddingBottom={20}
+          paddingX={{ lg: 20 }}
         >
           {characterList.map((character) => {
             return <CharacterCard key={character.id} {...character} />;

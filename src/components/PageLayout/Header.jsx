@@ -46,18 +46,18 @@ export default function Header() {
 
   return (
     <Box
-      position="fixed"
+      position={'fixed'}
       top={0}
       left={0}
-      width="100%"
+      width={'full'}
       transition="transform 0.3s"
       transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-200%)'}
       background={'gray.200'}
       paddingX={4}
       zIndex={50}
-      height={{ base: '80px', md: '100px', lg: '110px' }}
+      height={{ base: '90px', md: '100px', lg: '110px' }}
     >
-      <HStack justifyContent={'space-evenly'}>
+      <HStack justifyContent={'space-between'}>
         <Image
           src={'/GMM-rectangle-logo.png'}
           alt={'Grimoire for the Modern Mage'}
@@ -68,7 +68,7 @@ export default function Header() {
         <Heading
           hideFrom={'751px'}
           fontFamily={'Kalam-Bold'}
-          fontSize={'.9em'}
+          fontSize={{ base: '.9em', sm: '1.5rem' }}
           paddingTop={'2'}
           color={'gray.600'}
           textAlign={'center'}
