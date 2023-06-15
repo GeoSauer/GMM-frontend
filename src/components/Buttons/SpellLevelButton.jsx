@@ -22,7 +22,7 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
-import { getSuffix } from '../../utils/utils';
+import { getSuffix, fullModifier } from '../../utils/utils';
 
 export default function SpellLevelButton({ spell, spellDetails }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,31 +31,6 @@ export default function SpellLevelButton({ spell, spellDetails }) {
   const [isDisabled, setIsDisabled] = useState(false);
   const toast = useToast();
   const { cast } = useSpell();
-
-  const fullModifier = (modifier) => {
-    let value;
-    switch (modifier) {
-      case 'STR':
-        value = 'Strength';
-        break;
-      case 'DEX':
-        value = 'Dexterity';
-        break;
-      case 'CON':
-        value = 'Constitution';
-        break;
-      case 'INT':
-        value = 'Intelligence';
-        break;
-      case 'WIS':
-        value = 'Wisdom';
-        break;
-      case 'CHA':
-        value = 'Charisma';
-        break;
-    }
-    return value;
-  };
 
   const damageAtSlotLevel = spellDetails?.damage.damageAtSlotLevel
     ? Object.keys(spellDetails.damage.damageAtSlotLevel)

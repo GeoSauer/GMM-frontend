@@ -34,6 +34,7 @@ export default function ForgetSpellButton({ spell }) {
     setIsDisabled(true);
     await forget(charId, spell.id);
     spell.known = false;
+    spell.prepared = false;
 
     const removeForgottenSpell = (spellArray) =>
       spellArray.filter((forgottenSpell) => forgottenSpell.name !== spell.name);

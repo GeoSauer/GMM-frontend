@@ -18,33 +18,10 @@ import {
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
 import gfm from 'remark-gfm';
 import { useCharacter } from '../../context/CharacterContext';
+import { fullModifier } from '../../utils/utils';
 
 export default function SpellDetail({ spellDetails }) {
   const { characterInfo } = useCharacter();
-  const fullModifier = (modifier) => {
-    let value;
-    switch (modifier) {
-      case 'STR':
-        value = 'Strength';
-        break;
-      case 'DEX':
-        value = 'Dexterity';
-        break;
-      case 'CON':
-        value = 'Constitution';
-        break;
-      case 'INT':
-        value = 'Intelligence';
-        break;
-      case 'WIS':
-        value = 'Wisdom';
-        break;
-      case 'CHA':
-        value = 'Charisma';
-        break;
-    }
-    return value;
-  };
 
   return (
     <>

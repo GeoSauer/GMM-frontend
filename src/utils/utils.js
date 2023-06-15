@@ -18,4 +18,29 @@ const truncateCharacterName = (character) => {
   return truncatedCharacterName;
 };
 
-module.exports = { getSuffix, truncateCharacterName };
+const fullModifier = (modifier) => {
+  let value;
+  switch (modifier) {
+    case 'STR':
+      value = 'Strength';
+      break;
+    case 'DEX':
+      value = 'Dexterity';
+      break;
+    case 'CON':
+      value = 'Constitution';
+      break;
+    case 'INT':
+      value = 'Intelligence';
+      break;
+    case 'WIS':
+      value = 'Wisdom';
+      break;
+    case 'CHA':
+      value = 'Charisma';
+      break;
+  }
+  return value;
+};
+
+module.exports = { getSuffix, truncateCharacterName, fullModifier };
