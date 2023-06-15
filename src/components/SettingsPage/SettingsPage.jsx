@@ -94,7 +94,7 @@ export default function SettingsPage() {
                       'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                     boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   }}
-                  isLoading={props.isSubmitting}
+                  isDisabled={props.isSubmitting}
                   type="submit"
                 >
                   Submit

@@ -14,6 +14,7 @@ import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
+import { useState } from 'react';
 
 export default function PrepareSpellButton({ spell }) {
   const toast = useToast();
@@ -22,8 +23,10 @@ export default function PrepareSpellButton({ spell }) {
   const { characterInfo } = useCharacter();
   const { preparedSpells, setPreparedSpells, spellDetailsList, setSpellDetailsList } =
     useSpellDetails();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handlePrepare = async (charId, prepared, onClose) => {
+    setIsDisabled(true);
     await prepare({ charId, spellId: spell.id, prepared });
     spell.prepared = true;
 
@@ -116,6 +119,7 @@ export default function PrepareSpellButton({ spell }) {
                     boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   }}
                   onClick={() => handlePrepare(characterInfo.id, true, onClose)}
+                  isDisabled={isDisabled}
                 >
                   Yup!
                 </Button>

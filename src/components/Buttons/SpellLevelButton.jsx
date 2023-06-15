@@ -28,6 +28,7 @@ export default function SpellLevelButton({ spell, spellDetails }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { characterInfo, setCharacterInfo } = useCharacter();
   const [slotLevel, setSlotLevel] = useState('');
+  const [isDisabled, setIsDisabled] = useState(false);
   const toast = useToast();
   const { cast } = useSpell();
 
@@ -61,25 +62,36 @@ export default function SpellLevelButton({ spell, spellDetails }) {
     : [];
 
   const handleCast = async (charId, slotLevel) => {
-    if (slotLevel) {
-      const suffix = getSuffix(slotLevel);
-      if (spell.level > 0) {
-        await cast(charId, slotLevel);
-        const availableSlots = characterInfo[`level${slotLevel}SpellSlots`];
-        characterInfo[`level${slotLevel}SpellSlots`] = availableSlots - 1;
-        setCharacterInfo({ ...characterInfo, availableSlots });
+    setIsDisabled(true);
+    setTimeout(() => setIsDisabled(false), 1500);
+    try {
+      if (slotLevel) {
+        const suffix = getSuffix(slotLevel);
+        if (spell.level > 0) {
+          await cast(charId, slotLevel);
+          const availableSlots = characterInfo[`level${slotLevel}SpellSlots`];
+          characterInfo[`level${slotLevel}SpellSlots`] = availableSlots - 1;
+          setCharacterInfo({ ...characterInfo, availableSlots });
+        }
+        onClose();
+        toast({
+          title: `${spell.name} cast at ${slotLevel}
+				${suffix}-Level!`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: 'Please choose a level!',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
       }
-      onClose();
+    } catch (error) {
       toast({
-        title: `${spell.name} cast at ${slotLevel}
-      ${suffix}-Level!`,
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      });
-    } else {
-      toast({
-        title: 'Please choose a level!',
+        title: error.response.body.message,
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -159,6 +171,7 @@ export default function SpellLevelButton({ spell, spellDetails }) {
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
               onClick={() => handleCast(characterInfo.id, slotLevel)}
+              isDisabled={isDisabled}
             >
               Cast
             </Button>

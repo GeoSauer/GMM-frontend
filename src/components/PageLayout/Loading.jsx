@@ -1,10 +1,10 @@
 import { Center } from '@chakra-ui/react';
-import { RiseLoader } from 'react-spinners';
+import { PropagateLoader } from 'react-spinners';
 
 export default function Loading() {
   return (
     <Center>
-      <RiseLoader />
+      <PropagateLoader color={'darkgray'} />
     </Center>
   );
 }

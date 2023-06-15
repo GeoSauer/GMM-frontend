@@ -2,9 +2,11 @@ import { Button } from '@chakra-ui/react';
 import { useUser } from '../../context/UserContext';
 import { Character } from '../../services/Character';
 import { User } from '../../services/User';
+import { useState } from 'react';
 
 export default function DemoButton() {
   const { setUserState } = useUser();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const demoUser = {
     email: `demo${Math.floor(Math.random() * 9000) + 100}@test.com`,
@@ -25,6 +27,7 @@ export default function DemoButton() {
   ];
 
   const handleClick = async () => {
+    setIsDisabled(true);
     const user = await User.signUp(demoUser);
     await Promise.all(characters.map((character) => Character.create(character)));
     setUserState(user.body);
@@ -48,6 +51,7 @@ export default function DemoButton() {
         boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
       }}
       onClick={handleClick}
+      isDisabled={isDisabled}
     >
       Demo
     </Button>

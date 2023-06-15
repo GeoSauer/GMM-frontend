@@ -58,7 +58,7 @@ export default function UserNav() {
 
           {/* //* MOBILE NAVIGATION */}
           <Stack hideFrom={'751px'}>
-            <MenuGroup title="Spell Pages" fontFamily={'Kalam-Bold'} fontSize={'sm'} marginY={'0'}>
+            <MenuGroup title="Spell Lists:" fontFamily={'Kalam-Bold'} fontSize={'sm'} marginY={'0'}>
               <MenuItem
                 value="prepared"
                 fontFamily={'Kalam-Regular'}
@@ -109,12 +109,11 @@ export default function UserNav() {
                 </NavLink>
               </MenuItem>
             </MenuGroup>
+            <MenuDivider />
           </Stack>
           {/* //* MOBILE NAVIGATION */}
 
-          <MenuDivider />
-
-          <MenuGroup title="Profile" fontFamily={'Kalam-Bold'} fontSize={{ base: 'sm', lg: 'md' }}>
+          <MenuGroup title="Profile:" fontFamily={'Kalam-Bold'} fontSize={{ base: 'sm', lg: 'md' }}>
             <MenuItem
               fontFamily={'Kalam-Regular'}
               fontSize={{ base: 'sm', lg: 'md' }}

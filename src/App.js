@@ -6,6 +6,7 @@ import CharacterPage from './components/CharacterPage/CharacterPage';
 import SettingsPage from './components/SettingsPage/SettingsPage';
 import SpellDisplay from './components/Spells/SpellDisplay';
 import { useEffect } from 'react';
+import { Box } from '@chakra-ui/react';
 
 function App() {
   function ScrollToTop() {
@@ -17,8 +18,9 @@ function App() {
 
     return null;
   }
+
   return (
-    <>
+    <Box overflow={'hidden'} width={'100vw'}>
       <ScrollToTop />
       <Routes>
         <Route path="welcome" element={<LandingPage />} />
@@ -38,7 +40,7 @@ function App() {
         </Route>
         <Route path="*" element={<Navigate replace to="prepared-spells" />} />
       </Routes>
-    </>
+    </Box>
   );
 }
 

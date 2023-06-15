@@ -13,6 +13,7 @@ import {
 import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
+import { useState } from 'react';
 
 export default function UnprepareSpellButton({ spell }) {
   const toast = useToast();
@@ -20,8 +21,10 @@ export default function UnprepareSpellButton({ spell }) {
   const { unprepare, error } = useSpell();
   const { characterInfo } = useCharacter();
   const { preparedSpells, setPreparedSpells, knownSpells, setKnownSpells } = useSpellDetails();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleUnprepare = async (charId, prepared, onClose) => {
+    setIsDisabled(true);
     await unprepare({ charId, spellId: spell.id, prepared });
     spell.prepared = false;
 
@@ -107,6 +110,7 @@ export default function UnprepareSpellButton({ spell }) {
                     boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   }}
                   onClick={() => handleUnprepare(characterInfo.id, false, onClose)}
+                  isDisabled={isDisabled}
                 >
                   Yes
                 </Button>

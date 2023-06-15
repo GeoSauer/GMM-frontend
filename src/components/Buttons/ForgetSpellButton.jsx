@@ -13,11 +13,13 @@ import {
 import { useRef } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
+import { useState } from 'react';
 
 export default function ForgetSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
   const { forget, error } = useSpell();
+  const [isDisabled, setIsDisabled] = useState(false);
   const { characterInfo } = useCharacter();
   const {
     knownSpells,
@@ -29,6 +31,7 @@ export default function ForgetSpellButton({ spell }) {
   } = useSpellDetails();
 
   const handleForget = async (charId, onClose) => {
+    setIsDisabled(true);
     await forget(charId, spell.id);
     spell.known = false;
 
@@ -104,6 +107,7 @@ export default function ForgetSpellButton({ spell }) {
                     boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                   }}
                   onClick={() => handleForget(characterInfo.id, onClose)}
+                  isDisabled={isDisabled}
                 >
                   Yup!
                 </Button>

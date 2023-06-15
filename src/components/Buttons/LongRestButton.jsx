@@ -12,14 +12,18 @@ import {
 import { useCharacter } from '../../context/CharacterContext';
 import { Character } from '../../services/Character';
 import { useRef } from 'react';
+import { useState } from 'react';
 
 export default function LongRestButton() {
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { firstField } = useRef();
   const { characterInfo, setCharacterInfo } = useCharacter();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleLongRest = async (onClose) => {
+    setIsDisabled(true);
+    setTimeout(() => setIsDisabled(false), 1500);
     const restedCharacter = await Character.updateInfo(characterInfo);
     setCharacterInfo(restedCharacter);
     onClose();
@@ -71,6 +75,7 @@ export default function LongRestButton() {
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
               onClick={() => handleLongRest(onClose)}
+              isDisabled={isDisabled}
             >
               Yes please! So tired!
             </Button>

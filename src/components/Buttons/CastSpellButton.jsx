@@ -12,12 +12,16 @@ import {
 } from '@chakra-ui/react';
 import SpellLevelButton from './SpellLevelButton';
 import { useRef } from 'react';
+import { useState } from 'react';
 
 export default function CastSpellButton({ spell, spellDetails }) {
   const toast = useToast();
   const initRef = useRef();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleRitual = (onClose) => {
+    setIsDisabled(true);
+    setTimeout(() => setIsDisabled(false), 1500);
     onClose();
     toast({
       title: `${spell.name} cast as ritual!`,
@@ -90,6 +94,7 @@ export default function CastSpellButton({ spell, spellDetails }) {
                     }}
                     ref={initRef}
                     onClick={() => handleRitual(onClose)}
+                    isDisabled={isDisabled}
                   >
                     As a ritual
                   </Button>
