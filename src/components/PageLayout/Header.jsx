@@ -56,6 +56,7 @@ export default function Header() {
       paddingX={4}
       zIndex={50}
       height={{ base: '90px', md: '100px', lg: '110px' }}
+      maxWidth={'100vw'}
     >
       <HStack justifyContent={'space-between'}>
         <Image

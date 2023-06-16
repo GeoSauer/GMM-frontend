@@ -22,38 +22,18 @@ import {
 } from '@chakra-ui/react';
 import { useRef } from 'react';
 import { useCharacter } from '../../context/CharacterContext';
+import { useState } from 'react';
+import { fullModifier } from '../../utils/utils';
 
 export default function CastCantripButton({ spellDetails, spell }) {
   const toast = useToast();
   const initRef = useRef();
   const { characterInfo } = useCharacter();
-
-  const fullModifier = (modifier) => {
-    let value;
-    switch (modifier) {
-      case 'STR':
-        value = 'Strength';
-        break;
-      case 'DEX':
-        value = 'Dexterity';
-        break;
-      case 'CON':
-        value = 'Constitution';
-        break;
-      case 'INT':
-        value = 'Intelligence';
-        break;
-      case 'WIS':
-        value = 'Wisdom';
-        break;
-      case 'CHA':
-        value = 'Charisma';
-        break;
-    }
-    return value;
-  };
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleCantrip = (onClose) => {
+    setIsDisabled(true);
+    setTimeout(() => setIsDisabled(false), 1500);
     onClose();
     toast({
       title: `${spell.name} cast!`,
@@ -123,6 +103,7 @@ export default function CastCantripButton({ spellDetails, spell }) {
                   }}
                   ref={initRef}
                   onClick={() => handleCantrip(onClose)}
+                  isDisabled={isDisabled}
                 >
                   Yup!
                 </Button>

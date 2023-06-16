@@ -12,7 +12,7 @@ import {
 
 export default function Footer() {
   return (
-    <Box background={'gray.200'} position={'fixed'} bottom={'0px'} width={'full'}>
+    <Box background={'gray.200'} position={'fixed'} bottom={'0px'} width={'100vw'}>
       <Flex height={'6'} alignItems={'center'} justifyContent={'center'}>
         <Text
           as={'span'}

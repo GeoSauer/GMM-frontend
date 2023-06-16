@@ -5,6 +5,7 @@ import SpellCard from './SpellCard';
 import { NavLink, useLocation } from 'react-router-dom';
 import { getSuffix } from '../../utils/utils';
 import PillPity from 'pill-pity';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function SpellDisplay() {
   const {
@@ -17,6 +18,7 @@ export default function SpellDisplay() {
     isLoading,
   } = useSpellDetails();
   const location = useLocation();
+  const { characterInfo } = useCharacter();
 
   const randomImage = Math.floor(Math.random() * 10 + 1);
 
@@ -102,7 +104,11 @@ export default function SpellDisplay() {
 
       {isLoading ? (
         <Loading />
-      ) : location.pathname === '/all-spells' && !allSpells.length ? (
+      ) : (location.pathname === '/all-spells' && !allSpells.length) ||
+        (location.pathname === '/available-spells' &&
+          !availableSpells.length &&
+          characterInfo.charClass !== 'Ranger') ||
+        (location.pathname === '/cantrips' && !cantrips.length) ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -115,7 +121,12 @@ export default function SpellDisplay() {
         >
           Looks like the server is acting up. Try refreshing the page or come back later, sorry!
         </Text>
-      ) : location.pathname === '/available-spells' && !availableSpells.length ? (
+      ) : (location.pathname === '/available-spells' &&
+          !availableSpells.length &&
+          characterInfo.charClass === 'Ranger') ||
+        (location.pathname === '/known-spells' &&
+          !knownSpells.length &&
+          characterInfo.charClass === 'Paladin') ? (
         <Text
           fontSize={{ base: '2xl', lg: '4xl' }}
           fontFamily={'Message'}
@@ -126,20 +137,7 @@ export default function SpellDisplay() {
           margin={'5'}
           style={{ backgroundImage: `url(${randomImage}.png)` }}
         >
-          Looks like the server is acting up. Try refreshing the page or come back later, sorry!
-        </Text>
-      ) : location.pathname === '/cantrips' && !cantrips.length ? (
-        <Text
-          fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Message'}
-          textAlign={'center'}
-          background={'gray.100'}
-          padding={'4'}
-          borderRadius={'5'}
-          margin={'5'}
-          style={{ backgroundImage: `url(${randomImage}.png)` }}
-        >
-          Looks like the server is acting up. Try refreshing the page or come back later, sorry!
+          Sorry buddy, you don&apos;t get any spells until you&apos;re at least level 2 😭
         </Text>
       ) : location.pathname === '/known-spells' && !knownSpells.length ? (
         <Text

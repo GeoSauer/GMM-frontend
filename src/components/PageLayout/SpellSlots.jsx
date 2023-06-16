@@ -20,7 +20,7 @@ export default function SpellSlots() {
         shadow={'lg'}
         marginBottom={4}
         marginTop={'1'}
-        rounded={'full'}
+        maxWidth={'100vw'}
         sx={{
           backgroundImage:
             'radial-gradient(circle at 65% 15%, lightgray 3%, gray 60%, lightgray 100%)',

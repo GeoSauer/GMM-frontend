@@ -15,12 +15,14 @@ import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { useSpellDetails } from '../../context/SpellContext';
 import { Spells } from '../../services/Spells';
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function LearnSpellButton({ spell }) {
   const toast = useToast();
   const initRef = useRef();
   const location = useLocation();
   const { learn, error } = useSpell();
+  const [isDisabled, setIsDisabled] = useState(false);
   const { characterInfo } = useCharacter();
   const {
     allSpells,
@@ -36,6 +38,7 @@ export default function LearnSpellButton({ spell }) {
   } = useSpellDetails();
 
   const handleLearn = async (charId, onClose) => {
+    setIsDisabled(true);
     if (location.pathname === '/all-spells') {
       spell.fromAll = true;
     }
@@ -138,6 +141,7 @@ export default function LearnSpellButton({ spell }) {
                   }}
                   ref={initRef}
                   onClick={() => handleLearn(characterInfo.id, onClose)}
+                  isDisabled={isDisabled}
                 >
                   Yes!
                 </Button>

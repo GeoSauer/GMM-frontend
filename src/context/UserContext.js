@@ -1,8 +1,6 @@
 import { useState, useContext, createContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { getLocalUser, storeLocalUser } from '../services/localStorage';
 import { User } from '../services/User.js';
-import { useCharacter } from './CharacterContext';
 
 const UserContext = createContext();
 
@@ -43,20 +41,4 @@ export default function UserProvider({ children }) {
 
 export function useUser() {
   return useContext(UserContext);
-}
-
-export function useSignOut() {
-  const { setUserState } = useContext(UserContext);
-  const { setCharacterState } = useCharacter();
-  const { userInfo } = useUser();
-  const navigate = useNavigate();
-
-  const signOut = async () => {
-    userInfo.demo ? await User.delete() : await User.signOut();
-    setUserState(null);
-    setCharacterState(null);
-    navigate('welcome', { replace: true });
-  };
-
-  return { signOut };
 }

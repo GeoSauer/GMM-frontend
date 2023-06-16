@@ -10,13 +10,28 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
-import { useSignOut } from '../../context/UserContext';
+import { useUser } from '../../context/UserContext';
 import { useRef } from 'react';
+import { useState } from 'react';
+import { useCharacter } from '../../context/CharacterContext';
+import { useNavigate } from 'react-router-dom';
+import { User } from '../../services/User';
 
 export default function SignOutButton() {
-  const { signOut } = useSignOut();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
+  const { setUserState, userInfo } = useUser();
+  const { setCharacterState } = useCharacter();
+  const navigate = useNavigate();
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const handleSignOut = async () => {
+    setIsDisabled(true);
+    userInfo.demo ? await User.delete() : await User.signOut();
+    setUserState(null);
+    setCharacterState(null);
+    navigate('welcome', { replace: true });
+  };
 
   return (
     <>
@@ -56,7 +71,8 @@ export default function SignOutButton() {
                   'radial-gradient(circle at 85% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
-              onClick={signOut}
+              onClick={handleSignOut}
+              isDisabled={isDisabled}
             >
               Confirm
             </Button>
