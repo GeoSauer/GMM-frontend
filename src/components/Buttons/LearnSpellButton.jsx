@@ -23,7 +23,7 @@ export default function LearnSpellButton({ spell }) {
   const location = useLocation();
   const { learn, error } = useSpell();
   const [isDisabled, setIsDisabled] = useState(false);
-  const { characterInfo } = useCharacter();
+  const { characterInfo, noSpellsAtLvl1 } = useCharacter();
   const {
     allSpells,
     setAllSpells,
@@ -92,6 +92,7 @@ export default function LearnSpellButton({ spell }) {
         <>
           <PopoverTrigger>
             <Button
+              isDisabled={noSpellsAtLvl1}
               fontFamily={'Kalam-Bold'}
               fontSize={{ base: 'lg', lg: 'xl' }}
               color={'blue.100'}
