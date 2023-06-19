@@ -11,12 +11,12 @@ import {
   MenuList,
   Stack,
 } from '@chakra-ui/react';
-import UserInfo from '../PageLayout/UserInfo';
+import CharacterInfo from '../PageLayout/CharacterInfo';
 import { NavLink } from 'react-router-dom';
 import SignOutButton from '../Buttons/SignOutButton';
 import { useCharacter } from '../../context/CharacterContext';
 import { TriangleDownIcon } from '@chakra-ui/icons';
-import HelpButton from '../Buttons/HelpButton';
+import HelpButton from '../Help/HelpButton';
 import LongRestButton from '../Buttons/LongRestButton';
 import { useState } from 'react';
 
@@ -51,7 +51,7 @@ export default function UserNav() {
           />
         </MenuButton>
         <MenuList paddingLeft={'2'} style={{ maxHeight: 'calc(100vh - 60px)', overflowY: 'auto' }}>
-          <UserInfo />
+          <CharacterInfo />
           <MenuDivider />
           <LongRestButton />
           <MenuDivider />
