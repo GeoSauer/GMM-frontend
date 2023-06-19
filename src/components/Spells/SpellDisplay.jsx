@@ -7,6 +7,25 @@ import { getSuffix } from '../../utils/utils';
 import PillPity from 'pill-pity';
 import { useCharacter } from '../../context/CharacterContext';
 
+function Message({ content }) {
+  const randomImage = Math.floor(Math.random() * 10 + 1);
+
+  return (
+    <Text
+      fontSize={{ base: '2xl', lg: '4xl' }}
+      fontFamily={'Message'}
+      textAlign={'center'}
+      background={'gray.100'}
+      padding={'4'}
+      borderRadius={'5'}
+      margin={'5'}
+      style={{ backgroundImage: `url(${randomImage}.png)` }}
+    >
+      {content}
+    </Text>
+  );
+}
+
 export default function SpellDisplay() {
   const {
     allSpells,
@@ -20,15 +39,12 @@ export default function SpellDisplay() {
   const location = useLocation();
   const { characterInfo } = useCharacter();
 
-  const randomImage = Math.floor(Math.random() * 10 + 1);
-
   const findSpellDetails = (spellName) =>
     spellDetailsList.find((spell) => spell.name === spellName);
 
   const generateSpellCards = (spellArray) => {
     return spellArray.map((spell, index) => {
       const suffix = getSuffix(spell.level);
-      // const number = index + 1;
       const previousSpell = spellArray[index - 1];
       if (spell.level !== previousSpell?.level) {
         return (
@@ -109,70 +125,38 @@ export default function SpellDisplay() {
           !availableSpells.length &&
           characterInfo.charClass !== 'Ranger') ||
         (location.pathname === '/cantrips' && !cantrips.length) ? (
-        <Text
-          fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Message'}
-          textAlign={'center'}
-          background={'gray.100'}
-          padding={'4'}
-          borderRadius={'5'}
-          margin={'5'}
-          style={{ backgroundImage: `url(${randomImage}.png)` }}
-        >
-          Looks like the server is acting up. Try refreshing the page or come back later, sorry!
-        </Text>
+        <Message content="Looks like the server is acting up. Try refreshing the page or come back later, sorry!" />
       ) : (location.pathname === '/available-spells' &&
           !availableSpells.length &&
           characterInfo.charClass === 'Ranger') ||
         (location.pathname === '/known-spells' &&
           !knownSpells.length &&
           characterInfo.charClass === 'Paladin') ? (
-        <Text
-          fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Message'}
-          textAlign={'center'}
-          background={'gray.100'}
-          padding={'4'}
-          borderRadius={'5'}
-          margin={'5'}
-          style={{ backgroundImage: `url(${randomImage}.png)` }}
-        >
-          Sorry buddy, you don&apos;t get any spells until you&apos;re at least level 2 😭
-        </Text>
+        <Message content="Sorry buddy, you don't get any spells until you're at least level 2 😭" />
       ) : location.pathname === '/known-spells' && !knownSpells.length ? (
-        <Text
-          fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Message'}
-          textAlign={'center'}
-          background={'gray.100'}
-          padding={'4'}
-          borderRadius={'5'}
-          margin={'5'}
-          style={{ backgroundImage: `url(${randomImage}.png)` }}
-        >
-          Looks like you haven&apos;t learned any spells, better head to{' '}
-          <NavLink to="/available-spells" alt="available" title="Available Spells">
-            Available Spells
-          </NavLink>{' '}
-          and get studying!
-        </Text>
+        <Message
+          content={
+            <>
+              Looks like you haven&apos;t learned any spells, better head to{' '}
+              <NavLink to="/available-spells" alt="available" title="Available Spells">
+                Available Spells
+              </NavLink>{' '}
+              and get studying!
+            </>
+          }
+        />
       ) : location.pathname === '/prepared-spells' && !preparedSpells.length ? (
-        <Text
-          fontSize={{ base: '2xl', lg: '4xl' }}
-          fontFamily={'Message'}
-          textAlign={'center'}
-          background={'gray.100'}
-          padding={'4'}
-          borderRadius={'5'}
-          margin={'5'}
-          style={{ backgroundImage: `url(${randomImage}.png)` }}
-        >
-          Looks like you don&apos;t have any spells prepared, better head over to{' '}
-          <NavLink to="/known-spells" alt="known" title="Known Spells">
-            Known Spells
-          </NavLink>{' '}
-          and remedy that!
-        </Text>
+        <Message
+          content={
+            <>
+              Looks like you don&apos;t have any spells prepared, better head over to{' '}
+              <NavLink to="/known-spells" alt="known" title="Known Spells">
+                Known Spells
+              </NavLink>{' '}
+              and remedy that!
+            </>
+          }
+        />
       ) : null}
     </PillPity>
   );
