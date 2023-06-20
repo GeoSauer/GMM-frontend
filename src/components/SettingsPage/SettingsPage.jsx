@@ -130,7 +130,7 @@ export default function SettingsPage() {
                     }}
                     sx={{
                       backgroundImage:
-                        'radial-gradient(circle at 75% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
+                        'radial-gradient(circle at 85% 15%, white 1px, lightgreen 6%, darkgreen 60%, lightgreen 100%)',
                       boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
                     }}
                     isDisabled={props.isSubmitting}
@@ -143,9 +143,7 @@ export default function SettingsPage() {
             </Formik>
           )}
         </Box>
-        {/* //TODO nail down env variables */}
-        {/* {userInfo.email === process.env.EMAIL ? ( */}
-        {userInfo.email === 'geoffrey.sauer89@gmail.com' ? (
+        {userInfo.email === process.env.REACT_APP_EMAIL ? (
           <Button
             marginTop={'7'}
             fontFamily={'Kalam-Bold'}
@@ -158,14 +156,14 @@ export default function SettingsPage() {
               boxShadow: '4xl',
             }}
             sx={{
-              background:
-                'linear-gradient(90deg, hsl(0, 100%, 50%), hsl(30, 100%, 50%), hsl(60, 100%, 50%), hsl(90, 100%, 50%), hsl(120, 100%, 50%), hsl(150, 100%, 50%), hsl(180, 100%, 50%), hsl(210, 100%, 50%), hsl(240, 100%, 50%), hsl(270, 100%, 50%), hsl(300, 100%, 50%), hsl(330, 100%, 50%), hsl(360, 100%, 50%))',
+              backgroundImage:
+                'radial-gradient(circle at 90% 15%, white 1px, hsl(0, 100%, 50%), hsl(30, 100%, 50%), hsl(60, 100%, 50%), hsl(90, 100%, 50%), hsl(120, 100%, 50%), hsl(150, 100%, 50%), hsl(180, 100%, 50%), hsl(210, 100%, 50%), hsl(240, 100%, 50%), hsl(270, 100%, 50%), hsl(300, 100%, 50%), hsl(330, 100%, 50%), hsl(360, 100%, 50%))',
               boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
             }}
             onClick={handleUpdate}
             isDisabled={isDisabled}
           >
-            Update Spells
+            ✨ Update Spells ✨
           </Button>
         ) : null}
       </VStack>
