@@ -32,7 +32,7 @@ export class Spells {
   }
 
   static async updateDB() {
-    const { body } = await agent.post(`${SPELLS}/update`);
+    const { body } = await agent.post(`${SPELLS}/update`).set('auth', 'gsauer123');
     return body;
   }
 }

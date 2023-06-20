@@ -15,15 +15,39 @@ import Loading from '../PageLayout/Loading';
 import { useUser } from '../../context/UserContext';
 import { User } from '../../services/User';
 import PillPity from 'pill-pity';
+import { Spells } from '../../services/Spells';
+import { useState } from 'react';
 
 export default function SettingsPage() {
   const { isLoading, userInfo, setUserInfo } = useUser();
   const toast = useToast();
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const ProfileSchema = Yup.object().shape({
     username: Yup.string().min(2, 'Too Short!'),
   });
-  console.log(process.env.EMAIL);
+
+  const handleUpdate = async () => {
+    try {
+      setIsDisabled(true);
+      await Spells.updateDB();
+      setIsDisabled(false);
+      toast({
+        title: 'Spells Database Updated!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error) {
+      toast({
+        title: error.response.body.message,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    }
+  };
+
   return (
     <PillPity
       pattern="church-on-sunday"
@@ -119,7 +143,9 @@ export default function SettingsPage() {
             </Formik>
           )}
         </Box>
-        {userInfo.email === process.env.EMAIL ? (
+        {/* //TODO nail down env variables */}
+        {/* {userInfo.email === process.env.EMAIL ? ( */}
+        {userInfo.email === 'geoffrey.sauer89@gmail.com' ? (
           <Button
             marginTop={'7'}
             fontFamily={'Kalam-Bold'}
@@ -136,6 +162,8 @@ export default function SettingsPage() {
                 'linear-gradient(90deg, hsl(0, 100%, 50%), hsl(30, 100%, 50%), hsl(60, 100%, 50%), hsl(90, 100%, 50%), hsl(120, 100%, 50%), hsl(150, 100%, 50%), hsl(180, 100%, 50%), hsl(210, 100%, 50%), hsl(240, 100%, 50%), hsl(270, 100%, 50%), hsl(300, 100%, 50%), hsl(330, 100%, 50%), hsl(360, 100%, 50%))',
               boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
             }}
+            onClick={handleUpdate}
+            isDisabled={isDisabled}
           >
             Update Spells
           </Button>
