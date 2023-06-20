@@ -16,10 +16,12 @@ export default function NewUserHelp({ userId }) {
   const firstField = useRef();
 
   useEffect(() => {
-    const IS_MODAL_SHOWN = localStorage.getItem(`IS_MODAL_SHOWN_${userId}`);
-    if (!IS_MODAL_SHOWN) {
-      onOpen();
-      localStorage.setItem(`IS_MODAL_SHOWN_${userId}`, 'true');
+    if (userId) {
+      const IS_MODAL_SHOWN = localStorage.getItem(`IS_MODAL_SHOWN_${userId}`);
+      if (!IS_MODAL_SHOWN) {
+        onOpen();
+        localStorage.setItem(`IS_MODAL_SHOWN_${userId}`, 'true');
+      }
     }
   }, [userId, onOpen]);
 
