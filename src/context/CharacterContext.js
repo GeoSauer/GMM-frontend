@@ -13,6 +13,7 @@ export default function CharacterProvider({ children }) {
   const [levelUp, setLevelUp] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [divineCaster, setDivineCaster] = useState(false);
+  const [noSpellsAtLvl1, setNoSpellsAtLvl1] = useState(false);
   const { userInfo, user } = useUser();
 
   useEffect(() => {
@@ -35,6 +36,12 @@ export default function CharacterProvider({ children }) {
           ) {
             setDivineCaster(true);
           } else setDivineCaster(false);
+          if (
+            (character.charClass === 'Paladin' || character.charClass === 'Ranger') &&
+            character.charLvl === 1
+          ) {
+            setNoSpellsAtLvl1(true);
+          } else setNoSpellsAtLvl1(false);
 
           setCharacterInfo(character);
           setCharacterList(characters);
@@ -72,7 +79,7 @@ export default function CharacterProvider({ children }) {
     levelUp,
     setLevelUp,
     divineCaster,
-    setDivineCaster,
+    noSpellsAtLvl1,
   };
   return <CharacterContext.Provider value={value}>{children}</CharacterContext.Provider>;
 }

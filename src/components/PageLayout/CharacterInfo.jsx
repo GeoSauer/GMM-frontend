@@ -1,7 +1,7 @@
 import { MenuGroup, Text } from '@chakra-ui/react';
 import { useCharacter } from '../../context/CharacterContext';
 
-export default function UserInfo() {
+export default function CharacterInfo() {
   const { characterInfo, isLoading } = useCharacter();
 
   return (

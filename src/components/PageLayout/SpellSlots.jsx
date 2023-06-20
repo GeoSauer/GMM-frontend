@@ -19,7 +19,6 @@ export default function SpellSlots() {
         marginRight="-16px"
         shadow={'lg'}
         marginBottom={4}
-        marginTop={'1'}
         maxWidth={'100vw'}
         sx={{
           backgroundImage:
