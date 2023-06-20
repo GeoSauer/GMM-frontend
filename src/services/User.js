@@ -1,9 +1,9 @@
 import agent from './customAgent';
 
 //* deployed url
-// const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
+const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
 //* local url
-const USERS = 'http://localhost:7890/api/v1/users';
+// const USERS = 'http://localhost:7890/api/v1/users';
 const USER_KEY = 'USER';
 
 export class User {

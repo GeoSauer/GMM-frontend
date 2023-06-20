@@ -1,76 +1,25 @@
-# Getting Started with Create React App
+<image src='./public/GMM-rectangle-logo.png'>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Grimoire for the Modern Mage - Front-end
 
-## Available Scripts
+## [Live Demo](https://grimoire-for-the-modern-mage.netlify.app/welcome)
 
-In the project directory, you can run:
+Full-stack spellcasting companion app for virtual or in-person Dungeons & Dragons 5e sessions that’s as fun to use as it is to look at. Allows users to easily create a profile with as many characters as they need, and effortlessly handle all spell related game mechanics in a fun, interactive, and intuitive way.
 
-### `npm start`
+## Table of contents
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- [Technologies](#technologies)
+- [Sources](#sources)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Technologies
 
-### `npm test`
+- [Chakra UI](https://github.com/chakra-ui/chakra-ui) v2.5.1
+- [Formik](https://formik.org/) v2.2.9
+- [PillPity](https://github.com/anubra266/pill-pity) v0.2.3
+- [React Spinners](https://www.davidhu.io/react-spinners/) v0.13.8
+- [Remark GFM](https://github.com/remarkjs/remark-gfm) v3.0.1
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Sources
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-Libraries used:
-Chakra-ui
-Formik
-ReactMarkdown
-Yup
+- Logo - [Erich Sauer](https://github.com/erichsauer)
+- Class Icons - [D&D Fan Site Kit](https://dnd.wizards.com/resources/fan-site-kit)
