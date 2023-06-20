@@ -108,7 +108,6 @@ export default function PrepareSpellButton({ spell }) {
                     '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
                   }
                   rounded={'full'}
-                  height={'40px'}
                   _hover={{
                     transform: 'translateY(-3px)',
                     boxShadow: '4xl',

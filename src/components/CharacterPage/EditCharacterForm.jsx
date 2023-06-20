@@ -46,22 +46,31 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
               initialValues={characterInfo}
               validationSchema={CharacterSchema}
               onSubmit={async (values, actions) => {
-                await Character.updateInfo(values);
-                setCharacterInfo((prevState) => {
-                  return { ...prevState, ...values };
-                });
-                close();
-                if (values.charLvl > characterInfo.charLvl) {
-                  setLevelUp(true);
+                try {
+                  await Character.updateInfo(values);
+                  setCharacterInfo((prevState) => {
+                    return { ...prevState, ...values };
+                  });
+                  close();
+                  if (values.charLvl > characterInfo.charLvl) {
+                    setLevelUp(true);
+                    toast({
+                      title: `${characterInfo.charName} leveled up!`,
+                      status: 'success',
+                      duration: 3000,
+                      isClosable: true,
+                    });
+                  }
+                  setTimeout(() => setLevelUp(false), 8000);
+                  actions.setSubmitting(false);
+                } catch (error) {
                   toast({
-                    title: `${characterInfo.charName} leveled up!`,
-                    status: 'success',
+                    title: error.response.body.message,
+                    status: 'error',
                     duration: 3000,
                     isClosable: true,
                   });
                 }
-                setTimeout(() => setLevelUp(false), 8000);
-                actions.setSubmitting(false);
               }}
             >
               {(props) => (
@@ -142,7 +151,6 @@ export default function EditCharacterForm({ close, truncatedCharacterName }) {
                         '1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'
                       }
                       rounded={'full'}
-                      height={'40px'}
                       _hover={{
                         transform: 'translateY(-3px)',
                         boxShadow: '4xl',

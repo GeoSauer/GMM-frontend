@@ -9,7 +9,6 @@ export default function DisabledLearnButton() {
       color={'blue.100'}
       textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
       rounded={'full'}
-      height={'40px'}
       _hover={{
         backgroundImage:
           'radial-gradient(circle at 85% 15%, white 1px, lightblue 6%, darkblue 60%, lightblue 100%)',
