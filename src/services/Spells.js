@@ -30,4 +30,9 @@ export class Spells {
     const response = await agent.get(`${SPELLS}/${spellId}/details`);
     return response.body;
   }
+
+  static async updateDB() {
+    const { body } = await agent.post(`${SPELLS}/update`);
+    return body;
+  }
 }

@@ -83,7 +83,6 @@ export default function CharacterCard(character) {
               color={'gray.200'}
               textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
-              height={'40px'}
               _hover={{
                 transform: 'translateY(-3px)',
                 boxShadow: '3xl',
@@ -110,7 +109,6 @@ export default function CharacterCard(character) {
               color={'blue.100'}
               textShadow={'1px 1px 0 black, -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black'}
               rounded={'full'}
-              height={'40px'}
               _hover={{
                 transform: 'translateY(-3px)',
                 boxShadow: '3xl',
