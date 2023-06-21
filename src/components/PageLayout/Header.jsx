@@ -9,40 +9,32 @@ import { useState, useEffect } from 'react';
 
 export default function Header() {
   const location = useLocation();
-  const [scrollPos, setScrollPos] = useState(0);
-  const [scrollDirection, setScrollDirection] = useState('up');
   const [isHeaderVisible, setIsHeaderVisible] = useState(true);
   const locationHeader = location.pathname.replace(/\/([\w-]+)/g, (_, match) =>
     match.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
   );
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+    let lastScrollTop = 0;
 
-      if (currentScrollPos > scrollPos) {
-        setScrollDirection('down');
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+      if (scrollTop > lastScrollTop) {
+        setIsHeaderVisible(false);
       } else {
-        setScrollDirection('up');
+        setIsHeaderVisible(true);
       }
 
-      setScrollPos(currentScrollPos);
+      lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('wheel', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
     };
-  }, [scrollPos]);
-
-  useEffect(() => {
-    if (scrollDirection === 'down') {
-      setIsHeaderVisible(false);
-    } else {
-      setIsHeaderVisible(true);
-    }
-  }, [scrollDirection]);
+  }, []);
 
   return (
     <Box
