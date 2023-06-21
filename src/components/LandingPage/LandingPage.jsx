@@ -47,12 +47,11 @@ export default function LandingPage() {
         justify={'center'}
         marginRight={{ md: '-2' }}
         marginBottom={{ base: '-2' }}
-        height={'100vh'}
       >
         <Box top={0} position={'absolute'} padding={'2'} align={'center'}>
           <Image
             src={'/GMM-rectangle-logo.png'}
-            alt={'Grimoire for the Modern Mage'}
+            alt={'Grimoire for the Modern Mage Logo'}
             width={{ base: '90%', md: '70%' }}
           />
           <Heading
@@ -68,8 +67,8 @@ export default function LandingPage() {
         <Stack
           spacing={1}
           width={{ lg: '85%' }}
-          alignItems="center"
-          marginTop={{ base: '40%', lg: '20%' }}
+          alignItems={'center'}
+          marginTop={{ base: '40%', lg: '30%' }}
         >
           <Text
             padding={2}
@@ -78,7 +77,8 @@ export default function LandingPage() {
             color={'gray.900'}
             rounded={'lg'}
             marginX={'-25px'}
-            bgGradient="linear-gradient(to top, blue.100, transparent)"
+            maxWidth={'560px'}
+            bgGradient={'linear-gradient(to top, blue.100, transparent)'}
           >
             <strong>The Grimoire for the Modern Mage</strong> is specifically for those exhausted by
             constant erasing and re-writing, dealing with illegible shorthand, and sifting through
@@ -87,7 +87,7 @@ export default function LandingPage() {
             and cast, regardless of where you are in your adventure. So, what are you waiting for?
           </Text>
           <Stack
-            align="center"
+            align={'center'}
             paddingBottom={{ base: '10', lg: '-40px' }}
             spacing={{ base: '1', lg: '4' }}
           >
@@ -135,7 +135,7 @@ export default function LandingPage() {
       </PillPity>
       <Flex flex={0.9}>
         <Image
-          alt={'Login Image'}
+          alt={'Photo of an old leather-bound book with metal clasp.'}
           objectFit={'cover'}
           src={'https://www.publicdomainpictures.net/pictures/30000/velka/old-book.jpg'}
           zIndex={{ md: '1' }}
