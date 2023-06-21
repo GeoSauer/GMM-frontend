@@ -3,7 +3,7 @@ import agent from './customAgent';
 //* deployed url
 // const SPELLS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/spells';
 //* local url
-const SPELLS = 'http://localhost:7890/api/v1/spells';
+const SPELLS = 'https://localhost:7890/api/v1/spells';
 
 export class Spells {
   static async getAll() {
