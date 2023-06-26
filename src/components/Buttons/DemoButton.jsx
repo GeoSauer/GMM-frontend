@@ -5,7 +5,7 @@ import { User } from '../../services/User';
 import { useState } from 'react';
 
 export default function DemoButton() {
-  const { setUserState } = useUser();
+  const { setUserState, setIsLoading } = useUser();
   const [isDisabled, setIsDisabled] = useState(false);
 
   const expirationDate = new Date();
@@ -32,8 +32,10 @@ export default function DemoButton() {
 
   const handleClick = async () => {
     setIsDisabled(true);
+    setIsLoading(true);
     const user = await User.signUp(demoUser);
     await Promise.all(characters.map((character) => Character.create(character)));
+    setIsLoading(false);
     setUserState(user.body);
   };
 
