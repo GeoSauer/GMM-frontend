@@ -25,14 +25,20 @@ export default function CharacterPage() {
         {location.pathname === '/choose-character' && (
           <Box paddingTop={'3'} backdropFilter="blur(2px)">
             <Heading fontFamily={'Title'} fontSize={{ base: '2xl', md: '4xl', lg: '5xl' }}>
-              Welcome back,{' '}
-              {userInfo.username?.length > 20
-                ? userInfo.username.slice(0, 20) + '...'
-                : userInfo.username}
-              !
+              {userInfo.demo
+                ? 'Thanks for checking out Grimoire for the Modern Mage'
+                : `Welcome back,${' '}
+              ${
+                userInfo.username?.length > 20
+                  ? userInfo.username.slice(0, 20) + '...'
+                  : userInfo.username
+              }
+              !`}
             </Heading>
             <Heading fontSize={{ base: 'xl', md: '2xl', lg: '3xl' }} fontFamily={'Title'}>
-              Which Character Are You Playing Today?
+              {userInfo.demo
+                ? 'Choose a character below or create your own!'
+                : 'Which Character Are You Playing Today?'}
             </Heading>
           </Box>
         )}

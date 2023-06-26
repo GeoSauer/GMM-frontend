@@ -21,13 +21,15 @@ import { useUser } from '../../context/UserContext';
 import PillPity from 'pill-pity';
 import DemoButton from '../Buttons/DemoButton';
 import Footer from '../PageLayout/Footer';
+import Loading from '../PageLayout/Loading';
 
 export default function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const firstField = useRef();
   const [option, setOption] = useState('');
   const options = ['up', 'in'];
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
+
   if (user) return <Navigate to="/prepared-spells" />;
 
   const handleClick = (newOption) => {
@@ -129,6 +131,12 @@ export default function LandingPage() {
               </ModalContent>
             </Modal>
             <DemoButton />
+            {isLoading ? (
+              <>
+                <Text fontFamily={'Kalam-Light'}>Generating demo characters. . .</Text>
+                <Loading />
+              </>
+            ) : null}
           </Stack>
         </Stack>
         <Footer />

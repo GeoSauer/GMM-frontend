@@ -7,7 +7,7 @@ const UserContext = createContext();
 export default function UserProvider({ children }) {
   const localUser = getLocalUser();
   const [user, setUser] = useState(localUser);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({});
 
   const setUserState = (user) => {
