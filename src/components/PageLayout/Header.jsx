@@ -29,10 +29,10 @@ export default function Header() {
       lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
     };
 
-    window.addEventListener('wheel', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -43,7 +43,7 @@ export default function Header() {
       left={0}
       width={'full'}
       transition="transform 0.3s"
-      transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-400%)'}
+      transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-210%)'}
       background={'gray.200'}
       paddingX={4}
       zIndex={50}
