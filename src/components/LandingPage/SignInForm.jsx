@@ -60,7 +60,7 @@ export default function SignInForm() {
                 actions.setSubmitting(false);
               } catch (error) {
                 toast({
-                  title: error.response.body.message,
+                  title: error.response?.body.message,
                   status: 'error',
                   duration: 3000,
                   isClosable: true,
