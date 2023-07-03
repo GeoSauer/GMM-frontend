@@ -8,13 +8,15 @@ export default function DemoButton() {
   const { setUserState, setIsLoading } = useUser();
   const [isDisabled, setIsDisabled] = useState(false);
 
+  const fourDigitNumber = Math.floor(Math.random() * 9000) + 100;
+
   const expirationDate = new Date();
   expirationDate.setDate(expirationDate.getDate() + 1);
 
   const demoUser = {
-    email: `demo${Math.floor(Math.random() * 9000) + 100}@test.com`,
+    email: `demo${fourDigitNumber}@test.com`,
     password: '123123123',
-    username: 'Demo' + (Math.floor(Math.random() * 9000) + 100),
+    username: `Demo${fourDigitNumber}`,
     demo: true,
     expirationDate: expirationDate,
   };

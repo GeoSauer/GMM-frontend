@@ -22,6 +22,7 @@ import PillPity from 'pill-pity';
 import DemoButton from '../Buttons/DemoButton';
 import Footer from '../PageLayout/Footer';
 import Loading from '../PageLayout/Loading';
+import SafariWarning from './SafariWarning';
 
 export default function LandingPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -29,6 +30,7 @@ export default function LandingPage() {
   const [option, setOption] = useState('');
   const options = ['up', 'in'];
   const { user, isLoading } = useUser();
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
   if (user) return <Navigate to="/prepared-spells" />;
 
@@ -39,6 +41,7 @@ export default function LandingPage() {
 
   return (
     <Stack minHeight={'100vh'} direction={{ base: 'column', md: 'row' }}>
+      {isSafari && <SafariWarning />}
       <PillPity
         as={Flex}
         pattern="endless-clouds"
@@ -134,6 +137,7 @@ export default function LandingPage() {
             {isLoading ? (
               <>
                 <Text fontFamily={'Kalam-Light'}>Generating demo characters. . .</Text>
+                <Text fontFamily={'Kalam-Light'}>(this can take a few moments)</Text>
                 <Loading />
               </>
             ) : null}
