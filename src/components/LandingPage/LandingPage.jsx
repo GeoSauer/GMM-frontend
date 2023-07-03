@@ -31,7 +31,7 @@ export default function LandingPage() {
   const options = ['up', 'in'];
   const { user, isLoading } = useUser();
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  console.log({ isSafari });
+
   if (user) return <Navigate to="/prepared-spells" />;
 
   const handleClick = (newOption) => {
