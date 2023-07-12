@@ -10,11 +10,11 @@ import {
   Portal,
   useToast,
 } from '@chakra-ui/react';
-import React, { useRef } from 'react';
+
 import { Character } from '../../services/Character';
 import { truncateCharacterName } from '../../utils/utils';
 import { useCharacter } from '../../context/CharacterContext';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function DeleteCharacterButton({ character }) {
   const toast = useToast();

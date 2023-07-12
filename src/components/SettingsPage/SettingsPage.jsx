@@ -17,6 +17,7 @@ import { User } from '../../services/User';
 import PillPity from 'pill-pity';
 import { Spells } from '../../services/Spells';
 import { useState } from 'react';
+import DeleteProfileButton from '../Buttons/DeleteProfileButton';
 
 export default function SettingsPage() {
   const { isLoading, userInfo, setUserInfo } = useUser();
@@ -143,6 +144,7 @@ export default function SettingsPage() {
             </Formik>
           )}
         </Box>
+        <DeleteProfileButton />
         {userInfo.email === process.env.REACT_APP_EMAIL ? (
           <Button
             marginTop={'7'}

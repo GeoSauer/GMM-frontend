@@ -9,7 +9,7 @@ import {
   ModalOverlay,
   useDisclosure,
 } from '@chakra-ui/react';
-import React from 'react';
+
 import { useUser } from '../../context/UserContext';
 import { useRef } from 'react';
 import { useState } from 'react';
