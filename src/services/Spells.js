@@ -1,9 +1,6 @@
 import agent from './customAgent';
 
-//* deployed url
-const SPELLS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/spells';
-//* local url
-// const SPELLS = 'http://localhost:7890/api/v1/spells';
+const SPELLS = process.env.REACT_APP_SPELLS;
 
 export class Spells {
   static async getAll() {

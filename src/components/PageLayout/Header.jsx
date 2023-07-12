@@ -43,7 +43,7 @@ export default function Header() {
       left={0}
       width={'full'}
       transition="transform 0.3s"
-      transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-210%)'}
+      transform={isHeaderVisible ? 'translateY(0)' : 'translateY(-250%)'}
       background={'gray.200'}
       paddingX={4}
       zIndex={50}

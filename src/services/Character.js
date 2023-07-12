@@ -1,9 +1,6 @@
 import agent from './customAgent';
 
-//* deployed url
-const CHARACTERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/characters';
-//* local url
-// const CHARACTERS = 'http://localhost:7890/api/v1/characters';
+const CHARACTERS = process.env.REACT_APP_CHARACTERS;
 
 export class Character {
   static async create(info) {

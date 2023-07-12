@@ -18,6 +18,13 @@ const truncateCharacterName = (character) => {
   return truncatedCharacterName;
 };
 
+const truncateUsername = (username) => {
+  if (username) {
+    const truncatedUsername = username.length > 20 ? username.slice(0, 20) + '...' : username;
+    return truncatedUsername;
+  }
+};
+
 const fullModifier = (modifier) => {
   let value;
   switch (modifier) {
@@ -43,4 +50,4 @@ const fullModifier = (modifier) => {
   return value;
 };
 
-module.exports = { getSuffix, truncateCharacterName, fullModifier };
+module.exports = { getSuffix, truncateCharacterName, truncateUsername, fullModifier };
