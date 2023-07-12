@@ -12,12 +12,28 @@ import {
 } from '@chakra-ui/react';
 import SpellLevelButton from './SpellLevelButton';
 import { useRef } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useCharacter } from '../../context/CharacterContext';
 
 export default function CastSpellButton({ spell, spellDetails }) {
   const toast = useToast();
   const initRef = useRef();
+  const { characterInfo } = useCharacter();
   const [isDisabled, setIsDisabled] = useState(false);
+  const [outOfSpellSlots, setOutOfSpellSlots] = useState(false);
+
+  useEffect(() => {
+    const checkForSpellSlots = () => {
+      let spellSlots = 0;
+      for (let i = spell.level; i <= 9; i++) {
+        if (characterInfo[`level${i}SpellSlots`]) {
+          spellSlots++;
+        }
+      }
+      setOutOfSpellSlots(spellSlots ? false : true);
+    };
+    checkForSpellSlots();
+  }, [spell.level, characterInfo]);
 
   const handleRitual = (onClose) => {
     setIsDisabled(true);
@@ -51,6 +67,7 @@ export default function CastSpellButton({ spell, spellDetails }) {
                   'radial-gradient(circle at 80% 15%, white 1px, yellow 6%, darkorange 60%, yellow 100%)',
                 boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
               }}
+              isDisabled={outOfSpellSlots && !spellDetails.ritual}
             >
               Cast
             </Button>
@@ -99,7 +116,11 @@ export default function CastSpellButton({ spell, spellDetails }) {
                     As a ritual
                   </Button>
                 ) : null}
-                <SpellLevelButton spell={spell} spellDetails={spellDetails} />
+                <SpellLevelButton
+                  spell={spell}
+                  spellDetails={spellDetails}
+                  outOfSpellSlots={outOfSpellSlots}
+                />
               </PopoverBody>
             </PopoverContent>
           </Portal>

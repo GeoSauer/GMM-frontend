@@ -20,14 +20,14 @@ import {
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useCharacter, useSpell } from '../../context/CharacterContext';
 import { getSuffix, fullModifier } from '../../utils/utils';
 
-export default function SpellLevelButton({ spell, spellDetails }) {
+export default function SpellLevelButton({ spell, spellDetails, outOfSpellSlots }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { characterInfo, setCharacterInfo } = useCharacter();
-  const [slotLevel, setSlotLevel] = useState('');
+  const [slotLevel, setSlotLevel] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
   const toast = useToast();
   const { cast } = useSpell();
@@ -35,6 +35,19 @@ export default function SpellLevelButton({ spell, spellDetails }) {
   const damageAtSlotLevel = spellDetails?.damage.damageAtSlotLevel
     ? Object.keys(spellDetails.damage.damageAtSlotLevel)
     : [];
+
+  useEffect(() => {
+    const calculateInitialSlotLevel = () => {
+      for (let i = 1; i <= 9; i++) {
+        if (spell.level <= i && characterInfo[`level${i}SpellSlots`]) {
+          return i;
+        }
+      }
+      return null;
+    };
+    const initialSlotLevel = calculateInitialSlotLevel();
+    setSlotLevel(initialSlotLevel);
+  }, [spell.level, characterInfo]);
 
   const handleCast = async (charId, slotLevel) => {
     setIsDisabled(true);
@@ -44,14 +57,12 @@ export default function SpellLevelButton({ spell, spellDetails }) {
         const suffix = getSuffix(slotLevel);
         if (spell.level > 0) {
           await cast(charId, slotLevel);
-          const availableSlots = characterInfo[`level${slotLevel}SpellSlots`];
-          characterInfo[`level${slotLevel}SpellSlots`] = availableSlots - 1;
+          const availableSlots = characterInfo[`level${slotLevel}SpellSlots`]--;
           setCharacterInfo({ ...characterInfo, availableSlots });
         }
         onClose();
         toast({
-          title: `${spell.name} cast at ${slotLevel}
-				${suffix}-Level!`,
+          title: `${spell.name} cast at ${slotLevel}${suffix}-Level!`,
           status: 'success',
           duration: 3000,
           isClosable: true,
@@ -92,6 +103,7 @@ export default function SpellLevelButton({ spell, spellDetails }) {
           boxShadow: '3px 10px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
         }}
         onClick={onOpen}
+        isDisabled={outOfSpellSlots}
       >
         Cast with a spell slot
       </Button>
@@ -110,14 +122,13 @@ export default function SpellLevelButton({ spell, spellDetails }) {
             <Select
               value={slotLevel}
               fontFamily={'Kalam-Light'}
-              placeholder="Choose One"
               onChange={(e) => setSlotLevel(e.target.value)}
             >
               {[...Array(9)].map((_, i) => {
                 const number = i + 1;
                 const spellsAvailableAtSlotLevel = characterInfo[`level${number}SpellSlots`];
 
-                if (spell.level <= number) {
+                if (spell.level <= number && spellsAvailableAtSlotLevel) {
                   return (
                     spellsAvailableAtSlotLevel && (
                       <option key={`key-${i}`} value={number}>
@@ -126,6 +137,7 @@ export default function SpellLevelButton({ spell, spellDetails }) {
                     )
                   );
                 }
+                return null;
               })}
             </Select>
 
