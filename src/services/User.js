@@ -1,6 +1,7 @@
 import agent from './customAgent';
 
-const USERS = process.env.REACT_APP_USERS;
+// const USERS = process.env.REACT_APP_USERS;
+const USERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/users';
 const USER_KEY = 'USER';
 
 export class User {
