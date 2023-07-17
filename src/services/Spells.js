@@ -1,7 +1,7 @@
 import agent from './customAgent';
 
-// const SPELLS = process.env.REACT_APP_SPELLS;
-const SPELLS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/spells';
+const SPELLS = process.env.REACT_APP_SPELLS;
+// const SPELLS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/spells';
 
 export class Spells {
   static async getAll() {
