@@ -1,8 +1,14 @@
 import agent from './customAgent';
 
-// const CHARACTERS = process.env.REACT_APP_CHARACTERS;
-const CHARACTERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/characters';
+const CHARACTERS = process.env.REACT_APP_CHARACTERS;
+// const CHARACTERS = 'https://grimoire-for-the-modern-mage.herokuapp.com/api/v1/characters';
 
+// eslint-disable-next-line
+console.log(
+  process.env.REACT_APP_CHARACTERS,
+  process.env.REACT_APP_USERS,
+  process.env.REACT_APP_SPELLS
+);
 export class Character {
   static async create(info) {
     const { body } = await agent.post(`${CHARACTERS}/`).send(info);
