@@ -23,10 +23,10 @@ export default function DemoButton() {
 
   const characters = [
     { charName: 'Beau Fiasco', charClass: 'Bard', charLvl: '11', charMod: '4' },
-    { charName: 'Abric Dragonslayer', charClass: 'Cleric', charLvl: '8', charMod: '3' },
-    { charName: 'Reshk', charClass: 'Druid', charLvl: '13', charMod: '5' },
-    { charName: 'Ulrick Lightborne', charClass: 'Paladin', charLvl: '16', charMod: '4' },
-    { charName: 'Drayton Scholls', charClass: 'Ranger', charLvl: '6', charMod: '2' },
+    // { charName: 'Abric Dragonslayer', charClass: 'Cleric', charLvl: '8', charMod: '3' },
+    // { charName: 'Reshk', charClass: 'Druid', charLvl: '13', charMod: '5' },
+    // { charName: 'Ulrick Lightborne', charClass: 'Paladin', charLvl: '16', charMod: '4' },
+    // { charName: 'Drayton Scholls', charClass: 'Ranger', charLvl: '6', charMod: '2' },
     { charName: 'Alistair', charClass: 'Sorcerer', charLvl: '17', charMod: '6' },
     { charName: 'Felbane', charClass: 'Warlock', charLvl: '10', charMod: '3' },
     { charName: 'Marius Rune', charClass: 'Wizard', charLvl: '3', charMod: '3' },
