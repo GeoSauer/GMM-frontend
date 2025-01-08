@@ -12,8 +12,8 @@ function Message({ content }) {
 
   return (
     <Text
-      fontSize={{ base: '2xl', lg: '4xl' }}
-      fontFamily={'Message'}
+      fontSize={{ base: 'lg', md: 'xl', lg: '2xl' }}
+      fontFamily={'Kalam-Regular'}
       textAlign={'center'}
       background={'gray.100'}
       padding={'4'}
@@ -139,7 +139,9 @@ export default function SpellDisplay() {
             <>
               Looks like you haven&apos;t learned any spells, better head to{' '}
               <NavLink to="/available-spells" alt="available" title="Available Spells">
-                Available Spells
+                <Text as="span" textDecoration={'underline'}>
+                  Available Spells
+                </Text>
               </NavLink>{' '}
               and get studying!
             </>
@@ -151,7 +153,9 @@ export default function SpellDisplay() {
             <>
               Looks like you don&apos;t have any spells prepared, better head over to{' '}
               <NavLink to="/known-spells" alt="known" title="Known Spells">
-                Known Spells
+                <Text as="span" textDecoration={'underline'}>
+                  Known Spells
+                </Text>
               </NavLink>{' '}
               and remedy that!
             </>
