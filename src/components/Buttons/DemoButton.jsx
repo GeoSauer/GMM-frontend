@@ -23,9 +23,9 @@ export default function DemoButton() {
 
   const characters = [
     { charName: 'Beau Fiasco', charClass: 'Bard', charLvl: '11', charMod: '4' },
-    // { charName: 'Abric Dragonslayer', charClass: 'Cleric', charLvl: '8', charMod: '3' },
-    // { charName: 'Reshk', charClass: 'Druid', charLvl: '13', charMod: '5' },
-    // { charName: 'Ulrick Lightborne', charClass: 'Paladin', charLvl: '16', charMod: '4' },
+    { charName: 'Abric Dragonslayer', charClass: 'Cleric', charLvl: '8', charMod: '3' },
+    { charName: 'Reshk', charClass: 'Druid', charLvl: '13', charMod: '5' },
+    { charName: 'Ulrick Lightborne', charClass: 'Paladin', charLvl: '16', charMod: '4' },
     { charName: 'Drayton Scholls', charClass: 'Ranger', charLvl: '6', charMod: '2' },
     { charName: 'Alistair', charClass: 'Sorcerer', charLvl: '17', charMod: '6' },
     { charName: 'Felbane', charClass: 'Warlock', charLvl: '10', charMod: '3' },
@@ -35,16 +35,10 @@ export default function DemoButton() {
   const handleClick = async () => {
     setIsDisabled(true);
     setIsLoading(true);
-    try {
-      const user = await User.signUp(demoUser);
-      await Promise.all(characters.map((character) => Character.create(character)));
-      setIsLoading(false);
-      setUserState(user.body);
-    } catch (error) {
-      console.error(error);
-      setIsDisabled(false);
-      setIsLoading(false);
-    }
+    const user = await User.signUp(demoUser);
+    await Promise.all(characters.map((character) => Character.create(character)));
+    setIsLoading(false);
+    setUserState(user.body);
   };
 
   return (
