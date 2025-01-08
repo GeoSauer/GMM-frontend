@@ -92,7 +92,7 @@ export default function SpellDisplay() {
   const cantripCards = generateSpellCards(cantrips);
   const knownSpellCards = generateSpellCards(knownSpells);
   const preparedSpellCards = generateSpellCards(preparedSpells);
-  //test
+
   return (
     <PillPity
       as={Flex}
